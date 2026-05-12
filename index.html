@@ -1,1 +1,166 @@
+# index.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Papers Repository</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 3rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #cbd5e1;
+            margin-bottom: 50px;
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 18px;
+            padding: 25px;
+            transition: 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            background: rgba(255,255,255,0.12);
+        }
+
+        .card h2 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: #60a5fa;
+        }
+
+        .card p {
+            color: #d1d5db;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 18px;
+            border-radius: 10px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s ease;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Research Papers Repository</h1>
+    <p class="subtitle">
+        Academic publications and conference papers by Dr. Nitin Mishra
+    </p>
+
+    <div class="grid" id="papersGrid">
+    </div>
+
+    <script>
+        const papersGrid = document.getElementById('papersGrid');
+
+        async function checkPageExists(url) {
+            try {
+                const response = await fetch(url, { method: 'HEAD' });
+                return response.ok;
+            } catch (error) {
+                return false;
+            }
+        }
+
+        async function loadPapers() {
+            for (let i = 1; i <= 10; i++) {
+                const fileName = `c${i}.html`;
+                const exists = await checkPageExists(fileName);
+
+                if (exists) {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+
+                    card.innerHTML = `
+                        <h2>Paper ${i}</h2>
+                        <p>
+                            Research paper available in repository.
+                        </p>
+                        <a class="btn" href="${fileName}" target="_blank">
+                            Open ${fileName}
+                        </a>
+                    `;
+
+                    papersGrid.appendChild(card);
+                }
+            }
+        }
+
+        loadPapers();
+    </script>
+
+    <footer>
+        © 2026 Dr. Nitin Mishra | Research Repository
+    </footer>
+
+</div>
+
+</body>
+</html>
+```
+
+## Deployment
+
+1. Save this file as `index.html`
+2. Upload it to your GitHub repository root folder
+3. Enable GitHub Pages from repository settings
+4. Your repository homepage will automatically become:
+
+`https://drnitinmishra10.github.io/nm1/`
 
