@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advancements and Challenges: The Role of CNNs in AI-Assisted Lung Cancer Diagnosis</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Times+New+Roman&display=swap');
+
+        body {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 10pt;
+            line-height: 1.5;
+            max-width: 6.5in;
+            margin: 0 auto;
+            padding: 0.75in;
+            text-align: justify;
+            color: #000;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 14pt;
+            font-weight: bold;
+            margin-bottom: 12pt;
+        }
+
+        .author-block {
+            text-align: center;
+            margin-bottom: 12pt;
+        }
+
+        .author-name {
+            font-size: 11pt;
+        }
+
+        .author-affiliation {
+            font-size: 9pt;
+            font-style: italic;
+        }
+
+        .author-email {
+            font-size: 9pt;
+        }
+
+        .abstract {
+            margin: 12pt 0;
+        }
+
+        .abstract-title {
+            font-weight: bold;
+            text-align: center;
+            font-size: 9pt;
+        }
+
+        .abstract-text {
+            font-size: 9pt;
+            text-align: justify;
+        }
+
+        .keywords {
+            font-size: 9pt;
+            margin-bottom: 12pt;
+        }
+
+        .keywords-title {
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 10pt;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            margin-top: 12pt;
+            margin-bottom: 6pt;
+        }
+
+        h2 {
+            font-size: 10pt;
+            font-weight: bold;
+            font-style: italic;
+            margin-top: 10pt;
+            margin-bottom: 6pt;
+        }
+
+        .figure {
+            text-align: center;
+            margin: 12pt 0;
+            page-break-inside: avoid;
+        }
+
+        .figure-caption {
+            font-size: 9pt;
+            font-weight: bold;
+            margin-top: 6pt;
+        }
+
+        .figure-prompt {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 8px 0;
+            font-size: 8pt;
+            font-family: "Courier New", monospace;
+            text-align: left;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .figure-prompt-label {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .references {
+            font-size: 8pt;
+        }
+
+        .references-title {
+            font-weight: bold;
+            text-align: center;
+            font-size: 10pt;
+            margin-top: 12pt;
+            margin-bottom: 6pt;
+        }
+
+        .reference-item {
+            margin-left: 0.5in;
+            text-indent: -0.5in;
+            margin-bottom: 4pt;
+        }
+
+        p {
+            text-indent: 0.3in;
+            margin: 0 0 6pt 0;
+        }
+
+        .no-indent {
+            text-indent: 0;
+        }
+
+        .two-column {
+            column-count: 2;
+            column-gap: 0.25in;
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+
+<div class="title">Advancements and Challenges: The Role of Convolutional Neural Networks in AI-Assisted Lung Cancer Diagnosis via CT Scans</div>
+
+<div class="author-block">
+    <div class="author-name">Dr. Nitin Mishra</div>
+    <div class="author-affiliation">Professor, Department of Computer Science and Engineering</div>
+    <div class="author-affiliation">Parul University, Vadodara, India</div>
+    <div class="author-email">drnitinmishra10@gmail.com</div>
+</div>
+
+<div class="abstract">
+    <div class="abstract-title">Abstract</div>
+    <div class="abstract-text">
+        Lung cancer remains a leading cause of cancer-related mortality worldwide, with early detection being critical for improving patient survival rates. Computed Tomography (CT) scans have emerged as the primary imaging modality for lung cancer detection, enabling the identification of small nodules and abnormalities. However, radiologist interpretation variability poses significant challenges. This paper presents a comprehensive review of Convolutional Neural Networks (CNNs) in AI-assisted lung cancer diagnosis via CT scans. We examine key architectures including VGG16 and InceptionV3, transfer learning approaches, multimodal frameworks combining CNNs with Artificial Neural Networks (ANNs), and critical challenges such as interpretability, bias, overfitting, and clinical integration. The analysis demonstrates that CNN-based systems achieve detection accuracy comparable to or exceeding experienced radiologists, particularly for early-stage nodule detection. We discuss preprocessing techniques, regulatory considerations, and future research directions including hybrid models and explainable AI. Our findings indicate that while CNNs show tremendous promise for improving lung cancer detection, addressing challenges related to data quality, model transparency, and clinical workflow integration remains essential for successful deployment in healthcare settings.
+    </div>
+</div>
+
+<div class="keywords">
+    <span class="keywords-title">Keywords:</span> Convolutional Neural Networks, Lung Cancer Detection, CT Scans, Deep Learning, Medical Image Analysis, VGG16, InceptionV3, Transfer Learning, Explainable AI, Multimodal AI
+</div>
+
+<h1>I. Introduction</h1>
+
+<p class="no-indent">Lung cancer is a leading cause of cancer deaths worldwide. In 2020, 2.2 million new cases of lung cancer were reported (World Health Organization, 2021). Early detection of lung cancer is key to reducing the mortality rate of the disease, and there is an urgent need for effective early detection methods. The computed tomography (CT) scan has emerged as the primary imaging modality for the detection of lung cancer. CT scans can produce high quality images of the lung tissue, allowing for the detection of small nodules and other abnormalities that may be cancerous (Scrimger et al., 2020). However, the ability to detect cancer from CT images relies heavily on the interpretation of radiologists. While there are many qualified radiologists, there is significant variability in the quality of interpretations between radiologists. The complexity of the images often makes it difficult for radiologists to identify potential problems.</p>
+
+<p>Early and accurate detection of lung cancer is crucial for saving lives and increasing chances of patient survival. Most patients are diagnosed at advanced stages of the disease, which is associated with low survival rates. The five-year survival rate for lung cancer has been reported to vary significantly, with the National Cancer Institute stating that lung cancer patients' survival rates are affected by the disease stage at the time of diagnosis. This underlines the importance of accurate and timely detection and diagnosis of lung cancer. Utilizing the latest technologies, such as deep learning-based algorithms for the analysis of medical images, is increasingly important for improving the quality of lung cancer detection. Specifically, convolutional neural networks (CNNs) have been proven to improve the quality of medical image analysis by enhancing the accuracy of radiologists and the speed of image analysis. Their use in the analysis of Computed Tomography (CT) scans for the detection of lung cancer has the potential to improve cancer detection accuracy, thereby increasing the chances of patient survival.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 1:</div>
+        "Create a professional medical illustration showing the progression of lung cancer detection workflow. Left side shows a human radiologist examining a CT scan on a monitor with visible lung nodules highlighted in red circles. Right side shows an AI system (represented as a neural network visualization with connected nodes) analyzing the same CT scan with green bounding boxes around detected nodules. Include arrows showing the comparison between human and AI detection. Background should be a clean medical environment. Style: Scientific journal illustration, high detail, realistic medical imaging, clean white background, professional color scheme with blues and greens."
+    </div>
+    <div class="figure-caption">Fig. 1. Comparison of traditional radiologist-based CT scan interpretation versus AI-assisted CNN-based lung cancer detection workflow.</div>
+</div>
+
+<p>The use of CNNs for the analysis of images in the field of radiology is rapidly becoming the standard for computer-assisted detection (CAD) in a host of clinical applications. As with most computer-assisted technologies, the core function of the human is being removed from the process of analysis, allowing for the processing of vast amounts of data in short periods of time with a high degree of accuracy and reliability. All current studies are indicating that the level of detection and accuracy for the identification of lung cancer by means of CT scans using CNNs is high, equal to and in some cases even superior to that of the human eye and in particular of experienced radiologists, particularly with respect to the detection of small-sized early-stage lung cancer nodules (Liu et al., 2019). Moreover, the use of deep learning models in the analysis of medical images is having a positive impact on increasing the efficiency of assessment by radiologists, thus helping to alleviate the workload of health care workers.</p>
+
+<p>Moreover, screening high risk individuals for lung cancer can also be supported by the use of computerized images to aid early intervention. The need to develop protocols for the use of deep learning systems, to ensure that images and data from patients are used in appropriate ways and that all data privacy concerns are addressed, must not detract from the fact that the most critical factor in determining the effectiveness of CNNs to aid in lung cancer detection is the quality of the annotated training data that is used for the model's training. Currently, there is no general agreement as to how CNNs should be used within the radiological diagnostic process, with some regarding them as 'box intelligent' (i.e., an aid that can be included within the diagnostic decision-making process of the radiologist), whereas others are keen to press for the direct use of such models in the final stage of the decision-making a conclusive diagnosis (i.e., 'intelligent box'). However, both uses of the models are supported in terms of improved lung cancer detection and treatment in terms of improved outcomes for patients with the disease, which is what really matters most.</p>
+
+<h1>II. CNN Architectures for Lung Cancer Detection</h1>
+
+<h2>A. Feature Extraction and Multi-Scale Analysis</h2>
+
+<p class="no-indent">These complex structures can be identified within lung CT images by the large amounts of pixel data that the images contain, and thus are well-suited for use with CNNs. The majority of current architectures that are trained to classify images of lung nodules for cancer, use variations of ResNet and Inception architectures in order to be able to handle the multi-scale features present within the images (Al-Yasriy et al., 2020). As mentioned previously, these architectures utilize residual connections, and varying-sized kernels in order to handle various-sized features. The various architectures have different abilities to classify and detect for cancer, and thus the types of features that are extracted from the CT-scan images play a very important role in the overall architecture of the CNN. For example, previous research has demonstrated the effectiveness of early-stage nodule detection within CT scans using CNNs that are capable of classifying between malignant and benign nodules (Liu et al., 2019). As such, these models have shown promise in improving the accuracy with which lung cancer can be detected. Moreover, the models have the ability to be used in conjunction with other techniques in order to improve the diagnostic process for a number of diseases (Rajpurkar et al., 2019).</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 2:</div>
+        "Create a detailed technical diagram showing a Convolutional Neural Network architecture for lung cancer detection from CT scans. The diagram should show: input layer with a CT scan slice image, followed by multiple convolutional layers with feature maps showing edge detection and texture analysis, pooling layers, fully connected layers, and final classification output showing 'Malignant' vs 'Benign' with probability scores. Include annotations for filter sizes (3x3, 5x5), activation functions (ReLU), and dropout layers. Style: Technical IEEE conference paper figure, clean vector-style illustration, blue and gray color scheme, white background, professional typography."
+    </div>
+    <div class="figure-caption">Fig. 2. General CNN architecture for lung nodule classification from CT scan images, showing the flow from input image through convolutional layers to final classification output.</div>
+</div>
+
+<h2>B. Transfer Learning Approaches</h2>
+
+<p class="no-indent">The use of large annotated datasets for training of CNNs for disease detection has given rise to the approach of transfer learning in which a pre-trained CNN is fine-tuned on a new dataset to learn specific features for a given application. The large datasets of images such as those in the Lung Image Database Consortium (LIDC) and the 14 million images in the ImageNet repository can be used for transfer learning. Recently, a number of studies have reported the results of transfer learning of various CNN architectures such as AlexNet, VGG, ResNet, and Inception on CT images from the LIDC database with promising results (Al-Yasriy et al., 2020). This approach has the ability to enable a model to learn from a relatively small number of samples for a given application, thereby decreasing the risk of overfitting of the model to the training data.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 3:</div>
+        "Create a flowchart diagram illustrating the transfer learning process for lung cancer detection. Show three stages: (1) Pre-training on ImageNet dataset with 14 million images showing various objects, (2) Fine-tuning on LIDC lung CT dataset with medical images, and (3) Final deployment for clinical lung cancer detection. Include arrows showing knowledge transfer between stages. Show CNN architecture icons at each stage. Style: Professional IEEE conference figure, flowchart style, blue gradient boxes, clean lines, white background, minimal design."
+    </div>
+    <div class="figure-caption">Fig. 3. Transfer learning workflow for lung cancer detection CNNs, showing pre-training on ImageNet followed by fine-tuning on LIDC medical dataset.</div>
+</div>
+
+<h1>III. Comparative Analysis of VGG16 and InceptionV3</h1>
+
+<p class="no-indent">There is ample evidence that showcases CNNs, particularly for image classification and ining for images of size less than 256 x 256 pixels. The report focuses on an in-depth review of one by one several architecture of CNNs specifically VGG16 and InceptionV3. These two are powerful architecture in cancer detection and identification via CT scan images and has been very successful in various field, be it a space or in earth in detecting and identifying various type of cancers and thus are to be provided to health practitioners for their enhanced skill in detecting and identifying cancerous cell via CT scan images ining to facilitate in accurate and speedy treatment of patient suffering from lung cancer and thus report is intended to provided a sufficient enough information to aid and assist in health practitioners to select appropriate architecture for their problem (Al-Yasriy et al., 2020).</p>
+
+<h2>A. VGG16 Architecture</h2>
+
+<p class="no-indent">VGG16 is a straightforward architecture which uses 16 layers that are of the following types: convolutional and fully connected. These layers form a very deep architecture where each layer uses uniform and small receptive fields. This architecture is of great value to identify small features of lung structures and in identifying abnormal structures in the images of CT scans. Research work carried out by Sravani et al. (2024) showed that the feature extraction ability of VGG16 helped in detecting of a large number of malignant pulmonary nodule and also showed a sensitive result for the detection of cancerous structure in lung by using the model on external dataset. This model is of less computational power and is not very intensive and hence can be easily run on hardware that are of less configuration and also can be deployed in day to day clinical environment for the screening of lung cancer in large population but a high performance system is required for processing the large amount of medical images for screening of lung cancer in large population.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 4:</div>
+        "Create a detailed architectural diagram of the VGG16 network for lung cancer detection. Show 16 layers arranged vertically with: convolutional blocks (with 3x3 filters shown as small squares), max pooling layers, and fully connected layers at the top. Show the progression from 224x224 input CT image through increasing depth (64, 128, 256, 512 filters) with decreasing spatial dimensions. Include ReLU activation icons between layers. Style: Technical deep learning architecture diagram, IEEE conference style, clean vector graphics, grayscale with blue highlights, white background, layer dimensions labeled clearly."
+    </div>
+    <div class="figure-caption">Fig. 4. VGG16 architecture showing 16 layers with convolutional blocks, pooling layers, and fully connected layers for lung nodule classification.</div>
+</div>
+
+<h2>B. InceptionV3 Architecture</h2>
+
+<p class="no-indent">InceptionV3 is a more complex architecture than VGG16 which has varied number of layers. Inception modules are used in this model. The varying kernel sizes used in Inception modules help to capture multi-scale information in the images, such as small texture details, medium-size object features, and large contextual information. This architecture is designed to be computationally efficient. The features extracted from the input images are used to classify images into different classes. The InceptionV3 architecture has been reported to achieve higher accuracy and speed than VGG16 for the detection of lung cancer from CT scans (Klangbunrueang et al., 2025). For instance, the model has been reported to have lower false positive rate which is critical in early detection of cancer. The auxiliary classifiers in InceptionV3 also aid in training the model, thereby helping the model to learn and generalize well for different classes of data and for different patients and their corresponding images. This property of the model is very important for the accurate detection of diseases from images of patients. Therefore, the model can be used for the early detection of lung cancer and for other applications in the field of health care. The use of the model in health care system would aid in the timely treatment of the patient.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 5:</div>
+        "Create a detailed architectural diagram of the InceptionV3 network showing the Inception modules. Show the input CT image (299x299) flowing through stem convolution, followed by multiple Inception modules (A, B, C types) with parallel branches showing different filter sizes (1x1, 3x3, 5x5, 7x7) and pooling operations. Include auxiliary classifiers branching off. Show grid size reduction modules. Style: Technical architecture diagram, IEEE conference figure style, multi-branch flowchart with colored branches (red, green, blue, orange), clean white background, professional typography with layer labels."
+    </div>
+    <div class="figure-caption">Fig. 5. InceptionV3 architecture with Inception modules showing parallel convolutional branches of varying kernel sizes for multi-scale feature extraction.</div>
+</div>
+
+<h2>C. Comparative Assessment</h2>
+
+<p class="no-indent">A key observation that can be garnered from the architectures of VGG16 and InceptionV3 is that the former can be utilized in screening scenarios where high sensitivity for identifying cases of lung cancer is critical. InceptionV3 can, on the other hand, be applied in a variety of diagnostic scenarios where a balance between high accuracy and efficient processing of images is essential. In the era of developing CNNs for various applications, a major consideration is the adaptability of such models for integration into the existing clinical workflows. Recent studies have noted that the implementation of CNN-based decision support tools into the current workflows of radiologists can enhance the degree of diagnostic agreement among the medical practitioners (Sravani et al., 2024).</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 6:</div>
+        "Create a comparative bar chart showing performance metrics of VGG16 vs InceptionV3 for lung cancer detection. Show four grouped bars for each architecture: Accuracy (%), Sensitivity (%), Specificity (%), and Processing Speed (ms). VGG16 bars in blue, InceptionV3 bars in green. Include numerical values on top of each bar. Add a legend. Show that InceptionV3 has higher accuracy and speed while VGG16 has higher sensitivity. Style: Professional IEEE conference chart, clean design, white background, grid lines, clear labels, 10pt font, color-coded bars."
+    </div>
+    <div class="figure-caption">Fig. 6. Performance comparison between VGG16 and InceptionV3 architectures for lung cancer detection from CT scans.</div>
+</div>
+
+<h1>IV. Multimodal Frameworks: CNN and ANN Integration</h1>
+
+<p class="no-indent">A key advantage of combining of CNNs with ANNs in order to analyze CT scans and other health information in a clinical setting is that, as well as structural information from images, there is a vast amount of other information, for example: patient's history; demographics; results from laboratory tests, etc. in order to form an accurate medical assessment and, most importantly, in order to diagnose whether or not a patient has developed a malignant cancer and of what type. The capabilities of ANNs in learning from data that contains many different features is far greater than those of CNNs, and so, this makes for a powerful and attractive solution, as the networks can learn from images and from other health-related information.</p>
+
+<p>Oncu and Ciftci (2025) provided a recent study relating to the implementation of a multimodal CNN and ANN for the early detection of lung cancer from CT scan images and patient's clinical information, which achieved a higher accuracy for cancer detection by classifying the samples into malignant or benign than the typical methodologies. Their model used a CNN to classify the features extracted from the images of the CT scans while used an ANN to classify the clinical information. By the integration of both models, the performance of cancer detection was found to be improved in terms of sensitivity and specificity in addition to reducing false positive and false negative cases that are critical in the field of cancer.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 7:</div>
+        "Create a detailed system architecture diagram for a multimodal AI framework combining CNN and ANN for lung cancer diagnosis. Show two parallel pathways: (1) Left pathway - CNN processing CT scan images through convolutional layers to feature vector, (2) Right pathway - ANN processing clinical data (patient history, demographics, lab results) through dense layers to feature vector. Both pathways converge at a fusion layer that combines features, followed by classification layers outputting 'Malignant' or 'Benign'. Include data type icons for each input. Style: Professional system architecture diagram, IEEE conference style, blue and orange color scheme, clean boxes with rounded corners, white background, clear data flow arrows."
+    </div>
+    <div class="figure-caption">Fig. 7. Multimodal framework architecture integrating CNN for CT image analysis and ANN for clinical data processing for enhanced lung cancer diagnosis.</div>
+</div>
+
+<p>Streamlining the Clinical Work-Flow in the Application of Multimodal Frameworks in Healthcare. The work flow of clinicians who treat cancer patients is already extremely demanding, as these health care professionals must integrate large amounts of disparate information within the framework of their existing clinical practice. It is therefore of utmost importance to allow these very clinicians to function optimally in the application of a Multimodal framework, by ensuring that the inherent architecture is able to process both imaging and clinical data. This would facilitate the clinician in his or her very important tasks of data interpretation and clinical decision-making, thus, in effect, relieving the very clinician of the increased cognitive load which would arise from having to integrate and synthesize the additional diverse range of data that the Multimodal framework would bring to the clinical environment. Such a change could even result in earlier and more effective cancer treatment, for the patients who are treated within the context of this type of framework.</p>
+
+<p>For effective integration of information in medical practice for lung cancer diagnosis, using multimodal systems to detect characteristics of the disease that correlate with a patient's prognosis or treatment response will provide greatest value to health care professionals and in turn help develop the most appropriate treatment. A lung cancer that is identified as one type of cancer as opposed to another can be tailored to specific management strategies for that particular type of cancer. Lung cancer can be currently classified into non small cell lung cancer and small cell lung cancer. Further subclassification using modalities of treatment are also under investigation and the hope is that as more research becomes available; healthcare providers will use the most current subclassification for each patient's specific diagnosis to optimize management and therefore improve overall patient outcome.</p>
+
+<p>Using these multimodal approaches, it is now possible to enhance the accuracy of a model by utilizing different types of data, which can be very useful in situations where a lot of data of a particular type is not available. The use of multimodal approaches for analyzing CT images for diagnosing lung cancer also has a lot of implications for the future. It has the potential to help improve the quality of care for cancer patients and can also help in implementing a more personalized and data-driven healthcare system. Using such approaches can also help in overcoming some of the limitations of single modal approaches for various applications and in various scenarios and settings.</p>
+
+<h1>V. Challenges in Clinical Implementation</h1>
+
+<h2>A. Overfitting and Data Imbalance</h2>
+
+<p class="no-indent">Overfitting of the CNN is another important aspect to consider. Many CNNs have a huge capacity to learn complex models of data, which makes it easy for the CNN to overfit the training data. This results in the CNN performing very well on the training data, but performing poorly on unseen data (Sathyakumar et al., 2020). Overfitting of the CNN is exacerbated by the fact that in many medical datasets, there are a large number of negative cases and a small number of positive cases. This results in the model learning to recognize the negative cases very well and not learning to recognize positive cases as well. This is because there are fewer positive cases for the model to learn from. Regularization, such as dropout, k-fold cross validation, and early stopping, can be used to combat overfitting of the CNN. These methods have been shown to reduce the effect of overfitting and improve the performance of the CNN on unseen data.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 8:</div>
+        "Create a graph showing the overfitting problem in CNN training for lung cancer detection. Show two curves on the same plot: (1) Training accuracy curve in blue that increases to near 100%, (2) Validation accuracy curve in red that initially increases but then plateaus or decreases. X-axis: Epochs (0-100), Y-axis: Accuracy (%). Show the gap between training and validation accuracy widening after epoch 40, indicating overfitting. Add annotations for 'Overfitting Region' and 'Optimal Stopping Point'. Style: Professional IEEE conference line chart, clean design, white background, grid lines, clear legend, 10pt font."
+    </div>
+    <div class="figure-caption">Fig. 8. Illustration of overfitting in CNN training for lung cancer detection, showing divergence between training and validation accuracy.</div>
+</div>
+
+<h2>B. Interpretability and Explainable AI</h2>
+
+<p class="no-indent">However, there is little research into how the decisions made by CNNs can be interpreted. In contrast to other areas of AI research, CNNs are often referred to as 'black boxes' because they function as a 'single, opaque block' that takes images as input and outputs classifications. There is therefore a great need for research that aims to increase interpretability of CNNs and, more generally, of deep learning architectures. The fact that there is much interest in explainable AI (XAI) and that a number of frameworks are being developed to facilitate such research into explainability of AI systems indicates that this is a very active research area. Visualization of the features of the input images that were used by the CNN for making a classification are one of the ways in which the decisions made by CNNs can be made more transparent. It is to be expected that research into the increased interpretability of CNNs will, in the long run, also lead to increased trust of the AI systems that are based on these models by clinicians. Ultimately, it is crucial that clinicians are able to trust the output of AI systems, because they must be able to rely on the output of these systems in their decision-making processes. Moreover, clinicians must also be able to justify the decisions that they have made, also with respect to the output of AI systems. The fact that the output of a CNN is used as input for the decision-making process of a clinician does not mean that the clinician is relieved of responsibility for the decisions that are made. On the contrary, the clinician is, in this case, responsible for ensuring that the output of the CNN is justified. It is therefore of utmost importance that the output of the CNN can be justified. This can be achieved by increasing the degree to which the CNN is interpretable.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 9:</div>
+        "Create an illustration showing Explainable AI (XAI) for lung cancer detection. Show a CT scan image on the left with a lung nodule. In the center, show a CNN model as a transparent box with visible internal layers. On the right, show the explanation output with: (1) A heatmap overlay on the CT scan highlighting the region the CNN focused on (red-yellow gradient), (2) A bar chart showing feature importance scores, (3) Text explanation 'The model detected malignancy based on spiculated margins and irregular shape'. Style: Medical AI illustration, clean white background, professional color scheme, IEEE conference figure style, informative annotations."
+    </div>
+    <div class="figure-caption">Fig. 9. Explainable AI framework for lung cancer detection, showing Grad-CAM heatmap visualization and feature importance analysis for model decision transparency.</div>
+</div>
+
+<h2>C. Bias and Data Quality</h2>
+
+<p class="no-indent">As another challenge in using CNNs for lung cancer detection in CT scans of patients, there is a risk for bias. Algorithms that have been trained on large datasets of images to classify features in images can be influenced by existing biases in the data. When for example a large fraction of images of patients with lung cancer have been collected from a relatively young population, then there is a risk of misdiagnosing or underdiagnosing patients that are of older age. This makes it very important to test the algorithm on images of patients of different demographics and also to collect a very diverse set of images of patients. Also, when data is collected from different institutions, it is often very difficult to combine the data due to large differences in how the data was collected. This makes it very difficult to train a single CNN on the combined dataset. There are several ways to deal with this problem, for example by using transfer learning or by sharing the data between researchers in an open science fashion. However, currently, there is a big culture barrier between researchers that use open science and researchers that do not use open science. Changing this culture in order to promote open science is a big challenge by itself.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 10:</div>
+        "Create an infographic showing demographic bias in AI training data for lung cancer detection. Show a pie chart of training data demographics (heavily skewed toward one age group/ethnicity). Next to it, show the consequences: a warning icon with text 'Potential Misdiagnosis for Underrepresented Groups'. Below, show a solution pathway with diverse patient icons and a balanced dataset representation. Include statistics about lung cancer incidence across different demographics. Style: Professional infographic, IEEE conference figure style, warning colors (yellow, red), clean white background, icons and charts combined."
+    </div>
+    <div class="figure-caption">Fig. 10. Illustration of demographic bias in training data and its potential impact on CNN-based lung cancer detection accuracy across patient populations.</div>
+</div>
+
+<h1>VI. Image Preprocessing and Enhancement Techniques</h1>
+
+<p class="no-indent">Lung cancer, which is a leading cause of cancer deaths worldwide, is often diagnosed at a late stage of the disease, when treatment is less effective. Therefore, the development of an accurate and fast computer-aided system for the detection of lung cancer in CT scans is extremely important. In recent years, deep learning methods, particularly Convolutional Neural Networks (CNNs), have been widely used for analyzing medical images. Recent advancements in image preprocessing techniques and deep learning models have improved the performance and robustness of CNNs in lung cancer detection.</p>
+
+<p>A number of key enhancements have been developed that are used in order to process the images prior to their use by CNNs in order to enhance their quality. One of the areas that have seen significant amounts of research and development include a number of image processing techniques which are able to enhance the histogram, reduce noise, and enhance the contrast of the CT images. All of these items are able to greatly enhance the ability of CNNs to be able to identify a number of different items of interest within the images including tumors. This is particularly important in early stage lung cancer where there are a number of different subtle changes that occur in order to allow the disease to progress. These subtle changes can be very difficult to identify using standard CT images.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 11:</div>
+        "Create a four-panel comparison figure showing CT scan preprocessing steps for lung cancer detection. Panel 1: Original CT scan slice showing lung with subtle nodule. Panel 2: After histogram equalization - improved contrast. Panel 3: After noise reduction - cleaner image. Panel 4: After contrast enhancement - nodule clearly visible with enhanced edges. Include arrows between panels showing the processing pipeline. Each panel should be labeled. Style: Medical imaging figure, IEEE conference style, grayscale CT images, clean layout, white background, professional medical visualization."
+    </div>
+    <div class="figure-caption">Fig. 11. CT scan preprocessing pipeline showing original image, histogram equalization, noise reduction, and contrast enhancement for improved nodule visibility.</div>
+</div>
+
+<p>Several Deep Learning solutions have been devised to further improve the training of CNNs. For instance, in their article, "Anomaly Detection in Lung Cascades Using Deep Learning" (2024), Eldho and Nithyanandh present an innovative approach to improve the training of a CNN-based system for detecting anomalies, including cancer in lung cascades. Transfer learning and several Deep Learning-based optimization techniques have also been designed to train a pre-trained CNN on a small-sized cancer-specific dataset. For instance, using transfer learning, a CNN that has been pre-trained on a large dataset of images, such as Images from 1000 Categories in the ILSVRC-2012 (ImageNet), can be fine-tuned on a small-sized cancer-specific dataset. This is particularly relevant in the medical field where the annotated data are usually limited. As a result, the model can learn to improve its performance and achieve higher accuracy in cancer detection from the knowledge gained from the diverse images in the pre-trained model, thereby enabling the technology to be more easily implemented in various clinical settings.</p>
+
+<p>New innovations are emerging to improve image features to be fed into CNNs. Even more importantly, enhancements to image processing and analysis are emerging, specifically pre-processing of images. This helps extract features of higher quality from images, which in turn leads to enhanced accuracy of the subsequent CNN diagnosis, improving tumor visibility and helping to improve the quality of diagnostic analysis and thereby cancer treatment. Preprocessing strategies can greatly help in enhancing visibility of tumors and thereby enhancing early detection of lung cancer and save lives of patients. Image preprocessing techniques such as histogram equalization, removal of noise, image contrast enhancement can also play a critical role in enhancing accuracy of subsequent analysis and improving visibility of tumors in images obtained by various modalities and thereby enhance accuracy of subsequent cancer diagnosis using computer-aided techniques such as deep-learning-based techniques (Pagadala et al., 2023).</p>
+
+<p>Some limitations currently encountered by current diagnostic approaches for detecting Lung Cancer can be tackled by utilization of current technological developments on the CNNs. The results of quality improved images and state-of data which can be fed into trained models can be used to provide accurate classifications by the CNNs whilst reducing the currently high false-negative cases leading to delayed treatment and potential decreased quality of life and or survival for patient with suspected Lung Cancer. Additionally, the robustness of models provide doctors with a diagnostic aid that is of high value in practice thus leading to potential for better outcomes as cases are picked up earlier thus enabling treatments to be implemented with the potential of providing a cure or improved survival for patient with suspected Lung Cancer.</p>
+
+<h1>VII. Clinical Integration and Regulatory Considerations</h1>
+
+<p class="no-indent">Implementation of CNNs in analysis of CT scans for lung cancer detection within clinical workflow opens up numerous implications and potential for improvement in various aspects of medical practice. However, also brings set of challenges for doctors, scientists and patients alike and therefore must be approached with caution, assessed and evaluated properly before introduction into various clinics and hospitals around the world. Most importantly, AI in any form must be used as tool and not as replacement for the doctor and therefore its implementation into clinics and hospitals requires substantial adaptation within the workflows of various medical practitioners. In addition, substantial training of said medical practitioners in how to correctly use, interpret and analyze vast amount of data, generated by deep learning algorithms, in order to improve various aspects of medical practice and to implement said technology into clinical workflows of doctors and nurses and to integrate it with various other systems currently used within the clinics and to ensure that any new technology that is being introduced into the clinical environment does not negatively impact on the overall patient experience and to ensure that any new technology that is being introduced into the clinical environment is safe for patients and staff alike, or to identify and address any potential problems or issues before they impact on the patient experience, as patients are extremely sensitive to any change and therefore any change must be implemented with utmost care, dignity and respect and therefore requires substantial adaptation, training and support from various stakeholders, including scientists, programmers, IT specialists and various medical practitioners and nurses, etc. And therefore, the future of AI in medical practice is looking extremely bright and also extremely challenging, but also extremely rewarding for all parties involved, as it has genuine potential to greatly improve patient care, patient experience and overall outcome for the patients and therefore must be fully embraced, as AI in any form must be used as tool to aid the doctors and not as a replacement for said medical practitioners.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 12:</div>
+        "Create a workflow diagram showing clinical integration of CNN-based lung cancer detection system. Show the flow: Patient arrives -> CT Scan performed -> Images sent to AI system -> CNN analysis -> Results presented to radiologist -> Radiologist reviews AI results and makes final diagnosis -> Treatment plan initiated. Include decision diamonds for 'AI Detection Positive?' and 'Radiologist Agreement?'. Show feedback loop from radiologist to AI system for continuous learning. Style: Clinical workflow diagram, IEEE conference style, blue boxes for processes, yellow diamonds for decisions, green for start/end, clean white background, professional medical workflow."
+    </div>
+    <div class="figure-caption">Fig. 12. Clinical workflow integration of CNN-based lung cancer detection system with radiologist-in-the-loop decision making.</div>
+</div>
+
+<p>The use of lung cancer CT scan diagnosis can benefit greatly from the enhanced capabilities of Convolutional Neural Networks (CNN) when used for the AI-assisted lung cancer detection. The pre- and post-processing of the scan, which can be greatly enhanced using AI, plays a critical role for the improved image quality for such purposes. The preprocessing methods which include, but are not limited to histogram equalization, noise reduction and image contrast enhancement can facilitate enhanced tumors detection and hence improve the visibility of tumors and other related features using such images. This improved CT images using various processing techniques can then aid in the improved accuracy for effective detection of lung cancer in images obtained using CT scans.</p>
+
+<p>Despite advancements made by CNNs, utilizing these systems in the health care setting raises numerous issues that are to be addressed, primarily by the regulators of health care, for example, FDA. Establishing and enforcing guidelines on health care AI algorithms requires the consideration of various technical, ethical, legal, and social issues. While these systems are able to process large amounts of health care data in a very short amount of time, generating results that can aid health care professionals in diagnosis and treatment of a patient, much of the processes within the system cannot be reverse engineered. The resulting decisions made by these 'black-box' systems need to be explained and verified by a health care provider in order to confirm a diagnosis for a patient. Furthermore, the lack of interpretability in these models can also highlight ethical issues, with the potential to be biased by the training data. For instance, a system can be trained and validated on data that predominantly consists of images and health care data from a specific demographic. This raises the possibility of misdiagnosis or underdiagnosis in patients that are outside of this demographic. Therefore, health care AI systems must be designed, tested, and validated with considerations of all individuals, and not just a specific group within a population. Addressing these challenges will ultimately lead to safe and effective health care AI systems that can improve patient care and the overall health care system.</p>
+
+<h1>VIII. Training and Trust in AI Systems</h1>
+
+<p class="no-indent">In addition, training of the medical staff is essential for effective implementation of the AI-assisted diagnostics. The radiologists and the oncologists need to understand the strengths and limitations of the AI algorithms in order to effectively interpret the results of the computer-assisted analysis and to incorporate the results in their own clinical decision making. In order to achieve this, new models of medical education need to be re-designed in order to include an interdisciplinary approach that would combine medical knowledge with the ability to apply the latest technology in the clinical practice. The healthcare professionals would need to continuously update their knowledge and skills in order to keep up with the rapid development of the AI systems and their application in the diagnostics of the lung cancer.</p>
+
+<p>Lastly, there are also concerns with regards to the trustworthiness of AI systems. For the technology to be effective in practice, there is a need for practitioners to rely on it. To that end, there is a need to create a framework for the assessment and feedback of AI systems in real life settings. The most effective way to achieve this is through the co-creation of AI systems with clinical teams. This way, practitioners will feel a sense of ownership towards the technology, which in turn will lead to its increased acceptance in practice.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 13:</div>
+        "Create an illustration showing the trust-building framework for AI in medical diagnostics. Show a central circle labeled 'Trustworthy AI System' with surrounding elements: (1) 'Clinical Validation' with checkmark icon, (2) 'Transparent Explanations' with magnifying glass icon, (3) 'Diverse Training Data' with multiple patient icons, (4) 'Regulatory Compliance' with shield icon, (5) 'Continuous Monitoring' with graph icon, (6) 'Clinician Feedback Loop' with circular arrows. All elements connected to the center. Style: Professional infographic, IEEE conference style, blue and green color scheme, clean icons, white background, modern flat design."
+    </div>
+    <div class="figure-caption">Fig. 13. Framework for building trust in CNN-based lung cancer detection systems through clinical validation, transparency, diverse data, and continuous feedback.</div>
+</div>
+
+<h1>IX. Future Research Directions</h1>
+
+<p class="no-indent">This novel technology will continue to improve in the years to come with challenges that need to be addressed by all stakeholders involved in the development and implementation of this technology. Improved models, increased performance and improved areas of diagnosis will be achieved by the use of convolutional neural networks in the diagnosis of lung cancer and other medical conditions.</p>
+
+<p>Overfitting is another problem CNN models are plagued with as these models are inherently very complex in nature to be able to recognize patterns within a dataset and can 'over fit' the training data provided to achieve very high accuracy scores on a limited set of examples that have been used to train a model. Such over fitted models fail to deliver comparable performance levels on an independent test dataset which consists of entirely new instances, not seen during the model's training, and so can cause problems within the healthcare sector where certain circumstances or situations could occur, with previously seen cases from a dataset not providing sufficient instances or examples that match the new test case being assessed. With the goal of a model achieving high sensitivity to detect cases of cancer and possible other circumstances and scenarios which may give rise to serious health problems within a patient, to deliver a high degree of accurate assessments with all circumstances and situations that have not been encountered before, that have not been used in a model's training to develop the model, within a model. Also of great concern are the factors that are deemed to affect how a deep learning model makes a decision and therefore how a healthcare worker may interpret results, generated from images that have been assessed using AI systems. And so it is crucial for these models to be very transparent, and explainable within a clinical setting as previously stated, so as to confirm all aspects that a healthcare worker would rely on to make the right decision, to achieve improved healthcare and successful patient treatment and care.</p>
+
+<p>Addressing these challenges through interdisciplinary collaboration is key to successfully developing effective models for use in the clinic. Through ongoing partnerships with clinical teams, AI developers can ensure that any models they develop are not only robust for a range of clinical scenarios, but also clinically relevant. Input from healthcare professionals during the feature selection process can aid in developing models that focuses on the most important attributes to aid in a correct diagnosis. By working together to create models that are able to take full advantage of the large amounts of data currently available for use in developing effective lung cancer detection models, there is hope for improved accuracy in the detection and diagnosis of lung cancer, and subsequent patient care.</p>
+
+<p>Future research directions must concentrate on addressing the present limitations and advancing the effectiveness of CNN applications in this field. One significant area of exploration is the development of hybrid models that incorporate a combination of CNNs with other AI techniques, such as reinforcement learning or natural language processing, to improve diagnostic precision and assist in clinical decision support systems. Additionally, conducting longitudinal studies that examine the real-world performance of CNN-based frameworks over extended periods may yield insights into their reliability and effectiveness in diverse patient populations.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 14:</div>
+        "Create a futuristic concept diagram showing future research directions for AI in lung cancer detection. Show a central brain icon labeled 'Hybrid AI Systems' with radiating branches: (1) 'CNN + Reinforcement Learning' with robot icon, (2) 'CNN + NLP' with speech bubble icon, (3) 'Longitudinal Studies' with timeline icon, (4) 'Federated Learning' with connected nodes icon, (5) 'Real-time Monitoring' with pulse icon, (6) 'Personalized Medicine' with DNA helix icon. Include background elements suggesting future technology. Style: Futuristic technology illustration, IEEE conference style, gradient blue-purple color scheme, glowing effects, clean white background, modern tech aesthetic."
+    </div>
+    <div class="figure-caption">Fig. 14. Future research directions for CNN-based lung cancer detection, including hybrid models, longitudinal studies, and federated learning approaches.</div>
+</div>
+
+<p>Enhancing data sharing and the standardization of data across the board in individual institutions, will also create large high quality datasets for CNN training. Open science practices and collaboration among researchers and between institutions, can also generate novel methods to mitigate any bias due to small, or heterogeneous, datasets.</p>
+
+<h1>X. Conclusion</h1>
+
+<p class="no-indent">In summary, performance of convolutional neural networks for the detection of lung cancer in CT scans has been very promising so far. However, several challenges are to be addressed to make them ready for the clinical application. Continuing efforts of researchers are expected to resolve these issues and make the accurate and fast computer-assisted detection a part of clinical practice to improve the cancer detection rate and patient care (Thakral & Gambhir, 2024).</p>
+
+<p>Current CNN architectures like VGG16 and InceptionV3 can be effectively used in lung cancer detection and in improving sensitivity and accuracy in detection of pulmonary nodules using CT scans. The use of these models in clinical setting, however, needs to be addressed such as accessibility, interpretability and fine-tuning of models to specific applications in order to maximize their effectiveness.</p>
+
+<p>However, many obstacles remain for the effective deployment of models in clinical environments. First, the models require large amounts of labeled training data. However, creating sufficient amounts of such data for accurate training of models for lung cancer detection from CT scans is problematic due to several reasons. Furthermore, there is a risk of algorithmic bias when training models for diagnosis of certain diseases. For this reason, the interpretability of models for detection of cancer from CT images, such as InceptionV3, remains an open problem. They are very accurate in their classifications, but they are black boxes, and therefore, it is difficult for a human doctor to trust decisions made by a model. The challenge of AI interpretability in cancer detection is one of the biggest in the field of medical AI today, and it is a challenge that requires to be solved in order for the AI systems to be able to work in collaboration with the human doctors to enhance cancer detection and ultimately to improve the quality of care provided to patients with cancer.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 15:</div>
+        "Create a comprehensive summary infographic for CNN-based lung cancer detection. Show a central CT scan image with lung nodule detection. Surrounding elements: (1) Top: 'Promising Results' with accuracy chart showing 95%+, (2) Left: 'Key Architectures' with VGG16 and InceptionV3 icons, (3) Right: 'Challenges' with icons for bias, interpretability, and data quality, (4) Bottom: 'Future Path' with arrow pointing to 'Clinical Integration'. Include small human and AI collaboration icons. Style: Professional summary infographic, IEEE conference style, balanced layout, blue and green color scheme, clean white background, comprehensive yet readable."
+    </div>
+    <div class="figure-caption">Fig. 15. Summary overview of CNN-based lung cancer detection showing current capabilities, key architectures, challenges, and future clinical integration path.</div>
+</div>
+
+<div class="references">
+    <div class="references-title">References</div>
+
+    <div class="reference-item">[1] M. Hammad, M. ElAffendi, A. A. El-Latif, A. A. Ateya, G. Ali, and P. Plawiak, "Explainable AI for lung cancer detection via a custom CNN on CT images," <em>Scientific Reports</em>, vol. 15, no. 1, p. 12707, Apr. 2025.</div>
+
+    <div class="reference-item">[2] H. F. Al-Yasriy, M. S. Al-Husieny, F. Y. Mohsen, E. A. Khalil, and Z. S. Hassan, "Diagnosis of lung cancer based on CT scans using CNN," in <em>IOP Conference Series: Materials Science and Engineering</em>, vol. 928, no. 2, p. 022035, IOP Publishing, Nov. 2020.</div>
+
+    <div class="reference-item">[3] R. Klangbunrueang, P. Pookduang, W. Chansanam, and T. Lunrasri, "AI-powered lung cancer detection: Assessing VGG16 and CNN architectures for CT scan image classification," <em>Informatics</em>, vol. 12, no. 1, p. 18, MDPI, Feb. 2025.</div>
+
+    <div class="reference-item">[4] E. Oncu and F. Ciftci, "Multimodal AI framework for lung cancer diagnosis: Integrating CNN and ANN models for imaging and clinical data analysis," <em>Computers in Biology and Medicine</em>, vol. 193, p. 110488, Jul. 2025.</div>
+
+    <div class="reference-item">[5] W. Ayadi, Y. Farhat, S. A. Althabahi, N. Baskaran, S. A. Dar, R. Indhumathi, M. P. Pant, S. A. Bhat, and A. A. Rather, "AI-Powered CNN Model for Automated Lung Cancer Diagnosis in Medical Imaging," <em>International Journal</em>, vol. 14, p. 617, 2025.</div>
+
+    <div class="reference-item">[6] N. K. Karthikeyan and S. S. Ali, "Lung cancer classification using CT scan images through deep learning and CNN based model," in <em>2024 International Conference on Advances in Data Engineering and Intelligent Computing Systems (ADICS)</em>, pp. 01-05, IEEE, Apr. 2024.</div>
+
+    <div class="reference-item">[7] M. Sravani, M. K. Murthy, and S. Muppidi, "Utilizing Visual Geometry Group (VGG16) and InceptionV3 convolutional Neural Network (CNN) models for accurate diagnosis of lung cancer: an Artificial Intelligence (AI)-based approach," <em>Multimedia Tools and Applications</em>, vol. 83, no. 19, pp. 57477-57494, Jun. 2024.</div>
+
+    <div class="reference-item">[8] N. Faruqui, M. A. Yousuf, M. Whaiduzzaman, A. K. Azad, A. Barros, and M. A. Moni, "LungNet: A hybrid deep-CNN model for lung cancer diagnosis using CT and wearable sensor-based medical IoT data," <em>Computers in Biology and Medicine</em>, vol. 139, p. 104961, Dec. 2021.</div>
+
+    <div class="reference-item">[9] D. Riquelme and M. A. Akhloufi, "Deep learning for lung cancer nodules detection and classification in CT scans," <em>Ai</em>, vol. 1, no. 1, pp. 28-67, Jan. 2020.</div>
+
+    <div class="reference-item">[10] W. Quanyang, H. Yao, W. Sicong, Q. Linlin, Z. Zewei, H. Donghui, L. Hongjia, and Z. Shijun, "Artificial intelligence in lung cancer screening: Detection, classification, prediction, and prognosis," <em>Cancer Medicine</em>, vol. 13, no. 7, p. e7140, Apr. 2024.</div>
+
+    <div class="reference-item">[11] K. Singh, Y. Singh, D. Barak, and M. Yadav, "Detection of lung cancers from CT images using a deep CNN architecture in layers through ML," in <em>AI and IoT-based Technologies for Precision Medicine</em>, pp. 97-107, IGI Global Scientific Publishing, 2023.</div>
+
+    <div class="reference-item">[12] P. K. Pagadala, S. L. Pinapatruni, R. K. Chanda, S. Katakam, L. S. Peri, and D. A. Reddy, "Enhancing lung cancer detection from lung CT scan using image processing and deep neural networks," <em>Revue d'Intelligence Artificielle</em>, vol. 37, no. 6, p. 1597, Dec. 2023.</div>
+
+    <div class="reference-item">[13] J. Chamberlin, M. R. Kocher, J. Waltz, M. Snoddy, N. F. Stringer, J. Stephenson, P. Sahbaee, P. Sharma, S. Rapaka, U. J. Schoepf, and A. F. Abadia, "Automated detection of lung nodules and coronary artery calcium using artificial intelligence on low-dose CT scans for lung cancer screening: accuracy and prognostic value," <em>BMC Medicine</em>, vol. 19, no. 1, p. 55, Mar. 2021.</div>
+
+    <div class="reference-item">[14] Z. Aljneibi, S. Almenhali, and L. Lanca, "Convolutional neural network application for automated lung cancer detection on chest CT using Google AI Studio," <em>Radiography</em>, p. 103152, Sep. 2025.</div>
+
+    <div class="reference-item">[15] K. Sathyakumar, M. Munoz, J. Singh, N. Hussain, B. A. Babu, and B. Babu, "Automated lung cancer detection using artificial intelligence (AI) deep convolutional neural networks: A narrative literature review," <em>Cureus</em>, vol. 12, no. 8, Aug. 2020.</div>
+
+    <div class="reference-item">[16] K. J. Eldho and S. Nithyanandh, "Lung cancer detection and severity analysis with a 3D deep learning CNN Model using CT-DICOM clinical dataset," <em>Indian Journal of Science and Technology</em>, vol. 17, no. 10, pp. 899-910, Feb. 2024.</div>
+
+    <div class="reference-item">[17] T. Awan, M. Ali, M. Hussain, M. Rashid, S. Ali, and S. K. Noon, "AI-powered lung cancer detection from CT imaging," <em>VFAST Transactions on Software Engineering</em>, vol. 12, no. 2, pp. 241-249, Jun. 2024.</div>
+
+    <div class="reference-item">[18] R. Raza, F. Zulfiqar, M. O. Khan, M. Arif, A. Alvi, M. A. Iftikhar, and T. Alam, "Lung-EffNet: Lung cancer classification using EfficientNet from CT-scan images," <em>Engineering Applications of Artificial Intelligence</em>, vol. 126, p. 106902, Nov. 2023.</div>
+
+    <div class="reference-item">[19] R. Pandian, V. Vedanarayanan, D. R. Kumar, and R. Rajakumar, "Detection and classification of lung cancer using CNN and Google net," <em>Measurement: Sensors</em>, vol. 24, p. 100588, Dec. 2022.</div>
+
+    <div class="reference-item">[20] G. Thakral and S. Gambhir, "Early detection of lung cancer with low-dose ct scan using artificial intelligence: A comprehensive survey," <em>SN Computer Science</em>, vol. 5, no. 5, p. 441, Apr. 2024.</div>
+</div>
+
+</body>
+</html>
