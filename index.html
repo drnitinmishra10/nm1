@@ -412,6 +412,7 @@
             background: var(--primary);
         }
     </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -450,7 +451,7 @@
     </div>
 
     <footer>
-        <p>© 2026 Dr. Nitin Mishra | Research Repository</p>
+        <p>&copy; 2026 Dr. Nitin Mishra | Research Repository</p>
         <p style="margin-top: 8px; font-size: 0.9rem;">
             Automatically indexes all HTML files in the repository
         </p>
@@ -466,31 +467,52 @@
 
     let allPapers = [];
 
+    // Extract title from HTML content
+    async function getPageTitle(url) {
+        try {
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), 5000);
+
+            const response = await fetch(url, { signal: controller.signal });
+            clearTimeout(timeout);
+
+            if (!response.ok) return null;
+
+            const html = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+
+            const title = doc.querySelector('title');
+            return title ? title.textContent.trim() : null;
+        } catch (error) {
+            return null;
+        }
+    }
+
     // Strategy 1: Try to fetch directory listing (works on some servers)
     async function fetchDirectoryListing() {
         try {
             const response = await fetch('./');
             if (!response.ok) return [];
-            
+
             const html = await response.text();
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
-            
-            // Look for links in directory listings
+
             const links = doc.querySelectorAll('a[href]');
             const htmlFiles = [];
-            
+
             links.forEach(link => {
                 const href = link.getAttribute('href');
-                if (href && href.endsWith('.html') && href !== 'index.html') {
+                if (href && href.endsWith('.html') && href !== 'index.html' && !href.startsWith('http')) {
                     htmlFiles.push({
                         name: href.replace('.html', '').replace(/-/g, ' ').replace(/_/g, ' '),
                         file: href,
-                        size: link.textContent.includes('[') ? link.textContent.match(/\[(.*?)\]/)?.[1] : null
+                        title: null
                     });
                 }
             });
-            
+
             return htmlFiles;
         } catch (e) {
             return [];
@@ -509,31 +531,31 @@
             'project1', 'project2', 'project3',
             'thesis', 'dissertation', 'monograph'
         ];
-        
+
         const extensions = ['.html', '.htm'];
         const found = [];
-        
-        // Check in parallel batches to be faster
+
         const batchSize = 5;
         for (let i = 0; i < commonNames.length; i += batchSize) {
             const batch = commonNames.slice(i, i + batchSize);
             const checks = batch.flatMap(name => 
                 extensions.map(ext => checkFileExists(`${name}${ext}`))
             );
-            
+
             const results = await Promise.all(checks);
-            
+
             results.forEach((result, idx) => {
                 if (result.exists) {
                     const fileName = batch[Math.floor(idx / extensions.length)] + extensions[idx % extensions.length];
                     found.push({
                         name: fileName.replace(/\.html?/, '').replace(/-/g, ' ').replace(/_/g, ' '),
-                        file: fileName
+                        file: fileName,
+                        title: null
                     });
                 }
             });
         }
-        
+
         return found;
     }
 
@@ -541,12 +563,12 @@
         try {
             const controller = new AbortController();
             const timeout = setTimeout(() => controller.abort(), 3000);
-            
+
             const response = await fetch(url, { 
                 method: 'HEAD',
                 signal: controller.signal
             });
-            
+
             clearTimeout(timeout);
             return { exists: response.ok, url };
         } catch (error) {
@@ -556,39 +578,31 @@
 
     // Strategy 3: If GitHub Pages, try API
     async function fetchGitHubFiles() {
-        // Extract username from URL if it's a github.io site
         const hostname = window.location.hostname;
         if (!hostname.includes('github.io')) return [];
-        
+
         const username = hostname.split('.')[0];
         const repoName = window.location.pathname.split('/')[1] || `${username}.github.io`;
-        
+
         try {
             const apiUrl = `https://api.github.com/repos/${username}/${repoName}/contents/`;
             const response = await fetch(apiUrl);
             if (!response.ok) return [];
-            
+
             const data = await response.json();
             return data
                 .filter(item => item.name.endsWith('.html') && item.name !== 'index.html')
                 .map(item => ({
                     name: item.name.replace('.html', '').replace(/-/g, ' ').replace(/_/g, ' '),
                     file: item.name,
-                    size: formatFileSize(item.size)
+                    title: null
                 }));
         } catch (e) {
             return [];
         }
     }
 
-    function formatFileSize(bytes) {
-        if (bytes < 1024) return bytes + ' B';
-        if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-        return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
-    }
-
     function formatTitle(name) {
-        // Capitalize and clean up the name
         return name
             .split(' ')
             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
@@ -604,9 +618,9 @@
         return icons[Math.abs(hash) % icons.length];
     }
 
-    function renderPapers(papers) {
+    async function renderPapers(papers) {
         papersGrid.innerHTML = '';
-        
+
         if (papers.length === 0) {
             papersGrid.innerHTML = `
                 <div class="empty-state">
@@ -620,29 +634,37 @@
             return;
         }
 
-        paperCountEl.textContent = papers.length;
-        fileCountEl.textContent = papers.length;
+        // Fetch titles for all papers in parallel
+        const titlePromises = papers.map(async (paper) => {
+            const title = await getPageTitle(paper.file);
+            paper.title = title || formatTitle(paper.name);
+            return paper;
+        });
 
-        papers.forEach((paper, index) => {
+        allPapers = await Promise.all(titlePromises);
+
+        paperCountEl.textContent = allPapers.length;
+        fileCountEl.textContent = allPapers.length;
+
+        allPapers.forEach((paper, index) => {
             const card = document.createElement('div');
             card.className = 'card';
             card.style.animationDelay = `${index * 0.05}s`;
-            
-            const title = formatTitle(paper.name);
+
+            const displayTitle = paper.title || formatTitle(paper.name);
             const icon = getPaperIcon(paper.name);
-            
+
             card.innerHTML = `
                 <div class="card-icon">${icon}</div>
-                <h2>${title}</h2>
+                <h2>${displayTitle}</h2>
                 <div class="card-meta">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                         <polyline points="14 2 14 8 20 8"></polyline>
                     </svg>
                     <span>${paper.file}</span>
-                    ${paper.size ? `<span style="margin-left: auto;">${paper.size}</span>` : ''}
                 </div>
-                <p>Research paper document available in the repository. Click to open and view the full content.</p>
+                <p>${displayTitle}</p>
                 <div class="card-footer">
                     <a class="btn" href="${paper.file}" target="_blank" rel="noopener noreferrer">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -661,31 +683,84 @@
                     </a>
                 </div>
             `;
-            
+
             papersGrid.appendChild(card);
         });
     }
 
     function filterPapers(query) {
         const filtered = allPapers.filter(paper => 
+            (paper.title && paper.title.toLowerCase().includes(query.toLowerCase())) ||
             paper.name.toLowerCase().includes(query.toLowerCase()) ||
             paper.file.toLowerCase().includes(query.toLowerCase())
         );
-        renderPapers(filtered);
+
+        papersGrid.innerHTML = '';
+
+        if (filtered.length === 0) {
+            papersGrid.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">🔍</div>
+                    <h3>No matching papers</h3>
+                    <p>No papers match your search query. Try different keywords.</p>
+                </div>
+            `;
+            return;
+        }
+
+        filtered.forEach((paper, index) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.style.animationDelay = `${index * 0.05}s`;
+
+            const displayTitle = paper.title || formatTitle(paper.name);
+            const icon = getPaperIcon(paper.name);
+
+            card.innerHTML = `
+                <div class="card-icon">${icon}</div>
+                <h2>${displayTitle}</h2>
+                <div class="card-meta">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                    <span>${paper.file}</span>
+                </div>
+                <p>${displayTitle}</p>
+                <div class="card-footer">
+                    <a class="btn" href="${paper.file}" target="_blank" rel="noopener noreferrer">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                        Open Paper
+                    </a>
+                    <a class="btn btn-secondary" href="${paper.file}" download title="Download">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                    </a>
+                </div>
+            `;
+
+            papersGrid.appendChild(card);
+        });
     }
 
     async function loadPapers() {
-        // Try multiple strategies in order
         let papers = await fetchDirectoryListing();
-        
+
         if (papers.length === 0) {
             papers = await fetchGitHubFiles();
         }
-        
+
         if (papers.length === 0) {
             papers = await probeForFiles();
         }
-        
+
         // Remove duplicates based on filename
         const seen = new Set();
         papers = papers.filter(paper => {
@@ -693,12 +768,11 @@
             seen.add(paper.file);
             return true;
         });
-        
-        // Sort alphabetically
-        papers.sort((a, b) => a.name.localeCompare(b.name));
-        
-        allPapers = papers;
-        renderPapers(papers);
+
+        // Sort alphabetically by filename
+        papers.sort((a, b) => a.file.localeCompare(b.file));
+
+        await renderPapers(papers);
     }
 
     // Search functionality
