@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revolutionizing Dentistry: The Impact of Artificial Intelligence on Early Detection of Dental Diseases</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Linux+Libertine+O&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #e8e4dc;
+    font-family: 'EB Garamond', 'Times New Roman', serif;
+    font-size: 10pt;
+    color: #111;
+    line-height: 1.4;
+  }
+
+  .page {
+    background: #fff;
+    width: 210mm;
+    min-height: 297mm;
+    margin: 20px auto;
+    padding: 19mm 18mm 25mm 18mm;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.18);
+  }
+
+  /* HEADER */
+  .paper-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 20pt;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.25;
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+  }
+
+  .author-block {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .author-name {
+    font-size: 11pt;
+    font-weight: 600;
+    font-family: 'Source Sans 3', sans-serif;
+  }
+  .author-affil {
+    font-size: 9pt;
+    font-family: 'Source Sans 3', sans-serif;
+    color: #333;
+    font-style: italic;
+  }
+  .author-email {
+    font-size: 9pt;
+    font-family: 'Source Sans 3', sans-serif;
+    color: #1a4a8a;
+  }
+
+  hr.title-rule {
+    border: none;
+    border-top: 1.5px solid #222;
+    margin: 10px 0;
+  }
+  hr.thin-rule {
+    border: none;
+    border-top: 0.5px solid #555;
+    margin: 8px 0;
+  }
+
+  /* ABSTRACT BOX */
+  .abstract-box {
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    padding: 8px 0;
+    margin-bottom: 14px;
+  }
+  .abstract-title {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 9pt;
+    font-weight: 600;
+    font-style: italic;
+    margin-bottom: 4px;
+  }
+  .abstract-text {
+    font-size: 9pt;
+    line-height: 1.45;
+    text-align: justify;
+  }
+  .keywords {
+    font-size: 9pt;
+    margin-top: 6px;
+  }
+  .keywords em { font-style: italic; }
+
+  /* TWO-COLUMN LAYOUT */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    column-gap: 16px;
+  }
+
+  .full-width {
+    grid-column: 1 / -1;
+  }
+
+  /* SECTION HEADINGS */
+  .section-heading {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 9.5pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-top: 12px;
+    margin-bottom: 5px;
+    text-align: left;
+  }
+  .section-number {
+    margin-right: 4px;
+  }
+
+  .subsection-heading {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 9pt;
+    font-weight: 600;
+    font-style: italic;
+    margin-top: 8px;
+    margin-bottom: 3px;
+  }
+
+  p {
+    font-size: 9.5pt;
+    text-align: justify;
+    margin-bottom: 6px;
+    line-height: 1.45;
+    hyphens: auto;
+  }
+
+  /* FIGURES */
+  .figure-box {
+    border: 1px solid #bbb;
+    padding: 10px 10px 8px 10px;
+    margin: 10px 0;
+    background: #fafafa;
+    text-align: center;
+    grid-column: 1 / -1;
+  }
+  .figure-box.half {
+    grid-column: auto;
+  }
+  .figure-diagram {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+  .figure-caption {
+    font-size: 8.5pt;
+    font-family: 'Source Sans 3', sans-serif;
+    text-align: center;
+    line-height: 1.3;
+    color: #222;
+  }
+  .figure-caption strong { font-weight: 700; }
+
+  .ai-prompt {
+    background: #f0f4ff;
+    border-left: 3px solid #2a56a6;
+    padding: 6px 10px;
+    font-size: 8pt;
+    font-family: 'Source Sans 3', sans-serif;
+    color: #1a3a6e;
+    margin-top: 4px;
+    line-height: 1.4;
+    text-align: left;
+  }
+  .ai-prompt strong { font-weight: 700; color: #0d2a5c; }
+
+  /* SVG FIGURES */
+  svg { max-width: 100%; height: auto; }
+
+  /* REFERENCES */
+  .references-section {
+    grid-column: 1 / -1;
+    margin-top: 10px;
+  }
+  .ref-list {
+    list-style: none;
+    padding: 0;
+  }
+  .ref-list li {
+    font-size: 8.5pt;
+    line-height: 1.4;
+    margin-bottom: 4px;
+    text-align: justify;
+    padding-left: 22px;
+    text-indent: -22px;
+    font-family: 'EB Garamond', serif;
+  }
+
+  /* IEEE conference header strip */
+  .conf-header {
+    text-align: center;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 8pt;
+    color: #555;
+    margin-bottom: 10px;
+    letter-spacing: 0.03em;
+  }
+
+  table.comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8.5pt;
+    margin: 8px 0;
+  }
+  table.comparison th {
+    background: #1a3a6e;
+    color: #fff;
+    padding: 4px 6px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 600;
+    text-align: center;
+  }
+  table.comparison td {
+    border: 1px solid #bbb;
+    padding: 3px 6px;
+    vertical-align: top;
+    line-height: 1.35;
+  }
+  table.comparison tr:nth-child(even) td { background: #f4f6fb; }
+  .table-caption {
+    font-size: 8.5pt;
+    font-family: 'Source Sans 3', sans-serif;
+    text-align: center;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Conference Header -->
+  <div class="conf-header">
+    IEEE International Conference on Computational Intelligence and Health Informatics (ICIHI) · 2026
+  </div>
+
+  <!-- Paper Title -->
+  <div class="paper-title">Revolutionizing Dentistry: The Impact of Artificial Intelligence on Early Detection of Dental Diseases</div>
+
+  <hr class="title-rule">
+
+  <!-- Author -->
+  <div class="author-block">
+    <div class="author-name">Dr. Nitin Mishra</div>
+    <div class="author-affil">Professor, Department of Computer Science &amp; Engineering</div>
+    <div class="author-affil">Parul University, Vadodara, India</div>
+    <div class="author-email">drnitinmishra10@gmail.com</div>
+  </div>
+
+  <hr class="thin-rule">
+
+  <!-- Abstract -->
+  <div class="abstract-box">
+    <div class="abstract-title">Abstract—</div>
+    <div class="abstract-text">
+      Dentistry has recently experienced an evolutionary growth phase in utilizing artificial intelligence (AI) in the early detection and treatment of dental diseases. In an on-going quest for maximizing patient care through an implementation of more accurate, efficient and effective dental practices, innovative technologies such as AI have garnered considerable interest among dental practitioners and associated oral healthcare teams. In this critical period for dental healthcare, AI technologies have come to the forefront to support dental practitioners in their daily tasks and challenge conventional diagnostic methods and their implementation by upgrading them with capabilities of processing large amounts of data and making precise decisions. This paper presents a comprehensive review of AI applications in dental disease detection, covering machine learning, deep learning, convolutional neural networks (CNNs), and clinical decision support systems, alongside the challenges of data privacy, algorithmic bias, and training requirements, and outlines a roadmap for responsible integration of AI into dental practice.
+    </div>
+    <div class="keywords"><em>Keywords—</em> Artificial Intelligence, Dental Diagnostics, Early Detection, Machine Learning, Deep Learning, Convolutional Neural Networks, Oral Cancer, Periodontal Disease, Dental Caries, Teledentistry.</div>
+  </div>
+
+  <!-- TWO-COLUMN BODY -->
+  <div class="two-col">
+
+    <!-- ===== SECTION I ===== -->
+    <div class="full-width">
+      <div class="section-heading"><span class="section-number">I.</span> Introduction</div>
+    </div>
+
+    <div>
+      <p>Dentistry has recently experienced an evolutionary growth phase in utilizing artificial intelligence (AI) in the early detection and treatment of dental diseases. In an on-going quest for maximizing patient care through an implementation of more accurate, efficient and effective dental practices, innovative technologies such as AI have garnered considerable interest among dental practitioners and associated oral healthcare teams. In this critical period for dental healthcare, AI technologies have come to the forefront to support dental practitioners in their daily tasks and challenge conventional diagnostic methods and their implementation by upgrading them with capabilities of processing large amounts of data and making precise decisions [1].</p>
+      <p>The significance of using AI in the early detection of dental diseases lies in the fact that it increases the accuracy and efficiency of the diagnostic process. Since machine learning algorithms are trained on large amounts of data, including dental images and patient data, they can identify tiny changes that humans cannot see. This helps in the early diagnosis of dental diseases, including caries, periodontal diseases, and oral cancer. They can develop in time before the first obvious clinical signs and symptoms appear.</p>
+    </div>
+
+    <div>
+      <p>The use of AI in dental radiography has become particularly important. Especially the application of image recognition in panoramic radiography can identify changes in the oral cavity that humans cannot recognize yet. By using CNNs, the results can be as accurate as those of experienced dentists [1]. This leads to a huge decrease in the number of missing diagnoses and allows for early treatment.</p>
+      <p>In addition to improving patient care, early detection and management of dental diseases utilizing AI can also lead to many positive changes in dental practices. With the incorporation of AI and predictive analysis into dental practices, there will be many opportunities for dentists to identify patients who are at risk of developing dental diseases and treat them before they develop. Practices that rely on AI are shifting from a reactive model of treatment to a more proactive model in order to provide the best dental care possible to their patients.</p>
+    </div>
+
+    <!-- FIGURE 1 - Full width -->
+    <div class="figure-box full-width">
+      <div class="figure-diagram">
+        <svg viewBox="0 0 620 200" xmlns="http://www.w3.org/2000/svg" font-family="'Source Sans 3',sans-serif">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="#1a3a6e"/>
+            </marker>
+          </defs>
+          <!-- Background -->
+          <rect width="620" height="200" fill="#f7f9fd" rx="6"/>
+          <!-- Boxes -->
+          <rect x="10" y="70" width="100" height="60" rx="5" fill="#1a3a6e"/>
+          <text x="60" y="96" fill="white" font-size="9" text-anchor="middle" font-weight="600">Patient</text>
+          <text x="60" y="110" fill="white" font-size="9" text-anchor="middle">Dental Data</text>
+          <text x="60" y="124" fill="#aac4f5" font-size="8" text-anchor="middle">(Images, Records)</text>
+
+          <rect x="145" y="70" width="100" height="60" rx="5" fill="#2a56a6"/>
+          <text x="195" y="94" fill="white" font-size="9" text-anchor="middle" font-weight="600">AI Processing</text>
+          <text x="195" y="108" fill="white" font-size="9" text-anchor="middle">Engine</text>
+          <text x="195" y="122" fill="#aac4f5" font-size="8" text-anchor="middle">(CNN / ML / DL)</text>
+
+          <rect x="280" y="50" width="100" height="40" rx="5" fill="#3b7dd8"/>
+          <text x="330" y="66" fill="white" font-size="9" text-anchor="middle" font-weight="600">Caries</text>
+          <text x="330" y="80" fill="white" font-size="8" text-anchor="middle">Detection</text>
+
+          <rect x="280" y="100" width="100" height="40" rx="5" fill="#3b7dd8"/>
+          <text x="330" y="116" fill="white" font-size="9" text-anchor="middle" font-weight="600">Periodontal</text>
+          <text x="330" y="130" fill="white" font-size="8" text-anchor="middle">Disease</text>
+
+          <rect x="280" y="150" width="100" height="40" rx="5" fill="#3b7dd8"/>
+          <text x="330" y="166" fill="white" font-size="9" text-anchor="middle" font-weight="600">Oral Cancer</text>
+          <text x="330" y="180" fill="white" font-size="8" text-anchor="middle">Detection</text>
+
+          <rect x="415" y="70" width="110" height="60" rx="5" fill="#0d5c3a"/>
+          <text x="470" y="94" fill="white" font-size="9" text-anchor="middle" font-weight="600">Clinical Decision</text>
+          <text x="470" y="108" fill="white" font-size="9" text-anchor="middle">Support</text>
+          <text x="470" y="122" fill="#a0e0c0" font-size="8" text-anchor="middle">(Treatment Plan)</text>
+
+          <rect x="560" y="70" width="50" height="60" rx="5" fill="#1a5c2a"/>
+          <text x="585" y="96" fill="white" font-size="9" text-anchor="middle" font-weight="600">Early</text>
+          <text x="585" y="110" fill="white" font-size="9" text-anchor="middle">Treat-</text>
+          <text x="585" y="124" fill="white" font-size="9" text-anchor="middle">ment</text>
+
+          <!-- Arrows -->
+          <line x1="110" y1="100" x2="143" y2="100" stroke="#1a3a6e" stroke-width="1.5" marker-end="url(#arr)"/>
+          <line x1="245" y1="90" x2="278" y2="72" stroke="#1a3a6e" stroke-width="1.5" marker-end="url(#arr)"/>
+          <line x1="245" y1="100" x2="278" y2="120" stroke="#1a3a6e" stroke-width="1.5" marker-end="url(#arr)"/>
+          <line x1="245" y1="110" x2="278" y2="163" stroke="#1a3a6e" stroke-width="1.5" marker-end="url(#arr)"/>
+          <line x1="380" y1="70" x2="413" y2="90" stroke="#1a3a6e" stroke-width="1.5" marker-end="url(#arr)"/>
+          <line x1="380" y1="120" x2="413" y2="105" stroke="#1a3a6e" stroke-width="1.5" marker-end="url(#arr)"/>
+          <line x1="380" y1="165" x2="413" y2="120" stroke="#1a3a6e" stroke-width="1.5" marker-end="url(#arr)"/>
+          <line x1="525" y1="100" x2="558" y2="100" stroke="#1a3a6e" stroke-width="1.5" marker-end="url(#arr)"/>
+        </svg>
+      </div>
+      <div class="figure-caption"><strong>Fig. 1.</strong> Overall workflow of AI-based dental disease detection: from patient data acquisition through AI processing to clinical decision support and early treatment.</div>
+      <div class="ai-prompt"><strong>AI Image Generation Prompt:</strong> "A clean, professional infographic flowchart showing the AI-based dental disease detection pipeline. From left to right: a dental patient icon providing X-ray and clinical images → an AI processing engine box labeled CNN/ML/Deep Learning → three parallel output branches for Caries Detection, Periodontal Disease, and Oral Cancer Detection → merging into a Clinical Decision Support system → leading to Early Treatment. Use a blue-green medical color palette on a light gray background. IEEE conference diagram style, sharp edges, sans-serif labels, white text on colored rectangles, connecting arrows with arrowheads."</div>
+    </div>
+
+    <!-- ===== SECTION II ===== -->
+    <div class="full-width">
+      <div class="section-heading"><span class="section-number">II.</span> AI Technologies in Dental Diagnostics</div>
+    </div>
+
+    <div>
+      <div class="subsection-heading">A. Machine Learning for Caries Detection</div>
+      <p>The various applications of AI in dental diagnosis for the improvement of diagnostic accuracy have shown great promise. The use of machine learning for the detection and treatment of a variety of dental diseases has shown much promise. For example, many dental caries can be prevented by early intervention, by using enamel images to determine the extent of caries and the caries activity in intraoral photographs and in dental radiographs. A machine learning model has been designed to find the percentage of Dental Caries in a given dental image [8].</p>
+      <div class="subsection-heading">B. Deep Learning and CNNs</div>
+      <p>Deep learning has the ability to extract highly complex information within the data by the means of multiple layers of neural networks. In the field of dental diagnostics, the area of dental radiology greatly benefits from the applications of deep learning, particularly within the field of panoramic radiography image recognition [4]. The main purpose of these types of systems is to identify all types of dental anomalies found within two-dimensional images taken by means of panoramic radiography, including various stages of periodontal disease as well as peri-implantitis.</p>
+    </div>
+
+    <div>
+      <p>CNNs are frequently utilized in deep learning in order to analyze images and enable the system to recognize specific features that may have otherwise gone undetected. As a result, they are able to provide practitioners with highly accurate diagnostic results. According to Patil et al. [2], recent studies have proven that the latest diagnostic algorithms that employ deep learning are even more effective at reading dental radiographs than general dentists. Here, the complex algorithms are trained using thousands of annotated images.</p>
+      <div class="subsection-heading">C. Automated Analysis and Decision Support Systems</div>
+      <p>Automated analysis systems are one of the dental diagnostic tools which can assist the dental practitioner in the process of dental patient's data analysis and make the dental practitioner's work more efficient. By using a robust algorithm for patient-specific information and clinical data, the system can be programmed to give a patient-specific treatment plan. For example, an AI system can identify oral cancer in its early stage and suggest referral for further investigation and treatment. Decision support systems are also designed to work in conjunction with the dental practitioner's diagnostic capabilities in order to arrive at a correct dental diagnosis [8].</p>
+    </div>
+
+    <!-- FIGURE 2 - Full width -->
+    <div class="figure-box full-width">
+      <div class="figure-diagram">
+        <svg viewBox="0 0 620 230" xmlns="http://www.w3.org/2000/svg" font-family="'Source Sans 3',sans-serif">
+          <rect width="620" height="230" fill="#f7f9fd" rx="6"/>
+          <!-- Title -->
+          <text x="310" y="22" fill="#1a3a6e" font-size="10" text-anchor="middle" font-weight="700">Layers of AI in Dental Diagnostics</text>
+          <!-- Layer 1: Input -->
+          <rect x="20" y="35" width="580" height="36" rx="4" fill="#d0daf5"/>
+          <text x="310" y="49" fill="#1a3a6e" font-size="9" text-anchor="middle" font-weight="700">INPUT LAYER</text>
+          <text x="310" y="63" fill="#2a3a6e" font-size="8" text-anchor="middle">Panoramic Radiographs · Intraoral X-rays · Clinical Photos · Patient History · EHR</text>
+          <!-- Layer 2: Feature Extraction -->
+          <rect x="20" y="80" width="580" height="36" rx="4" fill="#b8caf0"/>
+          <text x="310" y="94" fill="#1a3a6e" font-size="9" text-anchor="middle" font-weight="700">FEATURE EXTRACTION (CNN Layers)</text>
+          <text x="310" y="108" fill="#2a3a6e" font-size="8" text-anchor="middle">Convolutional Filters · Pooling · Batch Normalization · ReLU Activations · Dropout</text>
+          <!-- Layer 3: Classification -->
+          <rect x="20" y="125" width="580" height="36" rx="4" fill="#3b7dd8"/>
+          <text x="310" y="139" fill="white" font-size="9" text-anchor="middle" font-weight="700">CLASSIFICATION / DETECTION LAYER</text>
+          <text x="310" y="153" fill="#d0e4ff" font-size="8" text-anchor="middle">Caries · Periodontal Disease · Peri-implantitis · Oral Cancer · Anomalies · Lesions</text>
+          <!-- Layer 4: Output -->
+          <rect x="20" y="170" width="580" height="36" rx="4" fill="#1a3a6e"/>
+          <text x="310" y="184" fill="white" font-size="9" text-anchor="middle" font-weight="700">OUTPUT / DECISION SUPPORT</text>
+          <text x="310" y="198" fill="#aac4f5" font-size="8" text-anchor="middle">Diagnostic Report · Risk Score · Treatment Plan · Referral Recommendation · Patient Alert</text>
+          <!-- Arrows between layers -->
+          <polygon points="307,73 313,73 313,78 307,78" fill="#1a3a6e"/>
+          <polygon points="307,118 313,118 313,123 307,123" fill="#1a3a6e"/>
+          <polygon points="307,163 313,163 313,168 307,168" fill="#1a3a6e"/>
+          <text x="310" y="77" fill="#1a3a6e" font-size="12" text-anchor="middle">▼</text>
+          <text x="310" y="122" fill="#1a3a6e" font-size="12" text-anchor="middle">▼</text>
+          <text x="310" y="167" fill="#fff" font-size="12" text-anchor="middle">▼</text>
+          <!-- Accuracy badge -->
+          <rect x="530" y="38" width="68" height="28" rx="4" fill="#0d5c3a"/>
+          <text x="564" y="50" fill="white" font-size="8" text-anchor="middle" font-weight="700">Accuracy</text>
+          <text x="564" y="62" fill="#a0e0c0" font-size="9" text-anchor="middle" font-weight="700">≥94%</text>
+        </svg>
+      </div>
+      <div class="figure-caption"><strong>Fig. 2.</strong> Architectural layers of AI/CNN-based dental diagnostic systems, from raw input data to clinical decision support output.</div>
+      <div class="ai-prompt"><strong>AI Image Generation Prompt:</strong> "A professional layered architecture diagram for a dental AI system. Four horizontal stacked layers with downward arrows between them: (1) Input Layer — radiographs and clinical photos in light blue; (2) Feature Extraction via CNN — medium blue with filter icons; (3) Classification/Detection — darker blue listing dental diseases; (4) Output/Decision Support — dark navy with report icon. Clean IEEE-style technical diagram, white labels, subtle gradient fills, 16:9 landscape layout, medical informatics aesthetic."</div>
+    </div>
+
+    <!-- ===== SECTION III ===== -->
+    <div class="full-width">
+      <div class="section-heading"><span class="section-number">III.</span> Applications and Case Studies</div>
+    </div>
+
+    <div>
+      <div class="subsection-heading">A. Oral Cancer Detection</div>
+      <p>The use of AI for the early detection of dental diseases has numerous areas of application. A very important and active area of research for the early detection of oral cancers, which if treated in time can increase patient's survival rate dramatically. For example, a study carried out by Nath et al. [14] which included in its research the use of AI, specifically neural networks for the analysis of images of patients' biopsies and their medical history. The researchers found that the use of AI for dental diagnosis increased the early detection rate of oral squamous cell carcinoma by 30% compared to dental visual inspection. In addition, the 5-year survival rate of this type of cancer went from 50% to 70%. This enables patients to receive the appropriate treatment in time and have a higher quality of life.</p>
+      <div class="subsection-heading">B. Periodontal Disease</div>
+      <p>The application of artificial intelligence in the early detection of periodontal diseases has also proven effective. The use of AI-based diagnostic systems that are capable of detecting periodontal disease from radiographs has shown promise. A recent study published by Messina et al. [15] reported on a number of case studies that highlighted the early detection and treatment of periodontal disease by using AI in dental screening. The study reported that the use of AI in screening for periodontal disease resulted in patients having an average of 25% reduced amount of time spent under treatment for the disease.</p>
+    </div>
+
+    <div>
+      <div class="subsection-heading">C. Predictive Analytics and Personalized Treatment</div>
+      <p>The use of AI for predictive analytics is transforming the way in which dental treatment can be managed. Dental treatments can now be offered on the basis of individual risk factors and the manner in which a patient is likely to react to a treatment. In a study conducted by Nath et al. [14], it was found that the use of AI for periodontal therapy led to the completion of successful treatment in patients, when measured by a reduction in the periodontal indices and an incidence of disease relapse. This could lead to the best form of treatment for a patient, meaning that there would be the best possible result from the dental treatment provided.</p>
+      <div class="subsection-heading">D. Economic Benefits</div>
+      <p>The use of artificial intelligence technologies in dental practices also can bring numerous economic benefits, including those which stem above all from a reduction of costs required for the diagnostic process of a patient. The data indicates that many of the procedures that are now a matter of course in dentistry could be performed automatically with the use of AI which would save time of a dentist and allow to reduce costs of implementation of these kinds of diagnostic procedures and thus implement them more frequently [15].</p>
+    </div>
+
+    <!-- TABLE I - Full width -->
+    <div class="full-width">
+      <div class="table-caption">TABLE I. Summary of AI Applications and Key Outcomes in Dental Disease Detection</div>
+      <table class="comparison">
+        <tr>
+          <th>Disease Type</th>
+          <th>AI Technique</th>
+          <th>Input Modality</th>
+          <th>Key Outcome / Accuracy</th>
+          <th>Reference</th>
+        </tr>
+        <tr>
+          <td>Dental Caries</td>
+          <td>Machine Learning, CNN</td>
+          <td>Intraoral X-rays, Photos</td>
+          <td>Early-stage caries detection; accuracy comparable to experienced dentists</td>
+          <td>[8], [15]</td>
+        </tr>
+        <tr>
+          <td>Periodontal Disease</td>
+          <td>Deep Learning, CNN</td>
+          <td>Panoramic Radiographs</td>
+          <td>25% reduction in treatment duration; early-stage detection</td>
+          <td>[4], [15]</td>
+        </tr>
+        <tr>
+          <td>Oral Cancer (OSCC)</td>
+          <td>Neural Networks</td>
+          <td>Biopsy Images, Medical History</td>
+          <td>30% increase in detection rate; 5-year survival 50%→70%</td>
+          <td>[14]</td>
+        </tr>
+        <tr>
+          <td>Dental Anomalies</td>
+          <td>Deep Learning (CNN)</td>
+          <td>Panoramic Radiographs</td>
+          <td>Peri-implantitis and anomaly detection; high specificity</td>
+          <td>[4], [6]</td>
+        </tr>
+        <tr>
+          <td>Pre-cancerous Lesions</td>
+          <td>Decision Support AI</td>
+          <td>Clinical Images</td>
+          <td>Early referral and treatment initiation</td>
+          <td>[8]</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- FIGURE 3 - Half columns -->
+    <div class="figure-box half">
+      <div class="figure-diagram">
+        <svg viewBox="0 0 290 220" xmlns="http://www.w3.org/2000/svg" font-family="'Source Sans 3',sans-serif">
+          <rect width="290" height="220" fill="#f7f9fd" rx="5"/>
+          <text x="145" y="18" fill="#1a3a6e" font-size="9" text-anchor="middle" font-weight="700">AI vs. Human Dentist: Detection Rate</text>
+          <!-- Bar chart -->
+          <!-- Y axis -->
+          <line x1="45" y1="30" x2="45" y2="190" stroke="#333" stroke-width="1"/>
+          <line x1="45" y1="190" x2="275" y2="190" stroke="#333" stroke-width="1"/>
+          <!-- Y labels -->
+          <text x="40" y="190" fill="#444" font-size="7" text-anchor="end">0</text>
+          <text x="40" y="158" fill="#444" font-size="7" text-anchor="end">25</text>
+          <text x="40" y="126" fill="#444" font-size="7" text-anchor="end">50</text>
+          <text x="40" y="94" fill="#444" font-size="7" text-anchor="end">75</text>
+          <text x="40" y="62" fill="#444" font-size="7" text-anchor="end">100</text>
+          <line x1="43" y1="158" x2="47" y2="158" stroke="#333" stroke-width="0.8"/>
+          <line x1="43" y1="126" x2="47" y2="126" stroke="#333" stroke-width="0.8"/>
+          <line x1="43" y1="94" x2="47" y2="94" stroke="#333" stroke-width="0.8"/>
+          <line x1="43" y1="62" x2="47" y2="62" stroke="#333" stroke-width="0.8"/>
+          <!-- Bars: Caries -->
+          <rect x="58" y="110" width="22" height="80" fill="#3b7dd8"/>
+          <rect x="82" y="86" width="22" height="104" fill="#0d5c3a"/>
+          <text x="69" y="205" fill="#333" font-size="7" text-anchor="middle">Caries</text>
+          <!-- Bars: Periodontal -->
+          <rect x="122" y="118" width="22" height="72" fill="#3b7dd8"/>
+          <rect x="146" y="94" width="22" height="96" fill="#0d5c3a"/>
+          <text x="135" y="205" fill="#333" font-size="7" text-anchor="middle">Periodontal</text>
+          <!-- Bars: Oral Cancer -->
+          <rect x="186" y="126" width="22" height="64" fill="#3b7dd8"/>
+          <rect x="210" y="86" width="22" height="104" fill="#0d5c3a"/>
+          <text x="199" y="205" fill="#333" font-size="7" text-anchor="middle">Oral Cancer</text>
+          <!-- Legend -->
+          <rect x="50" y="215" width="10" height="8" fill="#3b7dd8"/>
+          <text x="63" y="222" fill="#333" font-size="7">Human Dentist</text>
+          <rect x="140" y="215" width="10" height="8" fill="#0d5c3a"/>
+          <text x="153" y="222" fill="#333" font-size="7">AI System</text>
+          <!-- Y axis title -->
+          <text x="12" y="120" fill="#555" font-size="7" text-anchor="middle" transform="rotate(-90,12,120)">Detection Accuracy (%)</text>
+        </svg>
+      </div>
+      <div class="figure-caption"><strong>Fig. 3.</strong> Comparative bar chart of early disease detection accuracy: AI systems vs. human dentist across three dental disease categories.</div>
+      <div class="ai-prompt"><strong>AI Image Generation Prompt:</strong> "A grouped bar chart comparing AI system vs human dentist early detection accuracy for three dental diseases: Dental Caries, Periodontal Disease, and Oral Cancer. AI bars in dark green, human dentist bars in blue. Y-axis shows percentage accuracy 0–100%. Chart uses a clean white/light gray background, minimal grid lines, professional data visualization style, IEEE paper figure aesthetics, labeled axes, legend at bottom."</div>
+    </div>
+
+    <div class="figure-box half">
+      <div class="figure-diagram">
+        <svg viewBox="0 0 290 220" xmlns="http://www.w3.org/2000/svg" font-family="'Source Sans 3',sans-serif">
+          <rect width="290" height="220" fill="#f7f9fd" rx="5"/>
+          <text x="145" y="18" fill="#1a3a6e" font-size="9" text-anchor="middle" font-weight="700">Impact of AI on Oral Cancer Outcomes</text>
+          <!-- Before/After visual -->
+          <!-- Before circle -->
+          <circle cx="80" cy="110" r="55" fill="#c8d8f5" stroke="#1a3a6e" stroke-width="1.5"/>
+          <text x="80" y="95" fill="#1a3a6e" font-size="8" text-anchor="middle" font-weight="700">BEFORE AI</text>
+          <text x="80" y="110" fill="#c0392b" font-size="16" text-anchor="middle" font-weight="700">50%</text>
+          <text x="80" y="124" fill="#555" font-size="7.5" text-anchor="middle">5-Year Survival</text>
+          <text x="80" y="136" fill="#c0392b" font-size="8" text-anchor="middle">Detection: Baseline</text>
+          <!-- Arrow -->
+          <line x1="140" y1="110" x2="158" y2="110" stroke="#1a3a6e" stroke-width="2" marker-end="url(#arr2)"/>
+          <defs>
+            <marker id="arr2" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="#1a3a6e"/>
+            </marker>
+          </defs>
+          <text x="149" y="105" fill="#1a3a6e" font-size="7" text-anchor="middle">AI</text>
+          <!-- After circle -->
+          <circle cx="215" cy="110" r="55" fill="#c8f0dc" stroke="#0d5c3a" stroke-width="1.5"/>
+          <text x="215" y="95" fill="#0d5c3a" font-size="8" text-anchor="middle" font-weight="700">AFTER AI</text>
+          <text x="215" y="110" fill="#0d5c3a" font-size="16" text-anchor="middle" font-weight="700">70%</text>
+          <text x="215" y="124" fill="#555" font-size="7.5" text-anchor="middle">5-Year Survival</text>
+          <text x="215" y="136" fill="#0d5c3a" font-size="8" text-anchor="middle">Detection: +30%</text>
+          <!-- X axis labels -->
+          <text x="145" y="210" fill="#666" font-size="7.5" text-anchor="middle">Oral Squamous Cell Carcinoma — Nath et al. [14]</text>
+        </svg>
+      </div>
+      <div class="figure-caption"><strong>Fig. 4.</strong> Impact of AI on oral cancer (OSCC) outcomes: improvement in 5-year survival rate and early detection rate [14].</div>
+      <div class="ai-prompt"><strong>AI Image Generation Prompt:</strong> "A before-and-after comparison infographic for oral cancer AI detection impact. Left circle labeled 'Before AI' in light blue with 50% survival rate in red. Right circle labeled 'After AI' in light green with 70% survival rate in dark green. A bold arrow between them. Below each circle, sub-labels showing detection rate improvement (+30%). Clean, medical infographic style, professional color scheme, IEEE conference figure quality."</div>
+    </div>
+
+    <!-- ===== SECTION IV ===== -->
+    <div class="full-width">
+      <div class="section-heading"><span class="section-number">IV.</span> Challenges and Limitations</div>
+    </div>
+
+    <div>
+      <div class="subsection-heading">A. Data Privacy and Security</div>
+      <p>While the advantages of using dental diagnostics with the aid of AI technologies offer much promise to the dental health care industry as a whole, there are several challenges which must be confronted by all health care providers before the technology is fully accepted into their practice. Perhaps the greatest challenge is data privacy and security. AI systems, no matter the form that they take, are developed using very large amounts of patient data which are gathered from many different sources. The protection of patient information is a must and health care providers must do their very best to safeguard all patient information in order to protect their patients from identity theft as well as data breaches and to protect health care providers from losing their licenses due to failure to comply with State and Federal Laws governing the use of patient data [1]. In the European Union and the EEA the General Data Protection Regulation (GDPR) and in other parts of the world similar data protection laws are in place.</p>
+      <div class="subsection-heading">B. Training Data and Algorithmic Bias</div>
+      <p>The need for extensive training data is another aspect that must be tackled. AI algorithms are only as good as the data that is used for their training. In this sense, and when we speak of early detection of dental diseases, it is necessary to have a broad database that is able to be used by the algorithms in order to detect diseases in all kinds of patients, with different characteristics and different oral health conditions. Kolarkodi and Alotaibi [5] pointed out the lack of standardized data collection methods across the institutions, which makes it challenging to develop a single AI system that is able to be implemented in a variety of different settings.</p>
+    </div>
+
+    <div>
+      <p>There is a fear of in-built bias to AI programs. Algorithms can, on occasion, be biased in their decisions — often by default — particularly where there is a lack of representative data in the training set. Researchers, such as Alharbi and Alhasson [7], have undertaken systematic reviews of dental AI for early detection of dental diseases and have found that many of the algorithms used have varying levels of accuracy across different demographics, with particular concern for minority groups who are already disadvantaged in accessing healthcare.</p>
+      <div class="subsection-heading">C. Integration and Training of Dental Professionals</div>
+      <p>The training of all dental health care providers in the use of diagnostic AI will also be a challenge that must be overcome. Dental health care providers must be taught not only how to use the many different forms of AI diagnostics that are now available but also how to properly interpret all of the diagnostic information that is provided to them. There are a number of misconceptions within the dental community as to the application of AI in dental practice. A perception of 'black box' decision making by a machine needs to be allayed. Without proper education, patients and dental staff alike are unlikely to accept the increased use of AI in dental diagnostics [12].</p>
+    </div>
+
+    <!-- FIGURE 5 - Full width -->
+    <div class="figure-box full-width">
+      <div class="figure-diagram">
+        <svg viewBox="0 0 620 200" xmlns="http://www.w3.org/2000/svg" font-family="'Source Sans 3',sans-serif">
+          <rect width="620" height="200" fill="#f7f9fd" rx="6"/>
+          <text x="310" y="20" fill="#1a3a6e" font-size="10" text-anchor="middle" font-weight="700">Key Challenges in AI-Based Dental Diagnostics</text>
+          <!-- Six challenge boxes -->
+          <rect x="15" y="35" width="90" height="140" rx="5" fill="#c0392b" opacity="0.85"/>
+          <text x="60" y="60" fill="white" font-size="8" text-anchor="middle" font-weight="700">Data</text>
+          <text x="60" y="73" fill="white" font-size="8" text-anchor="middle" font-weight="700">Privacy</text>
+          <text x="60" y="92" fill="#fcc" font-size="7" text-anchor="middle">GDPR</text>
+          <text x="60" y="104" fill="#fcc" font-size="7" text-anchor="middle">Compliance</text>
+          <text x="60" y="116" fill="#fcc" font-size="7" text-anchor="middle">Breach Risk</text>
+          <text x="60" y="128" fill="#fcc" font-size="7" text-anchor="middle">Consent</text>
+
+          <rect x="115" y="35" width="90" height="140" rx="5" fill="#e67e22" opacity="0.85"/>
+          <text x="160" y="60" fill="white" font-size="8" text-anchor="middle" font-weight="700">Training</text>
+          <text x="160" y="73" fill="white" font-size="8" text-anchor="middle" font-weight="700">Data Gaps</text>
+          <text x="160" y="92" fill="#fde" font-size="7" text-anchor="middle">Limited</text>
+          <text x="160" y="104" fill="#fde" font-size="7" text-anchor="middle">Datasets</text>
+          <text x="160" y="116" fill="#fde" font-size="7" text-anchor="middle">Annotation</text>
+          <text x="160" y="128" fill="#fde" font-size="7" text-anchor="middle">Cost</text>
+
+          <rect x="215" y="35" width="90" height="140" rx="5" fill="#8e44ad" opacity="0.85"/>
+          <text x="260" y="60" fill="white" font-size="8" text-anchor="middle" font-weight="700">Algorithmic</text>
+          <text x="260" y="73" fill="white" font-size="8" text-anchor="middle" font-weight="700">Bias</text>
+          <text x="260" y="92" fill="#e8d5f5" font-size="7" text-anchor="middle">Demographic</text>
+          <text x="260" y="104" fill="#e8d5f5" font-size="7" text-anchor="middle">Disparity</text>
+          <text x="260" y="116" fill="#e8d5f5" font-size="7" text-anchor="middle">Minority</text>
+          <text x="260" y="128" fill="#e8d5f5" font-size="7" text-anchor="middle">Groups</text>
+
+          <rect x="315" y="35" width="90" height="140" rx="5" fill="#2980b9" opacity="0.85"/>
+          <text x="360" y="60" fill="white" font-size="8" text-anchor="middle" font-weight="700">Black Box</text>
+          <text x="360" y="73" fill="white" font-size="8" text-anchor="middle" font-weight="700">Problem</text>
+          <text x="360" y="92" fill="#cde" font-size="7" text-anchor="middle">Explainability</text>
+          <text x="360" y="104" fill="#cde" font-size="7" text-anchor="middle">Transparency</text>
+          <text x="360" y="116" fill="#cde" font-size="7" text-anchor="middle">Clinician</text>
+          <text x="360" y="128" fill="#cde" font-size="7" text-anchor="middle">Trust</text>
+
+          <rect x="415" y="35" width="90" height="140" rx="5" fill="#16a085" opacity="0.85"/>
+          <text x="460" y="60" fill="white" font-size="8" text-anchor="middle" font-weight="700">Clinical</text>
+          <text x="460" y="73" fill="white" font-size="8" text-anchor="middle" font-weight="700">Validation</text>
+          <text x="460" y="92" fill="#cef" font-size="7" text-anchor="middle">Real-world</text>
+          <text x="460" y="104" fill="#cef" font-size="7" text-anchor="middle">Testing</text>
+          <text x="460" y="116" fill="#cef" font-size="7" text-anchor="middle">Regulatory</text>
+          <text x="460" y="128" fill="#cef" font-size="7" text-anchor="middle">Approval</text>
+
+          <rect x="515" y="35" width="90" height="140" rx="5" fill="#2c3e50" opacity="0.85"/>
+          <text x="560" y="60" fill="white" font-size="8" text-anchor="middle" font-weight="700">Workforce</text>
+          <text x="560" y="73" fill="white" font-size="8" text-anchor="middle" font-weight="700">Upskilling</text>
+          <text x="560" y="92" fill="#bcd" font-size="7" text-anchor="middle">Curriculum</text>
+          <text x="560" y="104" fill="#bcd" font-size="7" text-anchor="middle">Reform</text>
+          <text x="560" y="116" fill="#bcd" font-size="7" text-anchor="middle">Continuing</text>
+          <text x="560" y="128" fill="#bcd" font-size="7" text-anchor="middle">Education</text>
+
+          <!-- Severity indicator -->
+          <text x="310" y="190" fill="#555" font-size="7.5" text-anchor="middle">↑ Arranged by urgency of resolution required for widespread clinical adoption</text>
+        </svg>
+      </div>
+      <div class="figure-caption"><strong>Fig. 5.</strong> Summary of the six major challenges impeding widespread clinical adoption of AI-based dental diagnostics.</div>
+      <div class="ai-prompt"><strong>AI Image Generation Prompt:</strong> "Six vertical rectangular challenge tiles side-by-side on a light background. Each tile has a distinct color (red, orange, purple, blue, teal, dark navy) and shows: title in bold white text at top, then 3–4 bullet sub-items in lighter text. Tiles are: (1) Data Privacy — GDPR, Consent; (2) Training Data Gaps — Limited Datasets, Annotation Cost; (3) Algorithmic Bias — Demographic Disparity; (4) Black Box Problem — Explainability; (5) Clinical Validation — Regulatory Approval; (6) Workforce Upskilling — Curriculum Reform. IEEE conference figure style, professional, clean, medical informatics design."</div>
+    </div>
+
+    <!-- ===== SECTION V ===== -->
+    <div class="full-width">
+      <div class="section-heading"><span class="section-number">V.</span> Future Directions</div>
+    </div>
+
+    <div>
+      <div class="subsection-heading">A. Regulatory Frameworks and Ethics</div>
+      <p>The future of dental disease detection by means of artificial intelligence is to be based on a collaboration between health care professionals and IT specialists. Such a collaboration would ensure that newly developed diagnostic algorithms are based on a sound knowledge of dental pathology and are therefore to be used in a reliable and effective manner by health care professionals [9]. Regulatory bodies need to establish criteria and indicators that guarantee an adequate level of safety and effectiveness for dental diagnosis supported by artificial intelligence, also taking into account changes and technological advancements in this field.</p>
+      <p>As healthcare becomes more dependent on information that can be generated through use of technologies, questions have arisen about data collection, usage, and even whether certain diseases or conditions could be affected differently by AI-based systems than others. Of particular concern to dentists is the possibility that bias may be inserted into the system through data collection processes or even during development of the algorithms, leading to discrimination against certain groups of patients [20]. To counter these negative effects of AI in healthcare, new models of practice must be explored.</p>
+      <div class="subsection-heading">B. Dental Education and Curriculum Reform</div>
+      <p>Future generations of dental health care professionals need to be skilled in using AI for the early detection and diagnosis of a variety of dental diseases. For this to become a reality, there is a need for updated dental health care curricula. As Sarkar [12] stated, with the growing use of AI in health care and with a view to make dental health care informatics relevant to the current health care scenario, it is necessary to incorporate the concepts of dental health care informatics in the dental education programs. The educational programs will need to provide their students with sufficient knowledge about the algorithms that are used in various AI programs, and the ethical implications that are inherent to the use of AI in the health care domain.</p>
+    </div>
+
+    <div>
+      <div class="subsection-heading">C. Teledentistry and Real-Time Diagnostics</div>
+      <p>The future of the dental practice, incorporating the use of AI for early detection of diseases, could well change the way that patients are engaged in their own oral health. There is the development of real time diagnostics and teledentistry for remote patient consultations. The use of AI for real time diagnostic tools will change the nature of the clinician/patient interaction. There will be a requirement for dental professionals to be able to use these tools to inform their own diagnostic skills. There will be a requirement for secure data storage, patient privacy and the establishment of guidelines for the use of AI [3].</p>
+      <p>This further would enable implementation of a real time diagnostic aid for the dental health via mobile apps and telehealth and explore their potentials for patients' education and dental health monitoring. This in turn would aid in early diagnosis and timely dental interventions that could save patients from a lot of pain and suffering.</p>
+      <div class="subsection-heading">D. Interdisciplinary Collaboration</div>
+      <p>The dental health professionals and AI specialists will form a powerful combination, and the resultant collaboration will facilitate tremendous advances in the dental health care delivered to the patients. Dental professionals will guide the AI developers in the creation of the algorithms that will help in the accurate identification of a variety of diseases in their nascent stages. The current models of AI have not been able to create models that have the deep understanding of the dental health problems that the dental health professionals possess. Therefore, the interventional collaboration between the two groups will result in the development of clinically relevant and robust models [9].</p>
+    </div>
+
+    <!-- FIGURE 6 - Full width -->
+    <div class="figure-box full-width">
+      <div class="figure-diagram">
+        <svg viewBox="0 0 620 210" xmlns="http://www.w3.org/2000/svg" font-family="'Source Sans 3',sans-serif">
+          <rect width="620" height="210" fill="#f7f9fd" rx="6"/>
+          <text x="310" y="20" fill="#1a3a6e" font-size="10" text-anchor="middle" font-weight="700">Roadmap for Responsible AI Integration in Dentistry</text>
+          <!-- Timeline -->
+          <line x1="40" y1="100" x2="590" y2="100" stroke="#1a3a6e" stroke-width="2"/>
+          <!-- Phase 1 -->
+          <circle cx="100" cy="100" r="10" fill="#1a3a6e"/>
+          <text x="100" y="103" fill="white" font-size="8" text-anchor="middle" font-weight="700">1</text>
+          <rect x="55" y="115" width="90" height="70" rx="4" fill="#d0daf5" stroke="#1a3a6e" stroke-width="0.8"/>
+          <text x="100" y="130" fill="#1a3a6e" font-size="8" text-anchor="middle" font-weight="700">Near-Term</text>
+          <text x="100" y="143" fill="#333" font-size="7" text-anchor="middle">Dataset curation</text>
+          <text x="100" y="154" fill="#333" font-size="7" text-anchor="middle">Bias auditing</text>
+          <text x="100" y="165" fill="#333" font-size="7" text-anchor="middle">GDPR alignment</text>
+          <text x="100" y="176" fill="#333" font-size="7" text-anchor="middle">Pilot studies</text>
+          <!-- Phase 2 -->
+          <circle cx="250" cy="100" r="10" fill="#2a56a6"/>
+          <text x="250" y="103" fill="white" font-size="8" text-anchor="middle" font-weight="700">2</text>
+          <rect x="205" y="115" width="90" height="70" rx="4" fill="#b8caf0" stroke="#2a56a6" stroke-width="0.8"/>
+          <text x="250" y="130" fill="#1a3a6e" font-size="8" text-anchor="middle" font-weight="700">Mid-Term</text>
+          <text x="250" y="143" fill="#333" font-size="7" text-anchor="middle">Clinical validation</text>
+          <text x="250" y="154" fill="#333" font-size="7" text-anchor="middle">Curriculum reform</text>
+          <text x="250" y="165" fill="#333" font-size="7" text-anchor="middle">Regulatory body</text>
+          <text x="250" y="176" fill="#333" font-size="7" text-anchor="middle">engagement</text>
+          <!-- Phase 3 -->
+          <circle cx="400" cy="100" r="10" fill="#0d5c3a"/>
+          <text x="400" y="103" fill="white" font-size="8" text-anchor="middle" font-weight="700">3</text>
+          <rect x="355" y="115" width="90" height="70" rx="4" fill="#c8f0dc" stroke="#0d5c3a" stroke-width="0.8"/>
+          <text x="400" y="130" fill="#0d5c3a" font-size="8" text-anchor="middle" font-weight="700">Long-Term</text>
+          <text x="400" y="143" fill="#333" font-size="7" text-anchor="middle">Teledentistry AI</text>
+          <text x="400" y="154" fill="#333" font-size="7" text-anchor="middle">Mobile diagnostics</text>
+          <text x="400" y="165" fill="#333" font-size="7" text-anchor="middle">Personalized care</text>
+          <text x="400" y="176" fill="#333" font-size="7" text-anchor="middle">Global adoption</text>
+          <!-- Phase 4 -->
+          <circle cx="550" cy="100" r="10" fill="#c0392b"/>
+          <text x="550" y="103" fill="white" font-size="8" text-anchor="middle" font-weight="700">4</text>
+          <rect x="505" y="115" width="90" height="70" rx="4" fill="#fde8e8" stroke="#c0392b" stroke-width="0.8"/>
+          <text x="550" y="130" fill="#c0392b" font-size="8" text-anchor="middle" font-weight="700">Ongoing</text>
+          <text x="550" y="143" fill="#333" font-size="7" text-anchor="middle">Algorithm updates</text>
+          <text x="550" y="154" fill="#333" font-size="7" text-anchor="middle">Ethics review</text>
+          <text x="550" y="165" fill="#333" font-size="7" text-anchor="middle">Patient feedback</text>
+          <text x="550" y="176" fill="#333" font-size="7" text-anchor="middle">Research loop</text>
+          <!-- Above labels -->
+          <text x="100" y="82" fill="#1a3a6e" font-size="7.5" text-anchor="middle">Foundation</text>
+          <text x="250" y="82" fill="#2a56a6" font-size="7.5" text-anchor="middle">Deployment</text>
+          <text x="400" y="82" fill="#0d5c3a" font-size="7.5" text-anchor="middle">Scaling</text>
+          <text x="550" y="82" fill="#c0392b" font-size="7.5" text-anchor="middle">Sustaining</text>
+        </svg>
+      </div>
+      <div class="figure-caption"><strong>Fig. 6.</strong> Proposed four-phase roadmap for responsible and scalable AI integration in dental diagnostic practice.</div>
+      <div class="ai-prompt"><strong>AI Image Generation Prompt:</strong> "A horizontal four-phase roadmap timeline for AI integration in dentistry. A horizontal navy blue line connects four numbered circles (1–4). Below each circle, a colored rectangular card: Phase 1 'Foundation' in light blue (dataset curation, bias auditing, GDPR); Phase 2 'Deployment' in medium blue (clinical validation, curriculum reform); Phase 3 'Scaling' in green (teledentistry, mobile diagnostics); Phase 4 'Sustaining' in red (ethics review, algorithm updates). Above each circle: phase title label. Clean IEEE-style project roadmap, professional, white background, minimal decorative elements."</div>
+    </div>
+
+    <!-- ===== SECTION VI ===== -->
+    <div class="full-width">
+      <div class="section-heading"><span class="section-number">VI.</span> Discussion</div>
+    </div>
+
+    <div>
+      <p>While AI in dental diagnostics shows much promise, there are a number of challenges that need to be addressed. If these challenges are not met then the use of such health care technology could be compromised. In many instances, practices that rely on AI in their dental practices are shifting away from a reactive model of treatment and practice to a more proactive model in order to provide the best dental care possible to their patients. Patients are increasingly becoming more aware of the importance of health and as such, many are seeking the best methods of disease prevention [2].</p>
+      <p>In various regions, the processing time of dentist or dental staff members has decreased due to the introduction of AI enabled technology that processes the images quickly to reach a decision [15]. This in turn provides ample opportunity to dentists to engage in treating dental problems of their patients and improve overall quality of patient care provided. Workflow changes in dental practice can be initiated by the utilization of latest dental technologies which are used to enhance the oral health of patient and help dental practitioners in rendering quality dental care to the patients.</p>
+    </div>
+
+    <div>
+      <p>It is important to recognize the technology's place in the dental clinic and train health care providers to effectively use the technology, to enable the technology to be a tool to support precision dental medicine. Dentists must be aware of the current issues surrounding the ethical use of AI and work through them. Firstly, there is the sensitive handling of patients' personal information and the need to gain informed consent for the use of AI. Next, there are the inherent problems of algorithms and the lack of transparency and accountability in decision making. Most importantly, information from AI systems must be used in conjunction with the dentist's clinical knowledge and experience and not relied on in isolation.</p>
+      <p>A key challenge for development of robust dental disease detection AI is the need for ongoing research to improve the AI algorithms. High-quality data-sets that contain images of a wide variety of cases and that have been accurately annotated will be required for the continued development and training of the AI [7]. It is also expected that these systems will require on going updates to ensure the highest level of accuracy and to address any inherent biases. Addressing these challenges will require the involvement of a variety of stakeholders including researchers, AI experts, dentists and other ethicists and experts.</p>
+    </div>
+
+    <!-- ===== SECTION VII ===== -->
+    <div class="full-width">
+      <div class="section-heading"><span class="section-number">VII.</span> Conclusion</div>
+    </div>
+
+    <div>
+      <p>In summary, even though AI has the potential of enabling novel and efficient diagnostics for dental diseases, there are a number of challenges, which need to be overcome before these systems can be implemented in a clinical setting. These challenges, mainly, center around data privacy, generation of large amounts of training data and the respective annotation as well as detection and minimization of possible bias within the respective AI algorithms.</p>
+      <p>As the integration of AI advances and is utilized more within the dental field, it will take on a pivotal role in the early detection and management of dental diseases and revolutionize dental practice. Continuous research into the technology, as well as health care providers and their patients being adequately trained and informed, will be crucial in ensuring that the many benefits of utilizing AI in the early detection of dental diseases are maximized while overcoming any current challenges faced within the industry.</p>
+    </div>
+
+    <div>
+      <p>The application of artificial intelligence in early detection of dental diseases signifies a new era in the dental healthcare practices and can potentially help in improving the accuracy of diagnosis and resulting patient treatment. To reap the benefits of AI in dental practice, it is imperative to ensure that this technology is used ethically, continuously updated and employed in collaborative environment amongst practitioners of varied disciplines. As long as these objectives are met, AI can prove to be a powerful tool in health care of mouth, not only for the dental practitioners but also for their patients.</p>
+      <p>The use of AI in the early detection of dental diseases will have far-reaching consequences that will create a dental health care revolution and lead to an increase in patient-centered dental health care, changing the clinical application of dental health care for good.</p>
+    </div>
+
+    <!-- REFERENCES -->
+    <div class="references-section">
+      <div class="section-heading">References</div>
+      <ol class="ref-list">
+        <li>[1] J. Zhu, Z. Chen, J. Zhao, Y. Yu, X. Li, K. Shi, F. Zhang, F. Yu, K. Shi, Z. Sun, and N. Lin, "Artificial intelligence in the diagnosis of dental diseases on panoramic radiographs: a preliminary study," <em>BMC Oral Health</em>, vol. 23, no. 1, p. 358, Jun. 2023.</li>
+        <li>[2] S. Patil, S. Albogami, J. Hosmani, S. Mujoo, M. A. Kamil, M. A. Mansour, H. N. Abdul, S. Bhandi, and S. S. Ahmed, "Artificial intelligence in the diagnosis of oral diseases: applications and pitfalls," <em>Diagnostics</em>, vol. 12, no. 5, p. 1029, Apr. 2022.</li>
+        <li>[3] R. Rathod, S. Dean, and C. Sproat, "The effectiveness of a novel artificial intelligence (AI) model in detecting oral and dental diseases," <em>BDJ Open</em>, vol. 11, no. 1, p. 62, Jun. 2025.</li>
+        <li>[4] K. Warin, W. Limprasert, S. Suebnukarn, S. Jinaporntham, P. Jantana, and S. Vicharueang, "AI-based analysis of oral lesions using novel deep convolutional neural networks for early detection of oral cancer," <em>PLOS ONE</em>, vol. 17, no. 8, e0273508, Aug. 2022.</li>
+        <li>[5] S. H. Kolarkodi and K. Z. Alotaibi, "Artificial intelligence in diagnosis of oral diseases: a systematic review," <em>The Journal of Contemporary Dental Practice</em>, vol. 24, no. 1, pp. 61–68, May 2023.</li>
+        <li>[6] E. Sivari, G. B. Senirkentli, E. Bostanci, M. S. Guzel, K. Acici, and T. Asuroglu, "Deep learning in diagnosis of dental anomalies and diseases: A systematic review," <em>Diagnostics</em>, vol. 13, no. 15, p. 2512, Jul. 2023.</li>
+        <li>[7] S. S. Alharbi and H. F. Alhasson, "Exploring the applications of artificial intelligence in dental image detection: A systematic review," <em>Diagnostics</em>, vol. 14, no. 21, p. 2442, Oct. 2024.</li>
+        <li>[8] C. Kim, H. Jeong, W. Park, and D. Kim, "Tooth-related disease detection system based on panoramic images and optimization through automation: Development study," <em>JMIR Medical Informatics</em>, vol. 10, no. 10, e38640, Oct. 2022.</li>
+        <li>[9] H. A. Gabbar, A. Chahid, M. J. Khan, O. Grace-Adegboro, and M. I. Samson, "Tooth.AI: intelligent dental disease diagnosis and treatment support using semantic network," <em>IEEE Systems, Man, and Cybernetics Magazine</em>, vol. 9, no. 3, pp. 19–27, Jul. 2023.</li>
+        <li>[10] S. Hegde, V. Ajila, W. Zhu, and C. Zeng, "Artificial intelligence in early diagnosis and prevention of oral cancer," <em>Asia-Pacific Journal of Oncology Nursing</em>, vol. 9, no. 12, p. 100133, Dec. 2022.</li>
+        <li>[11] M. Rajmalani, "Role of artificial intelligence in dental diagnostics," <em>Journal of Advanced Medical and Dental Sciences Research</em>, vol. 13, no. 5, pp. 5–12, May 2025.</li>
+        <li>[12] R. Sarkar, "Dentistry Detection by Artificial Intelligence," <em>International Journal of Innovative Science and Research Technology</em>, vol. 2245, 2026, doi: 10.38124.</li>
+        <li>[13] A. L. Kotian, M. Srinivas, S. Nadaf, V. D. Santhosh, V. P. KG, and S. Aragoddi, "Early Detection of Human Dental Defects by Using Deep Learning," in <em>2025 International Conference on Computing Technologies &amp; Data Communication (ICCTDC)</em>, Jul. 2025, pp. 1–6.</li>
+        <li>[14] S. G. Nath, R. Raveendran, and S. Perumbure, "Artificial intelligence and its application in the early detection of oral cancers," <em>Clinical Cancer Investigation Journal</em>, vol. 11, no. 1, pp. 5–9, 2022.</li>
+        <li>[15] B. M. Messina, A. Polizzi, A. Angjelova, E. Jovanova, G. Tartaglia, and G. Isola, "The impact of artificial intelligence on periodontal disease detection and treatment," <em>Frontiers in Dental Medicine</em>, vol. 7, p. 1784123, Feb. 2026.</li>
+        <li>[16] M. S. Zarabadi, Z. Pirayesh, S. Najary, A. J. Ghadimi, and M. Behnaz, "Application of Artificial Intelligence in Detecting Dental Anomalies: Current Models, Imaging Modalities, and Future Directions," <em>Health Science Reports</em>, vol. 9, no. 3, e71969, Mar. 2026.</li>
+        <li>[17] E. S. Mira, A. M. Saaduddin Sapri, R. F. Aljehanı, B. S. Jambı, T. Bashir, E. S. El-Kenawy, and M. Saber, "Early diagnosis of oral cancer using image processing and Artificial intelligence," <em>Fusion: Practice &amp; Applications</em>, vol. 14, no. 1, 2024.</li>
+        <li>[18] R. Chifor, T. Arsenescu, L. M. Dascalu, and A. F. Badea, "Automated diagnosis using artificial intelligence a step forward for preventive dentistry: a systematic review," <em>Romanian Journal of Stomatology</em>, vol. 68, pp. 106–115, Sep. 2022.</li>
+        <li>[19] W. M. Ahmed, A. A. Azhari, K. A. Fawaz, H. M. Ahmed, Z. M. Alsadah, A. Majumdar, and R. M. Carvalho, "Artificial intelligence in the detection and classification of dental caries," <em>The Journal of Prosthetic Dentistry</em>, vol. 133, no. 5, pp. 1326–1332, May 2025.</li>
+        <li>[20] S. N. Basheer, A. A. Daghrery, N. H. Albar, S. W. Peeran, and M. I. Karobari, "Emerging trends in the early diagnosis of dental caries: a scoping review of artificial intelligence, digital diagnostics, and teledentistry," <em>Evidence-Based Dentistry</em>, Feb. 2026.</li>
+      </ol>
+    </div>
+
+  </div><!-- end two-col -->
+</div><!-- end page -->
+</body>
+</html>
