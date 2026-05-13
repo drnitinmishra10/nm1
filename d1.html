@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Diagnostic Performance for Diseases</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f4f6f9;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        h1, h2 {
+            color: #0b3d91;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            margin-top: 25px;
+            font-size: 14px;
+        }
+
+        th, td {
+            border: 1px solid #bbb;
+            padding: 10px;
+            vertical-align: top;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0b3d91;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f5fa;
+        }
+
+        .note {
+            background: #fff3cd;
+            padding: 15px;
+            border-left: 5px solid #ffc107;
+            margin: 20px 0;
+        }
+
+        .ref {
+            background: white;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-left: 5px solid #0b3d91;
+        }
+
+        a {
+            color: #0b3d91;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<h1>AI in Effective Diagnosis of Diseases</h1>
+<h2>Accuracy, Precision, and Recall Based on Published AI Diagnostic Studies</h2>
+
+<div class="note">
+    <strong>Important Note:</strong> The performance values below are representative ranges reported across AI-based diagnostic studies and reviews. 
+    Accuracy, precision, and recall may vary depending on dataset size, image quality, disease stage, algorithm, training method, and external validation.
+</div>
+
+<table>
+    <tr>
+        <th>Sr. No.</th>
+        <th>Disease / Area</th>
+        <th>Common AI Methods</th>
+        <th>Reported Accuracy</th>
+        <th>Reported Precision</th>
+        <th>Reported Recall / Sensitivity</th>
+        <th>Remarks</th>
+    </tr>
+
+    <tr>
+        <td>1</td>
+        <td>Cancer Diagnosis</td>
+        <td>CNN, deep learning, radiomics, pathology AI, omics-based ML</td>
+        <td>85%–99%</td>
+        <td>82%–98%</td>
+        <td>80%–98%</td>
+        <td>AI is widely used in breast, lung, skin, colon, and prostate cancer diagnosis using imaging and pathology data.</td>
+    </tr>
+
+    <tr>
+        <td>2</td>
+        <td>Diabetic Retinopathy</td>
+        <td>CNN, fundus image analysis, transfer learning</td>
+        <td>90%–98%</td>
+        <td>88%–97%</td>
+        <td>87%–98%</td>
+        <td>One of the strongest AI diagnostic areas due to large retinal image datasets.</td>
+    </tr>
+
+    <tr>
+        <td>3</td>
+        <td>Breast Cancer</td>
+        <td>CNN, SVM, ANN, radiomics, mammography AI</td>
+        <td>90%–99%</td>
+        <td>88%–98%</td>
+        <td>86%–98%</td>
+        <td>AI supports mammography, ultrasound, and histopathology-based diagnosis.</td>
+    </tr>
+
+    <tr>
+        <td>4</td>
+        <td>Lung Diseases</td>
+        <td>CNN, X-ray AI, CT-based deep learning</td>
+        <td>85%–98%</td>
+        <td>83%–97%</td>
+        <td>82%–97%</td>
+        <td>Used for pneumonia, tuberculosis, COVID-19, COPD, and lung cancer detection.</td>
+    </tr>
+
+    <tr>
+        <td>5</td>
+        <td>Heart Diseases</td>
+        <td>Random Forest, SVM, ANN, XGBoost, ECG deep learning</td>
+        <td>85%–100%</td>
+        <td>84%–98%</td>
+        <td>82%–98%</td>
+        <td>Some experimental datasets report very high accuracy, but clinical validation is still important.</td>
+    </tr>
+
+    <tr>
+        <td>6</td>
+        <td>Parkinson’s Disease</td>
+        <td>SVM, Random Forest, CNN, voice analysis, gait analysis</td>
+        <td>78%–96%</td>
+        <td>80%–95%</td>
+        <td>78%–96%</td>
+        <td>Recent review reported AI accuracy ranging from 78% to 96%; one multimodal framework achieved 94.2% accuracy.</td>
+    </tr>
+
+    <tr>
+        <td>7</td>
+        <td>Mental Health Disorders</td>
+        <td>SVM, Random Forest, NLP, chatbot analytics, wearable AI</td>
+        <td>75%–95%</td>
+        <td>72%–94%</td>
+        <td>70%–94%</td>
+        <td>AI is used for depression, anxiety, suicide-risk prediction, and monitoring, but datasets are often heterogeneous.</td>
+    </tr>
+
+    <tr>
+        <td>8</td>
+        <td>Sepsis Detection</td>
+        <td>ML prediction models, EHR analytics, time-series models</td>
+        <td>80%–95%</td>
+        <td>75%–92%</td>
+        <td>78%–94%</td>
+        <td>AI predicts sepsis risk using ICU data, vitals, lab values, and electronic health records.</td>
+    </tr>
+
+    <tr>
+        <td>9</td>
+        <td>Retinal Diseases</td>
+        <td>CNN, OCT analysis, fundus image AI</td>
+        <td>88%–98%</td>
+        <td>85%–97%</td>
+        <td>85%–98%</td>
+        <td>AI is useful for diabetic retinopathy, AMD, retinopathy of prematurity, and retinal vascular diseases.</td>
+    </tr>
+
+    <tr>
+        <td>10</td>
+        <td>Neurological Disorders</td>
+        <td>MRI deep learning, EEG analysis, SVM, CNN</td>
+        <td>80%–97%</td>
+        <td>78%–96%</td>
+        <td>78%–96%</td>
+        <td>Used for Alzheimer’s disease, epilepsy, stroke, Parkinson’s disease, and brain tumor classification.</td>
+    </tr>
+
+    <tr>
+        <td>11</td>
+        <td>Skin Diseases</td>
+        <td>CNN, dermoscopy image analysis, transfer learning</td>
+        <td>85%–98%</td>
+        <td>83%–97%</td>
+        <td>82%–97%</td>
+        <td>AI is widely applied in melanoma and skin lesion classification.</td>
+    </tr>
+
+    <tr>
+        <td>12</td>
+        <td>Infectious Diseases</td>
+        <td>CNN, ML classifiers, outbreak prediction models</td>
+        <td>82%–98%</td>
+        <td>80%–96%</td>
+        <td>80%–97%</td>
+        <td>Used for COVID-19, tuberculosis, influenza, Zika, Ebola, and other infectious disease detection.</td>
+    </tr>
+
+    <tr>
+        <td>13</td>
+        <td>Gastrointestinal Diseases</td>
+        <td>Endoscopy AI, CNN, computer vision</td>
+        <td>85%–98%</td>
+        <td>84%–97%</td>
+        <td>83%–97%</td>
+        <td>AI helps detect colon polyps, adenomas, colorectal cancer, and gastrointestinal lesions.</td>
+    </tr>
+
+    <tr>
+        <td>14</td>
+        <td>Kidney Diseases</td>
+        <td>Random Forest, ANN, SVM, clinical ML models</td>
+        <td>90%–99%</td>
+        <td>88%–98%</td>
+        <td>87%–98%</td>
+        <td>Chronic kidney disease prediction often shows high performance on structured clinical datasets.</td>
+    </tr>
+
+    <tr>
+        <td>15</td>
+        <td>Liver Diseases</td>
+        <td>SVM, Random Forest, ANN, imaging AI</td>
+        <td>85%–97%</td>
+        <td>82%–96%</td>
+        <td>80%–96%</td>
+        <td>AI supports diagnosis of fatty liver, hepatitis, cirrhosis, and liver cancer.</td>
+    </tr>
+
+    <tr>
+        <td>16</td>
+        <td>Oral and Dental Diseases</td>
+        <td>CNN, dental radiograph analysis, image segmentation</td>
+        <td>85%–97%</td>
+        <td>82%–96%</td>
+        <td>80%–96%</td>
+        <td>AI is used for dental caries, periodontal disease, oral cancer, and jaw abnormality detection.</td>
+    </tr>
+
+    <tr>
+        <td>17</td>
+        <td>Pediatric Diseases</td>
+        <td>Clinical ML, imaging AI, decision-support systems</td>
+        <td>80%–95%</td>
+        <td>78%–93%</td>
+        <td>78%–94%</td>
+        <td>AI is used in pediatric pneumonia, neonatal disease, congenital conditions, and pediatric imaging.</td>
+    </tr>
+
+    <tr>
+        <td>18</td>
+        <td>Rare Diseases</td>
+        <td>Genomic AI, NLP, phenotype matching, clinical ML</td>
+        <td>75%–95%</td>
+        <td>72%–94%</td>
+        <td>70%–94%</td>
+        <td>Performance depends heavily on availability of genetic and phenotype datasets.</td>
+    </tr>
+
+    <tr>
+        <td>19</td>
+        <td>Clinical Laboratory Diagnosis</td>
+        <td>ML on biomarkers, blood tests, laboratory records</td>
+        <td>85%–98%</td>
+        <td>82%–97%</td>
+        <td>82%–97%</td>
+        <td>AI improves interpretation of blood reports, biomarkers, and laboratory-based disease prediction.</td>
+    </tr>
+
+    <tr>
+        <td>20</td>
+        <td>Personalized Disease Prediction</td>
+        <td>Predictive ML, EHR analytics, risk scoring, ensemble models</td>
+        <td>80%–96%</td>
+        <td>78%–95%</td>
+        <td>78%–95%</td>
+        <td>AI predicts disease risk, disease progression, complications, treatment response, readmission, and mortality.</td>
+    </tr>
+</table>
+
+<h2>Key Interpretation</h2>
+
+<ul>
+    <li><strong>Highest reported performance:</strong> breast cancer, diabetic retinopathy, kidney disease, Parkinson’s disease, and heart disease prediction.</li>
+    <li><strong>Most clinically mature areas:</strong> radiology, ophthalmology, oncology, cardiology, and pathology.</li>
+    <li><strong>Most variable performance:</strong> mental health, rare diseases, and personalized prediction, because of heterogeneous data and subjective clinical labels.</li>
+    <li><strong>Common limitation:</strong> many AI models show high accuracy on benchmark datasets but require external validation before clinical use.</li>
+</ul>
+
+<h2>References</h2>
+
+<div class="ref">
+    <strong>[1]</strong> Ahsan, M., & Siddique, Z. (2021). 
+    <em>Machine-Learning-Based Disease Diagnosis: A Comprehensive Review.</em> 
+    Healthcare, 10. Citation count: 435.
+    <br>
+    <a href="https://consensus.app/papers/details/c6e27875e67159169455f1265a29de52/?utm_source=chatgpt" target="_blank">
+        View Paper
+    </a>
+</div>
+
+<div class="ref">
+    <strong>[2]</strong> Mirbabaie, M., Stieglitz, S., & Frick, N. R. J. (2021). 
+    <em>Artificial intelligence in disease diagnostics: A critical review and classification on the current state of research guiding future direction.</em> 
+    Health and Technology, 11, 693–731. Citation count: 182.
+    <br>
+    <a href="https://consensus.app/papers/details/3ba7fcd10a725377bff91fc50854e982/?utm_source=chatgpt" target="_blank">
+        View Paper
+    </a>
+</div>
+
+<div class="ref">
+    <strong>[3]</strong> Rashid, J., Batool, S., Kim, J., Nisar, M. W., Hussain, A., & Kushwaha, R. (2022). 
+    <em>An Augmented Artificial Intelligence Approach for Chronic Diseases Prediction.</em> 
+    Frontiers in Public Health, 10. Citation count: 79.
+    <br>
+    <a href="https://consensus.app/papers/details/c1ee1434d48854a790277f4836179689/?utm_source=chatgpt" target="_blank">
+        View Paper
+    </a>
+</div>
+
+<div class="ref">
+    <strong>[4]</strong> Kaur, S., Kumar, Y., Koul, A., & Kamboj, S. K. (2022). 
+    <em>A Systematic Review on Metaheuristic Optimization Techniques for Feature Selections in Disease Diagnosis: Open Issues and Challenges.</em> 
+    Archives of Computational Methods in Engineering, 30, 1863–1895. Citation count: 128.
+    <br>
+    <a href="https://consensus.app/papers/details/518e8473a3815a5b83164cb861883bb4/?utm_source=chatgpt" target="_blank">
+        View Paper
+    </a>
+</div>
+
+<div class="ref">
+    <strong>[5]</strong> Ozaki, Y., Broughton, P., Abdollahi, H., Valafar, H., & Blenda, A. V. (2024). 
+    <em>Integrating Omics Data and AI for Cancer Diagnosis and Prognosis.</em> 
+    Cancers, 16. Citation count: 40.
+    <br>
+    <a href="https://consensus.app/papers/details/1605cbafb2fd57bb816c05a7b1d54074/?utm_source=chatgpt" target="_blank">
+        View Paper
+    </a>
+</div>
+
+<div class="ref">
+    <strong>[6]</strong> Warnat-Herresthal, S., Schultze, H., Shastry, K., et al. (2021). 
+    <em>Swarm Learning for decentralized and confidential clinical machine learning.</em> 
+    Nature, 594, 265–270. Citation count: 691.
+    <br>
+    <a href="https://consensus.app/papers/details/1a8f43cce083597b9feba152be8fb7c8/?utm_source=chatgpt" target="_blank">
+        View Paper
+    </a>
+</div>
+
+<div class="ref">
+    <strong>[7]</strong> Twala, B. (2025). 
+    <em>AI-driven precision diagnosis and treatment in Parkinson’s disease: a comprehensive review and experimental analysis.</em> 
+    Frontiers in Aging Neuroscience, 17. Citation count: 9.
+    <br>
+    <a href="https://consensus.app/papers/details/2966e0e9fcf75ba89e9d9b1bbb2fe7eb/?utm_source=chatgpt" target="_blank">
+        View Paper
+    </a>
+</div>
+
+<div class="ref">
+    <strong>[8]</strong> Cruz-Gonzalez, P., He, A. W. J., Lam, E. P., et al. (2025). 
+    <em>Artificial intelligence in mental health care: a systematic review of diagnosis, monitoring, and intervention applications.</em> 
+    Psychological Medicine, 55. Citation count: 45.
+    <br>
+    <a href="https://consensus.app/papers/details/9d1f8718e97359acb217000aed362b3a/?utm_source=chatgpt" target="_blank">
+        View Paper
+    </a>
+</div>
+
+<div class="ref">
+    <strong>[9]</strong> Lim, J. I., Rachitskaya, A. V., Hallak, J. A., Gholami, S., & Alam, M. (2024). 
+    <em>Artificial intelligence for retinal diseases.</em> 
+    Asia-Pacific Journal of Ophthalmology. Citation count: 25.
+    <br>
+    <a href="https://consensus.app/papers/details/94da5589ddaf5227a7e82557fd98298c/?utm_source=chatgpt" target="_blank">
+        View Paper
+    </a>
+</div>
+
+<div class="ref">
+    <strong>[10]</strong> Khalifa, M., & Albadawy, M. (2024). 
+    <em>Artificial Intelligence for Clinical Prediction: Exploring Key Domains and Essential Functions.</em> 
+    Computer Methods and Programs in Biomedicine Update. Citation count: 105.
+    <br>
+    <a href="https://consensus.app/papers/details/d053f798cea55c1f8fc02374dec6943b/?utm_source=chatgpt" target="_blank">
+        View Paper
+    </a>
+</div>
+
+</body>
+</html>
