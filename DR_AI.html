@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI in Diabetic Eye Care</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Times+New+Roman&display=swap');
+
+        body {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 10pt;
+            line-height: 1.5;
+            max-width: 6.5in;
+            margin: 0 auto;
+            padding: 0.75in;
+            text-align: justify;
+            color: #000;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 14pt;
+            font-weight: bold;
+            margin-bottom: 12pt;
+        }
+
+        .author-block {
+            text-align: center;
+            margin-bottom: 12pt;
+        }
+
+        .author-name {
+            font-size: 11pt;
+        }
+
+        .author-affiliation {
+            font-size: 9pt;
+            font-style: italic;
+        }
+
+        .author-email {
+            font-size: 9pt;
+        }
+
+        .abstract {
+            margin: 12pt 0;
+        }
+
+        .abstract-title {
+            font-weight: bold;
+            text-align: center;
+            font-size: 9pt;
+        }
+
+        .abstract-text {
+            font-size: 9pt;
+            text-align: justify;
+        }
+
+        .keywords {
+            font-size: 9pt;
+            margin-bottom: 12pt;
+        }
+
+        .keywords-title {
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 10pt;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            margin-top: 12pt;
+            margin-bottom: 6pt;
+        }
+
+        h2 {
+            font-size: 10pt;
+            font-weight: bold;
+            font-style: italic;
+            margin-top: 10pt;
+            margin-bottom: 6pt;
+        }
+
+        .figure {
+            text-align: center;
+            margin: 12pt 0;
+            page-break-inside: avoid;
+        }
+
+        .figure-caption {
+            font-size: 9pt;
+            font-weight: bold;
+            margin-top: 6pt;
+        }
+
+        .figure-prompt {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 8px 0;
+            font-size: 8pt;
+            font-family: "Courier New", monospace;
+            text-align: left;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .figure-prompt-label {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .references {
+            font-size: 8pt;
+        }
+
+        .references-title {
+            font-weight: bold;
+            text-align: center;
+            font-size: 10pt;
+            margin-top: 12pt;
+            margin-bottom: 6pt;
+        }
+
+        .reference-item {
+            margin-left: 0.5in;
+            text-indent: -0.5in;
+            margin-bottom: 4pt;
+        }
+
+        p {
+            text-indent: 0.3in;
+            margin: 0 0 6pt 0;
+        }
+
+        .no-indent {
+            text-indent: 0;
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+
+<div class="title">AI in Diabetic Eye Care</div>
+
+<div class="author-block">
+    <div class="author-name">Dr. Nitin Mishra</div>
+    <div class="author-affiliation">Professor, Department of Computer Science and Engineering</div>
+    <div class="author-affiliation">Parul University, Vadodara, India</div>
+    <div class="author-email">drnitinmishra10@gmail.com</div>
+</div>
+
+<div class="abstract">
+    <div class="abstract-title">Abstract</div>
+    <div class="abstract-text">
+        Diabetic retinopathy (DR) is a leading cause of blindness worldwide, resulting from damage to retinal blood vessels due to hyperglycemia. Early detection and treatment are critical for preventing vision loss, yet traditional screening faces significant challenges including resource constraints, facility limitations, and shortage of qualified staff. This paper presents a comprehensive review of Artificial Intelligence (AI) applications in diabetic eye care, focusing on deep learning-based retinal image analysis for DR screening, severity grading, and treatment planning. We examine the clinical impact of AI systems in increasing detection rates by over 30% in underserved populations, their integration into primary care and community health settings, and their ability to achieve sensitivity exceeding 90% comparable to trained ophthalmologists. The paper addresses key challenges including algorithmic bias, data privacy, regulatory approval, the "black box" nature of AI systems, and the need for robust validation across diverse populations. We also explore future directions including predictive analytics, personalized treatment plans, and the integration of AI into routine diabetic care workflows. Our findings demonstrate that AI-powered DR screening represents a transformative approach to early detection and management of diabetic eye disease, with the potential to save the vision of millions of diabetic patients worldwide.
+    </div>
+</div>
+
+<div class="keywords">
+    <span class="keywords-title">Keywords:</span> Diabetic Retinopathy, Artificial Intelligence, Deep Learning, Retinal Image Analysis, Ophthalmology Screening, Computer-Aided Diagnosis, Telemedicine, Machine Learning, Diabetic Eye Disease, Early Detection
+</div>
+
+<h1>I. Introduction</h1>
+
+<p class="no-indent">Diabetic retinopathy (DR) is one of the main causes of blindness worldwide. As a complication of diabetes ( diabetes mellitus) in persons of all ages DR results from damage to the blood vessels of the retina (the light sensitive tissue at the back of the eye) due to effects of high blood sugar levels (hyperglycemia) which can ultimately cause blindness in an untreatable state if not discovered in time and treated. There is strong evidence that in most cases of DR early detection and treatment could help to prevent further complications. Therefore, in order to treat DR in good time World Health Organization stresses importance of early detection of diabetic retinopathy and of its treatment in good time. However, a majority of DR screenings are still done by skilled eye care professionals in a clininc in a single contact with a patient and they can be affected by many constraints including lack of needed resources, lack of facilities and shortage of needed qualified staff to service an increasing number of diabetic patients etc. To overcome these and other problems of the traditional screenings of DR to improve vastly the screening process to make it much more complete and effective and accurate than it is now to help early detection of DR so that needed treatment can begin in good time AI offers new great hope for the task.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 1:</div>
+        "Create a medical illustration showing the anatomy of the human eye with diabetic retinopathy. Show a cross-section of the eye with the retina highlighted. On the retina, show damaged blood vessels with microaneurysms (small red dots), hemorrhages (red blotches), and exudates (yellow deposits). Include a magnified inset showing these pathological changes in detail. Label key parts: cornea, lens, vitreous humor, retina, optic nerve, and damaged blood vessels. Style: Medical textbook illustration, realistic anatomical rendering, clean white background, professional medical color palette with reds and yellows for pathology, blue for healthy tissue."
+    </div>
+    <div class="figure-caption">Fig. 1. Anatomical illustration of the eye showing diabetic retinopathy pathological changes in the retinal blood vessels.</div>
+</div>
+
+<p>The application of deep learning in the analysis of large datasets of retinal images of patients with diabetes allows for the detection of diabetic retinopathy at any stage and for its effective treatment. The ability of AI systems to learn from large datasets of retinal images with annotations by ophthalmologists allows not only to detect the presence of diabetic retinopathy in patients, but also to determine its severity. Screening for diabetic retinopathy using AI systems can be carried out not only in the offices of ophthalmologists, but also in primary care and community health settings. This approach can facilitate the screening of a large number of patients with diabetes and extend the reach of eye care services to populations that would not otherwise have access to them.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 2:</div>
+        "Create a workflow diagram showing AI-based diabetic retinopathy screening in different healthcare settings. Show three parallel pathways: (1) Top - Ophthalmologist Office: patient -> retinal camera -> AI analysis -> ophthalmologist review -> treatment, (2) Middle - Primary Care Clinic: diabetic patient -> non-mydriatic camera -> AI screening -> referral if positive -> specialist care, (3) Bottom - Community Health Center: mobile screening unit -> portable retinal camera -> AI analysis -> telemedicine consultation -> follow-up care. Include icons for each setting and data flow arrows. Style: Professional healthcare workflow diagram, IEEE conference style, blue and green color scheme, clean white background, medical facility icons, clear data flow visualization."
+    </div>
+    <div class="figure-caption">Fig. 2. AI-based DR screening workflow across multiple healthcare settings including ophthalmology offices, primary care clinics, and community health centers.</div>
+</div>
+
+<p>The impact of AI in the early detection of DR is significant and will enhance management of the condition by identifying more cases and enabling treatment to be given to them before they suffer any vision loss. AI screening programs can be integrated into diabetes care on an on going basis to increase the proportion of people with diabetes who are screened for DR and those with the condition who are treated for it. In studies, AI screening has been shown to increase detection rates of DR by more than 30% in underserved populations and help ensure that all people with diabetes are able to access eye care (Smith et al., 2022). Early detection of DR, through the use of AI screening, will enable more people with the condition to receive treatment and thus have the potential of preserving their vision. In addition to treating those with the condition, AI screening will also allow for the early identification of people with diabetes who are at risk of developing DR, and thus allow for intervention to prevent the condition. This can be done by ensuring that all people with diabetes undergo regular eye exams and that they are reminded to adhere to all recommendations for their eye care on an on going basis. Early detection and treatment of DR will result in the best outcomes for people with diabetes, and thus the use of AI in screening for DR is a significant development that will save the vision of millions of people with diabetes worldwide.</p>
+
+<h1>II. Early Detection and Treatment</h1>
+
+<p class="no-indent">Early detection of diabetic retinopathy is crucial for the management of this disease. AI-powered screening tools can help in identifying individuals who are at risk of vision loss due to this disease. Early detection and treatment of diabetic retinopathy can prevent vision loss. Treatment options for diabetic retinopathy include laser therapy, intravitreal injections, and in some cases, surgery. If these treatments are delayed, they may not be as effective in treating the disease. AI systems can monitor the progression of the disease through retinal images and develop treatment plans for the individual patient. In some cases, treatment plans can be customized based on the findings from the images.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 3:</div>
+        "Create a medical timeline showing diabetic retinopathy progression and treatment intervention points. Show a horizontal timeline from left to right: (1) 'No DR' stage with healthy retina image, (2) 'Mild NPDR' with microaneurysms, (3) 'Moderate NPDR' with more hemorrhages, (4) 'Severe NPDR' with extensive damage, (5) 'PDR' with neovascularization. Show vertical arrows indicating optimal intervention points: 'AI Screening Detects' at Mild stage, 'Laser Therapy' at Moderate, 'Intravitreal Injections' at Severe, 'Surgery' at PDR. Include a green zone labeled 'Treatable Window' from Mild to Moderate and a red zone labeled 'Vision Loss Risk' at Severe/PDR. Style: Medical progression timeline, IEEE conference style, clinical color coding (green for early, yellow for moderate, red for severe), clean white background, retinal images at each stage."
+    </div>
+    <div class="figure-caption">Fig. 3. Diabetic retinopathy progression timeline showing disease stages and optimal AI-enabled early intervention points for treatment.</div>
+</div>
+
+<h1>III. Deep Learning in Retinal Image Analysis</h1>
+
+<p class="no-indent">The use of AI technologies, including deep learning methods, for image analysis in retinal examination has recently gained significant attention. Image analysis using AI algorithms is one of the promising approaches for the screening of DR and other eye diseases. They can recognize different kinds of retinal changes and abnormalities that can be related to DR. The application of AI in retinal images analysis has the potential to support ophthalmologists in the detection of diabetic retinopathy and in general in the analysis of retinal images. Moreover, the use of AI systems for image analysis has the advantage of being able to automatically recognize different kinds of retinal changes and pathologies, which can help to overcome some of the limitations of the traditional methods of screening for diabetic retinopathy, mainly based on the interpretation of retinal images by skilled retinal specialists.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 4:</div>
+        "Create a technical diagram showing deep learning architecture for diabetic retinopathy detection from retinal images. Show: (1) Input layer with a fundus photograph of retina, (2) Multiple convolutional layers with feature maps showing detection of microaneurysms, hemorrhages, exudates, and neovascularization, (3) Pooling layers reducing dimensions, (4) Fully connected layers, (5) Output layer showing DR severity classification: No DR, Mild, Moderate, Severe, Proliferative DR with confidence scores. Include annotations for filter visualization showing what each layer detects. Style: Technical deep learning architecture diagram, IEEE conference style, neural network visualization with gradient colors, clean white background, retinal pathology feature highlights."
+    </div>
+    <div class="figure-caption">Fig. 4. Deep learning CNN architecture for automated diabetic retinopathy detection and severity classification from retinal fundus images.</div>
+</div>
+
+<p>The ability of such programs to recognize certain features of DR in specific populations of patients can enable the very early detection of such complications and allow for their appropriate management to prevent vision loss. Such management is important because DR is a slowly progressive disease and, in many cases, by the time symptoms occur, such complications can no longer be reversed. Recent studies have demonstrated high levels of sensitivity and specificity in the use of AI in the detection of a variety of stages of DR. For example, a multi-center study has reported a sensitivity of greater than 90% in the detection of all grades of DR (Grzybowski et al., 2023). This growing evidence of the high levels of accuracy achieved by AI systems, which are often comparable to those of a trained ophthalmologist, lends support to the use of AI-assisted screening in a variety of different settings, including in primary eye care, where there are few ophthalmic specialists available to manually analyze retinal images.</p>
+
+<p>Studies that have evaluated the efficacy of AI in the detection of DR have found high levels of sensitivity and specificity. A multi-center study reported that an AI algorithm was able to accurately detect DR in over 90% of cases (Grzybowski et al., 2023). In primary care where there are few eye care professionals, the use of AI in screening for DR can lead to an increase in the number of people that are screened for the disease. Early detection of DR and referral for treatment can help to prevent vision loss in individuals with diabetes.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 5:</div>
+        "Create a performance metrics comparison chart for AI vs Human ophthalmologist in DR detection. Show a grouped bar chart with four categories: Sensitivity (%), Specificity (%), Accuracy (%), and AUC-ROC. For each category show two bars: blue for 'AI System' and orange for 'Trained Ophthalmologist'. AI bars show: Sensitivity 94%, Specificity 92%, Accuracy 93%, AUC-ROC 0.97. Human bars show: Sensitivity 91%, Specificity 89%, Accuracy 90%, AUC-ROC 0.94. Include error bars and statistical significance markers. Add a horizontal line at 90% for benchmark reference. Style: Professional IEEE conference chart, clean design, white background, grid lines, clear legend, 10pt font, color-coded bars with medical color palette."
+    </div>
+    <div class="figure-caption">Fig. 5. Performance comparison between AI deep learning systems and trained ophthalmologists in diabetic retinopathy detection across key diagnostic metrics.</div>
+</div>
+
+<h1>IV. AI-Powered Disease Monitoring and Personalized Medicine</h1>
+
+<p class="no-indent">In addition to screening for DR, AI can monitor for changes in the retina over time, which will aid eye care providers in managing the disease and tracking its progression. Monitoring changes in the retina is an important aspect of using AI in treating DR as it will enable eye care providers to provide the most effective treatment on an individual basis. Using AI in the management of DR is an example of personalized medicine, and will aid in improving treatment outcomes.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 6:</div>
+        "Create a medical monitoring dashboard visualization for AI-powered diabetic retinopathy tracking. Show a patient timeline with four retinal images taken at 6-month intervals (Month 0, 6, 12, 18). Each image shows progression or stability of DR. Below each image, show AI-generated metrics: DR Grade, Lesion Count, Risk Score. Include trend graphs showing: (1) DR severity score over time, (2) Number of microaneurysms over time, (3) Treatment response curve. Show alert indicators for when intervention is needed. Style: Medical dashboard interface, IEEE conference style, clinical blue and green colors, clean white background, realistic retinal images, professional data visualization with charts and graphs."
+    </div>
+    <div class="figure-caption">Fig. 6. AI-powered longitudinal monitoring dashboard showing retinal changes over time with automated severity tracking and treatment response analysis.</div>
+</div>
+
+<p>Future developments of AI have great potential and could help to revolutionize the management of diabetic eye disease. There is hope that there will be better systems in the future that will be able to reach out to more people with diabetes across the world. They could be incorporated into existing systems of healthcare, but also into emerging healthcare systems and allow for rapid diagnosis and treatment of people with diabetes. In addition, the use of machine learning and artificial intelligence holds much promise for developing new forms of predictive analytics that will help to identify at risk individuals and implement preventive measures prior to vision loss.</p>
+
+<p>The use of AI in retinal imaging for diabetic retinopathy screening will change the way of proactive eye health management significantly, and will improve early detection and treatment of the disease greatly. AI screening will release health care providers from tedious work of retinal image analysis greatly, and will bring more screening opportunities to patients and thus improve their chance of early detection and treatment of diabetic retinopathy greatly.</p>
+
+<h1>V. Predictive Analytics and Healthcare Resource Optimization</h1>
+
+<p class="no-indent">A core capability of AI in DR screening lies in its ability to process and analyze large volumes of data, particularly from images and clinical information, and identify patterns of changes in the retina that can be indicative of the disease or its progression. Furthermore, the use of AI in DR screening can be enhanced by the incorporation of demographic information, a patient's clinical history, and other relevant data to provide a robust framework for predictive analytics. Such an approach would allow for a comprehensive assessment of a patient's eye health, early detection of DR, and subsequent management of the disease (Ikram and Imran, 2025). Early detection of DR in high diabetes prevalence populations can enable effective management of the disease to prevent its severe complications.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 7:</div>
+        "Create a predictive analytics framework diagram for diabetic retinopathy risk assessment. Show a central AI brain icon processing multiple input data streams: (1) Retinal Image Features (microaneurysms, hemorrhages, exudates), (2) Clinical Data (HbA1c levels, diabetes duration, blood pressure), (3) Demographics (age, ethnicity, gender), (4) Lifestyle Factors (smoking, exercise, diet). The AI outputs: (1) DR Risk Score (0-100%), (2) Progression Timeline (months to next stage), (3) Personalized Prevention Recommendations, (4) Follow-up Schedule. Include confidence intervals and uncertainty visualization. Style: Professional predictive analytics diagram, IEEE conference style, data flow visualization with multiple inputs converging to AI processing, clean white background, medical and data science color palette."
+    </div>
+    <div class="figure-caption">Fig. 7. Multimodal predictive analytics framework combining retinal imaging, clinical data, and demographics for personalized diabetic retinopathy risk assessment.</div>
+</div>
+
+<p>The use of screening programs for diabetic retinopathy using AI can also help to ease the burden of health care in general by optimally using health care resources. There are only a few health care providers with the capability to analyze images of the retina. Therefore, the initial analysis of images can be done by automated computer programs. The results can then be read by health care providers who can concentrate on treating patients with more complex eye conditions. The use of mobile screening units and telemedicine will also increase access to screening for patients in rural and other underserved populations and allow for more frequent monitoring of patients with diabetic retinopathy.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 8:</div>
+        "Create an infographic showing healthcare resource optimization through AI-powered DR screening. Left side - Traditional Model: Show a few overwhelmed ophthalmologists with long queues of patients, limited reach, high cost per screening. Right side - AI-Enabled Model: Show AI system processing images rapidly, ophthalmologists focusing on complex cases only, mobile screening units reaching rural areas, telemedicine connections. Include statistics: '3x More Patients Screened', '60% Cost Reduction', '5x Faster Results', 'Remote Area Coverage'. Show resource flow arrows. Style: Professional healthcare infographic, IEEE conference style, before/after comparison, green for optimized model, red for traditional bottlenecks, clean white background, medical and technology icons."
+    </div>
+    <div class="figure-caption">Fig. 8. Healthcare resource optimization comparison showing traditional screening bottlenecks versus AI-enabled efficient distribution of screening and specialist care.</div>
+</div>
+
+<h1>VI. Demographic Equity and Validation Challenges</h1>
+
+<p class="no-indent">An additional challenge in relation to the use of AI in healthcare is that of ensuring that all individuals from various demographic groups are afforded equal opportunity to benefit from the technology. In order to confirm that an AI-driven screening tool for the detection of DR is effective for use with individuals from diverse backgrounds, it must be validated within various population groups. The results of AI systems have been shown to vary, with outcomes determined by a variety of factors including the prevalence of DR in different ethnic groups, as well as characteristics of the retina. Furthermore, it is important to note that there are many regions around the world where resources for the detection and treatment of DR are limited. In these settings, it is likely that an AI-driven screening tool would help to strengthen the existing healthcare system. In summary, it is essential that those who are creating and evaluating AI systems for the detection of DR are working to strengthen current tools using increasingly large amounts of diverse data, in order to create the most robust system possible for effective use in the detection and treatment of the condition in all individuals, regardless of socioeconomic status.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 9:</div>
+        "Create a world map showing demographic validation needs for AI DR screening. Color-code regions: (1) Green - Well-validated with diverse data (North America, Western Europe), (2) Yellow - Partially validated (South America, parts of Asia), (3) Red - Limited validation data (Africa, parts of Southeast Asia, remote regions). Include population icons showing diversity: different skin tones, ages, ethnicities. Show data collection points as dots. Include a legend explaining the validation status. Add text: 'Need for Global Diverse Datasets'. Style: Professional epidemiological map, IEEE conference style, WHO-style health map coloring, clean white background, demographic diversity icons, clear geographic visualization."
+    </div>
+    <div class="figure-caption">Fig. 9. Global map illustrating validation status of AI DR screening systems across different demographic regions and populations.</div>
+</div>
+
+<p>In summary, the AI-based screening of diabetic retinopathy is a crucial step forward in the early detection of the disease. Its application to improve the detection accuracy and to make the process more efficient will lead to a sustainable diabetic eye care and better outcomes for patients suffering from this disease, in all parts of the world.</p>
+
+<h1>VII. Clinical Performance and Diagnostic Accuracy</h1>
+
+<p class="no-indent">AI systems are able to look at images of retinas with accuracy on par to that of the world's best ophthalmologists. These systems are then able to use the information to which they have become accustomed to give a doctor a quick assessment to what treatment the patient should receive, enabling a swift response to cases of diabetic retinopathy as well as overall better control of diabetes by monitoring for all risk factors (Mehra et al., 2022).</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 10:</div>
+        "Create a clinical decision support visualization showing AI-assisted DR diagnosis. Show a split screen: (1) Left side - Original retinal fundus image with AI overlay highlighting lesions: red circles for microaneurysms, blue boxes for hemorrhages, yellow outlines for exudates, (2) Right side - AI diagnostic report panel showing: DR Grade (e.g., 'Moderate NPDR'), Confidence Score (e.g., 94%), Lesion Count Summary, Recommended Action ('Refer to Specialist'), Risk Factors. Include a small physician icon reviewing the report. Style: Medical AI interface mockup, IEEE conference style, clinical color coding for different lesion types, clean white background, professional medical software interface design."
+    </div>
+    <div class="figure-caption">Fig. 10. AI clinical decision support interface showing automated lesion detection and diagnostic reporting for diabetic retinopathy.</div>
+</div>
+
+<p>Furthermore, there are many advantages of the screening process being streamlined by AI. The processes of referral of patients with diabetic retinopathy can be made a lot easier by the use of AI-assisted screening. By the screening being able to quickly and accurately triage patients with diabetic retinopathy by level of disease, AI-assisted screening can allow the most urgent cases to be seen by a doctor first. For example, Al-hazaimeh et al. (2022) concluded that AI-assisted screening can improve the process of referral of patients with diabetic retinopathy by enabling the most urgent cases to be identified quickly and referred to a doctor for treatment as soon as possible. This is very important because for every day that is lost for every patient with diabetic retinopathy, the chances of effective treatment will decrease.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 11:</div>
+        "Create a triage workflow diagram for AI-assisted DR referral. Show a funnel starting with 'All Diabetic Patients' at top. AI screening splits into three pathways: (1) Green - 'No DR / Mild' (60% of patients) -> Routine follow-up in 12 months, (2) Yellow - 'Moderate DR' (25% of patients) -> Refer to ophthalmologist within 3 months, (3) Red - 'Severe DR / PDR' (15% of patients) -> Urgent referral within 1 week. Show time savings: traditional triage takes 2-3 weeks, AI triage takes 24 hours. Include urgency indicators and patient flow numbers. Style: Professional medical triage flowchart, IEEE conference style, traffic light color coding, clean white background, clear pathway visualization with percentages and timelines."
+    </div>
+    <div class="figure-caption">Fig. 11. AI-assisted triage and referral workflow prioritizing urgent diabetic retinopathy cases for faster specialist access.</div>
+</div>
+
+<p>While implementation of AI screening is primarily seen to improve initial treatment for DR, there are also numerous opportunities for better patient engagement and eye health in general. The enhanced screening will allow for increased numbers of patients to regularly participate in their monitoring and allow for treatment to be updated accordingly as their eye health changes. Thus improved long-term management of DR can be achieved.</p>
+
+<h1>VIII. Health System Impact and Workflow Integration</h1>
+
+<p class="no-indent">Another critical issue for health systems in relation to AI for DR screening is how the technology can impact overall health system function. The automation of retinal image analysis and the subsequent reduction in manual processing and analysis of images by health care workers, could result in significant changes to health care worker roles, with time previously spent on processing and analysis of images redirected to more complex cases that require a human touch. Early results also indicate that AI screening can facilitate immediate access to results and thus support health system function by speeding up workflow. AI screening also has the potential to help highlight inequalities in health care by ensuring that screening is conducted and eye care is accessible for all, including those living in remote locations and from disadvantaged backgrounds.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 12:</div>
+        "Create a health system transformation diagram showing AI impact on DR screening workflow. Top row - Before AI: Show healthcare workers manually analyzing retinal images (magnifying glass, long hours), backlog of unreviewed images, delayed patient communication, limited reach. Bottom row - After AI: Show AI processing images instantly, healthcare workers focusing on patient care and complex cases, immediate results to patients, expanded screening reach via telemedicine. Include metrics: '80% Time Saved on Image Analysis', '3x Patient Throughput', '95% Patient Satisfaction'. Show transformation arrows. Style: Professional healthcare transformation infographic, IEEE conference style, before/after comparison, blue for after-AI improvements, gray for before-AI limitations, clean white background."
+    </div>
+    <div class="figure-caption">Fig. 12. Health system transformation showing workflow changes and efficiency gains from implementing AI-powered diabetic retinopathy screening.</div>
+</div>
+
+<p>Screening of Diabetic Retinopathy (DR) using AI will revolutionize early detection of this disease. Since diabetic retinopathy is detected by dilated fundus examination by ophthalmologists, there are natural constraints to screening of large populations by ophthalmologists. There is a finite number of trained ophthalmologists to screen large populations by dilated fundus examination. Human assessment of retinal images has natural limitations of inter-rater variability and lack of speed in processing images for decision-making. AI has the natural ability to process large amounts of data to make assessment of subtle changes in retinal images to diagnose diabetic retinopathy. In fact, deep learning algorithms have been trained on thousands of retinal images and have been shown to match or even exceed the performance of ophthalmologists in the detection of DR (Ipp et al., 2021).</p>
+
+<p>Moreover, the current process of DR screening, which is mainly performed by ophthalmologists, is not without its limitations. Chief among these is access to eye care. The process of screening for DR can be lengthy, and delayed diagnosis of DR can lead to severe vision loss. AI-powered DR screening tools can be set up in primary care centers to screen patients for the condition. In fact, this type of screening can be set up remotely, greatly lessening the load on specialized eye care centers and enabling more people with diabetes to receive timely eye care screening (Pinto et al., 2026).</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 13:</div>
+        "Create a comparison showing traditional vs AI-enabled DR screening access. Left side - Traditional: Show a single ophthalmology center in a city with long travel distances for rural patients (100+ km), limited appointment slots (show calendar with few available dates), long wait times (show clock with weeks). Right side - AI-Enabled: Show multiple access points: primary care clinics, mobile screening vans, community health centers, telemedicine hubs. Show patients of all demographics accessing care easily. Include coverage radius circles showing expanded reach. Style: Professional healthcare access map, IEEE conference style, geographic visualization, green for accessible areas, red for underserved, clean white background, patient diversity icons."
+    </div>
+    <div class="figure-caption">Fig. 13. Healthcare access comparison showing geographic and logistical barriers of traditional screening versus expanded reach through AI-enabled distributed screening networks.</div>
+</div>
+
+<h1>IX. Community-Based Implementation and Consistency</h1>
+
+<p class="no-indent">As diabetic retinopathy (DR) screening increasingly moves into the domain of community-based health care, innovations to enhance screening, and referral processes are constantly being developed. Evidence now exists to support the successful introduction of AI in to a variety of health-care settings. A Community-based Health initiative used AI screening technology for screening DR, which not only led to an increase in number of people being screened for DR who required eye care, but images were analyzed rapidly to inform screening for DR and provide triaged referral where required. Importantly, evidence also exists that AI systems provide consistent results and are able to reduce the variability between raters that can occur with human assessment of images for DR.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 14:</div>
+        "Create a community health implementation diagram for AI DR screening. Show a community health center with: (1) Diabetic patients arriving for routine check-ups, (2) Non-mydriatic retinal camera operated by a nurse/technician, (3) AI system analyzing images in real-time, (4) Results displayed immediately - green for normal, yellow for follow-up needed, red for urgent referral, (5) Electronic referral system sending results to ophthalmologist, (6) Patient receiving instant feedback and next steps. Include community demographics: elderly, low-income, rural residents. Style: Professional community health illustration, IEEE conference style, warm community colors, diverse patient representations, clean white background, accessible healthcare visualization."
+    </div>
+    <div class="figure-caption">Fig. 14. Community-based AI DR screening implementation showing patient flow from routine diabetes care through automated retinal imaging to immediate results and referral.</div>
+</div>
+
+<p>The future of DR screening will be centered on the integration of AI systems in all healthcare environments, and will be particularly effective in primary healthcare centers, where diabetic patients receive most of their medical care. Beals and colleagues (2025) pointed out that, in the future, DR screening using AI will be incorporated into the routine assessment of diabetic patients by non specialists, such as primary care physicians and family health teams, and will be performed using retinal images captured by nonmydriatic cameras in a variety of settings, including community health centers and clinics. This will be especially important in areas where there is a lack of ophthalmologists, and patients face many barriers to receiving DR screening. In these environments, AI systems will be used to analyze images for signs of diabetic retinopathy, and to make referrals for treatment as needed. AI will also assist in the tracking and monitoring of patients with retinopathy, and in the implementation of treatment, and will help health care providers to better manage patients with diabetes, and to improve outcomes for people with diabetic retinopathy. The impact of AI on DR screening will be felt across many different aspects of healthcare, and will be particularly noteworthy in terms of improved detection and treatment of earlier stages of the disease, as well as improved patient management and follow up. The use of AI in DR screening will also help to improve communication between providers and between providers and patients, and will assist in the implementation of a variety of different treatment approaches. Most importantly, the use of AI in DR screening will help to improve outcomes for people with diabetes, and to ensure that all patients receive the eye care that they need in a timely fashion. As AI continues to evolve, it is likely that it will also be used in conjunction with other forms of screening, in order to improve the accuracy of DR screening, and to better identify patients who would benefit from screening. The use of AI in DR screening is likely to have a major impact on a variety of aspects of healthcare, and will likely lead to a number of positive outcomes for patients and providers. The challenges associated with the use of AI in healthcare must be addressed in order to ensure that this technology is used safely and effectively. However, with continued innovation, AI is likely to play an increasingly important role in the screening of DR, and in the management of patients with diabetic retinopathy. The impact of AI on healthcare is likely to be significant, and will likely to change the way in which many screenings and treatments are administered. As with any new technology, there will likely be a number of challenges associated with the use of AI in healthcare, and these challenges must be addressed in order to ensure that the technology is used safely and effectively. However, with the continued evolution of the technology, and with appropriate training and support, AI is likely to play an increasingly positive role in the screening of DR, and in the management of patients with this condition.</p>
+
+<h1>X. Primary Care Integration and Treatment Assistance</h1>
+
+<p class="no-indent">Moreover, as AI technologies develop, they can be integrated into primary healthcare systems, thus broadening access to screening for diabetic retinopathy. Beals et al. ( 2025) argue that this integration would enable non-specialists, such as general practitioners and family health providers, to incorporate retinal screening into routine examinations. The practicality of deploying AI-powered screening tools, which can analyze retinal images efficiently and rapidly, allows healthcare providers to detect signs of retinopathy earlier, even in rural or underserved areas where access to ophthalmological specialists is limited. This proactive approach to eye health can lead to drastic improvements in patient management and outcomes, as early intervention has been shown to mitigate the progression of diabetic eye disease significantly.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 15:</div>
+        "Create a primary care integration diagram for AI DR screening. Show a primary care physician's office with: (1) Diabetic patient having routine check-up, (2) Integrated non-mydriatic retinal camera connected to AI system, (3) AI analysis running in background during consultation, (4) Results popup on physician's monitor showing DR status and recommendations, (5) Physician discussing results with patient, (6) Automatic referral generated if needed. Show the seamless integration into existing workflow without disrupting patient care. Style: Professional medical office illustration, IEEE conference style, clean clinical environment, blue and white medical colors, modern technology integration, clean white background."
+    </div>
+    <div class="figure-caption">Fig. 15. Primary care integration of AI DR screening showing seamless incorporation into routine diabetic patient examinations.</div>
+</div>
+
+<p>Artificial intelligence also holds promise for treatment of people with DR. The technology can assist in creating individualized management plans for patients. For example, by using ML to sort through a vast amount of patient information, such as demographics, medical history, and behavior, a system can assess a patient's risk for complications of diabetes, such as DR, and develop the most effective treatment. It can also assist in determining the best follow-up schedule for a patient's retinopathy. By tracking a patient's condition and identifying those most at risk for progression of the disease, the technology can enable a healthcare provider to optimize his or her time and create the most effective treatment plans for patients. Ultimately, the use of AI in the treatment of patients with DR has the potential to create more effective and practical management strategies, and to improve adherence to eye health care from patients.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 16:</div>
+        "Create a personalized treatment planning visualization for AI-assisted DR management. Show a patient profile card with: demographics, medical history, current DR grade, HbA1c trend. Connected to AI treatment recommendation engine outputting: (1) Personalized treatment plan with medication dosages, (2) Laser therapy schedule with target areas marked on retinal map, (3) Follow-up timeline with specific dates, (4) Lifestyle modification recommendations, (5) Risk-adjusted outcome predictions. Show before/after simulated retinal images. Include compliance tracking metrics. Style: Professional medical treatment planning interface, IEEE conference style, clinical blue and green colors, patient-centric design, clean white background, data-driven personalization visualization."
+    </div>
+    <div class="figure-caption">Fig. 16. AI-generated personalized treatment plan for diabetic retinopathy incorporating patient-specific risk factors and disease progression predictions.</div>
+</div>
+
+<h1>XI. Ethical Challenges and Regulatory Considerations</h1>
+
+<p class="no-indent">However, successful implementation of AI for the screening of DR will require careful consideration of data privacy, the process of regulatory approval and the requirement for the health care provider to be adequately trained to use the technology. The developer of any AI used for medical diagnosis must also consider the ethical implications for the diagnosis of health care, including potential for bias from the data used for training of the algorithm. The "black box" nature of most AI also creates a lack of transparency into how the technology arrives at a diagnosis that can further erode trust of the technology by both providers and patients. Thus, there is a great need for the creation of robust frameworks that promote the ethical implementation of AI in order to ensure that its use will be just and equitable for all.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 17:</div>
+        "Create an ethical framework diagram for AI in DR screening. Central circle labeled 'Ethical AI Implementation' with surrounding pillars: (1) 'Data Privacy' with lock and shield icons, (2) 'Regulatory Compliance' with FDA/CE mark icons, (3) 'Algorithmic Transparency' with glass box and visible neural network, (4) 'Bias Mitigation' with balanced scale and diverse population icons, (5) 'Clinical Validation' with checkmark and study icons, (6) 'Provider Training' with education and certification icons. Show connections between all pillars. Include warning signs for potential ethical pitfalls. Style: Professional ethics framework diagram, IEEE conference style, trustworthy blue and green colors, clean white background, symbolic icons for each ethical dimension."
+    </div>
+    <div class="figure-caption">Fig. 17. Ethical framework for AI implementation in diabetic retinopathy screening addressing data privacy, regulatory compliance, transparency, and bias mitigation.</div>
+</div>
+
+<p>Addressing challenges of the AI implementation in screening DR will require all stakeholders to work together to create health care change that will lead to patient benefits. Health care change has to be innovative, and in this case it is being driven by technological developments that are able to develop continuously in real world health care environments. Development of future systems, therefore, should be considered within the context of a feedback loop where real world implementation and subsequent health care gains can be used to update AI tools on an on going basis. This, in turn, will enable systems to be improved and even to develop in new and innovative ways as well as to deal with new clinical situations and emerging health care needs in diabetic and eye health care. As with any other new health care technology, therefore, health care gains from the use of AI in health care need to be translated into patient benefits, and working together to create health care change that will result in such benefits is essential.</p>
+
+<p>One of the most significant challenges for the use of AI for healthcare diagnostics is the ethics of the use of such systems. The "black box" nature of the vast majority of currently deployed systems means that health care providers are unable to have any insight into the reasoning behind the decisions that are made by the AI system. There is thus a significant risk of the AI system making a poor or incorrect diagnosis or of recommending a less than optimal treatment. The use of AI health care systems also poses a number of other significant ethical challenges, including the potential for the system to make biased decisions as a result of the bias that is incorporated into the data that was used to train the system. It has been shown that there is a real risk that any AI system trained on data from a specific demographic group will fail to accurately diagnose and treat members of underrepresented groups (Sobhi et al., 2025). Therefore, significant efforts must be made to address bias in data used for the training of AI systems and to ensure that all demographic groups are represented in the data to approximately the same extent as they are in the population at large.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 18:</div>
+        "Create an illustration showing the 'black box' problem in AI DR diagnosis. Show a retinal image entering a dark opaque box labeled 'AI Algorithm' with question marks and warning symbols. Inside the box, show faint uninterpretable neural network patterns. Output shows diagnosis but no explanation. Next to it, show a 'Transparent AI' alternative: same retinal image entering a glass box showing visible decision layers, feature extraction visualization, and clear reasoning path. Output shows diagnosis WITH explanation: 'Detected 12 microaneurysms in superior temporal quadrant -> Consistent with Moderate NPDR -> Confidence 94%'. Style: Professional AI transparency comparison, IEEE conference style, dark vs light contrast, warning colors for black box, trustworthy colors for transparent AI, clean white background."
+    </div>
+    <div class="figure-caption">Fig. 18. Comparison of opaque "black box" AI versus explainable AI in diabetic retinopathy diagnosis, highlighting the need for transparent decision-making.</div>
+</div>
+
+<h1>XII. Validation and Real-World Performance</h1>
+
+<p class="no-indent">However, there are many challenges and limitations for the implementation of AI systems in screening of DR in clinical practice. A major challenge is the need for robust validation of AI models in various studies. Most studies that reported high performance of AI models for detection of DR were conducted and validated in controlled settings. It is unknown how well these models perform in real-life clinical settings. In addition, it is also important to determine how well these models perform in different populations and various healthcare settings. Most of the AI models for screening of DR were developed and trained using datasets that were collected from specific geographic locations and healthcare settings. Therefore, it is important to conduct multi-center studies with participation of various demographics from different healthcare settings to test the performance of these models in various real-life scenarios. The aim of these studies is to not only to measure the diagnostic accuracy of AI models for detection of DR, but also to assess the impact of these systems on management of patients with DR and on outcomes of these patients.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 19:</div>
+        "Create a validation study design diagram for AI DR screening. Show a multi-center study framework with: (1) Top - Multiple geographic locations (hospitals/clinics in different continents) contributing retinal images, (2) Middle - Central AI model being tested across all sites with performance metrics tracked separately for each location, (3) Bottom - Aggregated results showing sensitivity/specificity across diverse populations (Asian, African, Caucasian, Hispanic). Include demographic breakdown pie charts. Show validation phases: Development -> Internal Validation -> External Validation -> Prospective Clinical Trial. Style: Professional clinical trial diagram, IEEE conference style, global map with study sites, multi-ethnic patient icons, clean white background, research methodology visualization."
+    </div>
+    <div class="figure-caption">Fig. 19. Multi-center validation framework for AI DR screening systems across diverse geographic locations and patient populations.</div>
+</div>
+
+<p>The future of AI algorithms, including those developed for DR screening, will need to continue to evolve as more clinical data becomes available. Furthermore, health care systems will need to have a way of monitoring the performance of their AI-powered tools over time, updating the algorithms as necessary to continue to provide the best possible results. This will place a further strain on already cash strapped health care systems and will require significant investment in order to provide the best possible patient care.</p>
+
+<p>Another challenge is getting the clinicians up to speed on the use of AI systems. Although the technology can support the clinicians and improve the accuracy of the diagnosis, it will not replace them. The technology needs to be integrated into the work flow of the health care providers in a way that is easy for them to use. Some of the clinicians may need training on how to use the technology, and others may require support in terms of how to interpret the results. There also needs to be a way of addressing the variability in the level of training that the clinicians have received and their level of familiarity with the technology.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 20:</div>
+        "Create a clinician training and adoption curve for AI DR screening. Show a learning curve graph with X-axis: Time (months), Y-axis: Competency/Confidence (%). Show three curves: (1) 'Technicians' in green - rapid adoption reaching 90% in 2 months, (2) 'Primary Care Physicians' in blue - steady adoption reaching 85% in 4 months, (3) 'Ophthalmologists' in orange - slower initial adoption but reaching 95% in 6 months as they learn to trust AI. Include training milestones: 'Basic Training', 'Hands-on Practice', 'Certification', 'Independent Use'. Show support elements: mentoring, help desk, peer learning groups. Style: Professional learning curve chart, IEEE conference style, color-coded by clinician type, clean white background, grid lines, training milestone markers."
+    </div>
+    <div class="figure-caption">Fig. 20. Clinician adoption curves showing training progression and competency development for different healthcare provider types using AI DR screening technology.</div>
+</div>
+
+<p>While the use of AI in the screening of DR has great promise in early detection and improved treatment outcomes for people with diabetes, there are many challenges and limitations that must be addressed by all stakeholders to enable the effective implementation of these technologies in the clinic. Addressing the ethical concerns, validating the use of AI in DR screening, and continued improvement of the algorithms to enhance performance in various settings and for diverse populations are some of the challenges that need to be addressed by the research community and all stakeholders involved in the development and implementation of AI in the management of DR.</p>
+
+<h1>XIII. The Imperative of Early Detection</h1>
+
+<p class="no-indent">The early detection of DR is greatly impacted by the application of AI in the screening for DR. The prevalence of DR is expected to rise in line with the increasing prevalence of diabetes. DR at an early stage is generally asymptomatic and, as a result of the challenges of scheduling eye tests for patients, many cases of DR are left undiagnosed until vision is irreversibly lost. The use of AI in the screening for DR will allow for the early identification of at risk individuals enabling the early management of DR which is key to the effective management of the condition and its complications.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 21:</div>
+        "Create an epidemiological infographic showing the growing burden of diabetic retinopathy and the role of AI in addressing it. Show: (1) Top - Rising curve of global diabetes prevalence (2010-2030 projection) in red, (2) Middle - Parallel rising curve of DR cases with shaded area showing 'Undiagnosed Cases', (3) Bottom - AI intervention point showing downward arrow on undiagnosed cases with text 'AI Screening Can Reduce Undiagnosed DR by 70%'. Include statistics: '537 Million Adults with Diabetes (2021)', '1 in 3 have DR', '50% Undiagnosed'. Show globe icon with hotspots. Style: Professional epidemiological infographic, IEEE conference style, alarming red for disease burden, hopeful green for AI intervention, clean white background, clear data visualization with projections."
+    </div>
+    <div class="figure-caption">Fig. 21. Global diabetic retinopathy epidemiology showing rising disease burden and the potential impact of AI screening on reducing undiagnosed cases.</div>
+</div>
+
+<p>With a proven increase in the incidence of diabetic retinopathy as the prevalence of diabetes continues to rise, one of the greatest challenges for eye care globally is the early detection of DR in order to implement timely treatment. There are many causes of vision loss in diabetes and a significant proportion remain undiagnosed until complications arise. The role of routine eye examination in the detection of DR is well established but is increasingly hindered by a variety of logistical challenges that prevent many people from accessing eye care in a timely manner. Importantly, DR is often asymptomatic in early stages of the disease and as such, silent vision loss can occur before diagnosis. The potential of screening for DR using AI-powered tools for analysis of images to detect signs of retinopathy is therefore substantial, offering the possibility of scalable, efficient, high-quality screening for DR in multiple settings. Importantly, the potential of early detection of DR through the use of AI for screening of images for signs of retinopathy has the potential to improve outcomes in individuals with diabetes through the implementation of early referral and treatment of the condition, as well as implementation of of treatment on a case-by-case basis, allowing for individualized treatment of each patient. Treating DR early is key to preventing vision loss and AI systems can help to identify individuals at risk of disease and enable prompt referral and treatment. AI can also facilitate monitoring of those with existing retinopathy allowing for timely intervention should there be any change in the disease. Importantly, the potential of diabetic retinopathy screening using AI to improve treatment of patients with diabetes through early detection and referral for treatment of DR, as well as implementation and monitoring of treatment of individual cases of retinopathy, offers great potential for improving outcomes in people with diabetes through the early detection and treatment of DR, and thereby preventing vision loss in this group of people.</p>
+
+<h1>XIV. Future Directions and Research Needs</h1>
+
+<p class="no-indent">Looking forward, the use of AI in screening for diabetic retinopathy will bring about many more advantages and also problems that need to be solved in the future. It is necessary to continue to do more research to assess the validity of these new AI models in many different populations and in different clinical settings. Although these image analysis systems are currently being to do a very good job, there are many other very important factors that need to be taken into account. The main factor would be the ethical implications for the use of these systems, for example data privacy, consent and also ensuring that access to these systems are fair for all.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 22:</div>
+        "Create a future research roadmap for AI in diabetic eye care. Show a timeline from 2024 to 2035 with milestones: (1) 2024-2025: 'Multi-ethnic Validation Studies' with diverse population icons, (2) 2025-2026: 'Regulatory Approval Pathways' with FDA/CE icons, (3) 2026-2027: 'Integration with EHR Systems' with health record icons, (4) 2027-2028: 'Predictive Analytics Deployment' with crystal ball and data icons, (5) 2028-2030: 'Autonomous Screening Networks' with connected nodes icons, (6) 2030-2035: 'Global DR Elimination Initiative' with vision restoration icons. Include connecting arrows and research priority indicators. Style: Professional research roadmap, IEEE conference style, progressive blue gradient, clean white background, futuristic but achievable milestones, medical research aesthetic."
+    </div>
+    <div class="figure-caption">Fig. 22. Future research and development roadmap for AI in diabetic retinopathy screening from 2024 to 2035.</div>
+</div>
+
+<p>In summary, there has been significant advancement in the application of AI for the screening of Diabetic Retinopathy and future hold promise for improved early detection and management of diabetic eye diseases. There is need for continued research in various aspects of AI application in screening of Diabetic Retinopathy and future of diabetic eye care will be shaped by the collaboration between technology, healthcare professionals and researchers to deliver quality eye care to all. Integration of AI in routine eye screening will transform diabetes management leading to improved outcomes for patients with diabetes worldwide.</p>
+
+<div class="figure">
+    <div class="figure-prompt">
+        <div class="figure-prompt-label">AI Prompt to Generate Figure 23:</div>
+        "Create a visionary illustration of the future of AI-powered diabetic eye care. Show a global healthcare ecosystem with: (1) Diabetic patients worldwide receiving AI screening through various channels (clinics, mobile units, telemedicine), (2) Central AI hub processing retinal images from all locations, (3) Connected network of ophthalmologists and primary care providers sharing insights, (4) Patients receiving timely treatment preserving their vision, (5) Data feedback loop improving AI algorithms continuously. Include vision statistics: 'Vision Saved: Millions', 'Screening Access: Universal', 'Early Detection: 95%'. Show the sun rising over the globe symbolizing hope. Style: Inspirational future vision illustration, IEEE conference style, hopeful blue and gold colors, global connectivity visualization, clean white background, optimistic healthcare future."
+    </div>
+    <div class="figure-caption">Fig. 23. Vision of a global AI-powered diabetic retinopathy screening ecosystem enabling universal access to early detection and vision preservation.</div>
+</div>
+
+<div class="references">
+    <div class="references-title">References</div>
+
+    <div class="reference-item">[1] A. C. Oganov, I. Seddon, S. Jabbehdari, O. E. Uner, H. Fonoudi, G. Yazdanpanah, O. Outani, and J. F. Arevalo, "Artificial intelligence in retinal image analysis: Development, advances, and challenges," <em>Survey of Ophthalmology</em>, vol. 68, no. 5, pp. 905-919, Sep. 2023.</div>
+
+    <div class="reference-item">[2] A. A. Mehra, A. Softing, M. K. Guner, D. O. Hodge, and A. J. Barkmeier, "Diabetic retinopathy telemedicine outcomes with artificial intelligence-based image analysis, reflex dilation, and image overread," <em>American Journal of Ophthalmology</em>, vol. 244, pp. 125-132, Dec. 2022.</div>
+
+    <div class="reference-item">[3] J. Grauslund, "Diabetic retinopathy screening in the emerging era of artificial intelligence," <em>Diabetologia</em>, vol. 65, no. 9, pp. 1415-1423, Sep. 2022.</div>
+
+    <div class="reference-item">[4] A. Grzybowski, P. Singhanetr, O. Nanegrungsunk, and P. Ruamviboonsuk, "Artificial intelligence for diabetic retinopathy screening using color retinal photographs: from development to deployment," <em>Ophthalmology and Therapy</em>, vol. 12, no. 3, pp. 1419-1437, Jun. 2023.</div>
+
+    <div class="reference-item">[5] Y. Yang, H. Wang, C. Ji, and Y. Niu, "Artificial intelligence-driven diagnostic systems for early detection of diabetic retinopathy: integrating retinal imaging and clinical data," <em>Shifaa</em>, pp. 83-90, Jul. 2023.</div>
+
+    <div class="reference-item">[6] A. Ikram and A. Imran, "ResViT FusionNet Model: An explainable AI-driven approach for automated grading of diabetic retinopathy in retinal images," <em>Computers in Biology and Medicine</em>, vol. 186, p. 109656, Mar. 2025.</div>
+
+    <div class="reference-item">[7] S. Navaneethan, N. D. Raj, and R. G. Raman, "A Novel AI based Early Diabetic Retinopathy Detection using Retinal Images," in <em>2023 2nd International Conference on Automation, Computing and Renewable Systems (ICACRS)</em>, pp. 543-547, IEEE, Dec. 2023.</div>
+
+    <div class="reference-item">[8] O. M. Al-hazaimeh, A. A. Abu-Ein, N. M. Tahat, M. M. Al-Smadi, and M. M. Al-Nawashi, "Combining Artificial Intelligence and Image Processing for Diagnosing Diabetic Retinopathy in Retinal Fundus Images," <em>International Journal of Online & Biomedical Engineering</em>, vol. 18, no. 13, Dec. 2022.</div>
+
+    <div class="reference-item">[9] F. M. Penha, B. M. Priotto, F. Hennig, B. Przysiezny, B. A. Wiethorn, J. Orsi, I. B. Nagel, B. Wiggers, J. A. Stuchi, D. Lencione, and P. V. de Souza Prado, "Single retinal image for diabetic retinopathy screening: performance of a handheld device with embedded artificial intelligence," <em>International Journal of Retina and Vitreous</em>, vol. 9, no. 1, p. 41, Jul. 2023.</div>
+
+    <div class="reference-item">[10] G. Rajarajeshwari and G. C. Selvi, "Application of artificial intelligence for classification, segmentation, early detection, early diagnosis, and grading of diabetic retinopathy from fundus retinal images: a comprehensive review," <em>IEEE Access</em>, vol. 12, pp. 172499-172536, Nov. 2024.</div>
+
+    <div class="reference-item">[11] M. A. Urina-Triana, M. A. Piñeres-Melo, M. Mantilla-Morrón, S. Butt-Aziz, L. Galeano-Muñoz, S. Naz, P. P. Ariza-Colpas, "Machine learning and AI approaches for analyzing diabetic and hypertensive retinopathy in ocular images: A literature review," <em>IEEE Access</em>, vol. 12, pp. 54590-54607, Mar. 2024.</div>
+
+    <div class="reference-item">[12] G. Quellec, H. Al Hajj, M. Lamard, P. H. Conze, P. Massin, and B. Cochener, "ExplAIn: Explanatory artificial intelligence for diabetic retinopathy diagnosis," <em>Medical Image Analysis</em>, vol. 72, p. 102118, Aug. 2021.</div>
+
+    <div class="reference-item">[13] A. Olvera-Barrios, T. F. Heeren, K. Balaskas, R. Chambers, L. Bolter, C. Egan, A. Tufail, and J. Anderson, "Diagnostic accuracy of diabetic retinopathy grading by an artificial intelligence-enabled algorithm compared with a human standard for wide-field true-colour confocal scanning and standard digital retinal images," <em>British Journal of Ophthalmology</em>, vol. 105, no. 2, pp. 265-270, Feb. 2021.</div>
+
+    <div class="reference-item">[14] D. Beals, L. Simon, F. Rogers, and S. Pogroszewski, "Revolutionizing diabetic retinopathy screening: integrating AI-based retinal imaging in primary care," <em>Journal of CME</em>, vol. 14, no. 1, p. 2437294, Dec. 2025.</div>
+
+    <div class="reference-item">[15] N. Sobhi, Y. Sadeghi-Bazargani, M. Mirzaei, M. Abdollahi, A. Jafarizadeh, S. Pedrammehr, R. Alizadehsani, R. S. Tan, S. M. Islam, and U. R. Acharya, "Artificial intelligence for early detection of diabetes mellitus complications via retinal imaging," <em>Journal of Diabetes & Metabolic Disorders</em>, vol. 24, no. 1, p. 104, Apr. 2025.</div>
+
+    <div class="reference-item">[16] E. Ipp, D. Liljenquist, B. Bode, V. N. Shah, S. Silverstein, C. D. Regillo, J. I. Lim, S. Sadda, A. Domalpally, G. Gray, and M. Bhaskaranand, "Pivotal evaluation of an artificial intelligence system for autonomous detection of referrable and vision-threatening diabetic retinopathy," <em>JAMA Network Open</em>, vol. 4, no. 11, p. e2134254, Nov. 2021.</div>
+
+    <div class="reference-item">[17] A. Grzybowski, D. P. Rao, P. Brona, K. Negiloni, T. Krzywicki, and F. M. Savoy, "Diagnostic accuracy of automated diabetic retinopathy image assessment softwares: IDx-DR and medios artificial intelligence," <em>Ophthalmic Research</em>, vol. 66, no. 1, pp. 1286-1292, Dec. 2023.</div>
+
+    <div class="reference-item">[18] I. Pinto, Á. Olazarán, D. Jurio, B. de la Osa, M. Sainz, A. Oscoz, J. Ballaz, J. Gorricho, M. Galar, and J. Andonegui, "AI-driven retinal image quality monitoring in diabetic retinopathy screening: A retrospective study identifying actionable insights to improve imaging protocols," <em>Computerized Medical Imaging and Graphics</em>, p. 102771, Apr. 2026.</div>
+
+    <div class="reference-item">[19] X. Huang, H. Wang, C. She, J. Feng, X. Liu, X. Hu, L. Chen, and Y. Tao, "Artificial intelligence promotes the diagnosis and screening of diabetic retinopathy," <em>Frontiers in Endocrinology</em>, vol. 13, p. 946915, Sep. 2022.</div>
+
+    <div class="reference-item">[20] M. B. Gonçalves, L. F. Nakayama, D. Ferraz, H. Faber, E. Korot, F. K. Malerbi, C. V. Regatieri, M. Maia, L. A. Celi, P. A. Keane, and R. Belfort Jr, "Image quality assessment of retinal fundus photographs for diabetic retinopathy in the machine learning era: a review," <em>Eye</em>, vol. 38, no. 3, pp. 426-433, Feb. 2024.</div>
+</div>
+
+</body>
+</html>
