@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research Paper Summary</title>
+
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        background-color:#f4f6f9;
+        margin:0;
+        padding:30px;
+        color:#222;
+        line-height:1.7;
+    }
+
+    .container{
+        max-width:1100px;
+        margin:auto;
+        background:white;
+        padding:40px;
+        border-radius:12px;
+        box-shadow:0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h1{
+        text-align:center;
+        color:#0b3d91;
+        margin-bottom:10px;
+    }
+
+    h2{
+        color:#114b8b;
+        border-left:5px solid #0b3d91;
+        padding-left:12px;
+        margin-top:35px;
+    }
+
+    p{
+        text-align:justify;
+        font-size:16px;
+    }
+
+    ul{
+        margin-left:25px;
+    }
+
+    table{
+        width:100%;
+        border-collapse:collapse;
+        margin-top:20px;
+    }
+
+    table th, table td{
+        border:1px solid #ccc;
+        padding:12px;
+        text-align:left;
+    }
+
+    table th{
+        background:#0b3d91;
+        color:white;
+    }
+
+    .highlight{
+        background:#eef4ff;
+        padding:15px;
+        border-left:5px solid #0b3d91;
+        margin-top:20px;
+    }
+
+    footer{
+        text-align:center;
+        margin-top:40px;
+        color:#666;
+        font-size:14px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>An Intelligent Hybrid CNN–Transformer Framework for Automated Skin Disease Detection and Classification</h1>
+
+<p>
+This research paper presents an intelligent hybrid deep learning framework for automated skin disease detection and classification using dermoscopic images. The study addresses the limitations of traditional Convolutional Neural Networks (CNNs) and transformer-based architectures by integrating both models into a unified AI-driven healthcare framework capable of improving diagnostic accuracy, contextual learning, robustness, and explainability.
+</p>
+
+<h2>Research Problem</h2>
+
+<p>
+Existing skin disease detection systems face several major challenges including limited contextual learning, high computational complexity, lack of interpretability, dataset imbalance, overfitting, and reduced classification robustness. Traditional CNN models effectively capture local lesion patterns but fail to model global spatial relationships, while transformer-based models provide strong contextual understanding but require high computational resources and large annotated datasets.
+</p>
+
+<div class="highlight">
+<b>Identified Core Problem:</b><br>
+Existing AI-based dermatological diagnosis systems fail to simultaneously achieve accurate local feature extraction, global contextual learning, computational efficiency, interpretability, and robust multiclass classification performance.
+</div>
+
+<h2>Proposed Solution</h2>
+
+<p>
+To overcome these limitations, the paper proposes a hybrid CNN–Transformer architecture that combines CNN-based local feature extraction with transformer-based global attention learning. The framework also integrates attention-guided feature fusion and Explainable Artificial Intelligence (XAI) techniques using Grad-CAM for transparent diagnostic interpretation.
+</p>
+
+<ul>
+<li>CNN module for local feature extraction</li>
+<li>Transformer encoder for global contextual learning</li>
+<li>Attention-guided hybrid feature fusion</li>
+<li>Softmax-based multiclass classification</li>
+<li>Grad-CAM explainability integration</li>
+<li>Data augmentation and regularization strategies</li>
+</ul>
+
+<h2>Methodology</h2>
+
+<p>
+The proposed methodology includes dermoscopic image acquisition, preprocessing, augmentation, CNN-based feature extraction, transformer-based attention learning, feature fusion, classification, and explainable AI visualization. Benchmark datasets such as HAM10000 and ISIC Archive were used for evaluation.
+</p>
+
+<table>
+<tr>
+<th>Methodology Component</th>
+<th>Purpose</th>
+</tr>
+
+<tr>
+<td>Image Preprocessing</td>
+<td>Noise removal and normalization</td>
+</tr>
+
+<tr>
+<td>Data Augmentation</td>
+<td>Improve generalization and reduce overfitting</td>
+</tr>
+
+<tr>
+<td>CNN Backbone</td>
+<td>Extract local lesion features</td>
+</tr>
+
+<tr>
+<td>Transformer Encoder</td>
+<td>Capture global contextual dependencies</td>
+</tr>
+
+<tr>
+<td>Feature Fusion</td>
+<td>Combine local and global representations</td>
+</tr>
+
+<tr>
+<td>Grad-CAM</td>
+<td>Provide explainable diagnostic visualization</td>
+</tr>
+</table>
+
+<h2>Experimental Results</h2>
+
+<p>
+Experimental analysis demonstrated that the proposed hybrid CNN–Transformer framework significantly outperformed existing CNN and transformer-only models across multiple evaluation metrics including accuracy, precision, recall, F1-score, and ROC-AUC.
+</p>
+
+<table>
+<tr>
+<th>Model</th>
+<th>Accuracy (%)</th>
+</tr>
+
+<tr>
+<td>ResNet50</td>
+<td>90.8</td>
+</tr>
+
+<tr>
+<td>DenseNet121</td>
+<td>91.5</td>
+</tr>
+
+<tr>
+<td>EfficientNet-B0</td>
+<td>92.3</td>
+</tr>
+
+<tr>
+<td>Vision Transformer</td>
+<td>93.1</td>
+</tr>
+
+<tr>
+<td><b>Proposed Hybrid CNN–Transformer</b></td>
+<td><b>96.4</b></td>
+</tr>
+</table>
+
+<h2>Key Contributions</h2>
+
+<ul>
+<li>Development of a novel hybrid CNN–Transformer architecture</li>
+<li>Attention-guided contextual feature fusion</li>
+<li>Explainable AI integration using Grad-CAM</li>
+<li>Improved classification robustness and generalization</li>
+<li>Reduced overfitting and class imbalance effects</li>
+<li>Deployment-oriented intelligent healthcare framework</li>
+</ul>
+
+<h2>Conclusion</h2>
+
+<p>
+The proposed intelligent hybrid CNN–Transformer framework successfully addressed several limitations of existing AI-based skin disease diagnosis systems. The integration of local spatial learning, transformer-based contextual modeling, and explainable AI significantly improved classification accuracy, robustness, and interpretability. The framework demonstrated strong potential for real-world deployment in intelligent healthcare systems, telemedicine platforms, mobile dermatology applications, and AI-assisted clinical decision support systems.
+</p>
+
+<h2>Future Scope</h2>
+
+<ul>
+<li>Federated learning for privacy-preserving healthcare AI</li>
+<li>Edge AI and lightweight mobile deployment</li>
+<li>Multimodal medical diagnosis integration</li>
+<li>Advanced explainable AI techniques</li>
+<li>Self-supervised and few-shot learning</li>
+<li>Real-time clinical deployment and validation</li>
+<li>3D and multispectral skin imaging analysis</li>
+</ul>
+
+<footer>
+Research Summary — AI for Skin Disease Detection using Hybrid CNN–Transformer Framework
+</footer>
+
+</div>
+
+</body>
+</html>
