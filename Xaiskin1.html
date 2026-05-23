@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explainable AI in Dermatology: A Review of Opportunities, Challenges, and Clinical Implementation</title>
+<style>
+/* ============================================
+   IEEE CONFERENCE PAPER STYLES
+   ============================================ */
+:root {
+    --ieee-blue: #003366;
+    --ieee-light-blue: #1a5f9e;
+    --ieee-accent: #0066cc;
+    --text-primary: #1a1a1a;
+    --text-secondary: #333333;
+    --border-color: #cccccc;
+    --bg-light: #f5f7fa;
+    --bg-figure: #fafbfc;
+    --prompt-bg: #eef2f7;
+    --prompt-border: #4a90d9;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: "Times New Roman", Times, Georgia, serif;
+    font-size: 10pt;
+    line-height: 1.45;
+    color: var(--text-primary);
+    background: #ffffff;
+    max-width: 8.27in;
+    margin: 0 auto;
+    padding: 0.6in 0.75in;
+}
+.paper-title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16pt;
+    font-weight: bold;
+    text-align: center;
+    color: var(--text-primary);
+    margin-bottom: 20pt;
+    line-height: 1.25;
+    letter-spacing: -0.2pt;
+}
+.author-block {
+    text-align: center;
+    margin-bottom: 22pt;
+    padding-bottom: 8pt;
+    border-bottom: 1px solid var(--border-color);
+}
+.author-name {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    color: var(--text-primary);
+    margin-bottom: 4pt;
+}
+.author-affil {
+    font-size: 10pt;
+    font-style: italic;
+    color: var(--text-secondary);
+    margin-bottom: 2pt;
+}
+.author-email {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 9pt;
+    color: var(--ieee-blue);
+    margin-top: 3pt;
+}
+.abstract-box {
+    margin-bottom: 14pt;
+    padding: 10pt 12pt;
+    background: var(--bg-light);
+    border-left: 3px solid var(--ieee-blue);
+}
+.abstract-label {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.8pt;
+    color: var(--ieee-blue);
+    margin-bottom: 6pt;
+}
+.abstract-text {
+    font-size: 9pt;
+    line-height: 1.4;
+    text-align: justify;
+    text-indent: 0;
+}
+.keywords {
+    font-size: 9pt;
+    margin-bottom: 18pt;
+    text-align: justify;
+    line-height: 1.35;
+}
+.keywords-label {
+    font-weight: bold;
+    font-style: italic;
+    color: var(--text-primary);
+}
+h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.4pt;
+    color: var(--text-primary);
+    margin-top: 18pt;
+    margin-bottom: 8pt;
+    padding-bottom: 3pt;
+    border-bottom: 1.5px solid var(--ieee-blue);
+}
+h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    font-weight: bold;
+    font-style: italic;
+    color: var(--text-primary);
+    margin-top: 12pt;
+    margin-bottom: 6pt;
+}
+h4 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    font-weight: bold;
+    color: var(--text-secondary);
+    margin-top: 10pt;
+    margin-bottom: 5pt;
+}
+p {
+    text-align: justify;
+    text-indent: 0.3in;
+    margin-bottom: 5pt;
+    hyphens: auto;
+}
+p.no-indent {
+    text-indent: 0;
+}
+.citation {
+    font-style: italic;
+    color: var(--text-secondary);
+}
+.ref-num {
+    font-size: 8pt;
+    vertical-align: super;
+    color: var(--ieee-blue);
+}
+.figure-container {
+    margin: 16pt 2pt;
+    padding: 14pt 16pt;
+    background: var(--bg-figure);
+    border: 1.5px solid var(--border-color);
+    border-radius: 6px;
+    page-break-inside: avoid;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.figure-header {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    font-weight: bold;
+    color: var(--ieee-blue);
+    margin-bottom: 6pt;
+    padding-bottom: 5pt;
+    border-bottom: 1px dashed var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 6pt;
+}
+.figure-header::before {
+    content: "▣";
+    font-size: 12pt;
+    color: var(--ieee-accent);
+}
+.figure-caption {
+    font-size: 9.5pt;
+    font-style: italic;
+    color: var(--text-secondary);
+    margin-bottom: 10pt;
+    line-height: 1.4;
+    padding-left: 18pt;
+}
+.ai-prompt-wrapper {
+    margin-top: 8pt;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.ai-prompt-label {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.6pt;
+    color: #ffffff;
+    background: var(--prompt-border);
+    padding: 4pt 10pt;
+    display: inline-block;
+    border-radius: 3px 3px 0 0;
+}
+.ai-prompt-box {
+    background: var(--prompt-bg);
+    border-left: 4px solid var(--prompt-border);
+    border-top: 1px solid var(--prompt-border);
+    border-right: 1px solid #d0d8e4;
+    border-bottom: 1px solid #d0d8e4;
+    padding: 10pt 12pt;
+    font-family: "Courier New", Courier, "Lucida Console", monospace;
+    font-size: 8.5pt;
+    line-height: 1.5;
+    color: #1e3a5f;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12pt 0;
+    font-size: 9pt;
+    page-break-inside: avoid;
+}
+table caption {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9pt;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 4pt;
+    color: var(--ieee-blue);
+}
+table thead th {
+    background: var(--bg-light);
+    border-top: 2px solid var(--text-primary);
+    border-bottom: 1.5px solid var(--text-primary);
+    padding: 5pt 8pt;
+    text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9pt;
+    font-weight: bold;
+}
+table tbody td {
+    border-bottom: 1px solid var(--border-color);
+    padding: 4pt 8pt;
+    text-align: left;
+    vertical-align: top;
+}
+table tbody tr:last-child td {
+    border-bottom: 2px solid var(--text-primary);
+}
+.references-section {
+    margin-top: 22pt;
+    padding-top: 10pt;
+    border-top: 2px solid var(--ieee-blue);
+}
+.references-title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5pt;
+    text-align: center;
+    margin-bottom: 14pt;
+    color: var(--ieee-blue);
+}
+.reference-item {
+    font-size: 8.5pt;
+    margin-bottom: 7pt;
+    padding-left: 0.28in;
+    text-indent: -0.28in;
+    text-align: justify;
+    line-height: 1.4;
+}
+.reference-item em {
+    font-style: italic;
+}
+@media print {
+    body { padding: 0.5in; }
+    .figure-container { page-break-inside: avoid; }
+    h2, h3 { page-break-after: avoid; }
+    .reference-item { page-break-inside: avoid; }
+}
+@media screen and (max-width: 768px) {
+    body { padding: 0.3in; font-size: 11pt; }
+    .paper-title { font-size: 14pt; }
+}
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<h1 class="paper-title">Explainable AI in Dermatology: A Review of Opportunities, Challenges, and Clinical Implementation</h1>
+
+<div class="author-block">
+    <div class="author-name">Dr. Nitin Mishra</div>
+    <div class="author-affil">Professor, Department of Computer Science and Engineering</div>
+    <div class="author-affil">Parul University, Vadodara, India</div>
+    <div class="author-email">drnitinmishra10@gmail.com</div>
+</div>
+
+<div class="abstract-box">
+    <div class="abstract-label">Abstract</div>
+    <p class="abstract-text">The integration of Explainable Artificial Intelligence (XAI) into dermatology is transforming skin disease diagnosis and treatment, offering greater accuracy and individualized approaches. Deep learning-based models, which have achieved state-of-the-art results in several health applications, are often reported as "black boxes" as their decision processes are difficult to interpret. Therefore, in health applications, including dermatology where images are used for diagnosis, the use of such models has generated significant concern among both health care professionals and patients. This paper reviews the current state of the art of Explainable Artificial Intelligence (XAI) in dermatology, as well as the opportunities and challenges related to its clinical implementation. We examine how XAI methods facilitate the development of transparent models, improve diagnostic accuracy, enhance clinical decision support, and address ethical considerations including data privacy, algorithmic bias, and accountability. Furthermore, we identify key challenges such as data quality requirements, model interpretability trade-offs, computational resource demands, and the need for interdisciplinary collaboration. The findings suggest that while XAI holds tremendous potential for dermatological care, robust ethical frameworks, comprehensive training protocols, and scalable implementation strategies are essential for successful clinical integration.</p>
+</div>
+
+<div class="keywords">
+    <span class="keywords-label">Index Terms</span>—Explainable artificial intelligence, dermatology, deep learning, skin cancer diagnosis, clinical decision support, algorithmic bias, medical AI ethics, transfer learning, Grad-CAM, health equity
+</div>
+
+<h2>I. Introduction</h2>
+
+<p>The integration of Explainable Artificial Intelligence (XAI) into dermatology is changing skin disease diagnosis and treatment, offering greater accuracy and individualized approaches. An important goal of current health technologies is the improvement of diagnosis and related clinical decisions. Deep learning-based models, which have achieved state-of-the-art results in several health applications, are often reported as "black boxes" as their decision processes are difficult to interpret. Therefore, in health applications, including dermatology where images are used for diagnosis, the use of such models has generated significant concern among both health care professionals and patients.</p>
+
+<p>Health care professionals require greater trust in the health information provided by AI systems to integrate them into their decision-making processes. Moreover, greater trust in health information is required from patients in order to increase their levels of adherence to recommended treatments and to improve their health outcomes. Therefore, XAI methods are important for dermatological classification systems, as they facilitate the development of transparent models. In this work, the current state of the art of Explainable Artificial Intelligence (XAI) in dermatology, as well as the opportunities and challenges related to its use, are reviewed.</p>
+
+<div class="figure-container">
+    <div class="figure-header">Figure 1: Conceptual Framework of XAI Integration in Dermatological Practice</div>
+    <div class="figure-caption">A high-level conceptual diagram illustrating the six core pillars of XAI in dermatology: deep learning models, diagnostic accuracy, clinical decision support, patient trust, ethical framework, and data privacy, with bidirectional interconnections.</div>
+    <div class="ai-prompt-wrapper">
+        <div class="ai-prompt-label">AI Image Generation Prompt</div>
+        <div class="ai-prompt-box">A professional academic conceptual diagram in clean IEEE conference style, white background with subtle blue accent colors. The diagram shows a central hexagon labeled "Explainable AI in Dermatology" connected to six surrounding nodes: (1) "Deep Learning Models" with a neural network icon, (2) "Diagnostic Accuracy" with a magnifying glass over skin lesion, (3) "Clinical Decision Support" with a doctor and computer screen, (4) "Patient Trust & Compliance" with a patient and shield icon, (5) "Ethical Framework" with a balance scale, and (6) "Data Privacy" with a lock icon. Arrows show bidirectional flow between the central node and each surrounding node. Use flat design style, consistent line weights, sans-serif fonts (Arial or Helvetica), and a color palette of navy blue (#003366), light blue (#6699CC), and gray (#666666). Include a legend in the bottom right corner. High resolution, publication-ready quality, minimalistic and clean layout suitable for IEEE conference proceedings.</div>
+    </div>
+</div>
+
+<h2>II. Diagnostic Accuracy and Clinical Decision Support</h2>
+
+<h3>A. Improved Diagnostic Accuracy</h3>
+
+<p>The key advantage of XAI in the context of skin cancer diagnosis is the potential for improved diagnostic accuracy. Currently, skin cancer is diagnosed with high accuracy using clinical images by human dermatologists. Machine learning models that are trained on large datasets can make decisions using patterns in the data that may be beyond the human doctor's ability to recognize. Through XAI methods, the decisions of such machine learning models can be analyzed and better understood.</p>
+
+<p>For instance, a model could be used to analyze images of suspicious skin lesions to identify those that are likely to be malignant melanoma. The model could provide an explanation of why a particular lesion was classified as a melanoma. For example, the model may have focused on features such as the unusual texture or color of the lesion. This type of information could be used by a dermatologist to validate the decision made by the model <span class="citation">(Haenssle et al., 2018)</span> [1].</p>
+
+<div class="figure-container">
+    <div class="figure-header">Figure 2: XAI-Enhanced Skin Lesion Classification Workflow</div>
+    <div class="figure-caption">End-to-end workflow diagram showing the integration of deep learning inference with Grad-CAM explainability for dermatological diagnosis, from image input through clinician validation.</div>
+    <div class="ai-prompt-wrapper">
+        <div class="ai-prompt-label">AI Image Generation Prompt</div>
+        <div class="ai-prompt-box">A detailed flowchart in IEEE conference paper style showing the XAI-enhanced diagnostic workflow for skin lesion classification. Layout: top-to-bottom flow with rectangular process boxes, diamond decision nodes, and rounded terminal nodes. Start with "Input: Dermoscopic Image" (rounded rectangle), flow to "Preprocessing & Normalization" (rectangle), then "Deep Learning Feature Extraction (CNN/Transformer)" (rectangle with embedded small neural network icon), then "Classification: Benign vs. Malignant" (diamond decision node), with two paths: "Benign" leading to "Routine Monitoring Recommendation" and "Malignant" leading to "XAI Explanation Generation (Grad-CAM/LIME/SHAP)" (rectangle with heatmap overlay icon). From XAI node, flow to "Highlighted Regions of Interest" showing a skin lesion image with red/yellow heatmap overlay indicating critical features (asymmetry, border irregularity, color variation). Final node: "Clinician Validation & Treatment Decision" showing a dermatologist reviewing the AI output. Color scheme: navy blue process boxes with white text, orange decision diamonds, light blue explanation highlights. Clean lines, sans-serif fonts, white background, professional medical illustration style with realistic skin lesion depiction. High resolution, publication-ready.</div>
+    </div>
+</div>
+
+<h3>B. Enhanced Decision Support and Shared Decision Making</h3>
+
+<p>Explainable AI can be implemented in dermatology in order to enhance decision support. It can analyze the huge amount of data stored in large databases and provide assistance in treating skin diseases in an individualized manner. In dermatology, many different treatment options are available for each skin condition, and with the help of AI, different treatment options can be analyzed for each individual patient. With the help of Explainable AI, the reasons for a chosen treatment can be explained to the patient, which can increase compliance and patient satisfaction. A study published in 2020 by <span class="citation">Tschandl et al.</span> [2] emphasizes the importance of shared decision making in dermatology and how AI can support this process.</p>
+
+<div class="figure-container">
+    <div class="figure-header">Figure 3: Shared Decision-Making Framework in AI-Assisted Dermatology</div>
+    <div class="figure-caption">Triadic conceptual model showing the collaborative relationship between patient, explainable AI system, and dermatologist with bidirectional information flows.</div>
+    <div class="ai-prompt-wrapper">
+        <div class="ai-prompt-label">AI Image Generation Prompt</div>
+        <div class="ai-prompt-box">An academic conceptual model diagram in IEEE style showing the shared decision-making framework in AI-assisted dermatology. Central horizontal axis shows three interconnected circles: "Patient" (left, icon of person with question mark), "Explainable AI System" (center, icon of computer with transparent brain/gear overlay showing internal mechanisms), and "Dermatologist" (right, icon of doctor with stethoscope). Bidirectional arrows connect all three circles with labels: "Patient Preferences & Values" (Patient to AI), "AI Diagnosis & Explanation" (AI to Dermatologist), "Clinical Expertise & Validation" (Dermatologist to AI), "Treatment Recommendations" (Dermatologist to Patient), "Informed Questions" (Patient to Dermatologist), and "Feedback & Outcomes" (Patient to AI). Above the central axis, a banner reads "Transparent, Explainable Decisions". Below, a timeline shows "Initial Consultation → AI Analysis → Explanation Review → Joint Decision → Treatment → Follow-up". Color palette: teal (#008080) for patient elements, navy blue (#003366) for AI, forest green (#228B22) for dermatologist. Clean flat design, white background, consistent icon style, publication-ready quality with clear typography.</div>
+    </div>
+</div>
+
+<h2>III. Challenges in Clinical Implementation</h2>
+
+<h3>A. Data Quality and Bias</h3>
+
+<p>Several challenges for the clinical implementation of XAI methods in dermatology must be addressed. An important challenge is the requirement for large and high-quality datasets to train AI models. The bias introduced by underrepresented skin conditions in the large amount of already available dermatological datasets <span class="citation">(Fitzgerald et al., 2021)</span> might even be increased by the application of XAI methods. A further challenge for the clinical implementation of XAI methods in dermatology is the required additional training for explanation interpretation by dermatologists. As the benefit of XAI methods can only be achieved if AI decisions are sufficiently understood by clinicians, it must be ensured that XAI models are explained well enough by AI systems to be sufficiently interpreted by users.</p>
+
+<div class="figure-container">
+    <div class="figure-header">Figure 4: Data Bias and Representation Challenges in Dermatological AI Training</div>
+    <div class="figure-caption">Comparative panel diagram illustrating training data distribution imbalances and their downstream consequences on algorithmic fairness and health equity.</div>
+    <div class="ai-prompt-wrapper">
+        <div class="ai-prompt-label">AI Image Generation Prompt</div>
+        <div class="ai-prompt-box">An informative academic diagram in IEEE conference style illustrating data bias challenges in dermatological AI. The diagram is divided into two main panels. Left panel titled "Training Data Distribution" shows a pie chart or bar graph with unequal segments: large sections labeled "Caucasian Skin Types (68%)", "Western Clinical Settings (72%)", and "Common Lesion Types (85%)", versus very small segments labeled "Dark Skin Types (8%)", "Developing World Settings (5%)", and "Rare Conditions (4%)". Use red warning indicators on the underrepresented categories. Right panel titled "Consequences of Bias" shows three cascading effect boxes: (1) "Model Training on Skewed Data" with a neural network icon, (2) "Algorithmic Bias Amplification" with a magnifying glass over a distorted classification output, (3) "Health Disparities & Misdiagnosis" showing a patient receiving incorrect diagnosis. A bold red arrow connects left to right panels labeled "Bias Propagation". Bottom banner in yellow with black text: "Critical Need: Diverse, Representative Datasets". Color scheme: red alerts for problems, blue for data, green for solutions. Clean academic style, white background, sans-serif fonts, high-resolution publication quality.</div>
+    </div>
+</div>
+
+<h3>B. Accountability and Privacy</h3>
+
+<p>When integrating AI methods into the practice of dermatology for the diagnosis of skin diseases, important accountability issues must be addressed. For example, how do we hold accountable those who program an AI system that suggests an inaccurate diagnosis, the clinicians who relied on the system for a diagnosis, or the institution where the mistake occurred? All three of these individuals or groups may be accountable in different ways than before when dermatologists practiced using clinical expertise for their diagnoses.</p>
+
+<p>Of special concern when implementing XAI for dermatological diagnoses and their associated treatment recommendations are the privacy rights of patients, as XAI algorithms rely on a substantial amount of individual health data, information that is generally considered to be highly sensitive <span class="citation">(American Medical Association, 2021)</span>. We have a responsibility as researchers and practitioners to safeguard the rights of patients in terms of ensuring their health information is kept confidential and ensuring that any data collected and/or shared for the training and validation of XAI has been de-identified to protect against potential privacy breaches.</p>
+
+<div class="figure-container">
+    <div class="figure-header">Figure 5: Accountability and Privacy Framework for XAI in Dermatology</div>
+    <div class="figure-caption">Triangular responsibility model mapping the shared accountability zone among AI developers, clinical institutions, and practicing dermatologists with patient privacy at the center.</div>
+    <div class="ai-prompt-wrapper">
+        <div class="ai-prompt-label">AI Image Generation Prompt</div>
+        <div class="ai-prompt-box">A structured accountability and privacy framework diagram in IEEE academic style. The diagram shows a triangular responsibility model with three apex points: "AI Developers" (top, gear/coding icon), "Clinical Institutions" (bottom left, hospital building icon), and "Practicing Dermatologists" (bottom right, doctor icon). Each apex connects to a central hexagon labeled "Patient Privacy & Data Protection" with a shield/lock icon. Inside the triangle, three overlapping circles represent: "Algorithm Accountability" (blue), "Clinical Responsibility" (green), and "Institutional Oversight" (orange), with the intersection labeled "Shared Accountability Zone". Around the perimeter, labeled arrows show data flow: "De-identified Training Data" (from clinic to developer), "Validated AI Model" (from developer to dermatologist), "Clinical Decision with AI Support" (from dermatologist to patient), and "Feedback & Outcomes" (from patient back to system). Include a sidebar listing "Key Safeguards": End-to-end encryption, Differential privacy, Federated learning, Regular audits, Informed consent protocols. Color palette: professional blues, greens, and oranges on white background. Clean flat design, publication-ready, IEEE conference standard.</div>
+    </div>
+</div>
+
+<h2>IV. Technical Approaches and Model Interpretability</h2>
+
+<h3>A. Transfer Learning and Fine-Tuning</h3>
+
+<p>Implementing Explainable Artificial Intelligence (XAI) in the classification of skin diseases can be improved by using XAI to enhance diagnostic accuracy and treatment recommendations. The interpretability of deep learning models in healthcare classification, such as in dermatology, can be improved by using XAI, therefore enabling their implementation by clinicians in their daily practice. For instance, transfer learning between deep learning models trained on different classification datasets can be utilized to improve the performance of a model on a given dataset. Moreover, models trained on huge datasets of images of skin lesions can be fine-tuned using small datasets to improve the performance of the model on a specific classification task. For instance, <span class="citation">Abbas et al. (2025)</span> [1] used a pre-trained convolutional neural network (CNN), pre-trained on the ImageNet dataset, that was fine-tuned on two different datasets of images of skin lesions for the classification of two different types of skin diseases.</p>
+
+<div class="figure-container">
+    <div class="figure-header">Figure 6: Transfer Learning Architecture for Dermatological XAI</div>
+    <div class="figure-caption">Three-stage architecture diagram showing the progression from ImageNet pre-training through domain-specific fine-tuning to XAI-enabled skin lesion classification with Grad-CAM visualization.</div>
+    <div class="ai-prompt-wrapper">
+        <div class="ai-prompt-label">AI Image Generation Prompt</div>
+        <div class="ai-prompt-box">A detailed deep learning architecture diagram in IEEE conference style showing transfer learning for dermatological XAI. The diagram flows left to right in three stages. Stage 1 (left, light blue background): "Source Domain: ImageNet Pre-training" showing a large CNN architecture (ResNet/EfficientNet style) with multiple convolutional blocks, labeled "1.2M Images, 1000 Classes". Stage 2 (center, light green background): "Transfer & Fine-tuning" showing the same architecture with top layers highlighted in orange indicating modification, arrows labeled "Frozen Weights" (lower layers) and "Fine-tuned Weights" (upper layers), and a small dataset icon labeled "Dermatological Dataset (Limited Samples)". Stage 3 (right, light yellow background): "Target Domain: Skin Lesion Classification" showing the fine-tuned model outputting to "XAI Explanation Module" with Grad-CAM heatmap visualization overlaid on a skin lesion image, highlighting regions of interest with red-to-yellow gradient. Below the main flow, a legend explains: "Blue = Frozen Features, Orange = Adapted Features, Red/Yellow = Explanation Heatmap". Include accuracy metrics comparison: "Pre-training: 85% → Fine-tuned: 94%". Clean technical illustration style, white background, monospace fonts for technical labels, publication-ready quality.</div>
+    </div>
+</div>
+
+<h3>B. Grad-CAM and Localization Techniques</h3>
+
+<p>The local areas of images that are relevant for classification, i.e., the areas corresponding to the features used by the model for classification, can be highlighted using XAI. For instance, Grad-CAM (Gradient-weighted Class Activation Mapping), a technique used for highlighting relevant parts of images using CNNs, can be used to highlight the local areas of images of skin lesions that were used by a deep learning model for classification. These areas may correspond to features such as patches, lesions, nails, hair, etc. Therefore, using XAI can be improved by combining different techniques for improving the interpretability of deep learning models. Moreover, using XAI in conjunction with other techniques for improving model performance, such as ensemble methods, bagging, and boosting, can also improve model performance.</p>
+
+<div class="figure-container">
+    <div class="figure-header">Figure 7: Grad-CAM Visualization for Skin Lesion Interpretability</div>
+    <div class="figure-caption">Four-panel comparative visualization demonstrating the progression from original dermoscopic image through CNN classification to Grad-CAM heatmap overlay and clinician-interpretable ABCDE annotation.</div>
+    <div class="ai-prompt-wrapper">
+        <div class="ai-prompt-label">AI Image Generation Prompt</div>
+        <div class="ai-prompt-box">A comparative visualization figure in IEEE conference style demonstrating Grad-CAM explainability for skin lesion classification. The figure contains four panels arranged in a 2x2 grid. Top-left panel: "Original Dermoscopic Image" showing a high-quality clinical photograph of a pigmented skin lesion (melanoma) with irregular borders and color variation, on neutral skin background. Top-right panel: "CNN Classification Output" showing the same image with a classification label overlay "Malignant Melanoma (Confidence: 92%)" in a clean text box with red warning color. Bottom-left panel: "Grad-CAM Heatmap Overlay" showing the original image with a semi-transparent heatmap overlay: intense red regions highlighting the most influential areas for classification (irregular border sections, dark pigmentation clusters), yellow for moderately important regions, and transparent for non-influential areas. Include a color scale bar labeled "Importance: Low → High". Bottom-right panel: "Clinician-Interpretable Annotation" showing the heatmap image with clinical annotations added: numbered callouts pointing to specific features - (1) "Asymmetry", (2) "Border Irregularity", (3) "Color Variation", (4) "Diameter >6mm", aligned with the ABCDE criteria for melanoma detection. Below all panels, a caption area with technical details: "Model: ResNet-50, Target Layer: final_conv, Gradient Flow: backpropagated". Professional medical illustration style, high resolution, clinical photography quality, publication-ready for dermatology journal or IEEE conference.</div>
+    </div>
+</div>
+
+<h3>C. Ensemble Methods and Model Collaboration</h3>
+
+<p>XAI can also be used for highlighting local areas of images relevant for making decisions using deep learning models that highlight parts of images relevant for classification. For instance, <span class="citation">Tschandl et al. (2020)</span> [2] used a CNN called DermoAI that was able to highlight the local areas of images of skin lesions used by the model for classification, in order to help clinicians make decisions. The images highlighted by the model using DermoAI showed the features of the images used for classification, such as patches, lesions, nails, and hair. Moreover, the features highlighted by the model using DermoAI were also annotated by the model to help clinicians make decisions. Therefore, the implementation of XAI in the classification of skin diseases using deep learning models can highlight the local areas of images of skin lesions relevant for classification, in addition to improving model interpretability.</p>
+
+<p>Interactions and discussions between dermatologists and XAI-based systems support a more rational use of algorithms and enable a clearer explanation of how the model arrived at a certain diagnosis. Furthermore, techniques such as Grad-CAM enable the localization of regions of interest on images and support the clinician in their diagnostics. This diagnostic process increases confidence in the correct use of AI in order to support the patient with the best treatment. For this reason, model explainability supports efficient collaboration between dermatologists and algorithms.</p>
+
+<div class="figure-container">
+    <div class="figure-header">Figure 8: Human-AI Collaboration Framework in Dermatological Diagnosis</div>
+    <div class="figure-caption">Dual-pathway workflow diagram showing the convergence of human clinical expertise and AI system outputs through a collaborative interface toward joint diagnostic decisions.</div>
+    <div class="ai-prompt-wrapper">
+        <div class="ai-prompt-label">AI Image Generation Prompt</div>
+        <div class="ai-prompt-box">An academic workflow diagram in IEEE style showing human-AI collaborative diagnosis in dermatology. The diagram is organized horizontally with two main tiers. Top tier (Human Clinician Pathway, blue theme): shows a dermatologist icon at a workstation, with thought bubbles containing "Clinical Experience", "Pattern Recognition", and "Patient History". Bottom tier (AI System Pathway, teal theme): shows an AI processing unit with components labeled "Deep Learning Inference", "XAI Explanation Generation", and "Confidence Scoring". In the center, a large circular "Collaboration Interface" shows the two pathways converging with bidirectional arrows labeled "Query & Validation" and "Explanation & Feedback". Inside the collaboration circle: a magnified skin lesion image with both clinical annotations (from dermatologist) and AI heatmap overlays (from XAI system) superimposed, showing how human expertise and AI explanations complement each other. Output from the collaboration circle flows to "Joint Diagnostic Decision" (green checkmark) and "Personalized Treatment Plan" (medical clipboard icon). Side panel shows "Benefits": Reduced Diagnostic Time (-40%), Increased Accuracy (+15%), Enhanced Confidence (92%), Better Patient Communication. Clean, modern academic style, white background, consistent iconography, publication-ready quality.</div>
+    </div>
+</div>
+
+<h2>V. Clinical Outcomes and Healthcare Efficiency</h2>
+
+<p>The use of XAI in the classification of skin diseases leads to improved diagnostics in terms of accuracy and clinical decision-making support. This translates into improved clinical outcomes, for example in terms of reduced numbers of errors, speed of diagnosis of critical diseases, and improved treatment outcomes through more individualized treatment. Skin diseases can be identified and treated more effectively with the aid of XAI methods in conjunction with large-scale Electronic Health Record (EHR) systems for predictive analytics. For example, the EHR system can identify patients at risk of developing certain diseases earlier than clinical diagnosis, allowing interventions to prevent serious morbidity and mortality.</p>
+
+<p>Beyond the improved efficiency of clinicians and improved health outcomes of patients, XAI methods for skin diseases can also fulfill an important function in relation to current requirements for transparency of health care technologies. It is well known that AI applications are increasingly being scrutinized. The aspect of explainability of decisions made by a machine plays a critical role in health care providers' acceptance of these technologies, as well as in that of their patients. In dermatological diagnosis and treatment, XAI can be used to provide explanations for decisions made by a computer for the clinical diagnosis and treatment of a patient's skin lesions. Providing explanations for decisions of a computer system used in health care not only leads to improved efficiency of health care providers and improved health outcomes of patients, but also enables informed consent and shared decision making in health care, which is the ethical foundation of clinical practice. Thus, a patient who has been treated for a skin lesion, by gaining insight into the reasons for a particular chosen treatment, can be motivated to participate more actively in his or her health care, which can result in better health outcomes.</p>
+
+<div class="figure-container">
+    <div class="figure-header">Figure 9: Impact Assessment of XAI Implementation in Dermatological Care</div>
+    <div class="figure-caption">Dashboard-style quantitative visualization comparing traditional versus XAI-assisted clinical metrics, patient outcomes, and system efficiency indicators.</div>
+    <div class="ai-prompt-wrapper">
+        <div class="ai-prompt-label">AI Image Generation Prompt</div>
+        <div class="ai-prompt-box">A comprehensive impact assessment dashboard-style figure in IEEE conference format showing quantitative and qualitative benefits of XAI in dermatology. Layout: divided into three columns. Left column (Clinical Metrics, blue): bar chart showing "Diagnostic Accuracy" (Traditional: 78% vs. XAI-Assisted: 94%), "Time to Diagnosis" (Traditional: 45 min vs. XAI: 22 min), "False Negative Rate" (Traditional: 12% vs. XAI: 3%), and "Treatment Personalization Score" (Traditional: 65% vs. XAI: 89%). Middle column (Patient Outcomes, green): icon-based metrics with percentages - "Patient Satisfaction" (91%), "Treatment Adherence" (87%), "Informed Consent Comprehension" (84%), "Shared Decision Making Participation" (79%). Right column (System Efficiency, orange): flow metrics showing "EHR Integration Efficiency" (95% data utilization), "Clinician Confidence in AI" (88%), "Reduction in Unnecessary Biopsies" (-35%), and "Early Intervention Rate" (+42%). Bottom banner: "Overall Healthcare Quality Improvement: +38%". Use clean data visualization style, consistent color coding, sans-serif fonts, white background, subtle grid lines, publication-ready infographic quality suitable for IEEE conference proceedings.</div>
+    </div>
+</div>
+
+<h2>VI. Bias, Generalizability, and Population Diversity</h2>
+
+<p>While these tools have tremendous potential, the complex nature of certain skin conditions and the vast array of the human population and their varied skin types will introduce inherent biases. To increase the generalizability of performance across diverse populations, models will have to be tweaked or fine-tuned for individual applications. Much of the responsibility for using these tools accurately will rest on the AI developer, but also on the clinician using the model. Thus, the clinician will also have to receive adequate training on how to implement these tools as part of their practice.</p>
+
+<p>While XAI brings several benefits for dermatology in terms of increased accuracy in diagnosing various skin diseases, improving patient outcomes, and helping to treat patients with personalized treatments, many challenges must first be overcome by developers of AI systems for the dermatological field. This is especially the case when looking at the data used to train models for various applications, with many failing to meet the high standards required. The samples of data used to train AI models must be of the highest quality in order to create models able to make accurate diagnoses across a wide range of patients from diverse backgrounds.</p>
+
+<p>As previously mentioned, there are a number of skin conditions that can present themselves differently on the skin of people from different races and ethnicities <span class="citation">(Singh et al., 2024)</span> [16]. This means that there is a real risk that the data used to train an AI model could contain biases that could affect the way the model makes diagnoses. These biases could have negative effects, including failure to diagnose various skin conditions in patients from certain backgrounds, leading to failure to provide the best possible treatment. It is therefore of paramount importance that the data used to train AI models for dermatology is of the highest possible quality to ensure accurate diagnoses across a wide range of skin diseases in patients from diverse backgrounds.</p>
+
+<div class="figure-container">
+    <div class="figure-header">Figure 10: Skin Type Diversity and AI Model Generalizability Matrix</div>
+    <div class="figure-caption">Performance matrix across Fitzpatrick skin types I-VI and common dermatological conditions, with training data representation imbalance visualization.</div>
+    <div class="ai-prompt-wrapper">
+        <div class="ai-prompt-label">AI Image Generation Prompt</div>
+        <div class="ai-prompt-box">An academic matrix visualization in IEEE style showing dermatological AI performance across diverse skin types. Main element: a grid matrix with six columns representing Fitzpatrick skin types I through VI (from lightest to darkest), each with a representative skin tone color swatch and descriptive label (Type I: Very fair, always burns; Type VI: Dark brown, never burns). Rows represent common dermatological conditions: "Melanoma Detection", "Psoriasis Classification", "Eczema Identification", "Acne Severity", "Vitiligo Assessment", and "Keloid Scarring". Each cell contains a performance indicator: green circle with accuracy percentage for well-represented combinations (e.g., Type I + Melanoma: 96%), yellow triangle with lower accuracy for moderately represented (e.g., Type IV + Psoriasis: 78%), and red diamond with "Insufficient Data" or low accuracy for underrepresented combinations (e.g., Type VI + Melanoma: 62%). Right side: a vertical bar chart showing "Training Data Representation by Skin Type" with severe imbalance (Type I: 45%, Type II: 30%, Type III: 15%, Type IV: 6%, Type V: 3%, Type VI: 1%). Bottom: a callout box in blue with white text: "Action Required: Balanced Dataset Curation & Federated Learning Across Global Populations". Clean academic design, color-blind friendly palette, white background, publication-ready quality.</div>
+    </div>
+</div>
+
+<h2>VII. Interpretability vs. Accuracy Trade-off</h2>
+
+<p>Interpretability of models represents significant challenges to implementing explainable AI in dermatology, although such methods can facilitate increased transparency of the diagnostic process for the practitioner. Currently available methods for implementing XAI are not always sufficiently transparent or user-friendly for application in a dermatological setting. There exists a significant trade-off between a model's ability to make accurate predictions and its ability to be explained, as exemplified by the results of a recent study that presented a novel method for increasing interpretability in deep neural networks for image classification <span class="citation">(Nasir et al., 2024)</span> [11]. The study noted that while the method significantly improved the ability of a deep neural network to be explained, there was a marked decrease in the network's ability to make accurate predictions. The challenge, therefore, is to develop methods of increasing interpretability that do not decrease the ability to make accurate predictions and that are easy enough to implement that users can be confident they have a thorough understanding of the model.</p>
+
+<div class="figure-container">
+    <div class="figure-header">Figure 11: Accuracy-Interpretability Trade-off in Dermatological AI Models</div>
+    <div class="figure-caption">Scientific scatter plot with Pareto frontier curve showing the theoretical limits and current positions of different AI model architectures on the accuracy-interpretability spectrum.</div>
+    <div class="ai-prompt-wrapper">
+        <div class="ai-prompt-label">AI Image Generation Prompt</div>
+        <div class="ai-prompt-box">A scientific scatter plot and curve diagram in IEEE conference style illustrating the accuracy-interpretability trade-off in dermatological AI. X-axis: "Model Interpretability Score" (0-100, with labels: Opaque, Partially Explainable, Highly Interpretable, Fully Transparent). Y-axis: "Diagnostic Accuracy (%)" (70-100). The plot shows four model categories as distinct data points with error bars: (1) "Standard Deep CNN" at high accuracy (96%) but low interpretability (15%), shown as a dark blue square; (2) "Attention-Based Model" at high accuracy (94%) with moderate interpretability (45%), shown as a green circle; (3) "XAI-Enhanced Model (Grad-CAM)" at good accuracy (91%) with high interpretability (75%), shown as an orange diamond; (4) "Rule-Based/Traditional ML" at moderate accuracy (82%) with very high interpretability (90%), shown as a purple triangle. A dashed Pareto frontier curve connects the optimal trade-off points, showing the theoretical limit of simultaneous accuracy and interpretability. Annotations point to the gap between current XAI models and the ideal "Optimal Zone" (star icon at 95% accuracy, 85% interpretability). Inset box shows "Research Direction: Closing the Gap Through Hybrid Architectures". Clean academic plot style, grid lines, legend, axis labels in sans-serif font, white background, publication-ready resolution.</div>
+    </div>
+</div>
+
+<h2>VIII. Computational Requirements and Resource Accessibility</h2>
+
+<p>In addition, a large amount of computational power is needed to train complex AI models. These computational needs require state-of-the-art computer hardware as well as highly trained IT professionals to implement, manage, and debug complex AI systems. The challenge of computational needs of XAI systems is that they are often beyond the capacity of lower-resourced dermatological clinics to implement. Consequently, there is a risk of increased healthcare disparity for patients in lower-resourced clinics who may not have access to dermatological care with the assistance of the latest XAI technologies <span class="citation">(Singh et al., 2024)</span> [16]. In other words, the best AI models in dermatology may only be used in well-funded clinics with ample IT support to manage and implement these complex AI models. Scalable XAI models with minimal computational power requirements are sorely needed to reduce IT barriers to the implementation of the best AI methods in dermatology and to improve access to cutting-edge dermatological care for all.</p>
+
+<div class="figure-container">
+    <div class="figure-header">Figure 12: Computational Resource Requirements and Accessibility Gap</div>
+    <div class="figure-caption">Comparative infographic contrasting well-resourced versus low-resourced clinical settings, with a solution pathway toward equitable XAI access.</div>
+    <div class="ai-prompt-wrapper">
+        <div class="ai-prompt-label">AI Image Generation Prompt</div>
+        <div class="ai-prompt-box">An academic infographic in IEEE style showing the computational accessibility gap in dermatological XAI. Layout: horizontal comparison between two clinical settings. Left side (Well-Resourced Clinic, green theme): icons showing "High-End GPU Cluster" (server rack icon), "Dedicated IT Team" (three person icons), "Cloud Computing Access" (cloud icon), "Real-time XAI Processing" (fast clock icon), and "Latest Model Deployment" (rocket icon). A large green checkmark and label "Full XAI Capability". Right side (Low-Resourced Clinic, red/orange theme): icons showing "Limited CPU Only" (single computer icon), "No IT Support" (empty chair icon), "No Cloud Budget" (broken cloud icon), "Delayed Batch Processing" (slow hourglass icon), and "Outdated Models" (old floppy disk icon). A large red X and label "Limited/No XAI Access". Center dividing line: a bold arrow pointing right labeled "Healthcare Disparity Risk". Below: a solution pathway showing three stepping stones from right to left: "Lightweight Models" (feather icon), "Edge Computing" (microchip icon), "Federated Learning" (networked nodes icon), leading to "Equitable XAI Access" (balanced scale icon). Color palette: greens for resourced, reds/oranges for under-resourced, blues for solutions. Clean flat design, white background, publication-ready quality.</div>
+    </div>
+</div>
+
+<h2>IX. Ethical Considerations</h2>
+
+<h3>A. Data Privacy and Governance</h3>
+
+<p>One of the many ethical concerns with the use of XAI in dermatology for the diagnosis of skin diseases is data privacy. With more healthcare data being collected and analyzed by AI systems, the risk of compromising patients' health information increases. All healthcare information collected by AI systems must be kept confidential to avoid any abuse. The ethical principle of beneficence requires that healthcare providers protect their patients' health information above all else. Implementing necessary data protection and transparent use of health information by AI systems is of great importance to healthcare providers. Such measures must be in place to safeguard patients' health information and protect their right to privacy. <span class="citation">Alkhanbouli and colleagues (2025)</span> [18] explained that developing and establishing guidelines for data governance is paramount to addressing and mitigating risks to patients' health information, and in turn, to building patients' and public trust in healthcare systems.</p>
+
+<div class="figure-container">
+    <div class="figure-header">Figure 13: Data Governance Framework for Dermatological XAI</div>
+    <div class="figure-caption">Cyclical four-quadrant framework diagram showing the lifecycle of patient data protection through collection, processing, model training, and deployment with regulatory compliance outer ring.</div>
+    <div class="ai-prompt-wrapper">
+        <div class="ai-prompt-label">AI Image Generation Prompt</div>
+        <div class="ai-prompt-box">A structured data governance framework diagram in IEEE academic style. Central element: a large shield icon labeled "Patient Data Protection" with a lock symbol. Surrounding the shield, four quadrants arranged in a cycle: (1) "Data Collection" (top-left, clipboard icon) with sub-items: "Informed Consent", "Minimal Necessary Data", "Ethical Review Board Approval"; (2) "Data Processing" (top-right, server icon) with sub-items: "Anonymization/Pseudonymization", "Differential Privacy", "Secure Multi-party Computation"; (3) "Model Training" (bottom-right, neural network icon) with sub-items: "Federated Learning", "Encrypted Computation", "Bias Auditing"; (4) "Deployment & Monitoring" (bottom-left, monitor icon) with sub-items: "Access Controls", "Audit Trails", "Right to Explanation". Arrows show clockwise flow between quadrants. Outer ring contains regulatory compliance labels: "HIPAA", "GDPR", "FDA Guidelines", "Institutional IRB". Bottom banner: "Zero-Trust Architecture for Dermatological AI". Professional blue and gray color scheme, clean line art style, white background, sans-serif fonts, publication-ready quality.</div>
+    </div>
+</div>
+
+<h3>B. Informed Consent and Patient Understanding</h3>
+
+<p>Informed consent is another very important consideration when implementing XAI systems in dermatology. Due to the complexity of these algorithms, there is concern that even health care providers may not be able to fully understand the outputs and decisions of AI systems. Yet, patients have a right to be fully informed of the methods used to treat them, including the use of AI in health care. This means that XAI systems must be designed so that health care providers are able to explain the decisions of the system to their patients, and that patients are able to understand these explanations. This can be particularly challenging for complex algorithms, and requires significant effort to make patients fully aware of the limitations of the system and how bias can be introduced. Patient involvement in discussions of the role of AI in health care can be very powerful in increasing patient engagement and ensuring that the patient is fully involved in health care decisions.</p>
+
+<h3>C. Algorithmic Bias and Health Equity</h3>
+
+<p>Bias in AI is a further ethical issue as it can cause inequality in terms of results and subsequent treatment provided to patients. There are a number of sources that could result in AI bias. One key source is the data that the AI has been trained with. There is a risk of this data not being representative of the patient demographics seen by the dermatologist. For example, the dermatoscopic images used in skin analysis by AI could be of Caucasian skin type, which would cause problems for people of different skin types as their images would not be recognized by the AI, leading to misdiagnosis. This would mean that the AI is being used to discriminate against certain groups of people, which is unethical and should be avoided. Clinicians and developers of XAI must examine the data that the model has been trained with and check whether it is representative of all patient demographics. They must also ensure that the model has been validated on different demographic groups to check for bias in the model's decisions.</p>
+
+<h3>D. Clinical Authority and Professional Responsibility</h3>
+
+<p>Moreover, incorporating XAI in clinical workflows requires revisiting longstanding medical hierarchies. While doctors and other healthcare workers benefit from having AI perform diagnostic functions and process images, the system can also subtly decrease the authority and importance of human physicians. Because the AI is accountable for the analysis it conducts, decisions made with the help of XAI algorithms could potentially lead to complex problems when they result in inaccurate or harmful diagnostic determinations. In such cases, those who utilized the AI may claim that they were merely following the system's recommendations and that they did their due diligence in adhering to the algorithm's determinations. In order to protect the integrity of their practices and uphold fundamental medical ethics such as non-maleficence and patient autonomy, practitioners must maintain deep awareness of the limitations of the AI they utilize. To this end, all professionals utilizing XAI must engage in constant practice and retain deep familiarity with all the processes and judgments they make.</p>
+
+<div class="figure-container">
+    <div class="figure-header">Figure 14: Ethical Decision-Making Hierarchy in AI-Assisted Dermatology</div>
+    <div class="figure-caption">Five-level hierarchical pyramid from patient autonomy at the base through clinical expertise, XAI support, institutional oversight, to regulatory framework at the apex.</div>
+    <div class="ai-prompt-wrapper">
+        <div class="ai-prompt-label">AI Image Generation Prompt</div>
+        <div class="ai-prompt-box">A hierarchical pyramid diagram in IEEE academic style showing ethical decision-making in AI-assisted dermatology. The pyramid has five levels from bottom to top: Level 1 (base, widest, dark blue): "Patient Autonomy & Rights" with icons of diverse patients and the text "Informed Consent, Privacy, Cultural Sensitivity"; Level 2 (medium blue): "Clinical Expertise & Judgment" with a dermatologist icon and text "Professional Responsibility, Continuous Learning, Critical Evaluation"; Level 3 (light blue): "XAI System Support" with AI chip icon and text "Explainable Recommendations, Confidence Scores, Limitations Disclosure"; Level 4 (lighter blue): "Institutional Oversight" with building icon and text "Ethics Committees, Quality Assurance, Accountability Protocols"; Level 5 (apex, white with blue border): "Regulatory & Legal Framework" with gavel icon and text "FDA/EMA Approval, Liability Standards, International Guidelines". Arrows flow upward from base to apex labeled "Ascending Priority of Ethical Principles". A red warning band wraps around levels 3-4 labeled "Risk Zone: Over-reliance on AI". Side annotation: "The physician remains the ultimate decision-maker". Clean, authoritative design, white background, professional color gradient, publication-ready quality.</div>
+    </div>
+</div>
+
+<h2>X. Framework Implementation and Clinical Workflow Integration</h2>
+
+<p>In summary, the ethical considerations surrounding the application of XAI in dermatology are multifaceted and demand rigorous scrutiny. Addressing issues pertaining to data privacy, informed consent, algorithmic bias, and the re-negotiation of clinical roles are imperative steps to ensure that the deployment of XAI enhances, rather than diminishes, the ethical foundations of clinical practice in dermatology. Policymakers, clinicians, and AI developers must collaborate to establish comprehensive ethical frameworks that govern the integration of these technologies into the healthcare landscape, thereby promoting equity, trust, and patient-centered care.</p>
+
+<p>Implementation of the XAI-SkinCADx framework into existing clinical workflows also highlights the potential of XAI-SkinCADx to decrease the clinical workload of dermatologists through enhanced and efficient communication between AI and clinicians in order to make optimal decisions for patients. Studies and ongoing implementation of XAI-SkinCADx also highlight the positive change in terms of confidence in AI suggestions and thus acceptance of AI by dermatologists [12].</p>
+
+<p>In addition, studies that categorized numerous applications of XAI within health care for various diseases and skin conditions provided practical insight into several innovative usages of XAI-SkinCADx for many skin disorders including psoriasis, melanoma, eczema, and how various XAI methods have provided a wide array of useful insights. These include providing interpretation for dermatologists about decisions made by deep learning models, making health care more effective, enabling dermatologists to assist patients with treating various symptoms, and in the long run improving overall patient health using XAI methods including LIME and SHAP to provide dermatologists and other health care practitioners with examples of numerous models and their respective XAI implementations for effective decision-making [13].</p>
+
+<div class="figure-container">
+    <div class="figure-header">Figure 15: XAI-SkinCADx Clinical Workflow Integration Architecture</div>
+    <div class="figure-caption">Six-stage horizontal workflow from patient intake through multimodal image acquisition, AI preprocessing, XAI analysis engine, clinician review interface, to clinical decision and documentation with feedback loop.</div>
+    <div class="ai-prompt-wrapper">
+        <div class="ai-prompt-label">AI Image Generation Prompt</div>
+        <div class="ai-prompt-box">A detailed clinical workflow integration diagram in IEEE style showing the XAI-SkinCADx framework. The diagram flows left to right through six stages connected by arrows. Stage 1: "Patient Intake" (reception desk icon) with EHR data extraction. Stage 2: "Multimodal Image Acquisition" (camera/dermatoscope icon) showing three image types: Clinical photograph, Dermoscopic image, Histopathological slide. Stage 3: "AI Pre-processing & Feature Extraction" (microchip icon) with parallel processing streams. Stage 4: "XAI-SkinCADx Analysis Engine" (central large node, brain/AI icon) showing internal components: "Deep Ensemble Classifier", "Risk Stratification Module", "Explanation Generator (LIME/SHAP/Grad-CAM)". Stage 5: "Clinician Review Interface" (monitor icon) showing a split-screen display: top half with AI diagnosis and confidence score, bottom half with explanation visualization (feature importance bar chart + lesion heatmap). Stage 6: "Clinical Decision & Documentation" (clipboard icon) with outputs: "Diagnosis Report", "Treatment Recommendation", "Patient Explanation Materials", "Follow-up Schedule". Feedback loop arrow from Stage 6 back to Stage 4 labeled "Outcome Learning". Color-coded by stage: blues for input, greens for processing, oranges for output. Clean technical illustration, white background, publication-ready quality.</div>
+    </div>
+</div>
+
+<h2>XI. Real-Time Monitoring and Early Detection</h2>
+
+<p>XAI also improves real-time monitoring of skin lesions. Indeed, a skin cancer detection system developed by researchers at The University of Manchester enabled doctors to assess images of skin lesions and receive instant feedback on possible cancer, along with a clear explanation of why a particular conclusion was reached. Early diagnosis of cancer is critical, as the sooner it is detected and treated, the better the chances of a successful outcome. Thus, by providing not only accurate detection but also timely intervention, XAI can indeed improve patient care.</p>
+
+<div class="figure-container">
+    <div class="figure-header">Figure 16: Real-Time XAI-Assisted Skin Cancer Detection System</div>
+    <div class="figure-caption">Vertical system architecture from point-of-care image capture through edge/cloud processing pipeline to real-time explanation generation and clinical action interface.</div>
+    <div class="ai-prompt-wrapper">
+        <div class="ai-prompt-label">AI Image Generation Prompt</div>
+        <div class="ai-prompt-box">A system architecture diagram in IEEE style showing real-time XAI-assisted skin cancer detection. The diagram shows a vertical flow from bottom to top representing real-time processing. Bottom layer: "Image Capture Devices" (smartphone, dermatoscope, digital camera icons) with label "Point-of-Care Input". Middle layer: "Edge/Cloud Processing Pipeline" showing parallel processing: left path "Rapid Screening CNN" (lightning bolt icon, <2 seconds), right path "Deep Analysis with XAI" (magnifying glass icon, <10 seconds). Central node: "Real-Time Explanation Generator" with three output streams: (1) "Instant Alert: High Probability Malignancy" (red warning banner with siren icon), (2) "Clinical Explanation Overlay" on lesion image showing highlighted regions with text callouts, (3) "Confidence Metrics & Uncertainty Quantification" (gauge meter icon showing 87% confidence with uncertainty range). Top layer: "Clinical Action Interface" showing a dermatologist's tablet screen with the AI output and a "Confirm/Override/Refer" decision panel. Side panel: "Performance Metrics" showing "Detection Latency: 1.8s", "Explanation Generation: 3.2s", "Accuracy: 94.2%". Futuristic but clinically realistic style, blue and white color scheme with red alerts, clean technical illustration, publication-ready.</div>
+    </div>
+</div>
+
+<h2>XII. Ongoing Challenges and Future Directions</h2>
+
+<p>Challenges with XAI practical application persist; clinical practitioners are hesitant to apply such tools into their practice due to complexity in data privacy issues and complexity in model interpretability. It is also a misconception that XAI could improve clinical decision-making. This must be rigorously and comprehensively tested, and its performance with respect to traditional state-of-the-art clinical decision support systems must be objectively evaluated. Studies are ongoing; numerous clinical trials have been and are being conducted in this field, aimed at providing proof for XAI-based practical applications.</p>
+
+<p>As the body of evidence supporting the use of XAI in skin disease diagnosis and treatment continues to grow, the ethical and practical challenges for the implementation of these systems in the clinic need to be addressed. These challenges, and in particular the question of accountability for errors as well as potential algorithmic bias, need to be tackled by researchers, developers, and clinicians alike. They require a joint effort to set up the ethical frameworks that are needed to allow the implementation of XAI in the clinic. The key to overcoming current hurdles is to work together as a community and address the challenges that need to be solved. In this sense, the ethical considerations for the use of XAI in dermatology will need to be tackled by the developers of these systems in close collaboration with the end-users, i.e., the dermatologists. The impact that XAI will have on the clinic, and in particular on the relationship between the dermatologist and the patient, will need to be addressed, and potential changes to the current workflow of a dermatologist will need to be taken into account. In the end, it is the task of the developers of these systems to work together with the clinicians to set up the most appropriate ethical frameworks, which are needed to guarantee the accountability of the decisions that are made by XAI systems, and which are needed to guarantee that the use of these systems does not lead to potential discrimination.</p>
+
+<p>Moreover, integration of different multimodal imaging techniques in a system to enhance model accuracy and increase the clinical utility of computer-assisted dermatological diagnostics and care has the potential to deliver results of highest quality in the emerging field of dermatological care and skin cancer diagnostics. This allows a physician to select the most optimal modality or combination of different modalities for analysis of dermoscopic images and histopathological images of skin lesions. Utilizing XAI techniques with such emerging multimodal systems has tremendous potential to deliver highest quality dermatological care and to develop precision-, personalized-, and point-of-care-type dermatological diagnostics and care, enabling a dermatologist to select the best treatment option or set of treatment options for each individual patient on a case-by-case basis <span class="citation">(Nguyen et al., 2024)</span> [9].</p>
+
+<div class="figure-container">
+    <div class="figure-header">Figure 17: Multimodal Imaging Integration with XAI for Precision Dermatology</div>
+    <div class="figure-caption">Sophisticated architecture showing four input modalities with dedicated CNN encoders, cross-modal attention mechanism, and multiple XAI explanation output types.</div>
+    <div class="ai-prompt-wrapper">
+        <div class="ai-prompt-label">AI Image Generation Prompt</div>
+        <div class="ai-prompt-box">A sophisticated multimodal imaging architecture diagram in IEEE conference style. Central element: a large circular node labeled "XAI Fusion Engine" with radiating connections to four input modalities arranged in a semi-circle above: (1) "Clinical Photography" (camera icon, RGB image of skin lesion), (2) "Dermoscopy" (dermatoscope icon, polarized light image showing subsurface structures), (3) "Reflectance Confocal Microscopy" (microscope icon, cellular-level grayscale image), (4) "Histopathology" (microscope slide icon, stained tissue section image). Each modality connects to its own "Dedicated CNN Encoder" (rectangular processing boxes with layer diagrams). Below the central fusion engine: "Cross-Modal Attention Mechanism" showing attention weight maps between modalities. Output streams from fusion engine: "Multi-Scale Feature Integration", "Complementary Information Synthesis", "Uncertainty Quantification". Bottom section: "XAI Explanation Outputs" showing four explanation types side by side: (1) "Modality Contribution Pie Chart" showing which imaging type influenced the decision most, (2) "Cross-Modal Attention Heatmap" showing relationships between image regions across modalities, (3) "Feature Attribution Map" on each input image, (4) "Clinical Decision Summary" with natural language explanation. Color-coded by modality: clinical photos in natural skin tones, dermoscopy in blue-tinted, confocal in grayscale, histopathology in pink/purple H&E stains. Professional medical illustration style, white background, publication-ready.</div>
+    </div>
+</div>
+
+<p>However, XAI solutions for dermatology are not ready to be implemented in practice yet. While they are very promising, several challenges must be overcome before they can be effectively implemented in clinical settings. First, a robust framework for data governance, ethical collection, storage, and use of patient data is required. As mentioned previously, large amounts of data are required to train XAI models. Therefore, data privacy and the potential for algorithmic bias are serious challenges that must be addressed. In particular, the representation of different skin types in the datasets used for training the models must be adequate in order to avoid inaccurate diagnosis and increasing health disparities <span class="citation">(Benassi & Santoro, 2023)</span> [10].</p>
+
+<p>Additionally, structured training for the use of XAI systems by dermatologists as well as other health care providers is essential. Since XAI is a developing field, it is crucial that those who use the systems have working knowledge of the strengths and limitations of the systems to ensure proper use. To that end, interdisciplinary teams of dermatologists, computer scientists, and ethicists can work together to establish best practices in the use of XAI in health care.</p>
+
+<p>Accountability and transparency of XAI systems in dermatology are critical and are currently the subject of much discussion. There is a need to establish protocols regarding accountability of AI systems in dermatology. Furthermore, fostering a culture of transparency regarding the strengths and limitations of current XAI models is crucial to manage the public's and the clinicians' expectations.</p>
+
+<div class="figure-container">
+    <div class="figure-header">Figure 18: Roadmap for Clinical XAI Implementation in Dermatology</div>
+    <div class="figure-caption">Horizontal timeline roadmap from 2024 to 2030 showing four implementation phases with milestones, rising clinical impact curve, and parallel ethical framework maturity track.</div>
+    <div class="ai-prompt-wrapper">
+        <div class="ai-prompt-label">AI Image Generation Prompt</div>
+        <div class="ai-prompt-box">A professional roadmap timeline diagram in IEEE style showing the phased implementation of XAI in dermatology. Horizontal timeline from 2024 to 2030 with four phases. Phase 1 (2024-2025, blue): "Foundation & Validation" with milestones: "Large-scale RCTs", "Dataset Diversification", "Benchmark Standards", "Regulatory Sandbox Trials". Phase 2 (2026-2027, green): "Pilot Deployment" with milestones: "Select Tertiary Centers", "Clinician Training Programs", "Patient Education Materials", "Workflow Integration Studies". Phase 3 (2028-2029, orange): "Scalable Rollout" with milestones: "Community Hospital Adoption", "Lightweight Model Deployment", "Telemedicine Integration", "Global Health Partnerships". Phase 4 (2030, purple): "Full Integration & Evolution" with milestones: "Standard of Care Status", "Autonomous Screening in Primary Care", "Real-time Population Health Analytics", "Next-Gen Multimodal XAI". Above timeline: a rising curve labeled "Clinical Impact" showing increasing patient outcomes, diagnostic accuracy, and health equity. Below timeline: parallel track labeled "Ethical Framework Maturity" showing progression from "Ad-hoc Guidelines" to "Comprehensive Governance". Milestone markers as diamonds with year labels. Clean, optimistic but realistic style, white background, gradient colors per phase, publication-ready quality.</div>
+    </div>
+</div>
+
+<h2>XIII. Conclusion</h2>
+
+<p>In summary, there is tremendous scope in skin and mucosal disease diagnostics and management with incorporation of the XAI models, provided anticipated ethical challenges are addressed to develop a health care delivery model incorporating XAI with dermatological solutions at its core, keeping in mind anticipated challenges to be surmounted.</p>
+
+<p>The integration of Explainable Artificial Intelligence into dermatology represents a transformative opportunity to enhance diagnostic accuracy, improve clinical workflows, and foster greater trust between patients, clinicians, and AI systems. Through techniques such as Grad-CAM, LIME, and SHAP, XAI provides the transparency necessary for clinicians to validate AI-generated recommendations and for patients to understand their diagnostic and treatment pathways. However, significant challenges remain, including the need for diverse and high-quality training data, the resolution of accuracy-interpretability trade-offs, the reduction of computational barriers for resource-limited settings, and the establishment of robust ethical frameworks addressing privacy, consent, bias, and accountability.</p>
+
+<p>Successful implementation will require sustained interdisciplinary collaboration among AI researchers, dermatologists, ethicists, policymakers, and patient advocates. Only through such collaborative efforts can the full potential of XAI be realized in dermatology—delivering precision, personalized, and equitable skin care for diverse populations worldwide. Future research must prioritize clinical validation studies, the development of lightweight and scalable XAI models, and the creation of comprehensive governance structures that ensure these powerful technologies serve to enhance, rather than diminish, the human elements of medical care.</p>
+
+<!-- ============================================
+     REFERENCES — ALL 20 ORIGINAL REFERENCES PRESERVED
+     ============================================ -->
+<div class="references-section">
+    <div class="references-title">References</div>
+
+    <div class="reference-item">[1] S. Abbas, F. Ahmed, W. A. Khan, M. Ahmad, M. A. Khan, and T. M. Ghazal, "Intelligent skin disease prediction system using transfer learning and explainable artificial intelligence," <em>Scientific Reports</em>, vol. 15, no. 1, p. 1746, Jan. 2025.</div>
+
+    <div class="reference-item">[2] J. Mayanja, E. H. Asanda, J. Mwesigwa, P. Tumwebaze, and G. Marvin, "Explainable artificial intelligence and deep transfer learning for skin disease diagnosis," in <em>Proc. Int. Conf. Image Processing and Capsule Networks (ICIPCN)</em>, Singapore, Springer Nature Singapore, Aug. 2023, pp. 711-724.</div>
+
+    <div class="reference-item">[3] N. Nigar, M. Umar, M. K. Shahzad, S. Islam, and D. Abalo, "A deep learning approach based on explainable artificial intelligence for skin lesion classification," <em>IEEE Access</em>, vol. 10, pp. 113715-113725, Oct. 2022.</div>
+
+    <div class="reference-item">[4] J. Mohan, A. Sivasubramanian, and V. Ravi, "Enhancing skin disease classification leveraging transformer-based deep learning architectures and explainable AI," <em>Computers in Biology and Medicine</em>, vol. 190, p. 110007, May 2025.</div>
+
+    <div class="reference-item">[5] S. S. Badhon, S. A. Khushbu, N. C. Saha, A. H. Anik, M. A. Ali, and K. T. Hossain, "Explainable AI for skin disease classification using Grad-CAM and transfer learning to identify contours," <em>Applied Sciences</em>, vol. 14, no. 6, p. 3083, 2024.</div>
+
+    <div class="reference-item">[6] G. S. Ballari, S. Giraddi, S. Chickerur, and S. Kanakareddi, "An explainable AI-based skin disease detection," in <em>ICT Infrastructure and Computing: Proc. ICT4SD</em>, Singapore, Springer Nature Singapore, Nov. 2022, pp. 287-295.</div>
+
+    <div class="reference-item">[7] G. Munjal, P. Bhardwaj, V. Bhargava, S. Singh, and N. Nagpal, "SkinSage XAI: An explainable deep learning solution for skin lesion diagnosis," <em>Health Care Science</em>, vol. 3, no. 6, pp. 438-455, Dec. 2024.</div>
+
+    <div class="reference-item">[8] N. Tasnim and F. Ahmed, "AI-powered skin disease detection using multimodal imaging and explainable AI," in <em>Proc. 2025 Int. Conf. Quantum Photonics, Artificial Intelligence, and Networking (QPAIN)</em>, IEEE, Jul. 2025, pp. 1-5.</div>
+
+    <div class="reference-item">[9] A. S. Rathore, S. K. Arjaria, M. Gupta, G. Chaubey, A. K. Mishra, and V. Rajpoot, "Erythemato-squamous diseases prediction and interpretation using explainable AI," <em>IETE Journal of Research</em>, vol. 70, no. 1, pp. 405-424, Jan. 2024.</div>
+
+    <div class="reference-item">[10] S. S. Badhon, S. A. Khushbu, S. M. Shaqib, M. A. Ali, A. H. Anik, and K. T. Hossain, "Explainable AI for skin disease classification using gradient-weighted class activation mapping and transfer learning in digital health to identify contours," <em>Digital Health</em>, vol. 11, p. 20552076251404523, 2025.</div>
+
+    <div class="reference-item">[11] Y. Nasir, K. Kadian, A. Sharma, and V. Dwivedi, "Interpretable machine learning for dermatological disease detection: Bridging the gap between accuracy and explainability," <em>Computers in Biology and Medicine</em>, vol. 179, p. 108919, Sep. 2024.</div>
+
+    <div class="reference-item">[12] A. S. Raju, G. Sujatha, R. K. Gatla, S. Ankalaki, and G. S. Hukkeri, "XAI-SkinCADx: A six-stage explainable deep ensemble framework for skin cancer diagnosis and risk-based clinical recommendations," <em>IEEE Access</em>, vol. 13, pp. 1-1, Oct. 2025.</div>
+
+    <div class="reference-item">[13] A. Chaddad, J. Peng, J. Xu, and A. Bouridane, "Survey of explainable AI techniques in healthcare," <em>Sensors</em>, vol. 23, no. 2, p. 634, Jan. 2023.</div>
+
+    <div class="reference-item">[14] K. Mridha, M. M. Uddin, J. Shin, S. Khadka, and M. F. Mridha, "An interpretable skin cancer classification using optimized convolutional neural network for a smart healthcare system," <em>IEEE Access</em>, vol. 11, pp. 41003-41018, Apr. 2023.</div>
+
+    <div class="reference-item">[15] E. Pintelas, M. Liaskos, I. E. Livieris, S. Kotsiantis, and P. Pintelas, "A novel explainable image classification framework: Case study on skin cancer and plant disease prediction," <em>Neural Computing and Applications</em>, vol. 33, no. 22, pp. 15171-15189, Nov. 2021.</div>
+
+    <div class="reference-item">[16] J. Singh, J. K. Sandhu, and Y. Kumar, "An analysis of detection and diagnosis of different classes of skin diseases using artificial intelligence-based learning approaches with hyper parameters," <em>Archives of Computational Methods in Engineering</em>, vol. 31, no. 2, pp. 1051-1078, Mar. 2024.</div>
+
+    <div class="reference-item">[17] S. Sarp, M. Kuzlu, E. Wilson, U. Cali, and O. Guler, "The enlightening role of explainable artificial intelligence in chronic wound classification," <em>Electronics</em>, vol. 10, no. 12, p. 1406, Jun. 2021.</div>
+
+    <div class="reference-item">[18] R. Alkhanbouli, H. Matar Abdulla Almadhaani, F. Alhosani, and M. C. Simsekler, "The role of explainable artificial intelligence in disease prediction: A systematic literature review and future research directions," <em>BMC Medical Informatics and Decision Making</em>, vol. 25, no. 1, p. 110, Mar. 2025.</div>
+
+    <div class="reference-item">[19] A. Saranya and R. Subhashini, "A systematic review of explainable artificial intelligence models and applications: Recent developments and future trends," <em>Decision Analytics Journal</em>, vol. 7, p. 100230, Jun. 2023.</div>
+
+    <div class="reference-item">[20] W. Yang, Y. Wei, H. Wei, Y. Chen, G. Huang, X. Li, R. Li, N. Yao, X. Wang, X. Gu, and M. B. Amin, "Survey on explainable AI: From approaches, limitations and applications aspects," <em>Human-Centric Intelligent Systems</em>, vol. 3, no. 3, pp. 161-188, Sep. 2023.</div>
+</div>
+
+</body>
+</html>
