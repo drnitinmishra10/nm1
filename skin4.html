@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Challenges in AI Skin Diagnosis — IEEE Conference Paper</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;600&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --mid: #444;
+    --light: #6b6b6b;
+    --rule: #bbb;
+    --rule-light: #ddd;
+    --accent: #1a3a6b;
+    --accent2: #c0392b;
+    --bg: #faf9f6;
+    --col-gap: 18px;
+    --body-font: 'EB Garamond', Georgia, serif;
+    --sans: 'Source Sans 3', sans-serif;
+    --mono: 'Source Code Pro', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  @media print {
+    body { background: white; }
+    .page-shell { box-shadow: none; margin: 0; }
+  }
+
+  body {
+    background: #e8e5df;
+    font-family: var(--body-font);
+    font-size: 9.8pt;
+    color: var(--ink);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Page Shell ── */
+  .page-shell {
+    max-width: 820px;
+    margin: 32px auto;
+    background: var(--bg);
+    box-shadow: 0 4px 40px rgba(0,0,0,0.22);
+    padding: 52px 54px 60px;
+  }
+
+  /* ── Conference Header ── */
+  .conf-header {
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 7.8pt;
+    font-weight: 600;
+    color: var(--light);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-top: 2.5px solid var(--accent);
+    border-bottom: 1px solid var(--rule-light);
+    padding: 7px 0;
+    margin-bottom: 22px;
+  }
+
+  /* ── Title Block ── */
+  .paper-title {
+    text-align: center;
+    font-family: var(--body-font);
+    font-size: 17pt;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1.25;
+    margin-bottom: 14px;
+    padding: 0 30px;
+  }
+
+  .authors-block {
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--mid);
+    margin-bottom: 4px;
+  }
+
+  .authors-block .author-names {
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+
+  .authors-block .affiliations {
+    font-style: italic;
+    font-size: 8.5pt;
+    color: var(--light);
+  }
+
+  /* ── Rule ── */
+  .section-rule {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 18px 0;
+  }
+
+  .heavy-rule {
+    border: none;
+    border-top: 2px solid var(--rule);
+    margin: 18px 0 16px;
+  }
+
+  /* ── Two-column layout ── */
+  .two-col {
+    column-count: 2;
+    column-gap: var(--col-gap);
+    column-rule: 1px solid var(--rule-light);
+  }
+
+  /* ── Abstract ── */
+  .abstract-block {
+    margin-bottom: 18px;
+  }
+
+  .abstract-label {
+    font-family: var(--sans);
+    font-size: 7.5pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .abstract-text {
+    font-style: italic;
+    font-size: 9pt;
+    line-height: 1.5;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .keywords-block {
+    margin-top: 8px;
+    font-size: 8.8pt;
+  }
+
+  .keywords-block strong {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  /* ── Section Headings ── */
+  h2.sec-heading {
+    font-family: var(--sans);
+    font-size: 9pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink);
+    margin: 16px 0 7px;
+    break-after: avoid;
+  }
+
+  h2.sec-heading .sec-num {
+    color: var(--accent);
+    margin-right: 4px;
+  }
+
+  h3.subsec-heading {
+    font-family: var(--sans);
+    font-size: 8.8pt;
+    font-style: italic;
+    font-weight: 600;
+    color: var(--mid);
+    margin: 12px 0 5px;
+    break-after: avoid;
+  }
+
+  h3.subsec-heading .subsec-num {
+    font-style: normal;
+    margin-right: 3px;
+  }
+
+  /* ── Body Text ── */
+  p {
+    text-align: justify;
+    hyphens: auto;
+    margin-bottom: 7px;
+    font-size: 9.5pt;
+  }
+
+  p + p {
+    text-indent: 1.2em;
+    margin-bottom: 7px;
+  }
+
+  /* No indent after headings or figure boxes */
+  h2.sec-heading + p,
+  h3.subsec-heading + p,
+  .fig-box + p,
+  .abstract-block + .two-col p:first-child {
+    text-indent: 0;
+  }
+
+  /* ── Citation superscripts ── */
+  cite {
+    font-style: normal;
+    vertical-align: super;
+    font-size: 7pt;
+    font-family: var(--sans);
+    color: var(--accent2);
+    font-weight: 600;
+    line-height: 0;
+  }
+
+  /* ── Figure Box ── */
+  .fig-box {
+    break-inside: avoid;
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--accent);
+    background: #f4f2ee;
+    margin: 14px 0;
+    padding: 12px 14px;
+    font-family: var(--sans);
+    font-size: 8pt;
+    line-height: 1.45;
+  }
+
+  .fig-box .fig-placeholder {
+    background: #e6e2da;
+    border: 1px dashed var(--rule);
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--light);
+    font-size: 8pt;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 9px;
+  }
+
+  .fig-box .fig-caption {
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 3px;
+  }
+
+  .fig-box .fig-body {
+    color: var(--mid);
+    margin-bottom: 6px;
+  }
+
+  .fig-box .ai-prompt-label {
+    font-size: 7pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent2);
+    margin-bottom: 2px;
+  }
+
+  .fig-box .ai-prompt {
+    font-family: var(--mono);
+    font-size: 7pt;
+    background: #ede9e0;
+    border-left: 2px solid var(--accent2);
+    padding: 6px 8px;
+    color: var(--mid);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  /* ── References ── */
+  .references-section {
+    column-count: 2;
+    column-gap: var(--col-gap);
+    column-rule: 1px solid var(--rule-light);
+    font-size: 7.8pt;
+    line-height: 1.45;
+  }
+
+  .references-section ol {
+    padding-left: 1.6em;
+    margin: 0;
+  }
+
+  .references-section li {
+    margin-bottom: 5px;
+    break-inside: avoid;
+    text-align: left;
+  }
+
+  .references-section li .ref-authors { color: var(--ink); }
+  .references-section li .ref-title { font-style: italic; color: var(--mid); }
+  .references-section li .ref-venue { color: var(--light); }
+
+  /* ── Full-width span across columns ── */
+  .full-width {
+    column-span: all;
+  }
+
+  /* ── Decorative ── */
+  .section-ornament {
+    display: inline-block;
+    width: 18px;
+    height: 2px;
+    background: var(--accent2);
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+
+  .footer-rule {
+    border: none;
+    border-top: 2.5px solid var(--accent);
+    margin: 32px 0 14px;
+  }
+
+  .paper-footer {
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 7.5pt;
+    color: var(--light);
+    letter-spacing: 0.06em;
+  }
+</style>
+</head>
+<body>
+<div class="page-shell">
+
+  <!-- Conference Banner -->
+  <div class="conf-header">IEEE International Conference on Medical Image Computing &amp; AI Diagnostics &nbsp;|&nbsp; 2024</div>
+
+  <!-- Title -->
+  <h1 class="paper-title">Data Challenges in AI-Based Skin Disease Diagnosis: Quality, Representation, and Ethical Implications</h1>
+
+  <!-- Authors -->
+  <div class="authors-block">
+    <div class="author-names">
+      Dr. Nitin Mishra
+    </div>
+    <div class="affiliations">
+      Professor, Department of Computer Science and Engineering, Parul University, Vadodara, India<br>
+      Corresponding Author: <a href="mailto:drnitinmishra10@gmail.com" style="color:var(--accent);text-decoration:none;">drnitinmishra10@gmail.com</a>
+    </div>
+  </div>
+
+  <hr class="heavy-rule">
+
+  <!-- Abstract + Keywords (single col) -->
+  <div class="abstract-block">
+    <div class="abstract-label">Abstract</div>
+    <p class="abstract-text">
+      The application of artificial intelligence (AI) in medical diagnostics, especially in skin disease detection, has attracted considerable research interest due to its potential to enhance diagnostic accuracy and streamline treatment pathways. Convolutional neural networks (CNNs) and other deep learning architectures have demonstrated promise for classifying a wide range of skin conditions from dermoscopic images. However, the effectiveness of these models is critically bounded by the quality, diversity, and ethical provenance of the datasets used for training and validation. This paper examines the principal data-centric challenges confronting AI-based dermatological diagnostics: image quality deficiencies, insufficient demographic representation—particularly regarding diverse skin tones and ethnic backgrounds—annotation inconsistencies, and the ethical concerns surrounding data collection, patient consent, and algorithmic fairness. The review synthesizes recent literature to propose pathways for developing more inclusive, rigorously annotated, and ethically governed datasets, including stratified sampling strategies, transfer learning, synthetic data generation using generative adversarial networks (GANs), and community-engaged data acquisition. Addressing these challenges is essential for the responsible integration of AI into equitable dermatological care worldwide.
+    </p>
+    <p class="keywords-block">
+      <strong>Keywords—</strong> artificial intelligence; skin disease detection; deep learning; convolutional neural networks; dermoscopy; dataset diversity; algorithmic bias; healthcare equity; ethical AI; generative adversarial networks.
+    </p>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- Two-column body -->
+  <div class="two-col">
+
+    <!-- I. Introduction -->
+    <h2 class="sec-heading"><span class="sec-num">I.</span> Introduction</h2>
+    <p>
+      The application of AI in medical diagnostics, especially in skin disease detection, has gained considerable interest and holds the potential to enhance the accuracy of diagnosis and treatment. Various studies have employed convolutional neural networks (CNNs)—a form of deep learning—to classify diverse skin conditions from dermoscopic images <cite>[1],[2]</cite>. These capabilities are increasingly leveraged in telemedicine and in automating healthcare workflows. However, AI models are only as good as the data used to train and validate them; accordingly, the focus must remain on data quality, demographic representation, and the ethical implications inherent in deploying such models in dermatological care <cite>[1],[2]</cite>.
+    </p>
+    <p>
+      The quality of data used for training and validating skin disease detection algorithms is critically important. Current datasets suffer from numerous limitations, including low image resolution, noise, missing annotations, and poor labeling. A lack of robust curation protocols is among the primary contributors to these shortcomings. There is therefore an urgent need for curating high-quality datasets that improve model performance, minimize diagnostic errors, and ultimately improve the quality of life for patients worldwide <cite>[3],[10]</cite>.
+    </p>
+    <p>
+      In addition to data quality, demographic representation within datasets is a critical factor affecting AI performance in dermatology. Many existing datasets are not sufficiently diverse, which impedes the development of universally applicable models. Algorithms trained predominantly on certain demographic groups—most commonly individuals of European descent—may fail to accurately recognize skin conditions across diverse populations <cite>[2],[8]</cite>. Such underrepresentation can exacerbate existing healthcare disparities and lead to misdiagnoses, with particularly adverse consequences for individuals not belonging to the majority demographics in the training sets.
+    </p>
+    <p>
+      Ethical challenges constitute yet another dimension of this problem. As AI becomes increasingly integrated into clinical practice, the issues of bias, transparency, and accountability in prediction must be urgently addressed. Ensuring fairness and equity in AI-generated diagnostics, safeguarding patient privacy, and obtaining informed consent from individuals whose images are used to train models are all critical imperatives <cite>[1]</cite>. An ethical framework governing not only the datasets but also the broader deployment of AI in dermatological and cosmetic diagnostics is therefore essential.
+    </p>
+    <p>
+      This paper is organized as follows. Section II addresses data quality challenges. Section III discusses representation and demographic diversity. Section IV covers annotation quality. Section V explores ethical implications. Section VI reviews proposed solutions and future directions. Section VII concludes the paper.
+    </p>
+
+    <!-- Fig 1 -->
+    <div class="fig-box full-width">
+      <div class="fig-placeholder">[ Figure 1 Placeholder ]</div>
+      <div class="fig-caption">Fig. 1: Overview of Key Data Challenges in AI-Based Skin Disease Diagnosis</div>
+      <div class="fig-body">A conceptual framework diagram illustrating the three primary challenge dimensions—data quality, representation, and ethics—and their interactions in AI dermatological diagnosis pipelines.</div>
+      <div class="ai-prompt-label">AI Image Generation Prompt</div>
+      <div class="ai-prompt">Academic conceptual framework diagram for a publication-quality IEEE paper. Three vertically stacked rectangular nodes labeled: "Data Quality" (top, deep blue), "Demographic Representation" (middle, teal), and "Ethical Implications" (bottom, crimson). Each node connects via bidirectional arrows to a central oval labeled "AI Skin Disease Diagnosis Model." Additional sub-labels branch from each node: from "Data Quality" — low resolution, noise, mislabeling; from "Demographic Representation" — skin tone diversity, ethnic bias, geographic gaps; from "Ethical Implications" — informed consent, algorithmic fairness, patient privacy. Clean white background, sans-serif labels, color-coded arrows (blue, teal, crimson), academic diagram style, left-to-right reading flow with top-down hierarchy, suitable for a scientific journal. High resolution, no decorative elements.</div>
+    </div>
+
+    <!-- II. Data Quality -->
+    <h2 class="sec-heading"><span class="sec-num">II.</span> Data Quality Challenges</h2>
+    <h3 class="subsec-heading"><span class="subsec-num">A.</span> Image Resolution and Noise</h3>
+    <p>
+      Effective AI-based skin disease detection requires that dataset images possess sufficient detail for deep learning models to learn the many variations among different conditions. Many current datasets contain suboptimal images characterized by insufficient resolution, poor lighting, and noise, resulting in suboptimal model performance regardless of the architecture employed <cite>[10],[3]</cite>. Images and data points of poor quality negatively affect the ability of AI systems to learn meaningful patterns, compromising downstream diagnostic reliability <cite>[10]</cite>.
+    </p>
+
+    <h3 class="subsec-heading"><span class="subsec-num">B.</span> Mislabeling and Annotation Inconsistencies</h3>
+    <p>
+      A primary concern for AI diagnostic accuracy is the presence of inaccurate or mislabeled images in training data, which train models to generate inaccurate predictions <cite>[10]</cite>. In many existing datasets, images have been annotated by non-dermatologists, yielding suboptimal annotations that compromise the integrity of the ground truth on which AI learning depends <cite>[3],[10]</cite>. A number of researchers have consequently called for standardized protocols for data collection and annotation to develop high-quality datasets for training and testing skin disease detection models <cite>[10]</cite>.
+    </p>
+
+    <h3 class="subsec-heading"><span class="subsec-num">C.</span> Consequences for Patient Safety</h3>
+    <p>
+      Poor data quality poses significant risks to patient safety. Evidence indicates a strong correlation between data accuracy and the accuracy of AI-assisted dermatological diagnosis. Poor-quality data can result in models that may cause patients significant harm—for example, by failing to prompt timely treatment for life-threatening skin conditions, or by initiating unnecessary treatment for benign ones. Improving the quality of training datasets is therefore not merely a technical concern but an urgent patient-safety imperative <cite>[3],[13]</cite>.
+    </p>
+
+    <!-- Fig 2 -->
+    <div class="fig-box">
+      <div class="fig-placeholder">[ Figure 2 Placeholder ]</div>
+      <div class="fig-caption">Fig. 2: Data Quality Factors Affecting AI Model Performance in Dermatology</div>
+      <div class="fig-body">A flowchart depicting how image resolution, annotation accuracy, and labeling quality collectively influence AI model output and downstream patient safety.</div>
+      <div class="ai-prompt-label">AI Image Generation Prompt</div>
+      <div class="ai-prompt">Vertical academic flowchart for an IEEE paper. Top node: "Dermatological Image Dataset" (blue rectangle). Four parallel branches flow downward from it, each as a rounded rectangle: "Image Resolution" (green), "Noise & Artifacts" (orange), "Annotation Accuracy" (blue), "Label Consistency" (purple). All four branches converge into a central diamond node: "AI Model Training Quality." From the diamond, two output arrows: one labeled "High-Quality Output → Accurate Diagnosis" (green arrow, check mark), and one labeled "Poor-Quality Output → Misdiagnosis Risk" (red arrow, warning sign). Clean academic style, white background, Arial or Helvetica labels, color-coded nodes, publication quality, no decorative borders.</div>
+    </div>
+
+    <!-- III. Representation -->
+    <h2 class="sec-heading"><span class="sec-num">III.</span> Demographic Representation and Dataset Diversity</h2>
+    <h3 class="subsec-heading"><span class="subsec-num">A.</span> Underrepresentation of Diverse Skin Types</h3>
+    <p>
+      The underrepresentation of diverse skin types in existing datasets represents one of the most significant challenges for the development and validation of effective AI systems for skin disease detection. Datasets predominantly composed of images of patients with lighter skin tones yield models that perform poorly on images of patients with darker skin tones <cite>[8],[2]</cite>. Many skin conditions—including acne, psoriasis, and eczema—present differently depending on skin tone, and individuals with darker skin tones are often misdiagnosed by AI systems trained on predominantly lighter-skinned datasets <cite>[8]</cite>.
+    </p>
+    <p>
+      The quality of data representation is also interlinked with overall data quality: a dataset that fails to represent diverse demographics—including different skin tones, age groups, genders, and geographic locations—results in biased AI models. The majority of current dermatological image datasets comprise predominantly lighter skin tones, and models validated on such datasets perform poorly on individuals with darker skin tones <cite>[8]</cite>.
+    </p>
+
+    <h3 class="subsec-heading"><span class="subsec-num">B.</span> Health Inequity and Marginalization</h3>
+    <p>
+      There is significant concern that existing datasets embed biases that may reinforce health inequalities. A system that fails to recognize signs of skin diseases more prevalent in non-Caucasian individuals will exhibit lower accuracy for patients from underrepresented groups <cite>[11]</cite>. Beyond clinical accuracy, such failures can engender a sense of marginalization among affected populations—eroding trust in AI-driven dermatology and, by extension, in healthcare services more broadly. The assumption that AI systems can treat all populations equally is thus demonstrably flawed; specific nuances in the presentation, assessment, and treatment of skin diseases must be explicitly accounted for in dataset design <cite>[11]</cite>.
+    </p>
+
+    <h3 class="subsec-heading"><span class="subsec-num">C.</span> Societal Implications</h3>
+    <p>
+      The limitations of current datasets and their downstream consequences also bear on a societal level. Inequitable AI-assisted healthcare could further entrench disadvantage for already marginalized populations—a concern particularly acute in dermatology, where diagnostic delays can have serious health consequences. A system that incorrectly identifies skin diseases in non-Caucasian individuals risks causing serious harm through delayed treatment <cite>[11],[3]</cite>. The challenge for AI development in healthcare is therefore not only to improve data quality but also to deploy these technologies in an equitable manner.
+    </p>
+
+    <!-- Fig 3 -->
+    <div class="fig-box">
+      <div class="fig-placeholder">[ Figure 3 Placeholder ]</div>
+      <div class="fig-caption">Fig. 3: Demographic Imbalance in Dermatological Datasets and Its Downstream Effects</div>
+      <div class="fig-body">A comparative bar chart and consequence cascade illustrating the imbalance in skin tone representation across major public dermatological datasets, and how underrepresentation leads to differential diagnostic accuracy.</div>
+      <div class="ai-prompt-label">AI Image Generation Prompt</div>
+      <div class="ai-prompt">Dual-panel academic figure for an IEEE journal paper. Left panel: horizontal grouped bar chart titled "Approximate Skin Tone Distribution in Major Dermatological Datasets." X-axis: percentage of dataset images (0–80%). Y-axis: five Fitzpatrick scale categories labeled I–II (very light), III (light-medium), IV (medium-dark), V (dark), VI (very dark). Bars use a gradient palette from beige to deep brown corresponding to skin tone. Dataset bars are clearly stacked. Right panel: a consequence cascade flowchart — top box "Underrepresentation of Dark Skin Tones" → middle box "Biased Model Training" → lower two boxes side by side: "Reduced Diagnostic Accuracy (Dark Skin)" and "Increased Misdiagnosis Risk." Arrows connect all boxes with labels. Academic sans-serif font, white background, neutral color scheme with a red highlight for the consequence boxes, publication-quality layout, no drop shadows.</div>
+    </div>
+
+    <!-- IV. Annotation Quality -->
+    <h2 class="sec-heading"><span class="sec-num">IV.</span> Expert Annotation and Ground Truth Quality</h2>
+    <p>
+      Expert annotation—the process of labeling images of skin conditions with corresponding disease identifiers such as lesion type or related skin disease—is critical because annotations serve as the ground truth underpinning the entire AI learning process <cite>[14],[3]</cite>. It is therefore vital to analyze the process by which expert dermatologists annotate individual images, to minimize errors that may compound in downstream model behavior, and to limit the potential impact of misdiagnosis in clinical settings.
+    </p>
+    <p>
+      In many current datasets, images have been annotated by non-specialists, yielding suboptimal ground-truth labels <cite>[3]</cite>. Additionally, diagnostic criteria for various skin diseases vary across geographic regions and among experienced dermatologists, introducing further variability and inconsistency into the annotation process <cite>[16]</cite>. Standardized annotation protocols, developed collaboratively with certified dermatologists, are an essential component of building trustworthy training datasets <cite>[10],[14]</cite>.
+    </p>
+    <p>
+      Zhang et al. <cite>[10]</cite> highlighted a critical flaw within many current training datasets: notably low sample sizes and a lack of variety among constituent images. These limitations cause AI systems to develop models that perform well within the original dataset but generalize poorly to real-world clinical applications—a phenomenon particularly pronounced when the model is applied to skin types or disease presentations that differ from those in the training set.
+    </p>
+
+    <!-- V. Ethical Implications -->
+    <h2 class="sec-heading"><span class="sec-num">V.</span> Ethical Implications</h2>
+    <h3 class="subsec-heading"><span class="subsec-num">A.</span> Informed Consent and Privacy</h3>
+    <p>
+      Obtaining informed consent from individuals who have contributed images to a dataset represents a significant ethical challenge. Many images have been collected within clinical trials and subsequently deposited in public repositories or web-scraped without the knowledge or consent of the individuals depicted <cite>[1]</cite>. This raises concerns relating to privacy, autonomy, and transparency. Affected individuals and communities—particularly those with histories of discriminatory treatment by medical institutions—may fear misrepresentation or adverse impact, leading to mistrust of AI in healthcare <cite>[1]</cite>.
+    </p>
+
+    <h3 class="subsec-heading"><span class="subsec-num">B.</span> Algorithmic Fairness and Bias</h3>
+    <p>
+      The ethical implications of AI in dermatology center significantly on the fairness of diagnostic decisions. If a dataset used to train an AI system contains no information about underrepresented populations, the resulting algorithm may prioritize the needs of majority groups, creating systemic disparities in healthcare delivery at an unprecedented aggregate scale <cite>[11],[8]</cite>. Several bias mitigation techniques have been proposed—including reweighting samples and augmenting minority-class data—to prevent models from classifying primarily on majority-class characteristics <cite>[18]</cite>. Continuous monitoring of AI decisions for potential bias is also emphasized as critical for preventing negative impacts on healthcare quality <cite>[18]</cite>.
+    </p>
+
+    <h3 class="subsec-heading"><span class="subsec-num">C.</span> Accountability and Governance</h3>
+    <p>
+      The question of accountability for ethical failures of AI systems in healthcare has yet to be fully resolved. Responsibility may lie with algorithm developers who utilize biased datasets, with companies deploying these systems, or with healthcare institutions that adopt them <cite>[11]</cite>. The root of the problem, however, resides in the data used for training, and therefore responsible stewardship of the development, validation, and deployment of AI systems in healthcare must be placed at the center of efforts to improve AI-assisted skin disease detection <cite>[11]</cite>.
+    </p>
+    <p>
+      Healthcare practitioners also bear ethical responsibility in the way they interpret and implement AI-powered diagnoses. There is considerable risk that clinicians will incorporate into practice decision algorithms validated on biased or unrepresentative data. Ethical responsibility thus extends beyond data quality to encompass the processes by which decision aids are validated and integrated into clinical practice, and to the development of clear guidelines for the use of AI-enabled health information technologies <cite>[1]</cite>.
+    </p>
+
+    <!-- Fig 4 -->
+    <div class="fig-box full-width">
+      <div class="fig-placeholder">[ Figure 4 Placeholder ]</div>
+      <div class="fig-caption">Fig. 4: Ethical Framework for AI-Based Dermatological Diagnostics</div>
+      <div class="fig-body">A systems diagram outlining the ethical considerations at each stage of the AI development and deployment lifecycle for skin disease detection.</div>
+      <div class="ai-prompt-label">AI Image Generation Prompt</div>
+      <div class="ai-prompt">Publication-quality academic systems diagram for an IEEE paper. Horizontal pipeline with five sequential rectangular process nodes connected by right-pointing arrows: (1) "Data Collection" (light blue) — sub-labels: informed consent, privacy, de-identification; (2) "Dataset Curation" (teal) — sub-labels: annotation standards, representation, quality control; (3) "Model Training" (blue) — sub-labels: bias detection, fairness metrics, reweighting; (4) "Clinical Deployment" (dark blue) — sub-labels: transparency, clinician training, governance; (5) "Outcome Monitoring" (navy) — sub-labels: ongoing bias audits, feedback loops, accountability. Above the pipeline: a header bar labeled "Ethical AI Lifecycle for Dermatological Diagnostics." A curved feedback arrow runs from node 5 back to node 1 labeled "Continuous Improvement." Color gradient from light blue to navy across nodes. Sans-serif academic font, white background, no decorative elements, suitable for journal publication.</div>
+    </div>
+
+    <!-- VI. Solutions and Future Directions -->
+    <h2 class="sec-heading"><span class="sec-num">VI.</span> Proposed Solutions and Future Directions</h2>
+    <h3 class="subsec-heading"><span class="subsec-num">A.</span> Improving Dataset Diversity and Quality</h3>
+    <p>
+      Future research must prioritize building datasets that are inclusive of a broad range of skin types, tones, ethnicities, age groups, genders, and geographic locations <cite>[15],[10]</cite>. Several stratified sampling methods have been proposed to improve the validity and reliability of AI diagnostics for different skin types <cite>[8]</cite>. Large-scale multi-centric datasets—comprising images that represent different types of skin diseases across diverse skin types and tones—are essential for training robust models that generalize effectively across populations <cite>[16]</cite>.
+    </p>
+    <p>
+      Constructing such databases requires a new collaborative environment involving dermatologists, epidemiologists, and AI developers, alongside standardized protocols for data collection covering diverse populations <cite>[18]</cite>. High-quality images with accurate annotations are a prerequisite for effective model learning, and standardized collection and annotation protocols are therefore an essential step toward trustworthy AI in dermatology <cite>[10]</cite>.
+    </p>
+
+    <h3 class="subsec-heading"><span class="subsec-num">B.</span> Transfer Learning and Synthetic Data</h3>
+    <p>
+      Transfer learning—enabling models to acquire and apply knowledge from large, existing datasets—has been proposed as a technique for improving the learning capacity of AI models for skin disease detection in diverse populations <cite>[18]</cite>. Additionally, there is growing interest in the use of synthetic data: generative adversarial networks (GANs) can generate realistic images of rare skin conditions, allowing underrepresented classes to be included in training sets and thereby enhancing model robustness to previously unseen cases <cite>[19]</cite>.
+    </p>
+
+    <h3 class="subsec-heading"><span class="subsec-num">C.</span> Crowd-Sourced and Community-Engaged Data Acquisition</h3>
+    <p>
+      Crowd-sourced data acquisition methods could serve as powerful tools for generating large datasets representative of diverse populations across a broad range of skin conditions <cite>[18]</cite>. Additional projects exploring community partnerships for improving public understanding of AI-based skin analysis are also important: developing sensitivity to the specific health needs and barriers to care within communities is crucial for improving public trust and for the successful clinical translation of AI diagnostic tools <cite>[19]</cite>.
+    </p>
+
+    <h3 class="subsec-heading"><span class="subsec-num">D.</span> Stakeholder Involvement and Ethical Governance</h3>
+    <p>
+      Current approaches to developing dermatological AI have concentrated predominantly on technical aspects. Future AI-assisted dermatological diagnostic systems will require the systematic involvement of stakeholders—including patients, clinicians, and community representatives—and can benefit from adopting social and behavioral methods for data representation <cite>[15],[14]</cite>. This will support the development of higher-quality datasets and a greater range of AI systems deployable across diverse clinical contexts <cite>[15],[10]</cite>.
+    </p>
+    <p>
+      The current ethical framework for the development and use of AI in dermatological diagnostics must also be reformed to address the interconnections among data quality, demographic representation, and diagnostic accuracy <cite>[13]</cite>. A framework aligned with current technical capabilities and committed to equitable healthcare delivery must ensure that accurate and fair care is accessible to patients with a wide variety of skin types and presentations of skin disease <cite>[13]</cite>.
+    </p>
+
+    <!-- Fig 5 -->
+    <div class="fig-box">
+      <div class="fig-placeholder">[ Figure 5 Placeholder ]</div>
+      <div class="fig-caption">Fig. 5: Proposed Workflow for Building Inclusive Dermatological AI Datasets</div>
+      <div class="fig-body">A process workflow illustrating the recommended pipeline from community-engaged data collection through multi-centric curation, expert annotation, bias auditing, and iterative model improvement.</div>
+      <div class="ai-prompt-label">AI Image Generation Prompt</div>
+      <div class="ai-prompt">Detailed academic process workflow diagram for an IEEE conference paper. Eight sequential rounded rectangular steps arranged in a two-row zigzag layout (4 per row), connected by labeled arrows. Steps: (1) "Community & Clinical Partnerships" → (2) "Multi-Centric Image Collection" → (3) "Standardized Pre-processing & De-identification" → (4) "Expert Dermatologist Annotation" → (5) "Demographic Stratification & QA" → (6) "Bias Audit & Fairness Assessment" → (7) "Model Training (CNN / Transfer Learning / GAN Augmentation)" → (8) "Clinical Validation & Iterative Refinement." Arrows between steps are color-coded by phase: data acquisition (green), curation (blue), modeling (purple). A curved feedback arrow from step 8 returns to step 2 labeled "Continuous Update Cycle." Clean white background, sans-serif labels, academic style, no drop shadows, publication-ready appearance.</div>
+    </div>
+
+    <!-- VII. Conclusion -->
+    <h2 class="sec-heading"><span class="sec-num">VII.</span> Conclusion</h2>
+    <p>
+      This paper has examined the principal data-centric challenges confronting AI-based skin disease diagnosis, encompassing data quality deficiencies, insufficient demographic representation, annotation inconsistencies, and a range of ethical concerns. These challenges are deeply interrelated: poor image quality and unrepresentative datasets compound one another, while both give rise to ethical failures in algorithmic fairness and patient safety.
+    </p>
+    <p>
+      There are many issues with current datasets for AI-assisted skin disease detection that must be resolved as a matter of urgency. Addressing these challenges requires developing high-quality, demographically representative datasets for training and testing skin disease detection models—a complex undertaking that demands collaboration among dermatologists, epidemiologists, AI developers, and community stakeholders. Promising avenues include stratified sampling, transfer learning, GAN-based synthetic data generation, crowd-sourced acquisition, and the establishment of robust ethical governance frameworks.
+    </p>
+    <p>
+      The responsible integration of AI into dermatological diagnostics depends on unwavering commitment to data integrity, demographic inclusivity, and ethical stewardship. Only by addressing these foundational challenges can AI fulfill its promise of accurate, equitable, and universally beneficial skin disease detection and treatment—ultimately improving health outcomes for patients across all populations worldwide.
+    </p>
+
+  </div><!-- /two-col -->
+
+  <hr class="footer-rule">
+
+  <!-- References -->
+  <h2 class="sec-heading" style="margin-bottom:12px;"><span class="sec-num">References</span></h2>
+  <div class="references-section">
+    <ol>
+      <li>
+        <span class="ref-authors">O. Jaiyeoba, O. Jaiyeoba, E. Ogbuju, and F. Oladipo,</span>
+        <span class="ref-title"> "AI-based detection techniques for skin diseases: A review of recent methods, datasets, metrics, and challenges,"</span>
+        <span class="ref-venue"> <em>Journal of Future Artificial Intelligence and Technologies</em>, vol. 1, no. 3, pp. 318–336, Dec. 2024.</span>
+      </li>
+      <li>
+        <span class="ref-authors">S. S. Noronha, M. A. Mehta, D. Garg, K. Kotecha, and A. Abraham,</span>
+        <span class="ref-title"> "Deep learning-based dermatological condition detection: A systematic review with recent methods, datasets, challenges, and future directions,"</span>
+        <span class="ref-venue"> <em>IEEE Access</em>, vol. 11, pp. 140348–140381, Dec. 2023.</span>
+      </li>
+      <li>
+        <span class="ref-authors">V. Anand, S. Gupta, and D. Koundal,</span>
+        <span class="ref-title"> "Skin disease diagnosis: challenges and opportunities,"</span>
+        <span class="ref-venue"> in <em>Proc. 2nd Doctoral Symposium on Computational Intelligence (DoSCI 2021)</em>, Singapore: Springer, 2021, pp. 449–459.</span>
+      </li>
+      <li>
+        <span class="ref-authors">D. Wen, A. Soltan, E. Trucco, and R. N. Matin,</span>
+        <span class="ref-title"> "From data to diagnosis: skin cancer image datasets for artificial intelligence,"</span>
+        <span class="ref-venue"> <em>Clinical and Experimental Dermatology</em>, vol. 49, no. 7, pp. 675–685, Jul. 2024.</span>
+      </li>
+      <li>
+        <span class="ref-authors">N. Melarkode, K. Srinivasan, S. M. Qaisar, and P. Plawiak,</span>
+        <span class="ref-title"> "AI-powered diagnosis of skin cancer: A contemporary review, open challenges and future research directions,"</span>
+        <span class="ref-venue"> <em>Cancers</em>, vol. 15, no. 4, p. 1183, Feb. 2023.</span>
+      </li>
+      <li>
+        <span class="ref-authors">C. N. Kanani and P. U. Jadeja,</span>
+        <span class="ref-title"> "Skin disease diagnosis: A comprehensive survey of models, datasets, and clinical applications,"</span>
+        <span class="ref-venue"> <em>Cureus Journals</em>, vol. 2, no. 1, Sep. 2025.</span>
+      </li>
+      <li>
+        <span class="ref-authors">K. Vayadande, A. A. Bhosle, R. G. Pawar, D. J. Joshi, P. A. Bailke, and O. Lohade,</span>
+        <span class="ref-title"> "Innovative approaches for skin disease identification in machine learning: A comprehensive study,"</span>
+        <span class="ref-venue"> <em>Oral Oncology Reports</em>, vol. 10, p. 100365, Jun. 2024.</span>
+      </li>
+      <li>
+        <span class="ref-authors">J. Zhang, F. Zhong, K. He, M. Ji, S. Li, and C. Li,</span>
+        <span class="ref-title"> "Recent advancements and perspectives in the diagnosis of skin diseases using machine learning and deep learning: A review,"</span>
+        <span class="ref-venue"> <em>Diagnostics</em>, vol. 13, no. 23, p. 3506, Nov. 2023.</span>
+      </li>
+      <li>
+        <span class="ref-authors">A. Bijalwan and S. S. Sikarwar,</span>
+        <span class="ref-title"> "Limitations and challenges of AI in disease detection — An examination of the limitations and challenges of AI in disease detection, including the need for large datasets and potential biases,"</span>
+        <span class="ref-venue"> in <em>AI in Disease Detection: Advancements and Applications</em>, 2025, pp. 289–311.</span>
+      </li>
+      <li>
+        <span class="ref-authors">B. Zhang, X. Zhou, Y. Luo, H. Zhang, H. Yang, J. Ma, and L. Ma,</span>
+        <span class="ref-title"> "Opportunities and challenges: Classification of skin disease based on deep learning,"</span>
+        <span class="ref-venue"> <em>Chinese Journal of Mechanical Engineering</em>, vol. 34, no. 1, p. 112, Dec. 2021.</span>
+      </li>
+      <li>
+        <span class="ref-authors">R. Fliorent, B. Fardman, A. Podwojniak, K. Javaid, I. J. Tan, H. Ghani, T. M. Truong, B. Rao, and C. Heath,</span>
+        <span class="ref-title"> "Artificial intelligence in dermatology: advancements and challenges in skin of color,"</span>
+        <span class="ref-venue"> <em>International Journal of Dermatology</em>, vol. 63, no. 4, pp. 455–461, Apr. 2024.</span>
+      </li>
+      <li>
+        <span class="ref-authors">M. Combalia et al.,</span>
+        <span class="ref-title"> "Validation of artificial intelligence prediction models for skin cancer diagnosis using dermoscopy images: the 2019 International Skin Imaging Collaboration Grand Challenge,"</span>
+        <span class="ref-venue"> <em>The Lancet Digital Health</em>, vol. 4, no. 5, pp. e330–e339, May 2022.</span>
+      </li>
+      <li>
+        <span class="ref-authors">S. P. Choy, B. J. Kim, A. Paolino, et al.,</span>
+        <span class="ref-title"> "Systematic review of deep learning image analyses for the diagnosis and monitoring of skin disease,"</span>
+        <span class="ref-venue"> <em>NPJ Digital Medicine</em>, vol. 6, no. 1, p. 180, Sep. 2023.</span>
+      </li>
+      <li>
+        <span class="ref-authors">R. Daneshjou, M. Yuksekgonul, Z. R. Cai, R. Novoa, and J. Y. Zou,</span>
+        <span class="ref-title"> "Skincon: A skin disease dataset densely annotated by domain experts for fine-grained debugging and analysis,"</span>
+        <span class="ref-venue"> in <em>Advances in Neural Information Processing Systems</em>, vol. 35, pp. 18157–18167, Dec. 2022.</span>
+      </li>
+      <li>
+        <span class="ref-authors">J. Singh, J. K. Sandhu, and Y. Kumar,</span>
+        <span class="ref-title"> "An analysis of detection and diagnosis of different classes of skin diseases using artificial intelligence-based learning approaches with hyper parameters,"</span>
+        <span class="ref-venue"> <em>Archives of Computational Methods in Engineering</em>, vol. 31, no. 2, pp. 1051–1078, Mar. 2024.</span>
+      </li>
+      <li>
+        <span class="ref-authors">H. M. Son, W. Jeon, J. Kim, C. Y. Heo, H. J. Yoon, J. U. Park, and T. M. Chung,</span>
+        <span class="ref-title"> "AI-based localization and classification of skin disease with erythema,"</span>
+        <span class="ref-venue"> <em>Scientific Reports</em>, vol. 11, no. 1, p. 5350, Mar. 2021.</span>
+      </li>
+      <li>
+        <span class="ref-authors">T. G. Debelee,</span>
+        <span class="ref-title"> "Skin lesion classification and detection using machine learning techniques: a systematic review,"</span>
+        <span class="ref-venue"> <em>Diagnostics</em>, vol. 13, no. 19, p. 3147, Oct. 2023.</span>
+      </li>
+      <li>
+        <span class="ref-authors">K. Liopyris, S. Gregoriou, J. Dias, and A. J. Stratigos,</span>
+        <span class="ref-title"> "Artificial intelligence in dermatology: challenges and perspectives,"</span>
+        <span class="ref-venue"> <em>Dermatology and Therapy</em>, vol. 12, no. 12, pp. 2637–2651, Dec. 2022.</span>
+      </li>
+      <li>
+        <span class="ref-authors">A. Grzybowski, K. Jin, and H. Wu,</span>
+        <span class="ref-title"> "Challenges of artificial intelligence in medicine and dermatology,"</span>
+        <span class="ref-venue"> <em>Clinics in Dermatology</em>, vol. 42, no. 3, pp. 210–215, May 2024.</span>
+      </li>
+    </ol>
+  </div>
+
+  <hr class="footer-rule">
+  <div class="paper-footer">© 2024 IEEE &nbsp;|&nbsp; Manuscript submitted for review &nbsp;|&nbsp; All rights reserved</div>
+
+</div><!-- /page-shell -->
+</body>
+</html>
