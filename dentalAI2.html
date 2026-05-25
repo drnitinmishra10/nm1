@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Gaps in AI-Based Dental Diagnostics: A Comprehensive Review</title>
+    <style>
+        /* ===== IEEE Conference Paper Styles ===== */
+        :root {
+            --primary-color: #1a1a2e;
+            --accent-color: #0f3460;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --border-color: #ddd;
+            --figure-bg: #f0f4f8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 10pt;
+            line-height: 1.4;
+            color: var(--text-color);
+            background: #e8e8e8;
+            padding: 20px;
+        }
+
+        .paper-container {
+            max-width: 8.5in;
+            min-height: 11in;
+            margin: 0 auto;
+            background: white;
+            padding: 0.75in 0.75in 1in 0.75in;
+            box-shadow: 0 0 20px rgba(0,0,0,0.15);
+        }
+
+        /* ===== Two-Column Layout ===== */
+        .two-column {
+            column-count: 2;
+            column-gap: 0.3in;
+            column-rule: none;
+        }
+
+        .two-column > * {
+            break-inside: avoid;
+        }
+
+        h1, h2, h3, .title-section, .abstract-section {
+            column-span: all;
+        }
+
+        /* ===== Title Section ===== */
+        .title-section {
+            text-align: center;
+            margin-bottom: 0.3in;
+            padding-bottom: 0.15in;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .paper-title {
+            font-size: 16pt;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.15in;
+            line-height: 1.3;
+        }
+
+        .author-info {
+            font-size: 10pt;
+            margin-bottom: 0.05in;
+        }
+
+        .author-name {
+            font-weight: bold;
+        }
+
+        .affiliation {
+            font-style: italic;
+            color: #555;
+            font-size: 9pt;
+        }
+
+        .email {
+            font-size: 8pt;
+            color: #666;
+        }
+
+        /* ===== Abstract ===== */
+        .abstract-section {
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-color);
+            padding: 0.15in;
+            margin-bottom: 0.2in;
+        }
+
+        .abstract-title {
+            font-size: 10pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.08in;
+            color: var(--primary-color);
+        }
+
+        .abstract-text {
+            font-size: 9pt;
+            text-align: justify;
+            line-height: 1.35;
+        }
+
+        .keywords {
+            margin-top: 0.1in;
+            font-size: 9pt;
+        }
+
+        .keywords-label {
+            font-weight: bold;
+        }
+
+        /* ===== Headings ===== */
+        h1 {
+            font-size: 12pt;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-top: 0.2in;
+            margin-bottom: 0.1in;
+            padding-bottom: 0.05in;
+            border-bottom: 1px solid var(--border-color);
+            column-span: all;
+        }
+
+        h2 {
+            font-size: 10pt;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-top: 0.15in;
+            margin-bottom: 0.08in;
+        }
+
+        h3 {
+            font-size: 10pt;
+            font-weight: bold;
+            font-style: italic;
+            color: var(--text-color);
+            margin-top: 0.12in;
+            margin-bottom: 0.06in;
+        }
+
+        /* ===== Paragraphs ===== */
+        p {
+            text-align: justify;
+            margin-bottom: 0.08in;
+            text-indent: 0.15in;
+        }
+
+        p:first-of-type {
+            text-indent: 0;
+        }
+
+        /* ===== Citations ===== */
+        .citation {
+            color: #0066cc;
+            font-weight: 500;
+        }
+
+        /* ===== Figures ===== */
+        figure {
+            margin: 0.15in 0;
+            padding: 0.1in;
+            background: var(--figure-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+            break-inside: avoid;
+        }
+
+        .figure-placeholder {
+            width: 100%;
+            height: 1.8in;
+            background: linear-gradient(135deg, #e0e7ef 0%, #d0dae8 100%);
+            border: 2px dashed #99aabb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.08in;
+            border-radius: 2px;
+        }
+
+        .figure-placeholder-text {
+            color: #667788;
+            font-size: 9pt;
+            font-style: italic;
+        }
+
+        figcaption {
+            font-size: 8pt;
+            text-align: justify;
+            color: #444;
+            line-height: 1.3;
+        }
+
+        .figure-number {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .ai-prompt {
+            font-size: 7.5pt;
+            color: #666;
+            margin-top: 0.05in;
+            padding: 0.05in;
+            background: #f5f5f5;
+            border-left: 2px solid #ccc;
+            font-style: italic;
+        }
+
+        .ai-prompt-label {
+            font-weight: bold;
+            color: #888;
+        }
+
+        /* ===== Tables ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.15in 0;
+            font-size: 8.5pt;
+            break-inside: avoid;
+        }
+
+        table caption {
+            font-size: 8pt;
+            font-weight: bold;
+            text-align: left;
+            margin-bottom: 0.05in;
+            color: var(--primary-color);
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 0.05in 0.08in;
+            text-align: left;
+        }
+
+        th {
+            background: var(--light-bg);
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        /* ===== References ===== */
+        .references-section {
+            column-span: all;
+            margin-top: 0.2in;
+        }
+
+        .references-title {
+            font-size: 12pt;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.1in;
+            padding-bottom: 0.05in;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .references-list {
+            font-size: 8pt;
+            line-height: 1.35;
+        }
+
+        .references-list li {
+            margin-bottom: 0.06in;
+            padding-left: 0.15in;
+            text-indent: -0.15in;
+            list-style: none;
+        }
+
+        .ref-number {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        /* ===== Responsive ===== */
+        @media screen and (max-width: 768px) {
+            .two-column {
+                column-count: 1;
+            }
+            .paper-container {
+                padding: 0.3in;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .paper-container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="paper-container">
+        <!-- ===== TITLE SECTION ===== -->
+        <div class="title-section">
+            <h1 class="paper-title">Research Gaps in AI-Based Dental Diagnostics: A Comprehensive Review of Challenges and Future Directions</h1>
+            <div class="author-info">
+                <span class="author-name">Dr. Nitin Mishra</span><sup>1</sup>
+            </div>
+            <div class="affiliation">
+                <sup>1</sup>Professor, Department of Computer Science and Engineering, Parul University, Vadodara, India
+            </div>
+            <div class="email">
+                Corresponding author: <a href="mailto:drnitinmishra10@gmail.com">drnitinmishra10@gmail.com</a>
+            </div>
+        </div>
+
+        <!-- ===== ABSTRACT ===== -->
+        <div class="abstract-section">
+            <div class="abstract-title">Abstract</div>
+            <div class="abstract-text">
+                Artificial intelligence (AI) has emerged as a transformative technology in dental diagnostics, offering significant potential for early detection of caries, periodontal diseases, and oral cancers. Despite promising advances in machine learning and deep learning applications for dental image analysis, substantial research gaps persist that hinder effective clinical implementation. This comprehensive review identifies and analyzes critical limitations in current dental AI research, including insufficient and non-standardized training datasets, lack of model interpretability (black-box problem), absence of longitudinal validation studies, data privacy and consent concerns, workflow integration challenges, and inadequate interdisciplinary collaboration. We examine the implications of these gaps for clinical practice and propose a structured framework for addressing them through diverse dataset curation, explainable AI development, continuous learning systems, standardized clinical protocols, and ethical regulatory frameworks. Our analysis underscores that bridging these research gaps is essential for realizing the full potential of AI in improving patient outcomes and advancing precision dentistry.
+            </div>
+            <div class="keywords">
+                <span class="keywords-label">Keywords:</span> artificial intelligence, dental diagnostics, deep learning, research gaps, explainable AI, clinical workflow integration, data standardization, precision dentistry, oral health technology
+            </div>
+        </div>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <div class="two-column">
+
+            <h1>I. Introduction</h1>
+
+            <p>Dentistry with artificial intelligence (AI) has become a novel subject of interest, with great promise for the early detection of dental diseases. The use of AI technologies, including machine learning and deep learning, for image and data analysis can greatly enhance the accuracy and speed of dental diagnosis. Current studies have shown promising results where the application of AI can outperform the traditional methods of dental diagnosis for the detection of caries, periodontal diseases, and oral cancers. The use of AI in dentistry can potentially provide dental patients with the best possible care and treatment through the early detection of diseases and implementation of customized treatments. Thus, there is great potential for the role of AI in the detection of dental diseases.</p>
+
+            <p>AI can also be used for image analysis, in particular dental radiographs, to identify various dental and oral pathologies. Most of the recent dental research studies focus on utilizing the computerized dental images in the detection of dental diseases. There are studies that utilized machine learning models that are trained with large sets of dental images to detect dental cavitation in the early stages before it turns into a serious dental disease. It has been shown that computerized images can identify subtle changes and anomalies that are hardly detected by human observers. The models can process dental images and analyze vast amounts of data in a fraction of the time that is required by a human dentist to study the images and arrive at a conclusion. As mentioned previously, with the help of AI and big data, the computer can process not only the dental images but also analyze a multitude of data. These vast amounts of data could be of demographic nature, genetic, or even of clinical nature. In fact, the use of AI could also lead to a more preventative approach to the treatment of dental diseases. Early detection of diseases that affect the teeth and oral cavity of patients could be identified by the AI-powered systems and enable dentists to implement appropriate measures of prevention prior to the onset of disease. This, indeed, is a positive and novel approach to dental health and would represent a significant shift from the treatment approach that is commonly in use today.</p>
+
+            <figure>
+                <div class="figure-placeholder">
+                    <span class="figure-placeholder-text">[Figure Placeholder]</span>
+                </div>
+                <figcaption>
+                    <span class="figure-number">Fig. 1.</span> Overview of AI applications in dental diagnostics, showing the spectrum from data acquisition (radiographs, intraoral scans, CBCT) through deep learning analysis to clinical decision support for caries, periodontal disease, and oral cancer detection.
+                </figcaption>
+                <div class="ai-prompt">
+                    <span class="ai-prompt-label">AI Prompt:</span> "A professional academic infographic-style diagram showing the workflow of AI in dental diagnostics. Left side: three vertical panels showing data acquisition modalities—(1) dental radiograph X-ray image, (2) intraoral camera scan, (3) CBCT 3D scan. Center: a large neural network icon with interconnected nodes in blue and teal colors. Right side: three clinical output panels—(1) caries detection with highlighted decay areas in red, (2) periodontal disease assessment with gum inflammation markers, (3) oral cancer screening with lesion boundary detection. Arrows flow from left to center to right. Title at top: 'AI-Powered Dental Diagnostic Pipeline'. Color scheme: medical blues, teals, and whites with red accents for pathology. Clean white background, IEEE conference style, publication-quality vector graphics, professional sans-serif typography."
+                </div>
+            </figure>
+
+            <h1>II. Dataset Limitations and Standardization Challenges</h1>
+
+            <h2>A. Insufficient and Heterogeneous Training Data</h2>
+
+            <p>However, despite the promise that the use of AI for the early detection of dental diseases holds for dental care, there are several limitations of current research. As with most AI tasks, the biggest challenge for the early detection of dental diseases lies in the data, and in particular, in the fact that the data used for the training of models is not yet sufficient to ensure that all relevant cases are covered. This problem is mainly caused by the fact that the existing datasets are not yet standardized in terms of size and quality. In addition to size, the main variables are the type of data, the used imaging protocols, and the used annotations. Small, non-standardized, and even sometimes poor quality datasets are frequently used for the training and evaluation of models [1]. Due to the existing variance of the used data, the performance of AI models can be biased and show poor generalizability for other datasets, other patients, and other clinical settings. This is particularly problematic as the use of AI in dental practice increasingly shifts from researchers to practitioners, who might not be familiar with the specific challenges and limitations of the datasets used for model development.</p>
+
+            <p>In order to enhance the diagnostic capability of dental diseases in diverse patients, there is a need to make a fundamental change in current research methodology. The available datasets that have been used to train and test existing models of AI have several limitations. The sizes of the majority of the existing datasets are limited. There is considerable variation in the demographic parameters of the patients included in the available datasets. Studies using AI have been mostly conducted on specific patient populations and specific clinical scenarios. Hence, it is expected that the performance of a model developed and tested using a specific dataset may not be adequate for a completely different dataset [1]. In dental AI research, considerable effort has been placed on developing and evaluating caries detection models on caries data. However, even within caries data, there is considerable variability in terms of type, location, and stage of caries. Hence, models developed and tested using a specific caries dataset may not perform optimally using a completely different caries dataset. Furthermore, studies have shown that an AI algorithm, which is trained and tested using a narrowly defined dataset, may fail to deliver adequate performance when implemented using a diverse dataset [10]. Such an AI algorithm may overlook or misdiagnose certain diseases and their presentations, which are not included in the training dataset. These issues are likely to affect the performance and transferability of the AI models developed and validated using available datasets. Hence, there is a need to include diverse patient populations and a variety of clinical scenarios in current dental AI research [8].</p>
+
+            <figure>
+                <div class="figure-placeholder">
+                    <span class="figure-placeholder-text">[Figure Placeholder]</span>
+                </div>
+                <figcaption>
+                    <span class="figure-number">Fig. 2.</span> Comparative analysis of current dental AI datasets showing limitations in size standardization, demographic diversity, imaging protocol consistency, and annotation quality across major publicly available repositories.
+                </figcaption>
+                <div class="ai-prompt">
+                    <span class="ai-prompt-label">AI Prompt:</span> "A professional academic radar chart (spider chart) comparing five major dental AI datasets across six dimensions: Dataset Size, Demographic Diversity, Imaging Protocol Standardization, Annotation Quality, Disease Type Coverage, and Longitudinal Data Availability. Five datasets represented by different colored polygons (Dataset A in blue, B in orange, C in green, D in red, E in purple). Each axis scaled 0-100. A reference dashed polygon showing 'Ideal Dataset' in dark gray. Legend at bottom right. Title at top: 'Comparative Assessment of Dental AI Training Datasets'. Subtitle: 'Normalized scores across quality dimensions'. Clean white background, IEEE conference style, publication-quality, grid lines, professional sans-serif fonts, subtle gray radial grid."
+                </div>
+            </figure>
+
+            <h2>B. Model Generalization and Transferability</h2>
+
+            <p>Ilhan et al. [11] stated that model generalization is another problem to be solved. In most studies, the models are trained with good results using in-house datasets, and then they are applied to real-life situations and fail to reach the same level of results. In order to solve this problem, studies should be conducted by involving multiple dental clinics and hospitals, and large amounts of datasets from different sources and situations should be collected to train the models.</p>
+
+            <p>Addressing the limitations of the current research into AI for the early detection of dental diseases will require a structured approach. Specifically, a major aim for future research will be the development of these technologies within the framework of an increased scope of their application for AI. This is especially important in regards to the validation of the newly developed diagnostic systems using a number of large multicentric studies, which are to include patients of diverse demographic characteristics. These various populations can present dental diseases in diverse ways and AI models are currently limited by the tendency to perform within parameters established using predominantly homogeneous patient datasets, with resulting decreased accuracy for minority groups of patients [16]. It is to be hoped that future studies that implement the use of AI in the early detection of a number of the oral diseases for a number of patient demographics will uncover variables and diagnostics that are critical to both an increased accuracy for each of the dental diseases that are presently addressed as well as an expansion of the currently limited scope of AI for the detection of dental diseases for newly studied diseases.</p>
+
+            <p>Multicenter studies offer further opportunities for the clinical validation of dental AI systems in a wide range of different clinical settings. Not only can a broader clinical dataset be created, which in turn can be used to improve the robustness of a model in terms of its diagnostic accuracy, but the performance of different algorithms can also be assessed in terms of the early detection of dental caries as well as periodontal disease and oral malignancies in a wide range of patient groups. In this sense, future dental AI systems must be generalizable and fair, in order to offer optimal support to dentists and their patients in a variety of different clinical situations.</p>
+
+            <h1>III. Interpretability and Trustworthiness of AI Models</h1>
+
+            <h2>A. The Black-Box Problem</h2>
+
+            <p>Another challenge associated with early dental disease detection using AI is the lack of interpretability of the algorithms used. Although the accuracy of AI-based methods for early dental disease detection can be very high, it is often difficult to understand the underlying reasoning process of the algorithms. The lack of interpretability of AI algorithms, or so-called "black boxes," can raise concerns regarding the reliability and the trustworthiness of the results obtained by dental professionals who intend to integrate AI outputs into their clinical decisions.</p>
+
+            <p>The lack of interpretability of AI models used for oral disease detection also needs to be tackled. Researchers are currently working on developing models that are not only highly accurate, but also are able to provide feedback to the user as to why a particular conclusion has been reached. While it is possible for some to argue that this is not necessary, the inability for healthcare providers and their patients to understand decision-making could lead to AI systems not being used as they were intended. Even simple models that provide great accuracy for caries detection could be difficult to implement when their reasoning process cannot be explained. As stated previously, there are many potential applications for AI in oral health, and ensuring that the models developed provide sufficient evidence and are interpretable for end-users will facilitate the necessary integration into dental practices.</p>
+
+            <figure>
+                <div class="figure-placeholder">
+                    <span class="figure-placeholder-text">[Figure Placeholder]</span>
+                </div>
+                <figcaption>
+                    <span class="figure-number">Fig. 3.</span> Conceptual comparison of black-box versus explainable AI (XAI) approaches in dental diagnostics, illustrating how interpretable models provide clinicians with evidence-based reasoning for diagnostic decisions.
+                </figcaption>
+                <div class="ai-prompt">
+                    <span class="ai-prompt-label">AI Prompt:</span> "A professional academic side-by-side comparison diagram. Left panel labeled 'Traditional Black-Box AI': shows a dental X-ray input feeding into an opaque black box with question marks, outputting a diagnosis label 'Caries Detected' with no explanation. Right panel labeled 'Explainable AI (XAI)': shows the same dental X-ray input feeding into a transparent neural network with visible attention heatmaps highlighting suspicious regions in yellow-to-red gradient, connected to intermediate reasoning steps (feature extraction icons), and outputting 'Caries Detected' with supporting evidence panel listing: 'Evidence 1: Radiolucency in enamel (confidence 94%)', 'Evidence 2: Depth measurement 2.3mm', 'Evidence 3: Similar cases from training data'. A large arrow between panels labeled 'Transparency Gap'. Color scheme: left panel in dark grays, right panel in blues and greens with warm accent colors for heatmaps. Clean white background, IEEE conference style, publication-quality, professional sans-serif fonts."
+                </div>
+            </figure>
+
+            <h2>B. Transparency and Accountability</h2>
+
+            <p>The lack of transparency in AI systems is yet another problem that has to be tackled by the stakeholders. "Black box" AI systems have become commonplace where the decision-making process is opaque and unknown to clinicians. This in turn can cause problems in terms of the clinicians' ability to trust in AI systems. The lack of transparency in decision-making could also mean that patients are being treated differently for the same condition. This could be due to the previous decisions that have been made by the AI system. This would mean that there would be a lack of accountability by the AI system. This in turn would mean that there would be a lack of trust from the stakeholders. Patients have a right to know how they have been diagnosed and treated for any medical condition. The use of AI in dentistry could provide different methods of treatment for the same condition. Therefore, patients have the right to know why one treatment over another. This in turn would ensure that there is accountability by the AI system and that there is transparency in the decision-making process. The use of AI in dentistry has the potential to provide optimal treatment for patients with dental diseases and conditions. Therefore, the stakeholders have to work together to ensure that there is transparency and accountability by the AI systems in dentistry.</p>
+
+            <h1>IV. Longitudinal Validation and Clinical Workflow Integration</h1>
+
+            <h2>A. Absence of Long-Term Studies</h2>
+
+            <p>There is a limited amount of research on the effects of AI implementation on dental practice in the long term. The majority of current research on early detection of dental diseases and their diagnosis is based on cross-sectional studies. The existing evidence suggests that early detection and prevention of dental diseases is one of the key goals of dental practice, which could be enhanced by effective AI-assisted systems. Therefore, future research should concentrate on evaluating AI-based systems in real-life workflows and assessing their influence on treatment outcomes and patient satisfaction.</p>
+
+            <p>Additionally, and most importantly, current research lacks longitudinal studies. While cross-sectional studies are easy to be implemented to analyze the early detection of dental diseases, AI's impact in the long run on dental practice needs to be studied. Only longitudinal studies can give a clear picture about the progression of dental diseases and the changes of risk factors over time. Thus, AI's potential and limitations of current models can be highlighted for implementation in clinical settings and for improving treatment options [9].</p>
+
+            <h2>B. Clinical Workflow Challenges</h2>
+
+            <p>Although an increasing number of clinical AI systems have been introduced into the market and have been integrated into the daily workflow of dental practitioners, there are a number of clinical workflow-related issues that must be addressed, not least the lack of a consensus on the standardized protocol for the implementation of AI into the clinical workflow [6]. As it is currently the case, the training that the staff receive and the amount of experience that they have with the technology affect how the technology is used, with the potential for poor patient outcomes as a result of underutilization of the technology. For example, a dental clinic equipped with the latest AI-powered diagnostic system would not be able to reach its full potential if the system is not used effectively due to practitioners' lack of comfort in using the technology and in making decisions with the aid of the technology. Moreover, there are also concerns that the inconsistent use of AI systems in the clinical setting could potentially affect the credibility of AI systems in the dental practice and may lead to the negative perception of the technology by patients.</p>
+
+            <p>Lastly, many challenges to the use of computer-based systems in practice remain and those relating to the operational use of the dental clinic are among the greatest. As noted earlier, all AI will, at some point, require human intervention and currently, in dental practice, time is a critical component in the clinical workflow. Future dental AI systems must be capable of being used with minimal input from users. In addition, while much is made of the potential for AI to analyze and diagnose conditions based on clinical and radiographic data, currently, many practitioners are hesitant to implement any change to practice that would require additional training or additional expense. Thus, there is a critical need for inclusion of dentists and dental hygienists in all stages of AI system development in order to create a system that is easily learnable, usable, and will enhance practice rather than creating additional challenges to complete the day's clinical work.</p>
+
+            <figure>
+                <div class="figure-placeholder">
+                    <span class="figure-placeholder-text">[Figure Placeholder]</span>
+                </div>
+                <figcaption>
+                    <span class="figure-number">Fig. 4.</span> Proposed framework for integrating AI diagnostics into dental clinical workflows, addressing the gap between algorithm development and practical chairside implementation.
+                </figcaption>
+                <div class="ai-prompt">
+                    <span class="ai-prompt-label">AI Prompt:</span> "A professional academic flowchart diagram showing clinical workflow integration of AI in dentistry. Top row: four stages from left to right—'Patient Registration' (clipboard icon), 'Intraoral Examination' (dental mirror icon), 'Radiographic Imaging' (X-ray icon), 'AI Analysis' (computer with neural network icon). Middle: a central decision diamond labeled 'AI Confidence > Threshold?' with two branches—'Yes' arrow to 'AI-Assisted Diagnosis' (dentist + AI collaboration icon), 'No' arrow to 'Expert Consultation' (senior dentist icon). Bottom row: three outcomes—'Treatment Planning' (tooth with treatment plan), 'Patient Education' (dentist explaining to patient), 'Follow-up Scheduling' (calendar icon). Color-coded stages: registration in light blue, examination in teal, imaging in blue, AI in dark blue, outcomes in green. Connecting arrows with labels. Clean white background, IEEE conference style, publication-quality, professional sans-serif fonts."
+                </div>
+            </figure>
+
+            <h1>V. Data Privacy, Ethics, and Consent</h1>
+
+            <h2>A. Patient Data Protection Concerns</h2>
+
+            <p>The use of health information for training AI systems also raises new questions with regard to data privacy and the necessary consent of the patients from whom the data originates. If and to what use is made of already processed data for training new AI systems, must be clarified on the basis of ethical considerations and in accordance with the applicable law. The development of new frameworks that can balance the necessary quantity and quality of required data with the protection of the patients' rights of influence and to access their data is needed.</p>
+
+            <p>Moreover, there are a number of ethical concerns related to the use of patient data for AI training. Current studies are failing to take the implications of using patient data for the training of models seriously enough and so are not providing adequate consideration of the issues of consent and data protection [1]. Guidelines are needed that set out a framework for the ethical use of data in AI research within the dental field.</p>
+
+            <h2>B. Ethical Implications in Clinical Decision-Making</h2>
+
+            <p>There are many ethical implications for the use of AI systems in a clinical environment, where decisions are made that can have serious effects on a patient's health. It is crucial for all healthcare practitioners to understand the limitations of the systems that they use, as they can provide results that are not 100% accurate. In the end, it is up to the dentist to make an informed decision based on the results provided by the computer. With the advent of precision dentistry, having the skills to effectively utilize AI systems will become a valuable asset to any dentist, and to the dentist's patients.</p>
+
+            <p>There is also potential for AI to be less effective at times due to social determinants of health that are changing rapidly and have greater influence on dental diseases than any other aspect of overall health. For instance, as noted by Sai et al. [12], the influence of socio-economic status, access to dental care, and cultural beliefs on prevalence and recognition of dental diseases in different populations cannot be ignored. The early detection and prevention of dental diseases using AI need to be tailored to the needs of different populations and must be able to take into consideration the various factors that influence the dental health of individuals from different backgrounds. This can only be achieved by using datasets that are able to accurately represent the diverse range of socio-demographic factors and how they influence the dental health of individuals.</p>
+
+            <table>
+                <caption>TABLE I. Key Research Gaps in AI-Based Dental Diagnostics</caption>
+                <thead>
+                    <tr>
+                        <th>Research Gap</th>
+                        <th>Description</th>
+                        <th>Impact on Clinical Practice</th>
+                        <th>Priority</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Dataset Standardization</td>
+                        <td>Small, non-standardized, poor-quality training data with limited demographic diversity [1]</td>
+                        <td>Poor generalizability across patient populations and clinical settings</td>
+                        <td>High</td>
+                    </tr>
+                    <tr>
+                        <td>Model Interpretability</td>
+                        <td>Black-box algorithms lack transparency in decision-making reasoning</td>
+                        <td>Reduced clinician trust and delayed clinical adoption</td>
+                        <td>High</td>
+                    </tr>
+                    <tr>
+                        <td>Longitudinal Validation</td>
+                        <td>Predominantly cross-sectional studies; absence of long-term outcome tracking [9]</td>
+                        <td>Unknown impact on disease progression and treatment efficacy</td>
+                        <td>High</td>
+                    </tr>
+                    <tr>
+                        <td>Workflow Integration</td>
+                        <td>Lack of standardized protocols for AI implementation in clinical practice [6]</td>
+                        <td>Inconsistent utilization and suboptimal patient outcomes</td>
+                        <td>Medium</td>
+                    </tr>
+                    <tr>
+                        <td>Data Privacy & Ethics</td>
+                        <td>Insufficient frameworks for patient consent and data protection in AI training [1]</td>
+                        <td>Legal risks and erosion of patient trust</td>
+                        <td>High</td>
+                    </tr>
+                    <tr>
+                        <td>Education & Training</td>
+                        <td>Dental curricula lack adequate AI technology preparation</td>
+                        <td>Workforce ill-prepared for technology-driven practice</td>
+                        <td>Medium</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h1>VI. Education and Workforce Preparedness</h1>
+
+            <h2>A. Dental Curriculum Gaps</h2>
+
+            <p>Lack of adequate training in dental schools also needs to be addressed. As dental education moves into the digital age, schools must incorporate adequate training in technology, especially AI. While some schools are now including technology in the dental curriculum, the focus is not on the specifics of AI and how it can be applied in practice. Dental schools need to do a better job of preparing their students for the challenges that they will face in the workplace. The educational programs must provide practical knowledge and applications of current technology and future developments, such as AI, to ensure that all graduating dentists are proficient in the use of technology.</p>
+
+            <p>Future research should address the needs of dental professionals by integrating AI training into practice and developing tools to aid in the clinical workflows of practitioners. There is a great need for future dental professionals to be better prepared to practice with dental AI in all of its various applications, and to work with the technology effectively in a variety of clinical situations and scenarios. To that end, it will be very important to create programs of study that incorporate the training of dental professionals in the use of a wide variety of different dental AI tools, as well as an in-depth examination of the effective implementation of AI in a variety of different clinical settings and scenarios. Such programs of study will not only help to increase the ability of currently practicing dental professionals to work effectively with a wide variety of different dental AI tools, but will also provide future dental professionals with the best possible education and training in the use of dental AI in all of its various forms and applications [3].</p>
+
+            <h2>B. Practitioner Confidence and Technology Adoption</h2>
+
+            <p>To address the issues with the current state of AI research and its implementation in dental practices, it is vital to understand how to integrate AI with clinical workflows. Long-term studies are needed to assess the performance and the impact that AI has on the different aspects of dental practices and their outcomes. To this end, the early detection of dental diseases using AI has the potential to transform the dental clinic. However, despite the advances in the diagnostic capabilities of various AI models and their applications in dental practices, there are various limitations that currently affect the implementation and efficient use of various AI systems in dental practices. One of the major limitations of current dental practices is the lack of understanding of how to integrate AI with the current workflow of dental practices. Various studies have been conducted to understand the current applications of various AI models and how they can be used in dental practices [3]. The use of various AI models in the early detection of dental diseases has the potential to improve the accuracy of various dental diagnostic procedures. However, despite their potential, there are many limitations that affect the implementation and the efficient use of various AI systems in dental practices. The limitations of current dental practices using AI systems need to be addressed to improve the early detection of dental diseases and to improve patient care.</p>
+
+            <figure>
+                <div class="figure-placeholder">
+                    <span class="figure-placeholder-text">[Figure Placeholder]</span>
+                </div>
+                <figcaption>
+                    <span class="figure-number">Fig. 5.</span> Proposed competency framework for AI literacy in dental education, mapping required skills from foundational digital literacy to advanced AI-assisted clinical decision-making.
+                </figcaption>
+                <div class="ai-prompt">
+                    <span class="ai-prompt-label">AI Prompt:</span> "A professional academic pyramid or tiered diagram showing four levels of AI competency for dental professionals. Bottom tier (Level 1 - Foundation): 'Digital Literacy' with icons for basic computer skills, data privacy awareness, digital imaging basics. Second tier (Level 2 - Understanding): 'AI Concepts' with icons for machine learning basics, neural networks, dataset quality awareness. Third tier (Level 3 - Application): 'Clinical AI Tools' with icons for radiograph analysis software, intraoral scan interpretation, treatment planning AI. Top tier (Level 4 - Mastery): 'AI-Assisted Decision Making' with icons for critical evaluation of AI outputs, integrating AI with clinical judgment, patient communication about AI. Each tier wider at bottom, narrower at top. Color gradient from light green (bottom) to dark blue (top). Arrows showing progression between levels. Title at top: 'AI Competency Framework for Dental Professionals'. Clean white background, IEEE conference style, publication-quality, professional sans-serif fonts."
+                </div>
+            </figure>
+
+            <h1>VII. Interdisciplinary Collaboration and Future Directions</h1>
+
+            <h2>A. Need for Multidisciplinary Research Teams</h2>
+
+            <p>In order to address these challenges and to find solutions for the currently open questions regarding the use of AI in the diagnosis of dental diseases, it is necessary to set up interdisciplinary research teams, consisting of AI researchers, healthcare providers, and ethicists [19]. Dental practitioners are essential to all stages of the research process, in order to enable the dental AI developers to create models that can accurately diagnose and treat a variety of oral health conditions and to take into account the specific clinical decisions that dentists and dental hygienists make on a daily basis. Healthcare providers are also essential in helping to identify and address any negative consequences that the use of AI in healthcare could have, and in order to develop and implement algorithms that are fair, accountable, secure, and that respect the rights of individuals (data protection). The ethical challenges that are related to the use of AI in healthcare should already be taken into account in the development phase of these systems. By doing so, it is possible to develop systems that, in addition to providing accurate diagnoses, also gain the trust of healthcare providers and patients.</p>
+
+            <p>In order to pursue innovative approaches to the training of AI systems and to deal with the ethical implications of AI diagnostics in healthcare, research funding bodies and institutions should, in future, more strongly support and promote joint projects from interdisciplinary teams of researchers, healthcare providers.</p>
+
+            <h2>B. Continuous Learning and Adaptive Systems</h2>
+
+            <p>Moreover, future studies should develop continuous learning systems for the AI diagnostics. Such systems are able to improve the accuracy of their decisions, as well as their reliability by continuously updating their algorithms by means of new data as well as by learning from the clinical experiences of healthcare providers. The development of such systems for the early detection of oral diseases requires a close collaboration of specialists from different fields.</p>
+
+            <p>In conclusion, there are also great needs for the development of and research on the regulatory frameworks of AI in the healthcare field in general and for the support of these issues in dental healthcare, with the focus placed on safe, effective, and equitable for all citizens.</p>
+
+            <figure>
+                <div class="figure-placeholder">
+                    <span class="figure-placeholder-text">[Figure Placeholder]</span>
+                </div>
+                <figcaption>
+                    <span class="figure-number">Fig. 6.</span> Roadmap for advancing AI-based dental diagnostics, outlining short-term, medium-term, and long-term research priorities across technical, clinical, ethical, and regulatory domains.
+                </figcaption>
+                <div class="ai-prompt">
+                    <span class="ai-prompt-label">AI Prompt:</span> "A professional academic roadmap timeline diagram with three horizontal time phases from left to right. Phase 1 (Short-term, 1-2 years): 'Dataset Standardization & XAI Development' with sub-items—multicentric data collection, annotation protocols, explainable model prototypes. Phase 2 (Medium-term, 3-5 years): 'Clinical Validation & Workflow Integration' with sub-items—longitudinal studies, workflow optimization, practitioner training programs. Phase 3 (Long-term, 5+ years): 'Regulatory Frameworks & Global Deployment' with sub-items—ethical guidelines, international standards, equitable access programs. Each phase is a colored horizontal bar (Phase 1 in light blue, Phase 2 in medium blue, Phase 3 in dark blue) with milestone diamond markers. Vertical connecting lines to four domain tracks above: Technical, Clinical, Ethical, Regulatory. Title at top: 'Research Roadmap for AI-Based Dental Diagnostics'. Clean white background, IEEE conference style, publication-quality, professional sans-serif fonts, subtle grid lines."
+                </div>
+            </figure>
+
+            <h1>VIII. Conclusion</h1>
+
+            <p>In summary, while the various applications of AI have promising potential in the early detection of dental diseases, there are several significant limitations of current research on AI for dental applications. Addressing these limitations will be crucial to the realization of the full potential of dental applications of AI for effective and efficient implementation in the dental clinic for the betterment of patient care and dental practice.</p>
+
+            <p>In summary, advancing the use of AI in early detection of dental diseases requires an integrated, multidisciplinary approach that brings clinical inputs from a variety of specialties, fosters collaboration and research across sectors and geographical locations, and highlights ethical considerations to optimize dental diagnostic tools and techniques.</p>
+
+            <p>Furthermore, the continued research into the early detection of dental diseases using AI is crucial for the optimal use of technology in order to increase the diagnostic accuracy of dental diseases and, most importantly, to improve the patient care provided. The ultimate goal of the implementation of innovative technologies such as AI in dental practices is to ensure that dental treatments and care are of the highest quality and provide the best results for patients. The ongoing efforts and contributions of researchers, clinicians, and companies around the world will continue to shape the future of dental care, and, with the successful integration of AI in dental practices, a future of dental charting new territories in healthcare disparities and the detection and treatment of a wide variety of dental diseases will arise.</p>
+
+            <!-- ===== REFERENCES ===== -->
+            <div class="references-section">
+                <div class="references-title">References</div>
+                <ol class="references-list">
+                    <li><span class="ref-number">[1]</span> E. Sivari, G. B. Senirkentli, E. Bostanci, M. S. Guzel, K. Acici, and T. Asuroglu, "Deep learning in diagnosis of dental anomalies and diseases: A systematic review," <em>Diagnostics</em>, vol. 13, no. 15, p. 2512, Jul. 2023.</li>
+
+                    <li><span class="ref-number">[2]</span> L. Arsiwala-Scheppach, "Artificial intelligence in dentistry: Scoping review and bridging observed knowledge gaps via a methodological study and a clinical trial," <em>Dissertation</em>, 2023.</li>
+
+                    <li><span class="ref-number">[3]</span> S. N. Basheer, A. A. Daghrery, N. H. Albar, S. W. Peeran, and M. I. Karobari, "Emerging trends in the early diagnosis of dental caries: A scoping review of artificial intelligence, digital diagnostics, and teledentistry," <em>Evidence-Based Dentistry</em>, pp. 1-1, Feb. 2026.</li>
+
+                    <li><span class="ref-number">[4]</span> R. B. Chauhan, T. V. Shah, D. H. Shah, T. J. Gohil, A. D. Oza, B. Jajal, and K. K. Saxena, "An overview of image processing for dental diagnosis," <em>Innovation and Emerging Technologies</em>, vol. 10, p. 2330001, Jun. 2023.</li>
+
+                    <li><span class="ref-number">[5]</span> T. Bonny, W. Al Nassan, K. Obaideen, M. N. Al Mallahi, Y. Mohammad, and H. M. El-Damanhoury, "Contemporary role and applications of artificial intelligence in dentistry," <em>F1000Research</em>, vol. 12, p. 1179, Sep. 2023.</li>
+
+                    <li><span class="ref-number">[6]</span> J. Li, W. Y. Kot, C. P. McGrath, B. W. Chan, J. W. Ho, and L. W. Zheng, "Diagnostic accuracy of artificial intelligence assisted clinical imaging in the detection of oral potentially malignant disorders and oral cancer: A systematic review and meta-analysis," <em>International Journal of Surgery</em>, vol. 110, no. 8, pp. 5034-5046, Aug. 2024.</li>
+
+                    <li><span class="ref-number">[7]</span> Z. M. Semerci and S. Yardımcı, "Empowering modern dentistry: The impact of artificial intelligence on patient care and clinical decision making," <em>Diagnostics</em>, vol. 14, no. 12, p. 1260, Jun. 2024.</li>
+
+                    <li><span class="ref-number">[8]</span> A. Dhopte and H. Bagde, "Smart smile: Revolutionizing dentistry with artificial intelligence," <em>Cureus</em>, vol. 15, no. 6, Jun. 2023.</li>
+
+                    <li><span class="ref-number">[9]</span> F. Schwendicke, T. Singh, J. H. Lee, R. Gaudin, A. Chaurasia, T. Wiegand, S. Uribe, and J. Krois, "Artificial intelligence in dental research: Checklist for authors, reviewers, readers," <em>Journal of Dentistry</em>, vol. 107, p. 103610, Apr. 2021.</li>
+
+                    <li><span class="ref-number">[10]</span> M. Ezhov, M. Gusarev, M. Golitsyna, J. M. Yates, E. Kushnerev, D. Tamimi, S. Aksoy, E. Shumilov, A. Sanders, and K. Orhan, "Clinically applicable artificial intelligence system for dental diagnosis with CBCT," <em>Scientific Reports</em>, vol. 11, no. 1, p. 15006, Jul. 2021.</li>
+
+                    <li><span class="ref-number">[11]</span> B. Ilhan, K. Lin, P. Guneri, and P. Wilder-Smith, "Improving oral cancer outcomes with imaging and artificial intelligence," <em>Journal of Dental Research</em>, vol. 99, no. 3, pp. 241-248, Mar. 2020.</li>
+
+                    <li><span class="ref-number">[12]</span> S. Sai, A. Gaur, R. Sai, V. Chamola, M. Guizani, and J. J. Rodrigues, "Generative AI for transformative healthcare: A comprehensive study of emerging models, applications, case studies, and limitations," <em>IEEE Access</em>, vol. 12, pp. 31078-31106, Feb. 2024.</li>
+
+                    <li><span class="ref-number">[13]</span> R. Rokhshad, S. O. Keyhan, and P. Yousefi, "Artificial intelligence applications and ethical challenges in oral and maxillo-facial cosmetic surgery: A narrative review," <em>Maxillofacial Plastic and Reconstructive Surgery</em>, vol. 45, no. 1, p. 14, Mar. 2023.</li>
+
+                    <li><span class="ref-number">[14]</span> A. Babu, J. Andrew Onesimu, and K. Martin Sagayam, "Artificial intelligence in dentistry: Concepts, applications and research challenges," in <em>E3S Web of Conferences</em>, vol. 297, p. 01074, Jan. 2021.</li>
+
+                    <li><span class="ref-number">[15]</span> T. Wasilewski, W. Kamysz, and J. Gębicki, "AI-assisted detection of biomarkers by sensors and biosensors for early diagnosis and monitoring," <em>Biosensors</em>, vol. 14, no. 7, p. 356, Jul. 2024.</li>
+
+                    <li><span class="ref-number">[16]</span> T. D. Pham, M. T. Teh, D. Chatzopoulou, S. Holmes, and P. Coulthard, "Artificial intelligence in head and neck cancer: Innovations, applications, and future directions," <em>Current Oncology</em>, vol. 31, no. 9, pp. 5255-5290, Sep. 2024.</li>
+
+                    <li><span class="ref-number">[17]</span> M. Khalifa and M. Albadawy, "AI in diagnostic imaging: Revolutionising accuracy and efficiency," <em>Computer Methods and Programs in Biomedicine Update</em>, vol. 5, p. 100146, Jan. 2024.</li>
+
+                    <li><span class="ref-number">[18]</span> Y. Kumar, A. Koul, R. Singla, and M. F. Ijaz, "Artificial intelligence in disease diagnosis: A systematic literature review, synthesizing framework and future research agenda," <em>Journal of Ambient Intelligence and Humanized Computing</em>, vol. 14, no. 7, pp. 8459-8486, Jul. 2023. [Retracted article].</li>
+
+                    <li><span class="ref-number">[19]</span> O. T. Jones, N. Calanzani, S. Saji, S. W. Duffy, J. Emery, W. Hamilton, H. Singh, N. J. de Wit, and F. M. Walter, "Artificial intelligence techniques that may be applied to primary care data to facilitate earlier diagnosis of cancer: Systematic review," <em>Journal of Medical Internet Research</em>, vol. 23, no. 3, p. e23483, Mar. 2021.</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
