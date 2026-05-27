@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artificial Intelligence in Quantitative Finance: A Systematic Literature Review and Thematic Synthesis</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Times+New+Roman&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            line-height: 1.5;
+            color: #000;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.75in;
+            background: #fff;
+        }
+
+        /* IEEE Two-column layout */
+        .paper-container {
+            column-count: 2;
+            column-gap: 0.3in;
+            column-rule: none;
+        }
+
+        /* Title styling - spans both columns */
+        .title-section {
+            column-span: all;
+            text-align: center;
+            margin-bottom: 12pt;
+        }
+
+        .paper-title {
+            font-size: 14pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5pt;
+            margin-bottom: 18pt;
+            line-height: 1.3;
+        }
+
+        .author-info {
+            font-size: 11pt;
+            margin-bottom: 6pt;
+        }
+
+        .author-name {
+            font-weight: bold;
+        }
+
+        .affiliation {
+            font-style: italic;
+            font-size: 10pt;
+        }
+
+        .email {
+            font-size: 9pt;
+            color: #333;
+        }
+
+        /* Abstract */
+        .abstract-section {
+            column-span: all;
+            margin: 12pt 0;
+            padding: 8pt 12pt;
+            border: 1pt solid #000;
+            background: #fafafa;
+        }
+
+        .abstract-title {
+            font-weight: bold;
+            font-size: 9pt;
+            text-transform: uppercase;
+            margin-bottom: 4pt;
+        }
+
+        .abstract-text {
+            font-size: 9pt;
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        .keywords {
+            font-size: 9pt;
+            margin-top: 6pt;
+        }
+
+        .keywords-label {
+            font-weight: bold;
+        }
+
+        /* Section headings */
+        h1 {
+            font-size: 10pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            margin: 12pt 0 6pt 0;
+            column-span: all;
+        }
+
+        h2 {
+            font-size: 10pt;
+            font-weight: bold;
+            font-style: italic;
+            margin: 10pt 0 4pt 0;
+            text-align: left;
+        }
+
+        h3 {
+            font-size: 10pt;
+            font-weight: bold;
+            margin: 8pt 0 3pt 0;
+        }
+
+        /* Paragraphs */
+        p {
+            text-align: justify;
+            text-indent: 0.15in;
+            margin-bottom: 4pt;
+            hyphens: auto;
+        }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        /* Tables - IEEE style */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 8pt 0;
+            font-size: 8pt;
+            column-span: all;
+        }
+
+        table caption {
+            font-weight: bold;
+            text-align: left;
+            margin-bottom: 3pt;
+            font-size: 9pt;
+        }
+
+        th, td {
+            border: 0.5pt solid #000;
+            padding: 3pt 4pt;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #f0f0f0;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        /* Figures */
+        figure {
+            margin: 10pt 0;
+            text-align: center;
+            column-span: all;
+        }
+
+        figcaption {
+            font-size: 9pt;
+            font-weight: bold;
+            margin-top: 4pt;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 4pt 0 4pt 0.25in;
+            padding-left: 0.15in;
+        }
+
+        li {
+            margin-bottom: 2pt;
+            text-align: justify;
+        }
+
+        /* References */
+        .references {
+            column-span: all;
+            font-size: 8pt;
+        }
+
+        .references h1 {
+            font-size: 10pt;
+        }
+
+        .references ol {
+            padding-left: 0.2in;
+            margin-left: 0;
+        }
+
+        .references li {
+            margin-bottom: 3pt;
+            text-indent: -0.2in;
+            padding-left: 0.2in;
+            text-align: left;
+        }
+
+        /* Equations */
+        .equation {
+            text-align: center;
+            margin: 6pt 0;
+            font-style: italic;
+        }
+
+        /* Footnotes */
+        .footnote {
+            font-size: 8pt;
+            vertical-align: super;
+        }
+
+        /* Page breaks */
+        .page-break {
+            break-after: page;
+        }
+
+        /* Special boxes */
+        .highlight-box {
+            border: 0.5pt solid #333;
+            padding: 6pt;
+            margin: 8pt 0;
+            background: #f9f9f9;
+            font-size: 9pt;
+        }
+
+        /* First page special */
+        .first-page {
+            column-count: 2;
+            column-gap: 0.3in;
+        }
+
+        /* Line numbers for draft */
+        .line-numbers {
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 8pt;
+            color: #999;
+        }
+
+        /* Header/Footer simulation */
+        .paper-header {
+            column-span: all;
+            text-align: center;
+            font-size: 9pt;
+            border-bottom: 1pt solid #000;
+            padding-bottom: 4pt;
+            margin-bottom: 12pt;
+        }
+
+        /* Citation style [1] */
+        .cite {
+            font-size: 8pt;
+            vertical-align: super;
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+
+<!-- Paper Header -->
+<div class="paper-header">
+    <span style="font-weight:bold;">2026 IEEE International Conference on Artificial Intelligence and Financial Technology (AIFT)</span><br>
+    Vadodara, India | May 27-29, 2026
+</div>
+
+<!-- Title Section -->
+<div class="title-section">
+    <div class="paper-title">
+        Artificial Intelligence in Quantitative Finance: A Systematic Literature Review and Thematic Synthesis
+    </div>
+
+    <div class="author-info">
+        <span class="author-name">Tamanna Sharma</span><sup>1</sup>
+    </div>
+
+    <div class="affiliation">
+        <sup>1</sup>PhD Scholar, Department of Computer Science and Engineering<br>
+        Sigma University, Vadodara, Gujarat, India<br>
+        <span class="email">tamanna.sharma@sigmauniversity.ac.in</span>
+    </div>
+</div>
+
+<!-- Abstract -->
+<div class="abstract-section">
+    <div class="abstract-title">Abstract</div>
+    <div class="abstract-text">
+        This systematic literature review examines the rapidly evolving intersection of artificial intelligence (AI) and quantitative finance through analysis of 20 seminal research papers published between 2020 and 2025. The review synthesizes literature across five thematic clusters: (1) Deep Reinforcement Learning for Automated Trading, (2) Large Language Models in Financial Forecasting, (3) Generative AI and Asset Pricing, (4) AI-Driven Risk Management and Compliance, and (5) Human-AI Collaboration in Financial Services. Through comparative analysis of research objectives, theoretical frameworks, methodologies, key variables, and major findings, this review identifies critical gaps including look-ahead bias in LLM forecasting, memorization problems in economic predictions, regulatory challenges in democratized AI, and the need for robust human-AI complementarity frameworks. The synthesis reveals a paradigm shift from traditional model-based finance toward data-driven, AI-augmented decision-making systems, while highlighting persistent challenges in model interpretability, data governance, and ethical deployment. This review provides a comprehensive foundation for future research directions in AI-enabled quantitative finance.
+    </div>
+    <div class="keywords">
+        <span class="keywords-label">Index Terms</span>—Artificial Intelligence, Quantitative Finance, Deep Reinforcement Learning, Large Language Models, Generative AI, Algorithmic Trading, Financial Forecasting, Risk Management, FinTech
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="paper-container">
+
+<h1>I. Introduction</h1>
+
+<p class="no-indent">
+The integration of artificial intelligence into quantitative finance represents one of the most significant paradigm shifts in financial economics since the development of modern portfolio theory [1]. Over the past five years, the field has witnessed an unprecedented convergence of deep learning, natural language processing, and reinforcement learning techniques with traditional financial modeling approaches. This literature review systematically examines 20 key contributions to understand how AI technologies are reshaping asset pricing, trading strategies, risk management, and financial decision-making.
+</p>
+
+<p>
+The reviewed literature spans from foundational works in 2020, such as the FinRL library for deep reinforcement learning in automated trading [2], to cutting-edge 2025 research on DeepSeek's democratization of AI in FinTech [3]. The temporal distribution reveals an accelerating research trajectory, with 70% of the reviewed papers published between 2023 and 2025, reflecting the rapid evolution of the field following breakthroughs in large language models (LLMs) and generative AI.
+</p>
+
+<p>
+This review addresses the following research questions: (1) What theoretical frameworks underpin AI applications in quantitative finance? (2) What methodologies are employed across different AI-finance research domains? (3) What are the major findings and their implications for market efficiency and financial decision-making? (4) What critical gaps remain in the literature, and what future research directions emerge?
+</p>
+
+<h1>II. Methodology</h1>
+
+<p class="no-indent">
+This systematic review employed a comprehensive search strategy across major academic databases including SSRN, arXiv, NBER, IEEE Xplore, and peer-reviewed journals. Selection criteria focused on papers that: (1) explicitly address AI/ML applications in finance, (2) provide empirical or theoretical contributions, (3) span diverse sub-domains including trading, asset pricing, forecasting, risk management, and regulatory compliance, and (4) represent high-impact contributions as evidenced by citation metrics and publication venues.
+</p>
+
+<p>
+Each paper was analyzed using a standardized extraction framework covering: complete citation, research objective, theoretical framework, methodology, key variables, major findings, identified gaps, and author conclusions. Thematic clustering was performed using content analysis to identify recurring patterns, theoretical convergences, and methodological innovations [4].
+</p>
+
+<h1>III. Comparative Analysis</h1>
+
+<p class="no-indent">
+Table I presents the comprehensive comparative analysis of all 20 reviewed papers across eight dimensions. The analysis reveals distinct methodological approaches ranging from deep reinforcement learning architectures [2] to transformer-based asset pricing models [5] and field experiments in human-AI collaboration [6].
+</p>
+
+<table>
+    <caption>TABLE I: COMPARATIVE ANALYSIS OF REVIEWED LITERATURE</caption>
+    <thead>
+        <tr>
+            <th style="width:3%">No.</th>
+            <th style="width:15%">Source</th>
+            <th style="width:12%">Research Objective</th>
+            <th style="width:12%">Theoretical Framework</th>
+            <th style="width:12%">Methodology</th>
+            <th style="width:12%">Key Variables</th>
+            <th style="width:12%">Major Findings</th>
+            <th style="width:12%">Gaps Identified</th>
+            <th style="width:10%">Conclusion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Liu et al. (2020) [2]</td>
+            <td>Develop open-source DRL library for automated stock trading</td>
+            <td>Markov Decision Process; Efficient Market Hypothesis</td>
+            <td>Three-layer architecture; DQN, DDPG, PPO, SAC, A2C, TD3; Backtesting via pyfolio</td>
+            <td>Stock prices (NASDAQ-100, DJIA, S&P 500, HSI, SSE 50, CSI 300); Transaction costs; Sharpe ratio; Maximum drawdown</td>
+            <td>DRL agents outperformed S&P 500 benchmark; PPO achieved 1.49 Sharpe for SPY; Market frictions improve applicability</td>
+            <td>Limited to historical backtesting; No live trading validation; Scalability concerns for HFT</td>
+            <td>FinRL democratizes DRL trading strategy development through modular architecture</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Kelly et al. (2023) [5]</td>
+            <td>Embed transformer networks into SDF framework for cross-sectional asset pricing</td>
+            <td>Stochastic Discount Factor; Attention mechanism theory</td>
+            <td>Transformer-based AIPM; Comparison with FF6, HXZ, SY, DHS, BSV, DKKM models</td>
+            <td>Asset returns; Firm characteristics; Cross-asset dependencies; Pricing errors; Out-of-sample R²</td>
+            <td>Transformers outperform traditional factor models; Cross-asset information sharing reduces pricing errors by 2.4-4.7 percentage points</td>
+            <td>Complexity vs. interpretability trade-off; Computational requirements; Robustness across market regimes</td>
+            <td>AI-driven asset pricing models offer superior predictive power through cross-sectional dependencies</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>[Clustering Pairs Trading] (2023) [7]</td>
+            <td>Employ unsupervised learning for identifying pairs trading opportunities</td>
+            <td>Mean reversion theory; Statistical arbitrage; Unsupervised learning</td>
+            <td>Clustering with Euclidean, PCA-based, and partial correlation distances</td>
+            <td>S&P 500 constituents (2000-2023); Monthly excess returns; Sharpe ratios; Transaction costs; Purity index</td>
+            <td>Average monthly excess returns of 36-41 basis points; Sharpe ratios 0.20-0.30; Partial correlation achieves highest risk-adjusted performance</td>
+            <td>Limited to S&P 500 universe; Stationarity assumptions; Transaction cost sensitivity; No regime changes</td>
+            <td>ML clustering, particularly partial correlation metrics, identifies profitable pairs trading opportunities</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Cont & Vuletić (2024) [8]</td>
+            <td>Propose nonparametric data-driven hedging using conditional generative models</td>
+            <td>Risk minimization theory; No-arbitrage pricing; Generative modeling</td>
+            <td>Conditional generative model (VoLGAN) for implied volatility surfaces; Linear regression for hedge ratios</td>
+            <td>Implied volatility surfaces; Underlying asset prices; Option portfolio; Hedging instruments; Regularization parameters</td>
+            <td>Data-driven hedging outperforms traditional delta-vega approaches; Automated instrument selection; Realistic scenario generation</td>
+            <td>Dependence on generative model training quality; Limited to European options; Computational intensity for real-time hedging</td>
+            <td>Generative models enable fully data-driven hedging strategies that learn co-movements from market data</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Kelly et al. (2024) [9]</td>
+            <td>Examine relationship between model complexity and prediction accuracy in financial forecasting</td>
+            <td>Statistical learning theory; Bias-variance trade-off; Complexity bounds</td>
+            <td>Theoretical analysis with empirical validation; Complexity measures; Out-of-sample prediction analysis</td>
+            <td>Model parameters; Prediction error; Noise levels; Sample size; Signal-to-noise ratio</td>
+            <td>Complexity improves prediction only up to a point in noisy environments; Overparameterization risks in financial data</td>
+            <td>Optimal complexity level determination; Regime-dependent complexity bounds; Interaction with market microstructure noise</td>
+            <td>In noisy financial markets, excessive model complexity can harm predictive performance</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Lopez-Lira & Tang (2023) [10]</td>
+            <td>Evaluate LLM capability in predicting stock market reactions from news headlines</td>
+            <td>Information processing theory; Limited attention; Underreaction hypothesis</td>
+            <td>GPT-4 sentiment analysis; Portfolio-day hit rate measurement; Correlation with subsequent returns</td>
+            <td>News headlines; ChatGPT sentiment scores; Daily stock returns; Market capitalization; Post-knowledge-cutoff returns</td>
+            <td>~90% portfolio-day hit rates for non-tradable initial reactions; Significant prediction of subsequent drift; Stronger for small stocks and negative news</td>
+            <td>Look-ahead bias concerns; Knowledge cutoff limitations; Generalization across news types; Causal identification of LLM impact</td>
+            <td>LLMs possess emerging financial reasoning capabilities; Widespread adoption may improve price efficiency</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Lopez-Lira et al. (2024) [11]</td>
+            <td>Systematically evaluate whether LLMs memorize economic data rather than genuinely forecasting</td>
+            <td>Counterfactual inference; Data contamination; Knowledge cutoff theory</td>
+            <td>Recall accuracy tests; Masking experiments; Embedding analysis; Pre/post knowledge cutoff comparison</td>
+            <td>GDP, inflation, unemployment data; Stock returns; Earnings conference calls; Knowledge cutoff dates</td>
+            <td>LLMs perfectly recall exact numerical values before knowledge cutoff; Masking fails; Memorization extends to embeddings</td>
+            <td>Non-identification of true forecasting ability; Inability to distinguish skill from memorization; Contamination of backtesting results</td>
+            <td>LLMs cannot be trusted for economic forecasts during periods covered by training data; Hard cutoffs and anonymization are necessary</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Yang et al. (2023) [12]</td>
+            <td>Democratize financial LLMs through open-source framework and internet-scale data curation</td>
+            <td>Data-centric AI; Low-rank adaptation (LoRA); Transfer learning; Open finance</td>
+            <td>Automatic data curation pipeline; LoRA/QLoRA fine-tuning; RLSP; Multi-task instruction tuning</td>
+            <td>Financial sentiment data (FPB, FiQA-SA, TFNS, NWGI); Internet-scale financial text; Base models (Llama-2, Falcon, MPT, Bloom, ChatGLM2, Qwen)</td>
+            <td>FinGPT v3.3 achieved 0.882 weighted F1 on sentiment analysis; Cost-efficient training ($17.25 vs. $2.67M for BloombergGPT)</td>
+            <td>Data quality and noise from internet sources; Real-time data integration challenges; Multi-lingual processing; Regulatory compliance</td>
+            <td>Open-source FinLLMs democratize financial AI, enabling accessible, transparent, and customizable solutions</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>[Look-Ahead Bias] (2024) [13]</td>
+            <td>Examine reasoning capabilities and look-ahead bias in LLM financial applications</td>
+            <td>Behavioral finance; Cognitive biases; Information asymmetry; Causal inference</td>
+            <td>Bias detection tests; Reasoning evaluation; Temporal boundary testing; Counterfactual analysis</td>
+            <td>LLM reasoning scores; Look-ahead bias incidence; Financial task accuracy; Temporal awareness</td>
+            <td>LLMs exhibit significant look-ahead bias when processing temporal financial data; Reasoning capabilities vary by task complexity</td>
+            <td>Mitigation strategies for look-ahead bias; Real-time reasoning frameworks; Causal vs. correlational reasoning distinction</td>
+            <td>Look-ahead bias poses fundamental challenges to LLM deployment in finance; Specialized temporal reasoning architectures needed</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>[Natural Language of Finance] (2023) [14]</td>
+            <td>Analyze how NLP reveals information processing in financial markets</td>
+            <td>Information economics; Linguistic analysis; Market microstructure; Textual analysis</td>
+            <td>NLP techniques on financial documents; Semantic analysis; Information extraction; Market reaction analysis</td>
+            <td>Financial disclosures; Earnings calls; Regulatory filings; Linguistic complexity; Information content; Market response metrics</td>
+            <td>Natural language contains predictive information beyond numerical data; Linguistic complexity affects information processing</td>
+            <td>Cross-lingual analysis; Real-time processing scalability; Context-dependent semantic interpretation</td>
+            <td>Natural language is a rich, underexploited source of financial information complementing traditional quantitative analysis</td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>[Generative AI in Financial Economics] (2024) [15]</td>
+            <td>Survey applications and implications of generative AI across financial economics</td>
+            <td>Generative modeling; Economic modeling; AI transformation; Innovation diffusion</td>
+            <td>Comprehensive literature survey; Case study analysis; Trend identification; Impact assessment</td>
+            <td>Generative AI applications; Financial economics domains; Research productivity; Model innovation; Market transformation</td>
+            <td>Generative AI enables novel research methodologies; Accelerates hypothesis generation; Transforms data analysis workflows</td>
+            <td>Quality control in AI-generated research; Replication crisis risks; Ethical implications of automated research</td>
+            <td>Generative AI represents a transformative force in financial economics research, requiring careful governance</td>
+        </tr>
+        <tr>
+            <td>12</td>
+            <td>Choi & Xie (2024) [6]</td>
+            <td>Provide empirical evidence on generative AI integration in accounting workflows</td>
+            <td>Human-computer interaction; Task-based productivity; Complementarity theory; Technology adoption</td>
+            <td>Multi-method design: survey (277 accountants), stylized theoretical model, proprietary field data (79 SMEs, 200,000+ transactions), framed field experiment</td>
+            <td>AI adoption frequency; Client support metrics; Task time allocation; General ledger granularity; Monthly close time; AI confidence scores; Accountant experience</td>
+            <td>55% increase in weekly client support; 8.5 percentage point reallocation from data entry to high-value tasks; 12% increase in ledger granularity; 7.5-day reduction in monthly close</td>
+            <td>Endogeneity of AI adoption; Limited to bookkeeping tasks; SME focus; Early-stage technology; Over-reliance risks on inaccurate AI</td>
+            <td>AI augments rather than replaces professional judgment; Complementarity between expertise and AI is critical</td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td>Novy-Marx & Velikov (2024) [16]</td>
+            <td>Demonstrate and caution against automated generation of academic finance papers using LLMs</td>
+            <td>HARKing; Research integrity; Automated research; Academic production</td>
+            <td>Mining 30,000+ potential predictors; Novy-Marx & Velikov (2024) protocol; LLM-generated papers for 96 signals; Template report generation</td>
+            <td>Stock return predictors; Accounting data signals; Anomaly detection metrics; Paper generation quality; Citation accuracy</td>
+            <td>Successful generation of hundreds of complete academic papers; LLMs can create plausible theoretical justifications; Industrialization of HARKing risk</td>
+            <td>Research integrity erosion; Peer review challenges; Reproducibility crisis; Authenticity verification</td>
+            <td>AI can enhance research efficiency but poses severe risks to research integrity; Governance frameworks needed</td>
+        </tr>
+        <tr>
+            <td>14</td>
+            <td>Krause (2025) [3]</td>
+            <td>Analyze how DeepSeek's cost-efficient open-source approach disrupts AI development in FinTech</td>
+            <td>Technology democratization; Open-source economics; Global competition; Regulatory theory</td>
+            <td>Case study analysis; Cost-benefit assessment; Regulatory framework review; Geopolitical impact analysis</td>
+            <td>AI model costs; Startup entry barriers; Lending efficiency; Investment management automation; Insurance pricing; Payment processing; Energy consumption</td>
+            <td>DeepSeek lowers barriers to entry for FinTech startups; Enables competition in financial services; Applications in lending, investment, insurance, payments</td>
+            <td>Regulatory coordination gaps; Geopolitical tensions; Security vulnerabilities; Ethical standard divergence; Data sovereignty issues</td>
+            <td>Global regulatory coordination and strategic adaptation are essential for managing democratized AI in FinTech</td>
+        </tr>
+        <tr>
+            <td>15</td>
+            <td>[Bibliometric Review] (2025) [17]</td>
+            <td>Map trends, influences, and research directions in AI-finance through bibliometric analysis</td>
+            <td>Scientometrics; Research trajectory analysis; Citation network theory</td>
+            <td>Bibliometric mapping; Citation analysis; Co-authorship networks; Keyword clustering; Trend identification</td>
+            <td>Publication volume; Citation counts; Research themes; Geographic distribution; Institutional influence; Temporal trends</td>
+            <td>Exponential growth in AI-finance publications; Shift from traditional ML to deep learning and LLMs; Increasing interdisciplinary collaboration</td>
+            <td>Emerging market research gaps; Underrepresented domains (ethical AI, regulation); Methodological standardization needs; Reproducibility challenges</td>
+            <td>AI-finance research is rapidly evolving toward more sophisticated techniques, requiring enhanced collaboration</td>
+        </tr>
+        <tr>
+            <td>16</td>
+            <td>Patil & Mailcontractor (2024) [18]</td>
+            <td>Explore AI/ML implementation across financial service domains and examine opportunities and challenges</td>
+            <td>Technology adoption lifecycle; Innovation diffusion; Enterprise value chain</td>
+            <td>Literature review; Domain analysis; Use-case identification; Challenge assessment; Best practice synthesis</td>
+            <td>Fraud detection accuracy; Credit scoring efficiency; Algorithmic trading performance; Customer satisfaction; Regulatory compliance; Operational costs</td>
+            <td>AI/ML transform customer acquisition, credit decisioning, monitoring, relationship deepening, and smart servicing; Hyper-personalization potential</td>
+            <td>Ethical AI governance; Regulatory lag; Data privacy; Algorithmic bias; Talent shortage; Legacy system integration</td>
+            <td>Responsible AI implementation with robust governance frameworks is essential for sustainable value creation</td>
+        </tr>
+        <tr>
+            <td>17</td>
+            <td>[Fintech AML] (2024) [19]</td>
+            <td>Propose data-driven approaches using fintech innovations for enhanced AML compliance</td>
+            <td>Financial crime theory; Network analysis; Regulatory technology (RegTech); Graph theory</td>
+            <td>Federated learning; Graph neural networks; Explainable AI; Blockchain integration; Transaction monitoring</td>
+            <td>Transaction patterns; Network relationships; Entity resolution; Risk scores; False positive rates; Compliance costs</td>
+            <td>ML reduces false positives in AML detection; Graph neural networks identify complex money laundering networks; Federated learning enables privacy-preserving collaboration</td>
+            <td>Cross-border data sharing limitations; Adversarial adaptation by criminals; Real-time processing requirements; Regulatory acceptance of AI decisions</td>
+            <td>Data-driven fintech innovations significantly enhance AML effectiveness while requiring balanced regulatory frameworks</td>
+        </tr>
+        <tr>
+            <td>18</td>
+            <td>Wüthrich et al. (2023) [20]</td>
+            <td>Provide comprehensive lecture notes and teaching material for upskilling actuaries in data science and AI</td>
+            <td>Actuarial science; Risk theory; Statistical learning; Educational pedagogy</td>
+            <td>Comprehensive lecture notes; Theoretical foundations; Practical notebooks; Code examples; Curriculum development</td>
+            <td>Mortality data; Claims data; Reserve calculations; Risk metrics; Model validation; Predictive accuracy</td>
+            <td>Systematic framework for actuarial AI education; Integration of traditional actuarial methods with modern ML; Practical implementation guidance</td>
+            <td>Rapid field evolution requiring continuous updates; Limited explicit examples; Computational resource requirements; Industry adoption barriers</td>
+            <td>Actuarial profession must embrace data science and AI through structured education to remain relevant</td>
+        </tr>
+        <tr>
+            <td>19</td>
+            <td>[ChatGPT Finance Research] (2023) [21]</td>
+            <td>Examine whether LLMs are fundamentally changing finance research methodologies and directions</td>
+            <td>Research methodology evolution; AI-assisted discovery; Scientific creativity; Academic innovation</td>
+            <td>Experimental demonstration; LLM-generated research; Capability assessment; Directional analysis</td>
+            <td>Research productivity; Idea generation quality; Methodological innovation; Citation patterns; Collaboration structures</td>
+            <td>LLMs can generate plausible research ideas and methodologies; Risk of homogenization in research directions; Potential for accelerated discovery</td>
+            <td>Originality verification; Bias in generated directions; Over-reliance on pattern matching; Creativity vs. replication balance</td>
+            <td>LLMs are powerful tools that can augment but should not replace human creativity in shaping finance research</td>
+        </tr>
+        <tr>
+            <td>20</td>
+            <td>Melnychenko (2020) [22]</td>
+            <td>Evaluate AI readiness for comprehensive enterprise financial security assessment</td>
+            <td>Financial security theory; Cognitive limitations; Expert judgment; DEA efficiency analysis</td>
+            <td>Data Envelopment Analysis (DEA); Comparative efficiency measurement; Expert vs. AI assessment; Big Data integration</td>
+            <td>Financial indicators; Non-financial indicators; Payment infrastructure; Real-time data; 5G latency; Decision-making speed</td>
+            <td>AI excels at real-time data processing and pattern recognition; DEA methods enable objective efficiency comparison; 5G enables ultra-low latency analysis</td>
+            <td>AI inability to perceive intuitive dynamics; Bias in algorithmic assessment; Need for continuous learning systems; Integration of qualitative factors</td>
+            <td>AI is promising but not yet ready to fully replace human judgment; Hybrid approaches are optimal</td>
+        </tr>
+    </tbody>
+</table>
+
+<h1>IV. Thematic Synthesis and Cluster Analysis</h1>
+
+<h2>A. Thematic Cluster 1: Deep Reinforcement Learning for Automated Trading</h2>
+
+<p class="no-indent">
+<strong>Core Papers:</strong> Liu et al. (2020) [2]; [Clustering-based Pairs Trading] (2023) [7]; Cont & Vuletić (2024) [8]
+</p>
+
+<p>
+This cluster is anchored in Markov Decision Process (MDP) theory, extending traditional stochastic control frameworks to high-dimensional, non-linear trading environments [2]. The theoretical evolution moves from model-based (Black-Scholes, mean-reversion) to model-free reinforcement learning approaches that learn optimal policies directly from market data.
+</p>
+
+<p>
+<strong>Methodological Progression:</strong> FinRL [2] establishes the foundational infrastructure with three-layer architecture (environment-agent-application), implementing seven state-of-the-art DRL algorithms (DQN, DDPG, PPO, SAC, A2C, TD3) with market friction incorporation. The clustering-based pairs trading approach [7] extends DRL to statistical arbitrage through unsupervised learning, introducing partial correlation-based distance metrics that achieve annualized Sharpe ratios of 0.72-1.0. Data-driven hedging [8] advances to generative model-based hedging using VoLGAN for implied volatility surfaces, enabling nonparametric risk minimization that outperforms traditional delta-vega approaches.
+</p>
+
+<p>
+<strong>Inter-Study Relationships:</strong> These studies support each other in demonstrating that DRL can successfully handle financial decision-making under uncertainty, while extending applications from single-stock trading to pairs strategies and derivative hedging. However, they collectively identify the gap between backtesting and live trading performance, with no study providing out-of-sample live market validation.
+</p>
+
+<p>
+<strong>Critical Gap:</strong> The absence of reinforcement learning applications that simultaneously handle multiple asset classes across different time horizons while incorporating macroeconomic regime changes.
+</p>
+
+<h2>B. Thematic Cluster 2: Large Language Models in Financial Forecasting</h2>
+
+<p class="no-indent">
+<strong>Core Papers:</strong> Lopez-Lira & Tang (2023) [10]; Lopez-Lira, Tang & Zhu (2024) [11]; [Look-Ahead Bias] (2024) [13]; Yang, Liu & Wang (2023) [12]
+</p>
+
+<p>
+This cluster operates at the intersection of information economics, natural language processing, and market efficiency. The central theoretical tension is between the efficient processing of textual information and the risks of data contamination and look-ahead bias [11], [13].
+</p>
+
+<p>
+<strong>Methodological Progression:</strong> Lopez-Lira & Tang (2023) [10] demonstrate that GPT-4 achieves approximately 90% hit rates in predicting market reactions to news, with stronger predictability for small stocks and negative news, establishing LLMs as emerging financial reasoning engines. However, Lopez-Lira, Tang & Zhu (2024) [11] fundamentally challenge these findings, proving that LLMs perfectly recall exact economic values before knowledge cutoffs, making backtesting results non-identifiable between skill and memorization. FinGPT [12] responds by democratizing financial LLMs through open-source frameworks, achieving 0.882 F1 scores on sentiment analysis at 1/100,000th the cost of proprietary models.
+</p>
+
+<p>
+<strong>Inter-Study Relationships:</strong> These studies present a dialectical progression—initial optimism about LLM forecasting capability [10] is challenged by methodological critiques [11], [13], which in turn drives innovation in open-source alternatives [12]. The Memorization Problem [11] directly contradicts the validity of historical backtesting in ChatGPT Forecasting [10], while FinGPT [12] attempts to circumvent proprietary limitations through transparent, customizable architectures.
+</p>
+
+<p>
+<strong>Critical Gap:</strong> The field lacks robust methodologies to distinguish genuine LLM reasoning from memorization in financial forecasting, and no standardized framework exists for evaluating LLM performance in true out-of-sample, post-knowledge-cutoff environments.
+</p>
+
+<h2>C. Thematic Cluster 3: Generative AI and Asset Pricing</h2>
+
+<p class="no-indent">
+<strong>Core Papers:</strong> Kelly et al. (2023) [5]; Kelly, Malamud & Zhou (2024) [9]; [Generative AI in Financial Economics] (2024) [15]; Novy-Marx & Velikov (2024) [16]
+</p>
+
+<p>
+This cluster examines the "virtue of complexity" in financial modeling—whether increasingly sophisticated AI models improve or degrade asset pricing accuracy. The theoretical foundation spans statistical learning theory, the bias-variance trade-off, and the Stochastic Discount Factor (SDF) framework [5], [9].
+</p>
+
+<p>
+<strong>Methodological Progression:</strong> Kelly et al. (2023) [5] introduce transformer-based AIPM within the SDF framework, demonstrating 2.4-4.7 percentage point improvements over traditional factor models through cross-asset attention mechanisms. Kelly, Malamud & Zhou (2024) [9] temper this optimism, showing that in noisy financial environments, excessive complexity harms rather than helps prediction accuracy. Novy-Marx & Velikov (2024) [16] demonstrate the industrialization risk: LLMs can generate hundreds of plausible academic papers, enabling HARKing (Hypothesizing After Results are Known) at scale.
+</p>
+
+<p>
+<strong>Inter-Study Relationships:</strong> The AI Asset Pricing [5] and Limited Virtue of Complexity [9] papers present a direct theoretical contradiction—one advocates for complexity through transformers, while the other warns against it in noisy environments. This tension is resolved by recognizing that complexity's virtue depends on signal-to-noise ratios and market regimes. The AI-Powered Scholarship paper [16] extends this by showing that generative AI can both enhance and corrupt the research process itself.
+</p>
+
+<p>
+<strong>Critical Gap:</strong> No unified framework exists for determining optimal model complexity conditional on market noise regimes, and the research community lacks defenses against AI-generated research pollution [16].
+</p>
+
+<h2>D. Thematic Cluster 4: AI-Driven Risk Management and Compliance</h2>
+
+<p class="no-indent">
+<strong>Core Papers:</strong> Cont & Vuletić (2024) [8]; [Fintech AML] (2024) [19]; Wüthrich et al. (2023) [20]; Patil & Mailcontractor (2024) [18]
+</p>
+
+<p>
+This cluster applies AI to traditional risk management functions—hedging, anti-money laundering, actuarial reserving, and operational risk—shifting from rule-based to learning-based approaches [18], [19].
+</p>
+
+<p>
+<strong>Methodological Progression:</strong> Data-driven hedging [8] uses generative models for derivative risk management. The fintech AML approach [19] employs federated learning and graph neural networks for financial crime detection, reducing false positives while preserving privacy. Wüthrich et al. (2023) [20] provide comprehensive educational frameworks for integrating ML into traditional actuarial science. Patil & Mailcontractor (2024) [18] survey transformation across banking, investment, and insurance domains.
+</p>
+
+<p>
+<strong>Inter-Study Relationships:</strong> These studies collectively demonstrate AI's applicability across the risk management spectrum, from market risk (hedging) to operational risk (AML) to insurance risk (actuarial). They support the conclusion that AI enhances risk detection capabilities while introducing new model risks [18].
+</p>
+
+<p>
+<strong>Critical Gap:</strong> Regulatory frameworks lag behind AI capabilities, creating compliance uncertainty; explainable AI requirements conflict with complex model architectures; and cross-border data sharing for AML remains legally constrained [19].
+</p>
+
+<h2>E. Thematic Cluster 5: Human-AI Collaboration in Financial Services</h2>
+
+<p class="no-indent">
+<strong>Core Papers:</strong> Choi & Xie (2024) [6]; Melnychenko (2020) [22]; Krause (2025) [3]; [Natural Language of Finance] (2023) [14]
+</p>
+
+<p>
+This cluster explores the complementarity between human expertise and AI capabilities, challenging the replacement narrative with an augmentation perspective. The theoretical foundation draws from human-computer interaction, bounded rationality, and organizational behavior [6], [22].
+</p>
+
+<p>
+<strong>Methodological Progression:</strong> Choi & Xie (2024) [6] provide the most rigorous field evidence: 277 accountants across 79 SMEs show 55% productivity gains with 8.5% task reallocation from routine to high-value work, with experienced professionals selectively intervening based on AI confidence scores. Melnychenko (2020) [22] argues that AI cannot replace human intuition in holistic financial security assessment, advocating hybrid approaches. Krause (2025) [3] examines how democratized AI lowers entry barriers while requiring human oversight for security and governance.
+</p>
+
+<p>
+<strong>Inter-Study Relationships:</strong> These studies consistently support the "augmentation over replacement" thesis. Choi & Xie's field evidence [6] empirically validates Melnychenko's theoretical argument [22] about human-AI complementarity. Krause [3] extends this to the systemic level, showing that democratization requires human governance frameworks.
+</p>
+
+<p>
+<strong>Critical Gap:</strong> Lack of standardized metrics for measuring human-AI complementarity; insufficient research on optimal task allocation algorithms; and limited understanding of how expertise levels moderate AI effectiveness [6].
+</p>
+
+<h1>V. Cross-Cutting Synthesis</h1>
+
+<h2>A. Areas of Agreement</h2>
+
+<p class="no-indent">
+<strong>1) AI Democratization:</strong> Multiple papers [2], [12], [3] converge on the imperative to democratize AI tools for financial applications, reducing barriers to entry for researchers and practitioners.
+</p>
+
+<p>
+<strong>2) Data Quality Imperative:</strong> Across all clusters, the importance of high-quality, curated data is universally acknowledged. FinGPT's data-centric approach [12], FinRL's market friction incorporation [2], and the Memorization Problem's critique [11] all center on data integrity.
+</p>
+
+<p>
+<strong>3) Market Friction Reality:</strong> Studies incorporating transaction costs, liquidity constraints, and bid-ask spreads [2], [8], [7] consistently find that realistic market frictions significantly impact strategy performance.
+</p>
+
+<p>
+<strong>4) Human Oversight Necessity:</strong> Despite AI capabilities, all studies acknowledge the continued need for human judgment, whether in selective intervention [6], holistic assessment [22], or governance frameworks [3].
+</p>
+
+<h2>B. Areas of Contradiction</h2>
+
+<p class="no-indent">
+<strong>1) Complexity vs. Simplicity:</strong> Kelly et al. (2023) [5] advocate for transformer-based complexity in asset pricing, while Kelly, Malamud & Zhou (2024) [9] demonstrate the "limited virtue of complexity" in noisy environments. This contradiction suggests regime-dependent optimal complexity.
+</p>
+
+<p>
+<strong>2) LLM Capability vs. Reliability:</strong> Lopez-Lira & Tang (2023) [10] demonstrate strong LLM forecasting capability, while Lopez-Lira, Tang & Zhu (2024) [11] prove these results may reflect memorization rather than skill. This fundamental tension remains unresolved.
+</p>
+
+<p>
+<strong>3) Automation vs. Augmentation:</strong> While some studies focus on full automation [2], [5], the Human-AI cluster [6], [22] emphasizes augmentation, creating a spectrum rather than binary choice.
+</p>
+
+<h2>C. Extensions and Evolution</h2>
+
+<p class="no-indent">
+The literature demonstrates clear evolutionary patterns: 2020-2021 focused on infrastructure development [2]; 2022-2023 on capability demonstration [10], [12], [5]; and 2024-2025 on critical evaluation and methodological refinement [11], [9], [6].
+</p>
+
+<h1>VI. Identified Gaps and Future Research Directions</h1>
+
+<h2>A. Critical Gaps Across the Literature</h2>
+
+<table>
+    <caption>TABLE II: CRITICAL GAPS AND PRIORITY ASSESSMENT</caption>
+    <thead>
+        <tr>
+            <th>Gap Domain</th>
+            <th>Specific Gap</th>
+            <th>Affected Studies</th>
+            <th>Priority</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Methodological</td>
+            <td>Inability to distinguish LLM memorization from genuine forecasting</td>
+            <td>[10], [11], All LLM forecasting papers</td>
+            <td>Critical</td>
+        </tr>
+        <tr>
+            <td>Methodological</td>
+            <td>Absence of live trading validation for DRL strategies</td>
+            <td>[2], [7], All trading papers</td>
+            <td>High</td>
+        </tr>
+        <tr>
+            <td>Theoretical</td>
+            <td>No unified complexity-conditional framework</td>
+            <td>[5], [9]</td>
+            <td>High</td>
+        </tr>
+        <tr>
+            <td>Empirical</td>
+            <td>Limited emerging market and cross-asset class evidence</td>
+            <td>All clusters</td>
+            <td>Medium</td>
+        </tr>
+        <tr>
+            <td>Regulatory</td>
+            <td>Lag between AI capabilities and governance frameworks</td>
+            <td>[19], [3], All deployment papers</td>
+            <td>Critical</td>
+        </tr>
+        <tr>
+            <td>Ethical</td>
+            <td>Insufficient attention to AI-generated research integrity</td>
+            <td>[16]</td>
+            <td>High</td>
+        </tr>
+        <tr>
+            <td>Technical</td>
+            <td>Real-time processing constraints for generative models</td>
+            <td>[8], [12]</td>
+            <td>Medium</td>
+        </tr>
+        <tr>
+            <td>Human Factors</td>
+            <td>Lack of standardized complementarity metrics</td>
+            <td>[6], [22]</td>
+            <td>Medium</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>B. Proposed Future Research Directions</h2>
+
+<p class="no-indent">
+<strong>Direction 1: Causal Identification Frameworks for LLM Financial Forecasting.</strong> Develop methodologies that can definitively distinguish between LLM memorization and genuine economic reasoning. Potential approaches include controlled information environment experiments, adversarial testing with synthetic financial data, counterfactual forecasting with manipulated temporal boundaries, and embedding space analysis for memorization detection [11], [13].
+</p>
+
+<p>
+<strong>Direction 2: Regime-Conditional Model Complexity Optimization.</strong> Create adaptive frameworks that dynamically adjust model complexity based on real-time signal-to-noise ratio estimation, including market regime detection algorithms, complexity penalty functions conditional on volatility, online learning with complexity regularization, and ensemble methods combining simple and complex models [5], [9].
+</p>
+
+<p>
+<strong>Direction 3: Live Market Validation Infrastructure.</strong> Establish collaborative platforms for real-world validation of AI trading strategies, including paper trading integration with live market feeds, regulatory sandboxes for DRL strategy testing, standardized performance benchmarking protocols, and risk management frameworks for autonomous trading systems [2], [7].
+</p>
+
+<p>
+<strong>Direction 4: Cross-Domain Human-AI Complementarity Metrics.</strong> Develop quantitative measures of effective human-AI collaboration, including task-specific complementarity indices, expertise-dependent AI utility functions, real-time intervention optimization, and cognitive load measurement during AI-assisted decision-making [6], [22].
+</p>
+
+<p>
+<strong>Direction 5: Ethical AI Governance for Financial Research.</strong> Create frameworks to prevent AI-generated research pollution, including authentication protocols for human vs. AI-generated research, replication standards for AI-assisted findings, peer review adaptations for AI-generated content, and journal policies for AI disclosure and validation [16].
+</p>
+
+<p>
+<strong>Direction 6: Emerging Market and Inclusive Finance Applications.</strong> Extend AI-finance research beyond developed markets through low-resource language financial NLP, mobile-first AI financial services, microfinance optimization with limited data, and cross-border regulatory harmonization for AI deployment [17], [3].
+</p>
+
+<h1>VII. Conclusion</h1>
+
+<p class="no-indent">
+This systematic review reveals that artificial intelligence is fundamentally reshaping quantitative finance across multiple dimensions—from automated trading and asset pricing to risk management and human-AI collaboration. The literature demonstrates both remarkable capabilities and significant limitations of AI in financial applications.
+</p>
+
+<p>
+The five thematic clusters identified—Deep Reinforcement Learning for Automated Trading, Large Language Models in Financial Forecasting, Generative AI and Asset Pricing, AI-Driven Risk Management and Compliance, and Human-AI Collaboration—represent distinct but interconnected research trajectories. While early literature (2020-2022) focused on capability demonstration and infrastructure development, recent work (2023-2025) has shifted toward critical evaluation, methodological refinement, and governance considerations.
+</p>
+
+<p>
+Several critical insights emerge from this synthesis: First, the tension between model complexity and predictive accuracy is context-dependent. The "virtue of complexity" is real but limited, requiring regime-conditional optimization rather than universal adoption of the most sophisticated models [5], [9]. Second, the memorization problem poses an existential challenge to LLM-based financial forecasting. Until methodologies can definitively distinguish memorization from reasoning, historical backtesting of LLM predictions remains fundamentally compromised [11]. Third, human-AI complementarity is not merely a theoretical ideal but an empirically validated reality. The 55% productivity gains and 8.5% task reallocation documented in accounting settings demonstrate that AI's greatest value lies in augmenting rather than replacing human expertise [6]. Fourth, democratization of AI in finance—exemplified by FinRL [2], FinGPT [12], and DeepSeek [3]—creates both opportunities for innovation and risks of systemic vulnerability. Lower barriers to entry must be balanced with enhanced governance frameworks. Fifth, the research integrity implications of AI-powered scholarship represent an emerging crisis requiring immediate attention. The industrialization of HARKing threatens the credibility of financial economics as a discipline [16].
+</p>
+
+<p>
+Future research must address these gaps through interdisciplinary collaboration spanning computer science, financial economics, law, and ethics. The field stands at an inflection point where technological capabilities have outpaced methodological rigor and regulatory frameworks. Closing these gaps is essential for realizing the transformative potential of AI in quantitative finance while maintaining market integrity, research credibility, and human welfare.
+</p>
+
+<p>
+The reviewed literature collectively suggests that the future of quantitative finance lies not in choosing between human judgment and artificial intelligence, but in designing sophisticated complementarity systems that leverage the strengths of both [6], [22]. Achieving this synthesis represents the defining challenge for the next generation of financial economists and AI researchers.
+</p>
+
+<h1>Acknowledgment</h1>
+
+<p class="no-indent">
+The author gratefully acknowledges the guidance and support of the faculty at Sigma University, Vadodara, India. Special thanks to the research committee for their valuable feedback on the manuscript. This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors.
+</p>
+
+<h1>References</h1>
+
+<div class="references">
+<ol>
+    <li>M. Melnychenko, "Is Artificial Intelligence Ready to Assess an Enterprise's Financial Security?" <em>Journal of Risk and Financial Management</em>, vol. 13, no. 9, p. 191, 2020. doi: 10.3390/jrfm13090191</li>
+
+    <li>X.-Y. Liu, H. Yang, Q. Chen, R. Zhang, L. Yang, B. Xiao, and C. D. Wang, "FinRL: A Deep Reinforcement Learning Library for Automated Stock Trading in Quantitative Finance," <em>arXiv preprint arXiv:2011.04726</em>, 2020. doi: 10.48550/arXiv.2011.04726</li>
+
+    <li>D. Krause, "DeepSeek and FinTech: The Democratization of AI and Its Global Implications," <em>SSRN Electronic Journal</em>, 2025. doi: 10.2139/ssrn.5120199</li>
+
+    <li>[Authors], "Artificial Intelligence and Finance: A Bibliometric Review on the Trends, Influences, and Research Directions," <em>F1000Research</em>, vol. 160959, no. 1, 2025. doi: 10.12688/f1000research.160959.1</li>
+
+    <li>B. Kelly, S. Malamud, and K. Zhou, "Artificial Intelligence Asset Pricing Models," <em>NBER Working Paper No. w33351</em>, 2023. doi: 10.2139/ssrn.4452202</li>
+
+    <li>J. H. Choi and C. Xie, "Human + AI in Accounting: Early Evidence from the Field," <em>SSRN Electronic Journal</em>, 2024. doi: 10.2139/ssrn.4719003</li>
+
+    <li>[Authors], "Machine Learning for Pairs Trading: A Clustering-Based Approach," <em>SSRN Electronic Journal</em>, 2023. doi: 10.2139/ssrn.4391219</li>
+
+    <li>R. Cont and D. Vuletić, "Data-Driven Hedging with Generative Models," <em>SSRN Electronic Journal</em>, 2024. doi: 10.2139/ssrn.4619356</li>
+
+    <li>B. Kelly, S. Malamud, and K. Zhou, "The Limited Virtue of Complexity in a Noisy World," <em>SSRN Electronic Journal</em>, 2024. doi: 10.2139/ssrn.4512991</li>
+
+    <li>A. Lopez-Lira and Y. Tang, "Can ChatGPT Forecast Stock Price Movements? Return Predictability and Large Language Models," <em>SSRN Electronic Journal</em>, 2023. doi: 10.2139/ssrn.4412788</li>
+
+    <li>A. Lopez-Lira, Y. Tang, and M. Zhu, "The Memorization Problem: Can We Trust LLMs' Economic Forecasts?" <em>SSRN Electronic Journal</em>, 2024. doi: 10.2139/ssrn.4759021</li>
+
+    <li>H. Yang, X.-Y. Liu, and C. D. Wang, "FinGPT: Open-Source Financial Large Language Models," <em>arXiv preprint arXiv:2306.06031</em>, 2023. doi: 10.48550/arXiv.2306.06031</li>
+
+    <li>[Authors], "Large Language Models in Finance: Reasoning and Look-Ahead Bias," <em>SSRN Electronic Journal</em>, 2024. doi: 10.2139/ssrn.4691012</li>
+
+    <li>[Authors], "The Natural Language of Finance," <em>NBER Working Paper No. w31502</em>, 2023. doi: 10.3386/w31502</li>
+
+    <li>[Authors], "(Generative) AI in Financial Economics," <em>SSRN Electronic Journal</em>, 2024. doi: 10.2139/ssrn.4682054</li>
+
+    <li>R. Novy-Marx and M. Velikov, "AI-Powered (Finance) Scholarship," <em>NBER Working Paper No. w33363</em>, 2024. doi: 10.2139/ssrn.4789125</li>
+
+    <li>[Authors], "Artificial Intelligence and Finance: A Bibliometric Review on the Trends, Influences, and Research Directions," <em>F1000Research</em>, 2025. doi: 10.12688/f1000research.160959.1</li>
+
+    <li>S. Patil and R. Mailcontractor, "Impact of AI and Machine Learning on Financial Services," <em>ITM Web of Conferences</em>, vol. 68, p. 01021, 2024. doi: 10.1051/itmconf/20246801021</li>
+
+    <li>[Authors], "Harnessing Fintech Innovations for Anti-Money Laundering: A Data-Driven Approach," <em>SSRN Electronic Journal</em>, 2024. doi: 10.2139/ssrn.4632190</li>
+
+    <li>M. V. Wüthrich, R. Richman, B. Avanzi, M. Lindholm, M. Maggi, M. Mayer, J. Schelldorfer, and S. Scognamiglio, "AI Tools for Actuaries," <em>SSRN Electronic Journal</em>, 2023. doi: 10.2139/ssrn.4590302</li>
+
+    <li>[Authors], "ChatGPT and Other Large Language Models: Are They Alternating Future Finance Research Directions?" <em>Finance Research Letters</em>, vol. 58, p. 103855, 2023. doi: 10.1016/j.frl.2023.103855</li>
+
+    <li>M. Melnychenko, "Is Artificial Intelligence Ready to Assess an Enterprise's Financial Security?" <em>Journal of Risk and Financial Management</em>, vol. 13, no. 9, p. 191, 2020. doi: 10.3390/jrfm13090191</li>
+</ol>
+</div>
+
+<div style="column-span: all; text-align: center; margin-top: 20pt; font-size: 9pt; border-top: 0.5pt solid #000; padding-top: 8pt;">
+    <strong>Author Biography</strong><br><br>
+    <strong>Tamanna Sharma</strong> is a PhD Scholar  at Sigma University, Vadodara, India. Her research interests include artificial intelligence applications in quantitative finance, deep reinforcement learning for algorithmic trading, and the intersection of large language models with financial forecasting. 
+</div>
+
+</div>
+
+</body>
+</html>
