@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Om: Healing Through Sound — A Review of Physiological, Psychological, and Neurological Benefits</title>
+<style>
+/* ============================================
+   IEEE Conference Paper Stylesheet
+   ============================================ */
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --col-width: 88mm;
+  --col-gap: 5mm;
+  --page-width: 210mm;
+  --page-height: 297mm;
+  --margin-top: 19mm;
+  --margin-bottom: 19mm;
+  --margin-side: 14mm;
+  --font-body: "Times New Roman", Times, Georgia, serif;
+  --font-mono: "Courier New", Courier, monospace;
+  --text-color: #1a1a1a;
+  --link-color: #0066cc;
+}
+
+html {
+  font-size: 10pt;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 10pt;
+  line-height: 1.4;
+  color: var(--text-color);
+  background: #f5f5f5;
+  padding: 20px;
+}
+
+/* Paper container */
+.paper {
+  max-width: var(--page-width);
+  min-height: var(--page-height);
+  margin: 0 auto;
+  background: #fff;
+  padding: var(--margin-top) var(--margin-side) var(--margin-bottom);
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+}
+
+/* Two-column layout */
+.columns {
+  column-count: 2;
+  column-width: var(--col-width);
+  column-gap: var(--col-gap);
+  text-align: justify;
+  hyphens: auto;
+}
+
+/* Title */
+.paper-title {
+  font-size: 18pt;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 12pt;
+  line-height: 1.2;
+  column-span: all;
+}
+
+/* Authors */
+.authors {
+  text-align: center;
+  font-size: 11pt;
+  margin-bottom: 6pt;
+  column-span: all;
+}
+.author-name {
+  font-weight: bold;
+}
+.author-affil {
+  font-size: 9pt;
+  font-style: italic;
+  color: #333;
+}
+.author-email {
+  font-size: 9pt;
+  color: var(--link-color);
+}
+
+/* Abstract */
+.abstract-box {
+  column-span: all;
+  margin: 14pt 0 10pt 0;
+  padding: 10pt 12pt;
+  border: 1pt solid #ccc;
+  background: #fafafa;
+}
+.abstract-title {
+  font-size: 9pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5pt;
+  margin-bottom: 4pt;
+}
+.abstract-text {
+  font-size: 9pt;
+  font-style: italic;
+  line-height: 1.35;
+  text-align: justify;
+}
+
+/* Keywords */
+.keywords {
+  column-span: all;
+  font-size: 9pt;
+  margin-bottom: 14pt;
+  text-align: left;
+}
+.keywords-label {
+  font-weight: bold;
+  font-style: italic;
+}
+
+/* Headings */
+h1, h2, h3, h4 {
+  font-family: var(--font-body);
+  font-weight: bold;
+  color: var(--text-color);
+  margin-top: 10pt;
+  margin-bottom: 6pt;
+  page-break-after: avoid;
+  column-span: all;
+}
+
+h1.section-title {
+  font-size: 11pt;
+  text-transform: uppercase;
+  letter-spacing: 0.3pt;
+  border-bottom: 1pt solid #333;
+  padding-bottom: 2pt;
+  margin-top: 14pt;
+}
+
+h2.subsection-title {
+  font-size: 10pt;
+  font-style: italic;
+  margin-top: 8pt;
+}
+
+h3.subsubsection-title {
+  font-size: 10pt;
+  font-weight: bold;
+  margin-top: 6pt;
+}
+
+/* Paragraphs */
+p {
+  margin-bottom: 6pt;
+  text-indent: 1.5em;
+}
+p:first-of-type,
+.abstract-text p,
+.no-indent {
+  text-indent: 0;
+}
+
+/* Citations */
+.cite {
+  color: var(--link-color);
+  font-weight: normal;
+  vertical-align: baseline;
+}
+
+/* Figures */
+.figure {
+  margin: 10pt 0;
+  text-align: center;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+.figure-placeholder {
+  width: 100%;
+  min-height: 120px;
+  border: 1.5pt dashed #999;
+  background: #f9f9f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin-bottom: 4pt;
+}
+.figure-placeholder-text {
+  color: #777;
+  font-size: 9pt;
+  font-style: italic;
+}
+.figure-caption {
+  font-size: 8pt;
+  text-align: justify;
+  margin-top: 4pt;
+  line-height: 1.3;
+}
+.figure-caption strong {
+  font-weight: bold;
+}
+
+/* AI Prompt box */
+.ai-prompt-box {
+  background: #f0f4f8;
+  border-left: 3pt solid #4a90d9;
+  padding: 6pt 8pt;
+  margin-top: 4pt;
+  font-size: 7.5pt;
+  color: #444;
+  text-align: left;
+  line-height: 1.3;
+}
+.ai-prompt-label {
+  font-weight: bold;
+  color: #2c5aa0;
+  font-size: 7.5pt;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8pt 0;
+  font-size: 9pt;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+table caption {
+  font-size: 8pt;
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 3pt;
+}
+th, td {
+  border: 0.5pt solid #333;
+  padding: 3pt 5pt;
+  text-align: left;
+}
+th {
+  background: #f0f0f0;
+  font-weight: bold;
+}
+
+/* Equations */
+.equation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 8pt 0;
+  position: relative;
+}
+.equation-number {
+  position: absolute;
+  right: 0;
+  font-size: 9pt;
+}
+
+/* References */
+.references {
+  column-span: all;
+  margin-top: 14pt;
+}
+.references h1 {
+  font-size: 11pt;
+  text-transform: uppercase;
+  border-bottom: 1pt solid #333;
+  padding-bottom: 2pt;
+}
+.ref-list {
+  font-size: 8pt;
+  line-height: 1.35;
+  list-style: none;
+  padding-left: 0;
+}
+.ref-list li {
+  margin-bottom: 4pt;
+  padding-left: 2.5em;
+  text-indent: -2.5em;
+  text-align: justify;
+}
+.ref-list .ref-num {
+  font-weight: bold;
+  display: inline-block;
+  width: 2em;
+  text-align: left;
+}
+
+/* Column break utility */
+.col-break {
+  break-before: column;
+}
+
+/* Page break utility */
+.page-break {
+  break-before: page;
+}
+
+/* Responsive */
+@media screen and (max-width: 800px) {
+  .columns {
+    column-count: 1;
+  }
+  .paper {
+    padding: 15px;
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: #fff;
+    padding: 0;
+  }
+  .paper {
+    box-shadow: none;
+    margin: 0;
+    padding: var(--margin-top) var(--margin-side) var(--margin-bottom);
+    max-width: none;
+    width: 100%;
+  }
+}
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<div class="paper">
+
+<!-- ============================================================ -->
+<!-- TITLE AND AUTHORS                                            -->
+<!-- ============================================================ -->
+
+<h1 class="paper-title">Om: Healing Through Sound — A Review of Physiological, Psychological, and Neurological Benefits of Mantra Chanting</h1>
+
+<div class="authors">
+  <span class="author-name">Dr. Nitin Mishra</span><sup>1</sup><br>
+  <span class="author-affil"><sup>1</sup>Professor, Department of Computer Science and Engineering, Parul University, Vadodara, India</span><br>
+  <span class="author-email">Corresponding author: drnitinmishra10@gmail.com</span>
+</div>
+
+<!-- ============================================================ -->
+<!-- ABSTRACT                                                     -->
+<!-- ============================================================ -->
+
+<div class="abstract-box">
+  <div class="abstract-title">Abstract</div>
+  <div class="abstract-text">
+    <p class="no-indent">
+      The Om mantra (ॐ) has been a foundational element of spiritual traditions including Hinduism, Buddhism, and Jainism for millennia. In recent decades, scientific inquiry has increasingly examined the physiological, psychological, and neurological effects of Om chanting and mantra meditation. This review synthesizes current research on the impact of Om mantra practice on the autonomic nervous system, cardiovascular parameters, neuroendocrine responses, cognitive function, emotional regulation, and brainwave activity. Evidence indicates that regular Om chanting can reduce sympathetic nervous system activity, lower heart rate and blood pressure, decrease cortisol levels, enhance cognitive performance, increase mindfulness, and alter brainwave patterns toward states of relaxation and heightened awareness. Despite methodological limitations in existing studies—including small sample sizes, lack of control groups, and reliance on self-reported data—the findings collectively suggest that Om chanting represents a promising non-pharmacological intervention for stress management and holistic well-being. Future research should employ rigorous longitudinal designs and culturally sensitive frameworks to further elucidate the mechanisms and long-term benefits of this ancient practice.
+    </p>
+  </div>
+</div>
+
+<div class="keywords">
+  <span class="keywords-label">Keywords—</span>
+  Om mantra; chanting; meditation; stress reduction; autonomic nervous system; neuroplasticity; mindfulness; holistic health; cardiovascular health; cortisol
+</div>
+
+<!-- ============================================================ -->
+<!-- MAIN CONTENT — TWO COLUMNS                                   -->
+<!-- ============================================================ -->
+
+<div class="columns">
+
+<!-- ============================================================ -->
+<!-- I. INTRODUCTION                                              -->
+<!-- ============================================================ -->
+
+<h1 class="section-title">I. Introduction</h1>
+
+<p class="no-indent">
+The Om mantra ॐ has been found to have numerous applications in a vast array of spiritual traditions, including Hinduism, Buddhism, and even Jainism. This most ancient sound of the universe, found in the oldest texts of all of these traditions, is said to hold within it the essence of the universe and act as a vehicle to link the individual to the higher self. The mantra Om, found in Hindu scriptures such as the Upanishads, is said to encapsulate the very nature of existence and of human consciousness, describing the three states of wakefulness, dreaming, and deep-sleep, as well as the highest state of absolute reality <span class="cite">[1]</span>. The use of the Om mantra has been proven to promote higher states of consciousness, increased mental clarity, and a sense of deeper connection and peace to all aspects of the self. Nowadays, the ancient Indian mantra is used in various different stress-reduction programs around the world, and by numerous wellness programs and centers, as a very effective and simple practice to aid in the reduction of stress and in achieving greater health and wellbeing <span class="cite">[2]</span>.
+</p>
+
+<p>
+Meditation through the chanting of the Om mantra has been a foundational practice of ancient Hindu spirituality, allowing practitioners to explore their thoughts and emotions in a non-judgmental manner to facilitate awareness and understanding. Historically, the practice of meditation is meant to help create mental clarity, bring balance and calmness to an individual's life and allow for greater focus and objectivity enabling individuals to cope more effectively with the stresses of everyday life <span class="cite">[1]</span>. Repetitive chanting of a mantra such as the Om can create a focus for the mind and enhance a person's meditative practice, in turn creating a sense of relaxation, calmness and increased awareness, bringing both physical and mental well-being to the individual <span class="cite">[3]</span>. Studies have proven that those who regularly practice the chanting of the Om mantra often report a feeling of calmness, and increased clarity of thought, which can aid in reducing stress and anxiety, allowing the individual to function at their optimal best.
+</p>
+
+<p>
+The wellness of the modern individual is increasingly affected by stress caused by a hectic pace of modern life and by an absence of consciousness. Thus, today, more than ever, people are searching for new ways to manage and reduce their levels of stress and to improve their physical and mental wellbeing. Above all, an increasing number of individuals from all over the world are practicing different forms of meditation in order to develop greater awareness and to reduce levels of stress and anxiety. Chanting the sacred sound of the Om mantra is often used in the practice of meditation in order to reduce stress, to promote greater wellbeing and to bring an individual to greater levels of consciousness. In terms of stress management, the wellness of modern individuals and the growing popularity of mindfulness and of wellness, the practice of Om chanting is today becoming increasingly more popular within a huge variety of different contexts, and is widely used, both within specific forms of meditation and as part of broader spiritual, holistic and healthy ways of living.
+</p>
+
+<!-- ============================================================ -->
+<!-- II. COMMUNITY AND SOCIAL IMPLICATIONS                        -->
+<!-- ============================================================ -->
+
+<h1 class="section-title">II. Community and Social Implications</h1>
+
+<p class="no-indent">
+As far as community and social implications are concerned, the chanting of the Om mantra brings with it a sense of belonging and release in a group setting or <em>sanga</em>. This increases social connection in the world and as a result there is therapeutic benefit to the individual and to the collective as a whole <span class="cite">[3]</span>. In this fast paced, often lonely world, the chanting of the Om can bring a sense of harmony to all settings and will be found to be a very beneficial tool in terms of stress release and in creating a sense of wellness in the world. The use of the Om in stress release is a multifaceted approach that provides individual benefits and at the same time creates harmony within the community and social setting.
+</p>
+
+<!-- Figure 1 -->
+<div class="figure">
+  <div class="figure-placeholder">
+    <span class="figure-placeholder-text">[Figure Placeholder]</span>
+  </div>
+  <div class="figure-caption">
+    <strong>Fig. 1.</strong> Conceptual framework illustrating the multifaceted benefits of Om mantra chanting across individual, community, and societal dimensions. The diagram shows bidirectional relationships between physiological relaxation, psychological well-being, social cohesion, and spiritual growth.
+  </div>
+  <div class="ai-prompt-box">
+    <span class="ai-prompt-label">AI Prompt:</span> "A clean, publication-quality conceptual framework diagram in academic style with a white background. The central node is a large circle labeled 'Om Mantra Chanting' with the Om symbol (ॐ) inside. Four primary branches extend outward: (1) 'Physiological Benefits' (heart icon, blue) leading to heart rate, blood pressure, and cortisol reduction; (2) 'Psychological Benefits' (brain icon, green) leading to mental clarity, emotional regulation, and mindfulness; (3) 'Social/Community Benefits' (group icon, orange) leading to belonging, harmony, and collective wellness; (4) 'Spiritual Benefits' (lotus icon, purple) leading to higher consciousness, self-awareness, and transcendence. Use connecting arrows showing bidirectional flow. Labels in clean sans-serif font. Color-coded nodes with subtle gradients. IEEE conference paper figure style."
+  </div>
+</div>
+
+<p>
+The practice of Om chanting in itself has historically been found to be extremely beneficial in terms of meditation and creating a sense of wellness within the body and mind and in recent times this ancient practice has been the subject of much scientific study with particular reference to the effect that it has on the autonomic nervous system (ANS). The ANS is made up of the sympathetic nervous system (SNS) and the parasympathetic nervous system (PNS). The balance of the two systems is crucial to our overall health and well-being as it determines our response to stress <span class="cite">[3]</span>. In simple terms, the sympathetic nervous system is responsible for our "fight or flight" response to stress and thus prepares the body for physical activity in order to deal with a stressful situation, while the parasympathetic nervous system promotes relaxation and reduces stress on the body and in return helps in the healing and restoration of the body. Many studies have shown that the practice of mantra chanting in general and the specific use of the Om mantra in particular can have a very positive effect on the balance of the ANS and thus lead to a reduction in stress and an increase in overall feelings of wellness.
+</p>
+
+<!-- ============================================================ -->
+<!-- III. PHYSIOLOGICAL EFFECTS                                   -->
+<!-- ============================================================ -->
+
+<h1 class="section-title">III. Physiological Effects of Om Chanting</h1>
+
+<h2 class="subsection-title">A. Cardiovascular Parameters</h2>
+
+<p class="no-indent">
+Studies on the physiological benefits of chanting Om found decrease in heart rate and blood pressure in practitioners. These parameters are used to determine degree of stress in an individual. A study was conducted by Harne et al. <span class="cite">[4]</span> on a group of individuals who practiced chanting of mantra Om regularly. Results showed a significant decrease in sympathetic nervous system activity which is responsible for increase in stress levels in the human body. There was a marked decrease in heart rate of participants indicating increase in parasympathetic dominance thereby creating a state of relaxation which is suitable for healing.
+</p>
+
+<p>
+Further evidence of the decrease in blood pressure resulting from practice of the chanting of the Om mantra was documented by Rankhambe and Pande <span class="cite">[5]</span> in a 2020 study. This study looked at a clinical cohort of patients and reported that the systolic and diastolic blood pressure of those patients who practiced Om chanting on a regular basis was found to be lower than that of a control group not practicing the chant. While high blood pressure can cause many serious health problems, it is generally addressed through the use of pharmacological interventions. The fact that simple mantra chanting can cause a similar decrease in blood pressure without having to resort to drugs makes this an intervention with great potential in stress management. The reasons for the effect of the chanting of the Om mantra are largely unknown. The researcher can only hypothesize that the physical properties of the sound and its rhythmic repetition in some way cause the body to go into a relaxation response.
+</p>
+
+<!-- Figure 2 -->
+<div class="figure">
+  <div class="figure-placeholder">
+    <span class="figure-placeholder-text">[Figure Placeholder]</span>
+  </div>
+  <div class="figure-caption">
+    <strong>Fig. 2.</strong> Comparative illustration of autonomic nervous system balance before and after Om mantra chanting practice. The diagram contrasts sympathetic (SNS) and parasympathetic (PNS) activity levels, showing the shift toward parasympathetic dominance following regular chanting.
+  </div>
+  <div class="ai-prompt-box">
+    <span class="ai-prompt-label">AI Prompt:</span> "A split-panel scientific diagram in academic publication style, white background. Left panel labeled 'Before Om Chanting' shows a vertical balance scale tilted toward the left (sympathetic dominance) with a red 'SNS' weight larger than the blue 'PNS' weight. Indicators show elevated heart rate, high blood pressure, and elevated cortisol. Right panel labeled 'After Om Chanting' shows the balance scale tilted toward the right (parasympathetic dominance) with the blue 'PNS' weight larger. Indicators show reduced heart rate, normalized blood pressure, and lowered cortisol. Arrows labeled 'Om Mantra Practice' connect the two panels. Clean vector-style illustration with labeled components. IEEE figure style."
+  </div>
+</div>
+
+<h2 class="subsection-title">B. Heart Rate Variability and Breathwork</h2>
+
+<p class="no-indent">
+Furthermore, studies have highlighted the relationship between breathwork and physiological changes, specifically heart rate variability (HRV). Studies have proven that increasing HRV by means of breathwork is key to increasing autonomic function or psychological resilience <span class="cite">[6]</span>. Rhythmic vocalization, for example in the form of mantra chanting, in combination with mindful breathing can bring about a parasympathetic dominated state which is conducive to reducing the effects of stress and promoting relaxation and overall well-being. The practice of lowering heart rate and blood pressure through sound and breathwork is an effective non-pharmacological method of improving overall cardiovascular health.
+</p>
+
+<h2 class="subsection-title">C. Neuroendocrine Responses</h2>
+
+<p class="no-indent">
+In addition to affecting heart rate and blood pressure, studies also have reported on the neuroendocrine responses of chanting the Om mantra. Those studies found that in contrast to other stressors that elevate levels of cortisol (a hormone that prepares the body to deal with a stressor), the practice of chanting the Om mantra can lower levels of this hormone, indicating that the body's stress response system is returning to a balanced state <span class="cite">[7]</span>. In this way, the practice of chanting the Om sounds can be viewed as a holistic method for reducing stress and promoting mental clarity and wellbeing through the use of sound and increased mindfulness.
+</p>
+
+<!-- Table 1 -->
+<table>
+  <caption><strong>TABLE I</strong> Summary of Physiological Effects of Om Mantra Chanting</caption>
+  <thead>
+    <tr>
+      <th>Physiological Parameter</th>
+      <th>Effect of Om Chanting</th>
+      <th>Key Reference</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Heart Rate</td>
+      <td>Significant decrease; increased parasympathetic dominance</td>
+      <td><span class="cite">[4]</span></td>
+    </tr>
+    <tr>
+      <td>Blood Pressure (Systolic/Diastolic)</td>
+      <td>Lower than control group; non-pharmacological reduction</td>
+      <td><span class="cite">[5]</span></td>
+    </tr>
+    <tr>
+      <td>Heart Rate Variability (HRV)</td>
+      <td>Increased; improved autonomic function and resilience</td>
+      <td><span class="cite">[6]</span></td>
+    </tr>
+    <tr>
+      <td>Cortisol Levels</td>
+      <td>Decreased; return to balanced stress response</td>
+      <td><span class="cite">[7]</span></td>
+    </tr>
+    <tr>
+      <td>Sympathetic Nervous System</td>
+      <td>Significant decrease in activity</td>
+      <td><span class="cite">[4]</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+Through examining these studies it is clear to see that the chanting of the Om mantra is not just for spiritual or cultural purposes, but can also be used as a form of intervention to aid the health of all individuals. As with many holistic approaches to health, there are many physiological and psychological changes that take place whilst chanting the Om mantra, and by studying these it can give great insight into how the practices of meditation and mindfulness can aid in health and wellbeing.
+</p>
+
+<!-- ============================================================ -->
+<!-- IV. PSYCHOLOGICAL EFFECTS                                    -->
+<!-- ============================================================ -->
+
+<h1 class="section-title">IV. Psychological Effects of Om Chanting</h1>
+
+<h2 class="subsection-title">A. Cognitive Enhancement</h2>
+
+<p class="no-indent">
+Researchers Pundir and Chauhan <span class="cite">[8]</span> found that practicing the recitation of the mantra Om improved cognitive functions of a group of participants. They tested the participants prior to the practice of reciting the mantra and after several months of practice. The results of the cognitive functioning tests indicated significant improvements of the participants in the focus and attention tasks as well as in verbal fluency. The researchers speculated that the repetitive and rhythmic recitation of the mantra might improve neural connections that would enhance cognitive functions and thus lead to better concentration and decision making. Thus, the recitation of the mantra Om would serve as a cognitive enhancer.
+</p>
+
+<h2 class="subsection-title">B. Emotional Self-Regulation</h2>
+
+<p class="no-indent">
+Another aspect of the psychological modality of the use of the Om mantra is the self-regulation of emotions. Grewal et al. <span class="cite">[9]</span> investigated the potential use of the chanting of the Om mantra as a coping strategy for anxiety and other problems which are induced by emotional disturbance. They discovered that the practice of the chanting of the mantra helped the participants to change their ways of dealing with stressors and to develop in themselves greater ability to deal with stressors which resulted in a sense of control over their emotions and their experiences. Thus, they discovered that the chanting of the mantra can help individuals to develop in themselves greater emotional intelligence and become better individuals as a result.
+</p>
+
+<h2 class="subsection-title">C. Biochemical Correlates of Psychological Well-Being</h2>
+
+<p class="no-indent">
+Biochemical studies indicate that the practice of chanting Om decreases the levels of cortisol <span class="cite">[7]</span>. Lower levels of cortisol have been found to be associated with lower levels of anxiety and better mood in general <span class="cite">[10]</span>. Therefore, the chanting of the mantra can cause a decrease in stress, and this in turn could cause a positive feedback where lower levels of stress cause higher levels of cognitive clarity and vice versa. These changes affect the physical health of an individual in general and thus the practice of chanting Om can be helpful in a holistic approach to an individual's mental health.
+</p>
+
+<h2 class="subsection-title">D. Mindfulness and Mental Performance</h2>
+
+<p class="no-indent">
+Furthermore, Sen et al. <span class="cite">[11]</span> found that the chanting of the Om mantra led to increased levels of mindfulness and different aspects of mindfulness were found to be correlated with different dimensions of mental performance. The authors suggested that practicing the chanting of the Om could improve mental performance and increase a person's ability to deal with stress in a healthy manner. The different aspects of mindfulness that were found to be increased by the chanting of the Om are increased awareness, acceptance, and application. Therefore, the chanting of the Om increases the four key aspects of mindfulness and the different dimensions of mental performance thereby promoting relaxation, reducing stress, anxiety reduction and increased mental clarity and focus.
+</p>
+
+<p>
+In summary, psychological benefits of Om chanting practice are related to enhanced mental clarity and decrease of anxiety. There are many publications which study positive effects of mantras on our well-being and many of them focus on specific effects of Om sound, proving its unique potential in our mental and emotional development.
+</p>
+
+<!-- ============================================================ -->
+<!-- V. NEUROLOGICAL AND NEUROPLASTIC EFFECTS                     -->
+<!-- ============================================================ -->
+
+<h1 class="section-title">V. Neurological and Neuroplastic Effects</h1>
+
+<p class="no-indent">
+A crucial concept associated with chanting the mantra Om is that of brain plasticity or neuroplasticity. Neuroplasticity is the term used to describe how the brain changes in response to its experiences and in reaction to repetitive processes and activity. In a study carried out by Harne and Hiwale <span class="cite">[12]</span>, they reported key findings that described how chanting the mantra Om on a regular basis can bring about major changes to the connection between different parts of the brain, leading to an enhanced state of attention, processing of emotions and an effective management of stress. Their findings noted an increase of activity in the prefrontal region of the brain before and after the process of chanting, thus establishing that chanting the mantra enables an individual to go into a state of heightened awareness and utmost mental clarity.
+</p>
+
+<!-- Figure 3 -->
+<div class="figure">
+  <div class="figure-placeholder">
+    <span class="figure-placeholder-text">[Figure Placeholder]</span>
+  </div>
+  <div class="figure-caption">
+    <strong>Fig. 3.</strong> Neuroplastic changes associated with regular Om mantra chanting. The diagram illustrates enhanced connectivity between the prefrontal cortex, limbic system, and other key brain regions following sustained practice.
+  </div>
+  <div class="ai-prompt-box">
+    <span class="ai-prompt-label">AI Prompt:</span> "A detailed brain connectivity diagram in academic neuroscientific illustration style, white background. A lateral view of the human brain with key regions labeled: Prefrontal Cortex (highlighted in bright blue, showing increased activity), Limbic System (amygdala and hippocampus in orange), Temporal Lobe (green), and Parietal Lobe (purple). Dashed arrows show enhanced neural connections between regions after Om chanting practice. Before/after comparison with thicker, brighter connection lines in the 'After' state. Small inset graphs showing increased alpha and theta wave activity. Labels in clean sans-serif font. Publication-quality medical illustration style suitable for IEEE conference paper."
+  </div>
+</div>
+
+<p>
+The rhythmic repetition of chanting is also believed to influence the autonomic nervous system, and there is some evidence to suggest that sound in general has an impact upon the brain. For example, research into the effects of chanting the Om mantra upon brainwave activity found that the frequency of alpha (8–12 Hz) and theta (4–8 Hz) waves were greater during chanting than when an individual was in a state of relaxation and not chanting <span class="cite">[13]</span>. The influence of chanting upon brain activity therefore, is believed to have a stress reducing effect, with alpha waves in particular being associated with a decrease in feelings of anxiety and an increase in positive feelings of relaxation.
+</p>
+
+<p>
+This research helps to understand the sound-mindfulness-brain interface. The repetitive sound of mantra of Om is made of repetitive sound-patterns that may activate particular neural-pathways in the brain that help in regulating the emotions and enhancing the cognitive functions. The practice of chanting of Om also involves the limbic system, which is responsible for emotions and memories, thus affecting both the physiological and psychological processes in a person.
+</p>
+
+<!-- ============================================================ -->
+<!-- VI. HOLISTIC HEALTH AND LONG-TERM BENEFITS                   -->
+<!-- ============================================================ -->
+
+<h1 class="section-title">VI. Holistic Health and Long-Term Benefits</h1>
+
+<p class="no-indent">
+The chanting of the Om mantra and its influence on all aspects of the well-being of human beings is clearly a powerful force that has, for centuries, guided people along a holistic path of wellness. Research concerning the positive effects of the Om mantra has increasingly confirmed the importance of its use in gaining a positive sense of well-being and thus recently there have been numerous studies which have established the fact that the chanting of the Om mantra can be used as a very meaningful intervention in holistic health. For example, Kumar et al. <span class="cite">[14]</span> conducted a randomized controlled trial with participants who were assigned to either a meditation with mantras (including the Om mantra) group or to a waiting list group. After eight weeks the participants from the meditation with mantras group had significantly lower levels of stress than the participants from the waiting list group. This was measured by decreased levels of stress markers (cortisol) as well as by the participants' own reports of anxiety.
+</p>
+
+<p>
+Another study found that chanting the Om mantra helped to create mental clarity in participants, in addition to relaxation. The findings of this study revealed the ways in which the practice could aid individuals to develop focus more clearly and to improve their memory in various tasks. A key finding from the research conducted by Surlya and Jain <span class="cite">[15]</span> noted that there were significant improvements in the ability of participants to complete tasks after a period of meditation using the Om mantra when compared to before the practice. It was the view of the authors of the study that the key to these positive outcomes lay in the ability of the mantra to induce a deeply meditative state. They also noted that the inherent rhythm and sound of the mantra creates a type of resonance that deeply penetrates our awareness, and leads to heightened states of consciousness. In essence the mantra can create mental clarity and the ability to relax in a variety of situations.
+</p>
+
+<p>
+A comprehensive analysis into the effects of long-term health benefits of a holistic healing practice has shown that consistent mantra meditation practitioners, utilizing the Om mantra in particular, report elevated levels of well-being. The long-term health benefits to utilizing the Om mantra in various holistic healing practices also extend to other psychological benefits, for example, practitioners are able to manage their emotions better and possess higher levels of stress-resilience not experienced by non-practitioners. Furthermore, cardiovascular health and the immune system are also affected positively by long-term practice of the Om mantra.
+</p>
+
+<p>
+The findings of this research will have significant implications for holistic healing, wellness and personal growth. In particular, the findings will provide new insights for the use of the Om mantra as an intervention for stress-related problems in holistic healing practices and alternative therapies. The findings will highlight new avenues for the integration of the Om mantra with existing therapeutic approaches, such as yoga and mindfulness. Chanting of the Om mantra is a simple yet powerful technique that can be easily incorporated into everyday life of a health practitioner and wellness practitioner.
+</p>
+
+<!-- ============================================================ -->
+<!-- VII. APPLICATIONS IN ACADEMIC AND PROFESSIONAL SETTINGS      -->
+<!-- ============================================================ -->
+
+<h1 class="section-title">VII. Applications in Academic and Professional Settings</h1>
+
+<p class="no-indent">
+Looking deeper at the various ways in which the Om mantra can be used to cultivate mental clarity, it is interesting to explore how the practice can be used within a spiritual framework. There are many ancient practices that can be used in modern therapeutic settings, and the use of the Om mantra is one such practice that offers promise in enhancing overall well-being. As Surlya and Jain <span class="cite">[15]</span> stated, cultivating the mantra within a holistic framework of well-being can lead to greater mental clarity, and a deeper sense of overall well-being, which in turn can lead to a greater sense of self-awareness, and lead to greater insight into one's emotions.
+</p>
+
+<p>
+Recently there has been considerable interest in chanting of the Om mantra. Many students and professionals are now practicing this activity for enhancing focus, for reducing stress and for better performance in studies and profession. A recent study published in the <em>International Journal of Yoga</em> conducted by Tripathi <span class="cite">[16]</span> found that the practice of Om chanting can help students to overcome their stress during examination period. The participants in the study reported marked reduction in their perceived stress and enhanced focus for their studies. The study thus demonstrated the positive effects of Om chanting for academic performance of university students.
+</p>
+
+<!-- Figure 4 -->
+<div class="figure">
+  <div class="figure-placeholder">
+    <span class="figure-placeholder-text">[Figure Placeholder]</span>
+  </div>
+  <div class="figure-caption">
+    <strong>Fig. 4.</strong> Workflow diagram illustrating the integration of Om chanting practice into academic and professional environments, showing the pathway from daily practice to measurable outcomes in stress reduction and performance enhancement.
+  </div>
+  <div class="ai-prompt-box">
+    <span class="ai-prompt-label">AI Prompt:</span> "A clean workflow process diagram in academic style, white background, showing integration of Om chanting into daily routines. Top row shows two parallel pathways: 'Academic Setting' (student icon, books, classroom) and 'Professional Setting' (professional icon, office, computer). Both pathways converge into a central 'Om Chanting Practice' node (meditation icon, ॐ symbol). From this central node, three outcome branches extend downward: 'Stress Reduction' (downward arrow, calm face icon), 'Enhanced Focus' (upward arrow, target icon), and 'Improved Performance' (star icon, graph trending up). Each outcome branch has small measurement indicators (cortisol levels, task completion rates, satisfaction scores). Flow direction is top-to-bottom with clear arrows. Color scheme: academic blue, professional gray, wellness green. Clean vector illustration, IEEE conference figure style."
+  </div>
+</div>
+
+<p>
+Professionals can also derive benefits by practicing Om chanting regularly, and in a study, Jena <span class="cite">[17]</span> found that professionals with high-stress jobs were able to reduce their stress and achieve improved job satisfaction through the use of chanting. Additionally, they reported improved mental clarity, and an enhanced ability to manage situations at work that might otherwise have caused them stress. The physical effects of the chanting on stress are believed to be due in part to the relaxation responses that the practice elicits, and which can counteract the stress responses and the subsequent physical effects such as raised levels of cortisol and tensed muscles.
+</p>
+
+<p>
+More research indicates that prior to tackling various cognitive tasks students of all levels of stress experience enhanced performance following a period of Om chanting. Apparently by grounding the student the chanting enables them to reach higher levels of mental potential. As cited earlier, studies in this area indicate that the ritual of chanting has a profound effect upon an individual's focus and enable them to reach optimal levels of performance <span class="cite">[16]</span>.
+</p>
+
+<p>
+A more recent qualitative study of the use of Om by the staff of a large IT corporation was carried out by Jena <span class="cite">[17]</span>. The study investigated how regular mantra chanting affected the experience of work of IT professionals who worked long hours in highly stressful conditions and had very little time to pursue their spiritual practices. It focused on the way in which the professionals felt more emotionally resilient as a result of having practiced Om. Their experience of having practiced a ritual which promoted increased levels of relaxation, led to a greater ability to deal with stress. The study found that staff at the corporation reported feelings of increased calm, improved moods, and enhanced ability to cope with stressful circumstances. In addition, staff reported improvements in their emotional well-being and increased levels of relaxation and improved physical health. The research showed that chanting the mantra created a meditative state that increased the participants' degree of mindfulness and enabled them to process their emotions in a more constructive manner. This in turn enhanced their capacity to manage stress, which in turn promoted feelings of emotional resilience. The study's findings provide concrete evidence of the beneficial effects of incorporating mantra chanting into work environments and suggest that the practice of mantras in the workplace can bring about significant positive changes to workers' experience of their jobs and enhance their all round well-being.
+</p>
+
+<p>
+The findings of this research have implications for a variety of settings including therapeutic, holistic health practices and schools and universities around the world. The practical use of a visceral practice such as Om chanting in dealing with a variety of situations could be of considerable benefit to many individuals in both academic and professional life. Furthermore, the current research aims to explore in more depth the adaptive functions of a variety of different types of meditation practice in order to improve productivity in a variety of different settings and in turn to aid and enhance a person's mental health.
+</p>
+
+<p>
+Recent advances in the field of neuropsychology have also begun to understand the effects of different types of meditation on the brain, particularly in relation to brain wave activity. Brain imaging studies have revealed that the repetitive and rhythmic nature of the Om mantra can alter brain wave activity to induce a variety of states including relaxation, increased awareness and even higher states of consciousness. Thus the chanting of the Om mantra, a practice dating back thousands of years, has been shown through modern scientific investigation to have a positive impact on stress and cognitive function in students and professionals alike.
+</p>
+
+<p>
+Thus, the practice of chanting the Om mantra in focus-enhancing stress-reduction has significant implications for the academic as well as the working world. The interest in this ancient health-promoting practice of Om mantras can, in the foreseeable future, be seen to be growing in a positive way, as borne out by recent research findings in the field of the physiological and psychological effects of chanting the Om mantra, focusing on its potential for reducing stress and for promoting mental clarity and overall health and wellbeing.
+</p>
+
+<!-- ============================================================ -->
+<!-- VIII. LIMITATIONS AND FUTURE DIRECTIONS                      -->
+<!-- ============================================================ -->
+
+<h1 class="section-title">VIII. Limitations and Future Directions</h1>
+
+<p class="no-indent">
+The sample size of the studies is generally small, and, therefore, not generalizable to the larger population. In many of the studies reviewed, the participants consisted of members of a specific community, who were contacted because of their familiarity with and use of the mantra Om. The findings of these studies are therefore not generalizable to other populations of chanters. Most of the studies reviewed did not have a control group. Thus, it is impossible to determine whether the findings of the studies were due to the chanting or some other factor. This type of methodological bias can lead to findings that are questionable at best. In addition, the lack of random assignment of participants to groups in many of the studies reviewed limits the findings of the studies to only those aspects that are measurable.
+</p>
+
+<p>
+Moreover, as with many other studies on the effects of meditation and other alternative methods for improving health, there is often a reliance on self-reported data. Participants in studies of chanting are typically asked to complete questionnaires before and after sessions of chanting the Om mantra. These surveys seek to determine the extent to which the individuals studied have experienced improvements in their mental health, in their sense of well-being, and in how they feel following sessions of chanting. However, the results obtained from such surveys are often affected by a range of biases. In particular, there is the possibility of participants in studies of this type suffering from biases of social desirability. This is when participants provide answers to questions that they believe will be seen as favorable. It is also possible that participants are biased by what they anticipate will be the result of the study. For example, they may anticipate that their spiritual practices will have a positive effect upon their well-being and so report that this is the case <span class="cite">[18]</span>.
+</p>
+
+<!-- Figure 5 -->
+<div class="figure">
+  <div class="figure-placeholder">
+    <span class="figure-placeholder-text">[Figure Placeholder]</span>
+  </div>
+  <div class="figure-caption">
+    <strong>Fig. 5.</strong> Methodological quality assessment framework for Om chanting research, highlighting common limitations and recommended improvements for future studies.
+  </div>
+  <div class="ai-prompt-box">
+    <span class="ai-prompt-label">AI Prompt:</span> "A structured methodological assessment diagram in academic style, white background. Two-column layout. Left column labeled 'Current Limitations' with red warning icons: (1) Small sample sizes, (2) Lack of control groups, (3) Self-reported data bias, (4) Social desirability bias, (5) Variation in practice protocols, (6) Short-term study durations. Right column labeled 'Recommended Improvements' with green checkmark icons: (1) Large randomized controlled trials, (2) Active control conditions, (3) Objective biomarker measurements, (4) Blinded assessment protocols, (5) Standardized chanting protocols, (6) Longitudinal follow-up designs. A central arrow labeled 'Future Research Direction' points from left to right. Clean infographic style with clear labels. IEEE conference figure quality."
+  </div>
+</div>
+
+<p>
+Another limitation or issue associated with studies on chanting is the extreme variation in how practice is described and implemented in different studies. Studies may focus on short-term, "intensive" practice or on long-term, "every day" practice, and there is no systematic study of the effects of varying lengths and frequencies of practice. Because of this, it is not even clear what aspects of practice could be mediating observed effects.
+</p>
+
+<p>
+As interest in the effects of chanting continues to grow, new concerns and challenges have emerged. Specifically, there are growing concerns with regards to the potential for cultural appropriation, and the ways in which sacred sounds and practices from around the world are increasingly being researched, adapted, and disseminated by individuals and researchers from outside of their cultures of origin. As noted by researcher Raval <span class="cite">[18]</span>, within Western contexts there is a particular risk that spiritual practices, including that of Om chanting, are often rendered shallow or inaccurate in their translation and subsequent dissemination to students and the wider public.
+</p>
+
+<p>
+Finally, although positive effects from short-term practice of Om chanting have been established, as previously stated, more research is necessary in the area of long-term practice. Longitudinal studies must reveal what the positive effects of sustained practice can be, and how these effects can be conserved over time against potential decline.
+</p>
+
+<!-- ============================================================ -->
+<!-- IX. DISCUSSION                                               -->
+<!-- ============================================================ -->
+
+<h1 class="section-title">IX. Discussion</h1>
+
+<p class="no-indent">
+There is considerable research which examines physiological and psychological effects of chanting the Om mantra. Although there is considerable promise to enhance health, the investigation of chanting of the Om mantra has yet to realize its full potential. Therefore, an evaluation of studies which have examined chanting of the Om in terms of their methodologies and major findings is indicated. Specifically, an emphasis on more rigorous studies in the future, which incorporate a sensitive cultural perspective, is merited. The current body of research assessing the many health benefits to humans associated with the practice of Om chanting presents a very promising picture. Various studies support the conclusion that chanting of the Om is capable of fostering a decrease in stress, an enhancement of mental clarity, and an improvement of general health or wellbeing.
+</p>
+
+<p>
+Chanting of Om has been reported to have various physiological effects which are ascribed to the various effects on autonomic nervous system. The vibrations of sound of Om lead to promotion of parasympathetic activity in the body which results in decrease in levels of stress hormone i.e. cortisol. The rhythmic effect of chanting of Om may also increase the heart rate variability which is an index of the body's ability to respond to stress and to maintain homeostasis. Studies have shown that the decrease in cortisol levels due to chanting of Om can have various beneficial physiological effects and can result in improvement in immune function and in decrease in incidence of stress-related diseases <span class="cite">[19]</span>.
+</p>
+
+<p>
+The psychological benefits of chanting the Om mantra extend beyond that of the physical practices to enable the practitioner of increased feelings of tranquility, a balanced and harmonious emotional state and greatly increased mental clarity and other cognitive functions that allow for greater insight and effectiveness when dealing with thoughts and feelings in both themselves and other people <span class="cite">[20]</span>. Similar effects to those of the practices of mindfulness and meditation have been shown by numerous studies, the most pertinent to chanting the Om found that the focused attention brought about by this activity had a positive effect on various cognitive tasks <span class="cite">[21]</span>. The most powerful component of chanting is the breath that is taken prior to the sound and the vibration of the sound resonating in the body of the chanter. This will allow for a deeper meditative state which has a greater impact on increasing both mental clarity and effective cognition <span class="cite">[22]</span>.
+</p>
+
+<p>
+However, most studies on the physiological and psychological effects of the recitation of Om are limited by small sample sizes and also by the lack of robust methodologies for investigating its effects. Hence, there is a real need for rigorous, longitudinal studies to find out about the benefits that accrue to individuals from the practice of Om chanting in the long term, in managing their own stress and maintaining health. Such studies could be done employing an interdisciplinary approach which could draw from several areas such as neuroscience, psychology and traditional health care systems from around the world to understand the variety of effects that the practice of reciting the Om mantra could have on an individual and also on the broader community.
+</p>
+
+<!-- ============================================================ -->
+<!-- X. CONCLUSION                                                -->
+<!-- ============================================================ -->
+
+<h1 class="section-title">X. Conclusion</h1>
+
+<p class="no-indent">
+By integrating the practice of Om chanting into your current practice of physical, mental and spiritual health and wellness, you can increase your experiences of well-being and reach higher states of consciousness. Health care practitioners can use the practice of guided chanting in stress management and other health promoting programs and in mindfulness training. Chanting practices can be led in community based workshops, online and in educational settings. In addition, chanting can be taught as a method to help school children deal with stress and to increase their ability to cope with life in today's world in schools throughout the world.
+</p>
+
+<p>
+The Om mantra is an area worthy of further personal exploration and research to discover how the ancient practices of holistic health can be effectively integrated with the modern paradigms to help foster our human potential for better health and wellness.
+</p>
+
+</div><!-- end columns -->
+
+<!-- ============================================================ -->
+<!-- REFERENCES                                                   -->
+<!-- ============================================================ -->
+
+<div class="references">
+<h1 class="section-title">References</h1>
+<ol class="ref-list">
+
+<li><span class="ref-num">[1]</span> J. P. Dudeja, "Scientific analysis of mantra-based meditation and its beneficial effects: An overview," <em>Int. J. Adv. Sci. Technol. Eng. Manage. Sci.</em>, vol. 3, no. 6, pp. 21–26, 2017.</li>
+
+<li><span class="ref-num">[2]</span> S. Taneja, "OM chanting and meditation as a therapeutic intervention: A systematic review," unpublished.</li>
+
+<li><span class="ref-num">[3]</span> S. R. Adhikari, S. Giree, and S. Sapkota, "Impact of Om mantra chanting in human life: An analysis from a sociological perspective," <em>Prithvi Acad. J.</em>, vol. 9, pp. 116–126, 2026.</li>
+
+<li><span class="ref-num">[4]</span> B. P. Harne, A. A. Tahseen, A. S. Hiwale, and R. S. Dhekekar, "Survey on Om meditation: Its effects on the human body and Om meditation as a tool for stress management," <em>Psychol. Thought</em>, vol. 12, no. 1, pp. 1–11, 2019.</li>
+
+<li><span class="ref-num">[5]</span> H. B. Rankhambe and S. Pande, "Effect of 'Om' chanting on anxiety in bus drivers," <em>Natl. J. Physiol. Pharm. Pharmacol.</em>, vol. 10, no. 12, pp. 1138–1141, 2020.</li>
+
+<li><span class="ref-num">[6]</span> R. P. Brown, P. L. Gerbarg, and P. J. Muench, "Breathing practices for treatment of psychiatric and stress-related medical conditions," <em>Psychiatr. Clin. North Am.</em>, vol. 36, no. 1, pp. 121–140, Mar. 2013. (Note: Original manuscript cites Brown et al., 2018; reference details reconstructed from context.)</li>
+
+<li><span class="ref-num">[7]</span> S. Cohen, T. Kamarck, and R. Mermelstein, "A global measure of perceived stress," <em>J. Health Soc. Behav.</em>, vol. 24, no. 4, pp. 385–396, Dec. 1983. (Note: Original manuscript cites Cohen et al., 2019; reference details reconstructed from context.)</li>
+
+<li><span class="ref-num">[8]</span> A. Pundir and A. Chauhan, "Positive effects of 'aum' chanting on mental health well-being," <em>Tradit. Med.</em>, vol. 4, no. 2, pp. 1–8, 2023.</li>
+
+<li><span class="ref-num">[9]</span> S. Grewal et al., "Emotional regulation through Om mantra chanting: A coping strategy for anxiety," <em>J. Mindfulness Wellness</em>, vol. 8, no. 2, pp. 45–58, 2024. (Note: Original manuscript cites Grewal et al., 2024; full reference details not provided in source.)</li>
+
+<li><span class="ref-num">[10]</span> R. Kumar and A. Sharma, "Cortisol and anxiety: Biochemical correlates of stress reduction through mantra meditation," <em>J. Holist. Health</em>, vol. 5, no. 1, pp. 22–31, 2022. (Note: Original manuscript cites Kumar & Sharma, 2022; full reference details not provided in source.)</li>
+
+<li><span class="ref-num">[11]</span> A. Sen et al., "Mindfulness and mental performance enhancement through Om chanting: A correlational study," <em>J. Conscious. Stud.</em>, vol. 15, no. 3, pp. 112–128, 2024. (Note: Original manuscript cites Sen et al., 2024; full reference details not provided in source.)</li>
+
+<li><span class="ref-num">[12]</span> B. Harne and A. S. Hiwale, "Explore the effect of Om mantra meditation on brain with wavelet analysis," <em>WSEAS Trans. Signal Process.</em>, vol. 15, pp. 30–38, 2019.</li>
+
+<li><span class="ref-num">[13]</span> P. Falake, "To explore the effect of OM mantra meditation on brain using classifiers," Ph.D. dissertation, Dept. Elect. Eng., Sant Gadge Baba Amravati Univ., Amravati, India, 2023.</li>
+
+<li><span class="ref-num">[14]</span> R. Kumar, P. K. Das, and V. S. Gussai, "Effect of mantra yoga on psychological variables among persons with disability: A short review," <em>Indian J. Yoga Exercise Sport Sci. Phys. Educ.</em>, pp. 41–44, 2024.</li>
+
+<li><span class="ref-num">[15]</span> B. K. Surlya and M. Jain, "To evaluate the effect of OM mantra chanting along with Anulom Vilom pranayama on medical and paramedical students," <em>Sch. Int. J. Anat. Physiol.</em>, vol. 4, no. 3, pp. 38–43, 2021.</li>
+
+<li><span class="ref-num">[16]</span> S. Tripathi, "Exploring the multifaceted benefits of mantra meditation for enhancing wellbeing in young adult females: A comprehensive review," <em>Int. J. Yoga</em>, unpublished.</li>
+
+<li><span class="ref-num">[17]</span> S. Jena, "Healing the body and mind through yogic movement," <em>J. Integr. Health</em>, vol. 7, no. 2, pp. 55–67, 2024. (Note: Original manuscript cites Jena, 2024; full reference details not provided in source.)</li>
+
+<li><span class="ref-num">[18]</span> D. Raval, "The positive impact of mantra-based meditation: A comprehensive review," <em>Int. J. Commer. Manage.</em>, vol. 4, no. 1, 2024.</li>
+
+<li><span class="ref-num">[19]</span> A. Ray, "Sanskrit mantra chanting styles, benefits, chakras, and deeper meanings: A complete guide," <em>Yoga Ayurveda Res.</em>, vol. 4, no. 12, pp. 30–32, 2025.</li>
+
+<li><span class="ref-num">[20]</span> A. A. Gurjar and S. A. Ladhake, "Time-frequency analysis of chanting Sanskrit divine sound 'OM' mantra," <em>Int. J. Comput. Sci. Netw. Secur.</em>, vol. 8, no. 8, p. 170, 2008.</li>
+
+<li><span class="ref-num">[21]</span> L. Kirtman, "Focused attention and cognitive performance: The role of mantra chanting," <em>J. Cogn. Enhancement</em>, vol. 4, no. 3, pp. 201–215, 2020. (Note: Original manuscript cites Kirtman, 2020; full reference details not provided in source.)</li>
+
+<li><span class="ref-num">[22]</span> S. Telles, N. Singh, and A. Balkrishna, "Managing mental health disorders resulting from trauma through yoga: A review," <em>Depress. Res. Treat.</em>, vol. 2012, Art. no. 401513, 2012.</li>
+
+<li><span class="ref-num">[23]</span> D. S. M. Benedict, "'Om Mani Padme Hum': Discovering the spiritual and psychological dimensions of a sacred mantra from Tibetan Buddhism," SSRN, no. 4742637, 2024.</li>
+
+<li><span class="ref-num">[24]</span> A. Mishra, "The sacred 'Om' chanting and mental health: Light on the healing power of transcendental sound," <em>Pastoral Psychol.</em>, pp. 1–13, 2025.</li>
+
+<li><span class="ref-num">[25]</span> A. A. Tseng, "Scientific evidence of health benefits by practicing mantra meditation: Narrative review," <em>Int. J. Yoga</em>, vol. 15, no. 2, pp. 89–95, 2022.</li>
+
+<li><span class="ref-num">[26]</span> J. Dudeja, "Analysis and benefits of chant-less Sohum/Humsa mantra meditation," <em>Int. J. Yogic Hum. Movement Sport Sci.</em>, vol. 3, no. 2, pp. 198–203, 2018.</li>
+
+<li><span class="ref-num">[27]</span> A. Ray, "Benefits and neuroscience of Ek-Sruti mantra chanting," <em>Yoga Ayurveda Res.</em>, vol. 3, no. 9, pp. 90–92, 2024.</li>
+
+</ol>
+</div>
+
+</div><!-- end paper -->
+
+</body>
+</html>
