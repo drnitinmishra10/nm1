@@ -1,154 +1,2030 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
-<title>Research Gaps in Financial Recommendation Systems</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Artificial Intelligence-Driven Financial Recommendation Systems: A Comprehensive Review of Research Gaps, Challenges, and Future Directions</title>
+
+<style>
+
+body{
+font-family:"Times New Roman",serif;
+font-size:12pt;
+line-height:1.6;
+margin:40px;
+color:#000;
+background:#fff;
+}
+
+h1{
+font-size:24pt;
+text-align:center;
+font-weight:bold;
+margin-bottom:15px;
+}
+
+h2{
+font-size:18pt;
+margin-top:35px;
+color:#000;
+}
+
+h3{
+font-size:15pt;
+margin-top:25px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+margin-bottom:20px;
+}
+
+table,th,td{
+border:1px solid black;
+padding:8px;
+}
+
+th{
+background:#f2f2f2;
+}
+
+.author{
+text-align:center;
+font-size:13pt;
+}
+
+.affiliation{
+text-align:center;
+font-style:italic;
+}
+
+.abstract{
+text-align:justify;
+}
+
+.keyword{
+font-style:italic;
+}
+
+.reference{
+font-size:11pt;
+}
+
+</style>
+
 </head>
+
 <body>
 
-<h1>Research Gaps in Financial Recommendation Systems and the Role of AI</h1>
-<p><b>Authors:</b> Tamanna Sharma (PhD Scholar, Sigma University), Dr. Nitin Mishra (Professor CSE, Parul University; drnitinmishra10@gmail.com)</p>
+<h1>
+Artificial Intelligence-Driven Financial Recommendation Systems:
+A Comprehensive Review of Research Gaps, Challenges, and Future Directions
+</h1>
 
-<h2>Executive Summary</h2>
-<p>Financial recommendation systems promise personalized guidance on products such as loans, insurance, investments and wealth management. However, adoption in finance has lagged behind other domains due to unique challenges. Recent surveys identify key issues: financial recommendations often involve multi-objective trade-offs and volatile, time-sensitive data. Techniques like text mining and time-series analysis have improved accuracy, but each method has shortcomings and important gaps remain. In particular, the integration of advanced AI (e.g. deep learning, knowledge graphs, LLMs) introduces new concerns: model explainability, fairness, and regulatory compliance become critical when automated systems impact customer finance decisions. We synthesize findings from recent literature to categorize these gaps into a taxonomy. Key gaps include lack of interpretability for AI-driven models, fairness and bias risks, robustness to market volatility, real-time adaptation to evolving behavior, and data quality and multimodal integration. Privacy and governance gaps arise from sensitive financial data and strict compliance requirements. We map each gap to research questions. For example, “How can we build transparent, fair financial recommenders that respect privacy and adapt in real time?” Figures and tables (e.g. comparative studies, gap/RQ mappings, flowcharts) illustrate these gaps. This review reveals that while AI techniques promise smarter recommendations, robust solutions must jointly address technical, data, and regulatory challenges to be effective in finance. The report concludes with future research directions spanning interpretable models, privacy-preserving learning, better evaluation metrics, and deployment guidelines, aiming to guide researchers in this emerging area.</p>
+<div class="author">
+
+<b>Tamanna Sharma</b><br>
+
+PhD Scholar<br>
+
+Sigma University, Vadodara, India
+
+<br><br>
+
+<b>Dr. Nitin Mishra</b><br>
+
+Professor,
+Department of Computer Science & Engineering<br>
+
+Parul University,
+Vadodara, Gujarat, India
+
+<br>
+
+Email:
+drnitinmishra10@gmail.com
+
+</div>
+
+<hr>
 
 <h2>Abstract</h2>
-<p>Financial recommendation systems (RS) aim to personalize product and service suggestions in domains such as banking, investment, and insurance. Despite the growing use of AI in finance, RS face unique challenges. This review surveys literature on financial RS from 2018–2026 to identify research gaps. We find that financial RS must cope with multi-objective goals, highly dynamic markets, and complex product structures. AI-enhanced approaches (e.g. deep learning, knowledge graphs, generative models) improve personalization and adaptivity, but introduce gaps: limited explainability, potential bias/fairness issues, vulnerability to volatility, data quality concerns, and deployment obstacles. Privacy and regulatory compliance are particularly critical in finance. For instance, explainable AI techniques are needed to satisfy auditability and trust requirements. We categorize identified gaps into a taxonomy of AI/algorithmic, data, and governance dimensions. A comparative table summarizes key studies (methods, domains, noted limitations). Mapping gaps to research questions provides a road map for future work (e.g., integrating differential privacy in recommendations, developing real-time adaptive models, designing fairness-aware metrics). We conclude with future research directions addressing these gaps, emphasizing interdisciplinary solutions. Our analysis highlights that advancing financial RS requires holistic attention to technical robustness, user trust, and compliance. (Keywords: financial recommendation, explainable AI, fairness, privacy, robustness, recommender systems).</p>
 
-<h2>Introduction</h2>
-<p>Recommendation systems (RS) filter vast information to match users with relevant items or services. In e-commerce and entertainment, RS are well-established. In finance, RS can guide customers to suitable products (loans, insurance, investments) and help advisors make data-driven suggestions. However, the financial domain has distinct characteristics. Financial products are diverse and complex (e.g. bank deposits, loans, insurance, stocks, derivatives). Users often lack specialized knowledge and need trustworthy recommendations. Financial decision contexts demand high accuracy and trustworthiness, since errors can cause large losses. Moreover, the finance sector is highly regulated: consumer protection, fair lending laws (e.g. ECOA in the US) and data privacy regulations impose strict requirements. As Di Wu and Li (2025) note, financial RS must handle “multi-objectivity, wide feature space, time sensitivity, and parallel interactive behaviors” – concerns that go beyond typical e-commerce RS. For example, recommending investments involves predicting market trends (time series) while balancing risk preferences (multiple objectives). Thus financial RS research demands specialized focus.</p>
+<div class="abstract">
 
-<p>Recent advances in artificial intelligence (AI) – deep learning, natural language models, graph-based methods – have been applied to finance. These promise to improve personalization by leveraging user transaction histories, social sentiment, news, etc. (Chatterjee & Das 2025). Adaptive frameworks use reinforcement learning and streaming data to adjust recommendations in real time (Shahbazi et al. 2025). However, AI models (especially opaque ones) raise new challenges. Highly complex models may be accurate but lack interpretability, making it hard to justify recommendations to users or regulators. Bias in training data can lead to unfair treatment of subgroups (e.g. disadvantaged loan applicants). Data quality issues (noisy financial records) can degrade performance. Furthermore, production deployment of AI systems in finance requires robustness to adversarial conditions, drift, and the ability to satisfy audit and compliance demands. </p>
+Financial recommendation systems have emerged as one of the most promising applications of Artificial Intelligence (AI), Machine Learning (ML), and Deep Learning (DL) within the financial services industry. They assist individuals and organizations in making informed decisions regarding investment planning, banking products, insurance selection, portfolio management, retirement planning, tax optimization, and wealth management. The increasing volume of financial data generated through banking transactions, stock exchanges, mobile applications, digital payments, and social media has made intelligent recommendation systems essential for personalized financial decision-making.
 
-<p>This study conducts a deep review of recent literature on financial recommendation systems, especially focusing on gaps and open issues. We structure the analysis by surveying both academic research and industry perspectives. After a formal literature review, we apply a gap analysis methodology to identify and categorize open problems (see Taxonomy, Figure below). We integrate AI-specific concerns such as explainability, fairness, privacy, and data heterogeneity into our framework. Finally, we discuss these gaps in context and propose research questions. This paper is aimed at academic researchers and PhD students interested in AI for financial recommendations, providing a comprehensive map of what is known and unknown, and guiding future exploration.</p>
+Recent advances in Artificial Intelligence, including deep neural networks, reinforcement learning, graph neural networks, explainable AI, federated learning, and large language models (LLMs), have significantly enhanced the predictive capabilities of financial recommender systems. Despite these developments, existing research continues to face several unresolved challenges related to transparency, interpretability, fairness, privacy preservation, data heterogeneity, cold-start problems, concept drift, trustworthiness, regulatory compliance, and real-time adaptation.
 
-<h2>Literature Review</h2>
-<p>We surveyed recent studies on financial recommendation systems (2018–2026). Key sources include two systematic reviews and several applied papers. Wu and Li (2025) provide a comprehensive SLR of financial product RS. They analyze 65 papers and note that most focus on three product categories: bank products, securities, and others. Their findings highlight that many models leverage multi-domain features and time-series forecasting to predict price trends. They also note integration of unstructured data (news, text) via NLP to improve accuracy. Importantly, Wu and Li identify that while progress has been made, “each method has its shortcomings” and recommend exploring multi-behavior sequence and multi-task recommendation for finance. Bonde and Bichanga (2025) perform an SLR specifically on using RS in finance and banking. They categorize challenges into three main areas: (i) transparency, ethics, and data privacy; (ii) complex content and multiple user behaviors; and (iii) explainability of AI models. They highlight concrete issues like cold-start problems, personalization gaps, fraud detection, and data privacy barriers. Both reviews signal that fundamental RS challenges (sparsity, cold start) persist, while financial context adds unique dimensions (need for trust, risk modelling, regulatory oversight).</p>
+This paper presents a comprehensive Springer Nature-style review of the current literature on AI-enabled financial recommendation systems with a specific emphasis on identifying existing research gaps. A systematic analysis of recent studies is conducted to classify research gaps into algorithmic, data-centric, user-centric, governance, evaluation, and deployment categories. Furthermore, this review discusses emerging AI technologies capable of addressing these limitations and proposes future research directions toward trustworthy, explainable, adaptive, and privacy-preserving financial recommendation systems.
 
-<p>Several applied works illustrate AI usage in finance RS. Chatterjee and Das (2025) propose a Generative AI (LLM-based) framework for financial product recsys. They combine LLMs, reinforcement learning, and time-series modelling on multimodal user data, embedding differential privacy and fairness constraints. Their experiments (on synthetic datasets) show large gains in relevance (≈30%) and engagement (≈25%) versus traditional methods. Similarly, Shahbazi et al. (2025) introduce a Cross-Domain Adaptive Recommender (CDARS) with real-time behavioural tracking and knowledge graphs. They fuse multi-domain signals with sentiment analysis and graph embeddings, along with an explainable learning module. CDARS achieves modest CTR/engagement boosts (~8%) over SOTA baselines. These modern systems aim at hyper-personalization and adaptability, but authors note that explainability modules and ethical AI design are integral parts of their solutions. </p>
+The study provides an extensive roadmap for researchers, academicians, industry practitioners, and doctoral scholars working in Financial Technology (FinTech), Artificial Intelligence, Data Science, and Recommendation Systems.
 
-<p>On the user and regulatory side, industry reports emphasize explainability. The CFA Institute’s Research & Policy Center (2025) discusses the “black-box problem” of deep models in finance. They stress that opaque recommendations make it hard to verify fairness or satisfy regulators (e.g. fair lending laws). Their analysis identifies a shortage of evaluation metrics and standards for explanations, and privacy risks if explanations leak data. The Frontiers in AI special issue (Fritz-Morgenthal et al. 2022) similarly urges a “trustworthy AI” approach: enforcing model validation, fairness/bias testing, and multi-criteria model selection (balancing accuracy vs. transparency/fairness). </p>
+</div>
 
-<p>Focusing on fairness, Yao and Huang (2018) specifically address “financial recommendation engines”. They argue that financial RS may perpetuate historical biases, e.g. systematically under-recommending profitable stocks to protected groups. They note legal imperatives: credit laws (ECOA) ban discrimination, so RS must incorporate fairness criteria. While not an SLR, their position paper highlights that fairness in finance RS is both an ethical and legal necessity, pointing to demographic parity, equal opportunity, and counterfactual fairness as research directions. </p>
+<br>
 
-<p>Overall, the literature shows rapid adoption of complex AI models for financial RS, often improving offline metrics. However, many works acknowledge shortcomings: lack of interpretability, data bias, and neglect of privacy or compliance. Table 1 below compares several representative studies, their methods, findings and noted gaps. This sets the stage for a structured gap analysis.</p>
+<b>Keywords:</b>
+
+<span class="keyword">
+
+Financial Recommendation Systems,
+Artificial Intelligence,
+Machine Learning,
+Deep Learning,
+Explainable AI,
+Generative AI,
+Large Language Models,
+Financial Technology,
+Recommendation Systems,
+Research Gaps,
+Trustworthy AI,
+Federated Learning,
+Privacy Preservation,
+Investment Recommendation,
+Personalized Finance.
+
+</span>
+
+<hr>
+
+<h2>1. Introduction</h2>
+
+<p align="justify">
+
+Financial recommendation systems have become one of the fastest-growing applications of Artificial Intelligence in the financial services industry. Modern financial institutions continuously collect enormous amounts of structured and unstructured information from multiple sources including banking transactions, investment portfolios, insurance records, customer demographics, stock market movements, credit histories, social media activities, mobile banking applications, wearable devices, and Internet of Things (IoT) platforms. The rapid growth of this information has created an urgent need for intelligent systems capable of transforming raw financial data into personalized recommendations that support informed financial decision-making.
+
+</p>
+
+<p align="justify">
+
+Traditional financial advisory services primarily relied on human financial advisors who manually evaluated customer profiles and recommended suitable financial products. Although human expertise remains valuable, traditional advisory approaches suffer from several limitations including subjective decision-making, limited scalability, high operational costs, inconsistent recommendations, and delayed response times. Consequently, Artificial Intelligence has emerged as a transformative technology capable of automating financial advisory services while improving personalization, prediction accuracy, and customer satisfaction.
+
+</p>
+
+<p align="justify">
+
+Recommendation systems have already demonstrated remarkable success across domains such as e-commerce, entertainment, healthcare, education, tourism, and social networking. Companies including Amazon, Netflix, Spotify, YouTube, and Google extensively utilize recommender systems to personalize user experiences. Inspired by these successes, financial institutions have increasingly adopted recommendation technologies to assist customers in selecting banking products, insurance policies, mutual funds, retirement plans, investment portfolios, credit cards, loans, and wealth management strategies.
+
+</p>
+
+<p align="justify">
+
+Recent developments in Artificial Intelligence have significantly expanded the capabilities of financial recommendation systems. Machine learning algorithms such as Decision Trees, Random Forests, Gradient Boosting Machines, Support Vector Machines, Artificial Neural Networks, and Deep Learning architectures enable recommendation models to identify complex nonlinear relationships within high-dimensional financial datasets. Reinforcement Learning further enables adaptive portfolio management by continuously learning optimal investment strategies through interaction with dynamic financial markets. Moreover, Graph Neural Networks effectively capture complex relationships among investors, financial products, institutions, and market entities, while Large Language Models (LLMs) have recently enabled conversational financial advisory systems capable of interacting naturally with users.
+
+</p>
+
+<p align="justify">
+
+Despite these technological advancements, current financial recommendation systems continue to encounter numerous scientific and practical challenges. Financial decision-making differs substantially from traditional recommendation domains because financial recommendations involve substantial monetary risk, strict regulatory compliance, ethical considerations, explainability requirements, privacy preservation, and highly volatile market environments. Unlike movie or product recommendations, incorrect financial recommendations may result in significant economic losses, legal disputes, or reduced public trust.
+
+</p>
+
+<p align="justify">
+
+The complexity of financial recommendation problems has encouraged researchers to investigate advanced Artificial Intelligence methodologies capable of improving recommendation quality while maintaining fairness, transparency, robustness, and interpretability. However, existing literature indicates that many important research questions remain unanswered. Current recommendation algorithms frequently suffer from cold-start problems, sparse financial datasets, insufficient explainability, limited personalization, inadequate handling of temporal financial behavior, biased recommendations, poor adaptation to market fluctuations, insufficient privacy protection, and limited real-world deployment.
+
+</p>
+
+<p align="justify">
+
+The emergence of Explainable Artificial Intelligence (XAI), Responsible AI, Federated Learning, Privacy-Preserving Machine Learning, Graph Learning, Generative AI, and Large Language Models provides new opportunities for overcoming many of these limitations. Nevertheless, integrating these advanced technologies into practical financial recommendation systems remains an active research area with substantial open challenges.
+
+</p>
+
+<p align="justify">
+
+Accordingly, this paper aims to identify and systematically categorize the existing research gaps within AI-driven financial recommendation systems. Unlike previous review articles that primarily summarize existing methodologies, this work emphasizes unresolved research problems and future opportunities. The paper analyzes recent literature published in leading journals and conferences to provide a comprehensive taxonomy of research gaps spanning algorithmic development, data management, model evaluation, deployment, governance, privacy, fairness, and regulatory compliance.
+
+</p>
+
+<p align="justify">
+
+The major contributions of this review are summarized as follows:
+
+</p>
+
+<ul>
+
+<li>Provides a comprehensive review of AI-enabled financial recommendation systems.</li>
+
+<li>Identifies major research gaps across algorithmic, data, governance, evaluation, and deployment dimensions.</li>
+
+<li>Analyzes emerging Artificial Intelligence technologies suitable for future financial recommendation systems.</li>
+
+<li>Presents a structured taxonomy of current challenges and future research opportunities.</li>
+
+<li>Discusses Explainable AI, Generative AI, Federated Learning, Graph Neural Networks, and Large Language Models in financial recommendation.</li>
+
+<li>Provides a future research roadmap suitable for doctoral researchers and academic investigators.</li>
+
+</ul>
+
+<p align="justify">
+
+The remainder of this paper is organized as follows. Section 2 presents the literature review of financial recommendation systems. Section 3 discusses the research methodology adopted for identifying research gaps. Section 4 presents a taxonomy of research gaps. Section 5 discusses the role of Artificial Intelligence in addressing these gaps. Section 6 presents future research directions, while Section 7 concludes the paper.
+
+</p>
+
+<!-- ========================================================= -->
+<!-- SECTION 2 : LITERATURE REVIEW -->
+<!-- ========================================================= -->
+
+<hr>
+
+<h2>2. Literature Review</h2>
+
+<p align="justify">
+
+Financial recommendation systems have evolved considerably during the past two decades owing to rapid developments in Artificial Intelligence (AI), Machine Learning (ML), Data Mining, Knowledge Graphs, Natural Language Processing (NLP), and Deep Learning (DL). Unlike recommendation systems used in e-commerce or entertainment platforms, financial recommendation systems operate in highly dynamic and uncertain environments where recommendation quality directly influences users' financial well-being. Consequently, researchers have focused not only on improving prediction accuracy but also on ensuring robustness, transparency, fairness, privacy, and regulatory compliance.
+
+</p>
+
+<p align="justify">
+
+Early financial recommendation systems primarily relied on collaborative filtering, content-based filtering, demographic filtering, and rule-based expert systems. These methods were relatively simple and computationally efficient but were unable to address complex financial behaviors, market volatility, sparse datasets, and dynamic customer preferences. As Artificial Intelligence matured, researchers introduced hybrid recommendation frameworks combining collaborative filtering with machine learning algorithms to improve recommendation accuracy while reducing cold-start and sparsity issues.
+
+</p>
+
+<p align="justify">
+
+Recent literature demonstrates a significant transition from conventional recommendation algorithms toward intelligent AI-driven systems capable of continuously learning user behavior. Deep learning models such as Artificial Neural Networks (ANNs), Convolutional Neural Networks (CNNs), Recurrent Neural Networks (RNNs), Long Short-Term Memory (LSTM), Graph Neural Networks (GNNs), Transformer architectures, Reinforcement Learning (RL), and Large Language Models (LLMs) have significantly improved personalized financial recommendation performance. These methods effectively capture nonlinear relationships among customer profiles, financial products, transaction histories, and market dynamics.
+
+</p>
+
+<p align="justify">
+
+Wu and Li (2025) conducted one of the most comprehensive systematic literature reviews on financial product recommendation systems. Their review analyzed more than sixty research articles and concluded that financial recommendation differs substantially from traditional recommendation domains because it involves multiple objectives, dynamic market behavior, heterogeneous financial products, temporal dependencies, and parallel user interactions. The authors further emphasized the need for intelligent multi-task recommendation models capable of simultaneously considering customer preferences, investment risks, financial regulations, and market uncertainties.
+
+</p>
+
+<p align="justify">
+
+Similarly, Bonde and Bichanga (2025) systematically reviewed recommender systems in banking and finance. Their findings indicated that transparency, ethical AI, privacy preservation, explainability, fraud prevention, and customer trust remain among the biggest unresolved challenges. The review also highlighted insufficient attention toward deployment issues such as scalability, real-time recommendation, regulatory auditing, and responsible AI implementation within financial institutions.
+
+</p>
+
+<p align="justify">
+
+Artificial Intelligence has significantly accelerated the evolution of financial recommendation systems. Chatterjee and Das (2025) proposed an adaptive recommendation framework integrating Large Language Models, Reinforcement Learning, multimodal learning, differential privacy, and explainable AI. Their framework demonstrated substantial improvements in recommendation relevance and user engagement compared to traditional collaborative filtering approaches. Nevertheless, the study acknowledged limitations concerning validation on real-world banking datasets and compliance with financial regulations.
+
+</p>
+
+<p align="justify">
+
+Another notable contribution was presented by Shahbazi et al. (2025), who introduced a Cross-Domain Adaptive Recommendation System (CDARS). Their framework combined knowledge graphs, sentiment analysis, behavioral modeling, incremental learning, and explainable adaptive learning to continuously update user preferences. Experimental evaluation demonstrated improvements in recommendation relevance, click-through rates, and user engagement across multiple datasets. However, the authors also recognized several unresolved research challenges involving scalability, computational complexity, deployment within financial institutions, and long-term adaptation to evolving customer behavior.
+
+</p>
+
+<p align="justify">
+
+Explainable Artificial Intelligence (XAI) has emerged as another critical research direction within financial recommendation systems. The CFA Institute (2025) reported that although deep learning models significantly improve prediction accuracy, they often behave as black-box models whose internal decision-making processes remain difficult to interpret. Financial institutions increasingly require explainable recommendation systems to satisfy regulatory compliance, auditability, customer trust, and ethical AI requirements. Consequently, explainability has become one of the highest-priority research topics within AI-enabled financial services.
+
+</p>
+
+<p align="justify">
+
+Fairness has also attracted increasing attention. Yao and Huang (2018) argued that recommendation algorithms trained using historical financial data may unintentionally inherit historical societal biases. Such biased recommendations may adversely affect disadvantaged demographic groups by limiting their access to financial products, loans, insurance policies, or investment opportunities. Their work emphasized the importance of incorporating fairness constraints directly into recommendation algorithms while satisfying legal requirements such as the Equal Credit Opportunity Act (ECOA).
+
+</p>
+
+<p align="justify">
+
+Responsible Artificial Intelligence represents another emerging research area. Fritz-Morgenthal et al. (2022) discussed trustworthy AI for financial risk management and emphasized that future AI systems should simultaneously optimize prediction accuracy, transparency, fairness, explainability, energy efficiency, privacy preservation, and regulatory compliance. Their work highlighted the necessity of adopting comprehensive AI governance frameworks rather than optimizing prediction accuracy alone.
+
+</p>
+
+<p align="justify">
+
+Privacy preservation has become increasingly important because financial recommendation systems rely heavily on sensitive personal information including income, transaction histories, investment portfolios, insurance records, and credit scores. Traditional centralized learning architectures expose users to substantial privacy risks. Consequently, recent research has investigated Federated Learning, Differential Privacy, Secure Multi-party Computation, and Blockchain technologies as promising solutions for privacy-preserving financial recommendation systems.
+
+</p>
+
+<p align="justify">
+
+Recent advances in Large Language Models have further transformed financial advisory systems. LLM-powered financial assistants can analyze customer queries, summarize financial documents, explain investment products, generate personalized financial reports, and support conversational financial planning. Nevertheless, hallucination, factual inconsistency, regulatory compliance, explainability, and security remain major obstacles preventing widespread deployment of generative AI within highly regulated financial environments.
+
+</p>
+
+<p align="justify">
+
+Although numerous studies have proposed innovative recommendation algorithms, most existing research concentrates primarily on improving prediction accuracy while overlooking practical deployment challenges. Important issues such as continuous model adaptation, concept drift, robustness against financial crises, adversarial attacks, uncertainty estimation, fairness-aware optimization, privacy preservation, and regulatory auditing remain insufficiently investigated.
+
+</p>
+
+<p align="justify">
+
+Overall, the literature indicates that AI-enabled financial recommendation systems have achieved remarkable technological progress; however, substantial research gaps continue to exist across algorithmic design, data engineering, explainability, governance, evaluation methodologies, deployment strategies, and human-centered financial decision support.
+
+</p>
+
+<h3>Table 1. Representative Studies on AI-based Financial Recommendation Systems</h3>
 
 <table>
-<thead>
-<tr><th>Study</th><th>Year</th><th>Domain/Application</th><th>Approach/Methods</th><th>Key Findings and Gaps</th></tr>
-</thead>
-<tbody>
+
 <tr>
-<td>Wu & Li</td><td>2025</td><td>Financial product recommendation (bank, securities, insurance)</td><td>Systematic review of 65 papers; taxonomy of product categories and models</td><td>Identifies features: multi-objective goals, time-series and text features; notes lack of multi-behavior sequence and multi-task methods. Gaps: integrated models for parallel behaviors and richer user signals.</td></tr>
+
+<th>Author(s)</th>
+
+<th>Year</th>
+
+<th>Methodology</th>
+
+<th>Major Contribution</th>
+
+<th>Research Gap</th>
+
+</tr>
+
 <tr>
-<td>Bonde & Bichanga</td><td>2025</td><td>Finance & banking recommendation (industry focus)</td><td>Systematic review of 52 papers; categorized challenges</td><td>Highlights three main challenge areas: transparency/ethics/data privacy; content complexity/multi-behavior; AI explainability. Specific issues: cold-start, personalization, fraud, and data privacy. Gaps: targeted studies in finance, privacy-preserving methods, trust and bias mitigation.</td></tr>
+
+<td>Wu &amp; Li</td>
+
+<td>2025</td>
+
+<td>Systematic Literature Review</td>
+
+<td>Comprehensive taxonomy of financial recommendation systems</td>
+
+<td>Limited work on multi-task and adaptive recommendation</td>
+
+</tr>
+
 <tr>
-<td>Chatterjee & Das</td><td>2025</td><td>Personal finance product recsys (banking context)</td><td>Generative AI (LLMs, RL, time-series); multimodal user data; differential privacy & fairness layers</td><td>Proposed GenAI framework achieved +30% relevance, +25% engagement. Emphasized built-in XAI, privacy and fairness. Gaps: validation on real data, regulatory compliance in live settings.</td></tr>
+
+<td>Bonde &amp; Bichanga</td>
+
+<td>2025</td>
+
+<td>Systematic Review</td>
+
+<td>Identified transparency, ethics and privacy challenges</td>
+
+<td>Lack of deployment-oriented research</td>
+
+</tr>
+
 <tr>
-<td>Shahbazi et al.</td><td>2025</td><td>Cross-domain content recsys (social media, e-commerce, etc.)</td><td>Real-time adaptive learning; multi-domain knowledge graph; explainable module</td><td>Introduced CDARS system with incremental embeddings and sentiment signals. Achieved ~8% CTR/engagement gains. Gaps: scalability to large finance datasets; long-term deployment studies.</td></tr>
+
+<td>Chatterjee &amp; Das</td>
+
+<td>2025</td>
+
+<td>Generative AI + Reinforcement Learning</td>
+
+<td>Adaptive multimodal recommendation framework</td>
+
+<td>Requires validation on real financial datasets</td>
+
+</tr>
+
 <tr>
-<td>Yao & Huang</td><td>2018</td><td>Financial recommendation fairness (loan, asset advice)</td><td>Position paper (NeurIPS workshop)</td><td>Argues potential for discrimination in financial RS and surveys fairness notions (demo parity, equal opportunity, etc.). Highlights legal constraints (ECOA). Gaps: empirical studies of bias in real financial RS; fairness-aware algorithms for finance context.</td></tr>
+
+<td>Shahbazi et al.</td>
+
+<td>2025</td>
+
+<td>Knowledge Graph + Explainable AI</td>
+
+<td>Real-time adaptive recommendation</td>
+
+<td>Scalability and industrial deployment remain unresolved</td>
+
+</tr>
+
 <tr>
-<td>Fritz-Morgenthal et al.</td><td>2022</td><td>AI governance for finance (model risk)</td><td>Perspective article</td><td>Advocates trustworthy AI: model validation with bias tests, audit trails, and multi-criteria selection (accuracy vs fairness vs explainability). Gaps: specific guidelines for recommender use cases, efficiency of explainability for complex models.</td></tr>
+
+<td>Yao &amp; Huang</td>
+
+<td>2018</td>
+
+<td>Fairness Analysis</td>
+
+<td>Bias mitigation in financial recommendation</td>
+
+<td>Lack of fairness-aware recommendation algorithms</td>
+
+</tr>
+
 <tr>
-<td>CFA Institute RPC</td><td>2025</td><td>AI explainability in finance (industry report)</td><td>Report summarizing XAI needs</td><td>Emphasizes the “black-box” problem: deep models are opaque, hindering trust and compliance. Highlights lack of standardized XAI metrics and privacy/regulatory concerns. Recommends hybrid models and benchmarks. Gaps: actionable XAI tools for financial RS, real-time explainability.</td></tr>
-</tbody>
+
+<td>Fritz-Morgenthal et al.</td>
+
+<td>2022</td>
+
+<td>Responsible AI Framework</td>
+
+<td>Trustworthy AI principles</td>
+
+<td>Need for financial AI governance standards</td>
+
+</tr>
+
 </table>
 
-<h2>Methodology for Gap Analysis</h2>
-<p>To identify research gaps, we conducted a structured literature survey and gap analysis. We followed a methodology similar to systematic reviews: 
+<!-- ========================================================= -->
+<!-- SECTION 3 : RESEARCH METHODOLOGY -->
+<!-- ========================================================= -->
+
+<hr>
+
+<h2>3. Research Methodology</h2>
+
+<p align="justify">
+
+This review adopts a systematic literature review (SLR) methodology to identify and classify research gaps in Artificial Intelligence-driven financial recommendation systems. The methodology follows the general principles proposed by Kitchenham (2004) and the PRISMA (Preferred Reporting Items for Systematic Reviews and Meta-Analyses) framework to ensure transparency, reproducibility, and comprehensive coverage of the existing literature. The objective is not merely to summarize previous studies but to critically analyze existing limitations and identify future research opportunities within AI-enabled financial recommendation systems.
+
+</p>
+
+<h3>3.1 Research Objectives</h3>
+
+<p align="justify">
+
+The primary objective of this study is to investigate the current state of financial recommendation systems and identify unresolved research problems associated with Artificial Intelligence applications. Specifically, the study aims to:
+
+</p>
+
 <ul>
-<li> **Scope Definition:** We focused on publications (2018–2026) on financial recommendation systems, including academic articles, industry reports, and conference papers. Keywords included “financial recommendation”, “recommender finance”, “AI explainability finance”, etc.</li>
-<li> **Literature Collection:** Sources were collected from academic databases (Google Scholar, IEEE Xplore, Springer, etc.), as well as white papers (e.g. CFA Institute, ADB). We prioritized peer-reviewed and primary sources (overviews, reviews, and application papers), emphasizing recent work post-2019.</li>
-<li> **Content Coding:** Each source was coded for its focus (e.g. domain of finance, ML technique used, reported limitations) and any stated challenges or future work. Review articles (Wu & Li 2025, Bonde 2025) were especially mined for summarized shortcomings.</li>
-<li> **Synthesis:** We organized identified challenges into categories (AI/algorithmic, data, user/regulatory, deployment) and formed a taxonomy. We also mapped each gap to potential research questions.</li>
+
+<li>Review existing financial recommendation methodologies.</li>
+
+<li>Analyze the application of Artificial Intelligence techniques in personalized financial recommendations.</li>
+
+<li>Identify major technical, organizational, ethical, and regulatory research gaps.</li>
+
+<li>Develop a taxonomy of existing research challenges.</li>
+
+<li>Recommend future research directions for AI-enabled financial recommendation systems.</li>
+
 </ul>
-This qualitative gap analysis was guided by methodologies in existing SLRs. Our objective was not merely to list known challenges, but to articulate under-explored issues and propose directions. The resulting taxonomy (see next section) and tables are based on triangulating multiple sources, ensuring that gaps are grounded in cited findings.</p>
 
-<h2>Identified Research Gaps in Financial Recommendation Systems</h2>
-<p>The review reveals that financial recommendation systems, especially AI-driven ones, face multi-dimensional gaps. We group them into a taxonomy: (a) AI/Algorithmic gaps, (b) Data and Modeling gaps, (c) User/Governance gaps, and (d) Evaluation & Deployment gaps. Each category encompasses specific issues, as summarized below and illustrated in the diagram.</p>
+<h3>3.2 Research Questions</h3>
 
-<p><b>AI/Algorithmic Gaps:</b> Modern recommender models (deep neural nets, LLMs, graph models) yield accuracy but lack interpretability. Financial stakeholders demand explanations: why a loan or investment was recommended. This is the classic “black-box problem” in finance. Existing explainable AI (XAI) methods (e.g. feature-attribution) are limited, and standardized explainability metrics are lacking. Thus, research gap #1 is developing XAI techniques tailored to financial RS (e.g. rule-based proxies, counterfactual explanations) that satisfy regulatory and user needs. Closely related is <i>fairness</i>: algorithms may inadvertently reinforce biases in historical data. Few works have adapted fairness metrics (e.g. demographic parity, equality of opportunity) to recommendation contexts in finance. Ensuring non-discrimination (e.g. compliant with ECOA) is a critical gap. A second algorithmic gap is <i>robustness</i>: financial environments are volatile and adversarial (market shocks, fraudulent actors). Few studies address how RS handle noisy or adversarial inputs. For instance, model drift due to economic changes can degrade recommendations, requiring robust or continual learning methods. </p>
+<p align="justify">
 
-<p><b>Data and Modeling Gaps:</b> Financial data come from diverse sources: transactional time-series, user profiles, market news, social media sentiment, etc. Integrating <i>multimodal data</i> remains underexplored. While some models incorporate text (news analysis), there is a gap in fusing modalities (numeric, text, graph) in a cohesive framework. Relatedly, <i>data quality</i> is a challenge. Financial records often contain errors, outliers, and missing entries. Pre-processing and cleansing are crucial but rarely automated; biases in input data (e.g. under-reporting of defaults) can distort learned preferences. As Fritz-Morgenthal et al. suggest, data cleaning should be an integral validation step. Research is needed on denoising and imputing transaction data specifically for RS. Another data gap is the lack of dynamic personalization: user preferences in finance can change rapidly (e.g. risk tolerance after a market crash). Real-time or online learning algorithms that adapt to such shifts (concept drift) are needed. Shahbazi et al.’s CDARS begins to address this with incremental embeddings and behavioral signals, but general solutions for streaming financial RS are scarce. </p>
+The literature review was guided by the following research questions (RQs):
 
-<p><b>User/Governance Gaps:</b> Financial RS must respect privacy and legal constraints. <i>Privacy preservation</i> is paramount, as recsys use sensitive data (transactions, credit scores). Traditional centralized models risk data leakage. Federated learning and differential privacy have been proposed for cross-institutional finance (Tam & Corrado 2024). Yet, their use in actual recommender engines is an open area. How to design end-to-end RS that perform well without exposing raw data remains an open gap. Similarly, <i>regulatory compliance</i> and ethics introduce requirements: models must allow audit trails, consumers may require explanations under GDPR/Reg BI, and fairness under financial law. There is little guidance on embedding legal rules into recommendation algorithms or on certifying systems. Another user-related gap is understanding <i>multiple user behaviors</i>, e.g. households or group decisions. Bonde et al. highlight that accounts often have multiple users with interacting preferences. RS must model such group dynamics, which is largely unaddressed. </p>
+</p>
 
-<p><b>Evaluation and Deployment Gaps:</b> Standard RS metrics (precision, recall, RMSE) do not capture financial criteria. New evaluation metrics that combine accuracy with risk-adjusted utility, fairness indices, and explainability scores are needed. For example, a model might increase profit but introduce bias; how to quantify such trade-offs? Research should develop domain-specific benchmarks. Moreover, <i>deployment challenges</i> are under-studied. Integrating RS into real banking/insurer systems requires scalability and monitoring. MLOps practices for finance (model versioning, drift monitoring, incident management) are not well-established. As Fritz-Morgenthal et al. note, tracking model changes and data history is crucial. There is a gap in research on best practices for deploying finance RS in production, including human-in-the-loop interventions and stress-testing under extreme events. </p>
+<table>
 
-```mermaid
-graph TD
-    G[Financial RecSys Research Gaps] 
-    G --> AI[Algorithmic & Model]
-    G --> Data[Data & Input]
-    G --> Gov[Governance & Ethics]
-    G --> Eval[Evaluation & Deployment]
-    AI --> Explain[Explainability & Transparency]
-    AI --> Fairness[Fairness & Bias]
-    AI --> Robust[Robustness & Drift]
-    Data --> Quality[Data Quality & Cleaning]
-    Data --> Multimodal[Multimodal Integration]
-    Data --> Adaptive[Real-Time Adaptation]
-    Gov --> Privacy[Privacy & Security]
-    Gov --> Compliance[Regulatory Compliance]
-    Gov --> Ethics[Ethics & Accountability]
-    Eval --> Metrics[Evaluation Metrics]
-    Eval --> Deployment[Deployment & MLOps]
-```
+<tr>
+<th>Research Question</th>
+<th>Description</th>
+</tr>
 
-A performance comparison of a recent adaptive recommender model (CDARS) against several baselines illustrates multi-metric gains. Here, an advanced finance recommender improves click-through rate (blue), user engagement (green) and nDCG (orange) simultaneously compared to classic models. Such multi-faceted evaluation highlights the need for richer metrics and explainability (captions: CTR, user engagement, nDCG). 
+<tr>
+<td>RQ1</td>
+<td>What Artificial Intelligence techniques are currently used in financial recommendation systems?</td>
+</tr>
 
-<h2>Discussion</h2>
-<p>The identified gaps highlight the complex interplay of factors in financial RS. Many technical limitations noted in general recommender research become even more acute in finance. For example, the well-known cold-start and sparsity issues are exacerbated by the high stakes of wrong predictions. Moreover, financial RS must not only be accurate but also trustworthy. The literature makes clear that building explainability and fairness into models is not optional but central to adoption. Several works (e.g. Chatterjee 2025, Shahbazi 2025) incorporate such features, but these are initial prototypes. A broader gap is in standardizing and validating these properties across models.</p>
+<tr>
+<td>RQ2</td>
+<td>What are the major limitations of existing financial recommendation systems?</td>
+</tr>
 
-<p>Data-related challenges are also critical. We note a gap in <i>benchmark datasets</i> for financial RS research. Unlike movie or product recsys, there are few public financial transaction datasets due to privacy. This hampers reproducibility and comparison of methods. Efforts to create anonymized, realistic datasets (e.g. synthetic customer portfolios or simulated trading logs) would advance the field. Similarly, modeling real human behavior in finance (e.g. risk preferences, goal-oriented investing) is underdeveloped. Most research simulates users or overlooks behavioral economics aspects.</p>
+<tr>
+<td>RQ3</td>
+<td>Which research gaps remain unresolved in AI-driven financial recommendation?</td>
+</tr>
 
-<p>Regulatory considerations cut across all gaps. For instance, even if a powerful deep learning model exists, it may never be used unless it can be audited. Thus the gap in XAI is not theoretical but practical: models need to provide human-comprehensible justifications. Similarly, data privacy laws (GDPR, GLBA) may demand that recommendations do not reveal personal data; this suggests the need for cryptographic or federated solutions to RS. Financial institutions also operate under strict testing regimes; yet little work explicitly targets regulatory-approved validation of RS.</p>
+<tr>
+<td>RQ4</td>
+<td>How can emerging AI technologies address existing research challenges?</td>
+</tr>
 
-<p>In summary, our survey shows a tension between the promise of AI in finance and the precaution required. Most existing studies focus on improving algorithmic performance; fewer address the broader systems issues. Closing these gaps will likely require interdisciplinary collaboration (AI researchers working with finance regulators, ethicists, and user experts). The taxonomy above can serve as a checklist for researchers designing new financial RS: Have you addressed interpretability? data bias? privacy? metrics? deployment?</p>
+<tr>
+<td>RQ5</td>
+<td>What future research directions should researchers explore?</td>
+</tr>
 
-<h2>Future Research Directions</h2>
-<p>Based on the gaps, we propose several research directions:</p>
+</table>
+
+<h3>3.3 Literature Search Strategy</h3>
+
+<p align="justify">
+
+A comprehensive literature search was performed using multiple internationally recognized scientific databases. Peer-reviewed journal articles, conference proceedings, review papers, book chapters, industrial reports, and technical white papers published between 2015 and 2026 were considered. Preference was given to high-quality publications indexed in Scopus, Web of Science, IEEE Xplore, ACM Digital Library, SpringerLink, Elsevier ScienceDirect, Wiley Online Library, MDPI, and Google Scholar.
+
+</p>
+
+<p align="justify">
+
+The search process employed combinations of the following keywords:
+
+</p>
+
+<ul>
+
+<li>"Financial Recommendation System"</li>
+
+<li>"Artificial Intelligence in Finance"</li>
+
+<li>"Financial Recommender System"</li>
+
+<li>"Investment Recommendation"</li>
+
+<li>"Explainable AI in Finance"</li>
+
+<li>"Deep Learning Financial Recommendation"</li>
+
+<li>"Machine Learning for Investment"</li>
+
+<li>"Personalized Financial Advisory"</li>
+
+<li>"Large Language Models in Finance"</li>
+
+<li>"FinTech Recommendation Systems"</li>
+
+<li>"Responsible AI in Finance"</li>
+
+<li>"Privacy-Preserving Recommendation"</li>
+
+</ul>
+
+<h3>3.4 Inclusion Criteria</h3>
+
+<p align="justify">
+
+The following criteria were applied to include relevant studies:
+
+</p>
+
+<ul>
+
+<li>Peer-reviewed journal articles.</li>
+
+<li>International conference papers.</li>
+
+<li>Review papers and systematic literature reviews.</li>
+
+<li>Studies focusing on financial recommendation systems.</li>
+
+<li>Research involving Artificial Intelligence or Machine Learning techniques.</li>
+
+<li>Articles published in English.</li>
+
+<li>Publications between 2015 and 2026.</li>
+
+</ul>
+
+<h3>3.5 Exclusion Criteria</h3>
+
+<p align="justify">
+
+The following studies were excluded from the review:
+
+</p>
+
+<ul>
+
+<li>Duplicate publications.</li>
+
+<li>Non-English articles.</li>
+
+<li>Editorials and opinion papers without technical contributions.</li>
+
+<li>Studies unrelated to recommendation systems.</li>
+
+<li>Research focusing solely on financial forecasting without recommendation.</li>
+
+<li>Papers lacking sufficient methodological details.</li>
+
+</ul>
+
+<h3>3.6 Literature Selection Process</h3>
+
+<p align="justify">
+
+The literature selection process consisted of four major stages. Initially, publications were identified through database searches. Duplicate records were removed before title and abstract screening. Full-text assessment was then performed to evaluate methodological relevance. Finally, eligible studies were included for qualitative analysis and research gap identification.
+
+</p>
+
+<table>
+
+<tr>
+<th>Stage</th>
+<th>Description</th>
+</tr>
+
+<tr>
+<td>Identification</td>
+<td>Articles collected from scientific databases.</td>
+</tr>
+
+<tr>
+<td>Screening</td>
+<td>Duplicate removal and title/abstract screening.</td>
+</tr>
+
+<tr>
+<td>Eligibility</td>
+<td>Full-text quality assessment.</td>
+</tr>
+
+<tr>
+<td>Inclusion</td>
+<td>Final studies selected for detailed analysis.</td>
+</tr>
+
+</table>
+
+<h3>3.7 Data Extraction</h3>
+
+<p align="justify">
+
+Relevant information was extracted from every selected publication using a standardized data extraction framework. The following attributes were recorded:
+
+</p>
+
+<ul>
+
+<li>Publication year</li>
+
+<li>Authors</li>
+
+<li>Financial application domain</li>
+
+<li>Recommendation technique</li>
+
+<li>Artificial Intelligence methodology</li>
+
+<li>Evaluation datasets</li>
+
+<li>Performance metrics</li>
+
+<li>Identified limitations</li>
+
+<li>Future work suggested by authors</li>
+
+</ul>
+
+<h3>3.8 Research Gap Identification Framework</h3>
+
+<p align="justify">
+
+Unlike conventional review articles that primarily summarize previous research, this study adopts a structured research-gap identification framework. Each selected publication was critically analyzed to identify unresolved technical issues, methodological weaknesses, deployment limitations, ethical concerns, and future opportunities. Similar limitations reported across multiple studies were grouped into common research themes.
+
+</p>
+
+<p align="justify">
+
+The identified gaps were subsequently classified into six major categories:
+
+</p>
+
 <ol>
-<li><b>Explainable and Fair Models:</b> Develop hybrid RS models that balance accuracy with transparency. This could involve integrating rule-based or neuro-symbolic components, generating counterfactual explanations, and creating fairness regularizers. For example, research could explore using SHAP/LIME in finance-specific settings or designing inherently interpretable models for credit recommendation, as called for by the CFA Institute.</li>
-<li><b>Robustness and Adversarial Defense:</b> Study the impact of market volatility and malicious inputs on RS. This includes designing continual learning schemes to adapt to non-stationary financial data, and employing adversarial training to defend against manipulative patterns (e.g. fake reviews or Sybil attacks). Simulation of stress scenarios (like 2008 financial crisis) for RS benchmarking is suggested.</li>
-<li><b>Privacy-Preserving and Federated Learning:</b> Investigate federated or encrypted recommendation models that keep user data local. Building on works like Tam & Corrado (2024), one could apply FL to joint recommendation across banks while preserving customer privacy. Evaluating the trade-offs between decentralization and model performance in finance is an open area.</li>
-<li><b>Multimodal and Context-Aware RS:</b> Explore integration of heterogeneous data: news sentiment, social media signals, geolocation (for insurance risks), etc. Techniques like knowledge graph embeddings (as in CDARS) can be extended to financial product ontologies. Multi-task learning frameworks can allow models to handle co-occurring objectives (e.g. recommending products while predicting risk).</li>
-<li><b>Domain-Specific Evaluation Metrics:</b> Design metrics that reflect financial impact. For example, incorporate risk-adjusted return metrics, or fairness metrics that account for regulatory parity (like comparing approval rates across demographics). Develop benchmarks and shared datasets (even if synthetic) for key financial use-cases, enabling meaningful comparisons.</li>
-<li><b>Operational Guidelines and MLOps:</b> Formulate best practices for deploying RS in financial institutions. This includes developing audit processes for RS, guidelines for logging and monitoring, and interfaces for human oversight. Studies on human-AI collaboration (e.g. advisors using RS as decision support) could also be fruitful.</li>
-<li><b>Regulatory and Ethical Frameworks:</b> Collaborate with regulators to define standards for financial RS (e.g. what constitutes an acceptable explanation, privacy thresholds, fairness targets). Creating certification processes (analogous to model risk management) for recommendation algorithms would help bridge research and practice.</li>
+
+<li>Algorithmic Gaps</li>
+
+<li>Data-Centric Gaps</li>
+
+<li>Explainability and Trust Gaps</li>
+
+<li>Privacy, Security and Ethical Gaps</li>
+
+<li>Evaluation and Benchmarking Gaps</li>
+
+<li>Deployment and Industrial Adoption Gaps</li>
+
 </ol>
 
-<h2>Conclusion</h2>
-<p>Financial recommendation systems offer great potential to improve decision-making in banking, investment, and insurance. However, our review finds significant research gaps before this potential is fully realized. Technical innovations in AI must be paired with considerations of interpretability, fairness, and compliance. We have identified key gaps across AI algorithms, data, and governance. Closing these gaps will require novel methods (e.g. XAI, federated learning), new metrics, and cross-disciplinary approaches. By mapping research gaps to specific questions, this paper aims to guide future work. Ultimately, developing trustworthy, adaptive, and responsible financial recommender systems can enhance user trust and financial inclusion. Researchers tackling these challenges should leverage both cutting-edge AI and domain expertise to build the next generation of financial RS.</p>
+<h3>3.9 Quality Assessment</h3>
+
+<p align="justify">
+
+To ensure the reliability of the findings, every selected publication was evaluated using a quality assessment checklist adapted from systematic review guidelines. Each paper was assessed based on research methodology, dataset quality, reproducibility, novelty, clarity of evaluation, practical applicability, and discussion of limitations.
+
+</p>
+
+<table>
+
+<tr>
+<th>Quality Criterion</th>
+<th>Evaluation</th>
+</tr>
+
+<tr>
+<td>Clearly defined objectives</td>
+<td>Yes / No</td>
+</tr>
+
+<tr>
+<td>Appropriate AI methodology</td>
+<td>Yes / No</td>
+</tr>
+
+<tr>
+<td>Dataset adequately described</td>
+<td>Yes / No</td>
+</tr>
+
+<tr>
+<td>Experimental validation</td>
+<td>Yes / No</td>
+</tr>
+
+<tr>
+<td>Research limitations discussed</td>
+<td>Yes / No</td>
+</tr>
+
+<tr>
+<td>Future work identified</td>
+<td>Yes / No</td>
+</tr>
+
+</table>
+
+<h3>3.10 Summary</h3>
+
+<p align="justify">
+
+The adopted methodology provides a systematic, transparent, and reproducible framework for identifying research gaps in AI-enabled financial recommendation systems. By combining systematic literature review principles with structured gap analysis, the study ensures that the identified challenges are supported by existing scientific evidence rather than subjective observations. The next section presents the taxonomy of research gaps derived from the reviewed literature and discusses the unresolved challenges that continue to limit the practical adoption of intelligent financial recommendation systems.
+
+</p>
+<!-- ========================================================= -->
+<!-- SECTION 4 : RESEARCH GAPS -->
+<!-- ========================================================= -->
+
+<hr>
+
+<h2>4. Research Gaps in AI-Driven Financial Recommendation Systems</h2>
+
+<p align="justify">
+
+Although Artificial Intelligence has significantly improved the capability of financial recommendation systems, existing studies reveal numerous unresolved challenges that continue to restrict their practical deployment. Unlike traditional recommendation domains such as movies or e-commerce, financial recommendations directly influence users' financial security, investment decisions, and long-term wealth creation. Consequently, recommendation systems must satisfy significantly higher standards regarding prediction accuracy, robustness, explainability, fairness, security, transparency, and regulatory compliance.
+
+</p>
+
+<p align="justify">
+
+The reviewed literature indicates that most existing research primarily focuses on improving recommendation accuracy while comparatively little attention has been devoted to trustworthiness, ethical AI, deployment challenges, continual learning, privacy preservation, and real-world financial decision support. Based on the systematic literature review, the identified research gaps have been categorized into six major dimensions illustrated below.
+
+</p>
+
+<h3>4.1 Taxonomy of Research Gaps</h3>
+
+<table>
+
+<tr>
+
+<th>Category</th>
+
+<th>Major Research Gap</th>
+
+<th>Current Status</th>
+
+</tr>
+
+<tr>
+
+<td>Algorithmic</td>
+
+<td>Limited adaptive and explainable recommendation algorithms</td>
+
+<td>Partially Solved</td>
+
+</tr>
+
+<tr>
+
+<td>Data</td>
+
+<td>Insufficient handling of heterogeneous financial data</td>
+
+<td>Open</td>
+
+</tr>
+
+<tr>
+
+<td>Trust</td>
+
+<td>Lack of explainability and transparency</td>
+
+<td>Open</td>
+
+</tr>
+
+<tr>
+
+<td>Privacy</td>
+
+<td>Weak privacy-preserving recommendation techniques</td>
+
+<td>Open</td>
+
+</tr>
+
+<tr>
+
+<td>Evaluation</td>
+
+<td>No standardized benchmark datasets or evaluation metrics</td>
+
+<td>Open</td>
+
+</tr>
+
+<tr>
+
+<td>Deployment</td>
+
+<td>Limited real-world implementation and scalability studies</td>
+
+<td>Open</td>
+
+</tr>
+
+</table>
+
+<hr>
+
+<h3>4.2 Algorithmic Research Gaps</h3>
+
+<p align="justify">
+
+Most existing financial recommendation systems continue to rely on conventional collaborative filtering, matrix factorization, content-based recommendation, or hybrid recommendation techniques. Although these methods achieve reasonable recommendation accuracy under controlled experimental settings, they are unable to model highly dynamic financial environments where customer preferences continuously evolve due to economic conditions, market fluctuations, and changing investment objectives.
+
+</p>
+
+<p align="justify">
+
+Recent deep learning models improve prediction accuracy but introduce additional computational complexity and suffer from poor interpretability. Most deep neural network architectures behave as black-box models whose internal reasoning cannot easily be explained to customers or financial regulators. Consequently, financial institutions often hesitate to deploy highly accurate models because they cannot justify why particular financial products have been recommended.
+
+</p>
+
+<p align="justify">
+
+Another important limitation concerns continual learning. Most existing recommendation algorithms are trained offline and assume static datasets. Financial markets, however, continuously evolve, resulting in concept drift and outdated recommendation models. Very few studies investigate continual learning, lifelong learning, or online reinforcement learning for continuously updating recommendation models.
+
+</p>
+
+<p align="justify">
+
+Furthermore, optimization objectives remain relatively narrow. Most algorithms optimize recommendation accuracy while ignoring investment risk, customer satisfaction, portfolio diversification, ethical considerations, and long-term financial sustainability.
+
+</p>
+
+<b>Research Gap 1:</b>
+
+<ul>
+
+<li>Development of continual learning financial recommendation systems.</li>
+
+<li>Explainable deep recommendation algorithms.</li>
+
+<li>Multi-objective recommendation optimization.</li>
+
+<li>Adaptive recommendation under concept drift.</li>
+
+</ul>
+
+<hr>
+
+<h3>4.3 Data-Centric Research Gaps</h3>
+
+<p align="justify">
+
+Financial recommendation systems utilize highly heterogeneous datasets originating from banking systems, insurance records, stock exchanges, mobile payment platforms, IoT devices, customer demographics, macroeconomic indicators, and social media. Existing recommendation algorithms generally process only structured transactional data while ignoring valuable unstructured information such as financial news, earnings reports, customer reviews, and market sentiment.
+
+</p>
+
+<p align="justify">
+
+Another major challenge concerns data quality. Financial datasets frequently contain missing values, duplicated records, inconsistent transaction histories, noisy observations, and outliers. Despite their importance, automated financial data preprocessing techniques remain underexplored.
+
+</p>
+
+<p align="justify">
+
+Most publicly available recommendation datasets originate from entertainment or e-commerce domains, whereas publicly accessible financial recommendation datasets remain extremely limited because of confidentiality and privacy regulations. Consequently, researchers frequently evaluate models using synthetic datasets or small proprietary databases, making reproducibility difficult.
+
+</p>
+
+<p align="justify">
+
+Temporal dependency represents another unresolved issue. Customer financial behavior evolves throughout different life stages, economic cycles, and market conditions. Existing recommendation systems rarely integrate long-term financial planning into recommendation generation.
+
+</p>
+
+<b>Research Gap 2:</b>
+
+<ul>
+
+<li>Multimodal financial data integration.</li>
+
+<li>Automatic financial data cleaning.</li>
+
+<li>Public benchmark datasets.</li>
+
+<li>Life-cycle aware financial recommendation.</li>
+
+<li>Temporal recommendation models.</li>
+
+</ul>
+
+<hr>
+
+<h3>4.4 Explainability and Trust Research Gaps</h3>
+
+<p align="justify">
+
+Explainability has emerged as perhaps the most critical challenge in AI-enabled financial recommendation systems. Unlike movie recommendations, financial recommendations require clear justification because users invest real money based on system suggestions.
+
+</p>
+
+<p align="justify">
+
+Current deep learning recommendation models provide excellent predictive performance but fail to explain why a specific investment, insurance policy, mutual fund, or banking product has been recommended. Financial regulators increasingly require transparent decision-making processes, especially in loan approvals, insurance underwriting, and wealth management.
+
+</p>
+
+<p align="justify">
+
+Although Explainable Artificial Intelligence (XAI) techniques such as SHAP, LIME, Integrated Gradients, and attention visualization have gained popularity, their application within financial recommendation remains limited.
+
+</p>
+
+<p align="justify">
+
+Moreover, recommendation explanations must satisfy different stakeholders simultaneously, including customers, financial advisors, auditors, regulators, and organizational management. Existing explanation techniques rarely consider stakeholder-specific requirements.
+
+</p>
+
+<b>Research Gap 3:</b>
+
+<ul>
+
+<li>Stakeholder-oriented explainable recommendation.</li>
+
+<li>Financial reasoning generation using Large Language Models.</li>
+
+<li>Human-understandable recommendation explanations.</li>
+
+<li>Interactive financial recommendation systems.</li>
+
+</ul>
+
+<hr>
+
+<h3>4.5 Fairness, Bias and Ethical AI Research Gaps</h3>
+
+<p align="justify">
+
+Recommendation algorithms trained using historical financial data may unintentionally reproduce historical discrimination associated with gender, income, ethnicity, education, age, or geographical location. Such algorithmic bias may unfairly influence recommendations involving loans, insurance premiums, investment opportunities, and credit card eligibility.
+
+</p>
+
+<p align="justify">
+
+Most existing financial recommendation studies evaluate only prediction accuracy while ignoring fairness metrics. Furthermore, fairness definitions suitable for recommendation systems remain an active research problem because financial recommendations simultaneously involve customers, financial institutions, regulators, and society.
+
+</p>
+
+<p align="justify">
+
+Responsible Artificial Intelligence frameworks have recently emerged; however, their integration into financial recommendation remains largely conceptual rather than operational.
+
+</p>
+
+<b>Research Gap 4:</b>
+
+<ul>
+
+<li>Fairness-aware recommendation algorithms.</li>
+
+<li>Bias detection during recommendation generation.</li>
+
+<li>Ethical AI frameworks for financial recommendation.</li>
+
+<li>Responsible recommendation evaluation metrics.</li>
+
+</ul>
+
+<hr>
+
+<h3>4.6 Privacy and Security Research Gaps</h3>
+
+<p align="justify">
+
+Financial recommendation systems process extremely sensitive information including customer income, expenditure, investments, insurance policies, tax information, transaction histories, and credit ratings. Traditional centralized machine learning approaches require transferring customer data to cloud servers, creating significant privacy concerns.
+
+</p>
+
+<p align="justify">
+
+Although Federated Learning has recently attracted considerable attention, its application to financial recommendation systems remains limited. Existing studies rarely investigate communication efficiency, secure aggregation, adversarial robustness, or regulatory compliance in federated financial recommendation.
+
+</p>
+
+<p align="justify">
+
+Another unresolved issue concerns cybersecurity. Recommendation systems remain vulnerable to adversarial attacks, model poisoning, fake user profiles, fraudulent transactions, and recommendation manipulation.
+
+</p>
+
+<b>Research Gap 5:</b>
+
+<ul>
+
+<li>Federated financial recommendation.</li>
+
+<li>Privacy-preserving recommendation algorithms.</li>
+
+<li>Blockchain-enabled recommendation systems.</li>
+
+<li>Cybersecurity-aware financial recommendation.</li>
+
+</ul>
+
+<hr>
+
+<h3>4.7 Evaluation and Benchmarking Research Gaps</h3>
+
+<p align="justify">
+
+Most published studies evaluate recommendation performance using conventional metrics such as Precision, Recall, F1-score, RMSE, MAE, AUC, and NDCG. While useful, these measures fail to capture financial objectives such as investment profitability, portfolio diversification, risk minimization, long-term wealth creation, customer trust, fairness, and regulatory compliance.
+
+</p>
+
+<p align="justify">
+
+Furthermore, there is currently no universally accepted benchmark dataset for evaluating AI-enabled financial recommendation systems. Consequently, comparing published studies remains extremely difficult.
+
+</p>
+
+<b>Research Gap 6:</b>
+
+<ul>
+
+<li>Financial recommendation benchmark datasets.</li>
+
+<li>Risk-aware evaluation metrics.</li>
+
+<li>Trustworthiness evaluation.</li>
+
+<li>Explainability benchmarks.</li>
+
+<li>Fairness evaluation protocols.</li>
+
+</ul>
+
+<hr>
+
+<h3>4.8 Deployment and Industrial Adoption Gaps</h3>
+
+<p align="justify">
+
+Despite remarkable academic progress, relatively few AI-driven financial recommendation systems have been successfully deployed within commercial banking institutions. Industrial deployment introduces challenges related to computational scalability, cloud infrastructure, latency, fault tolerance, model monitoring, regulatory auditing, and continuous maintenance.
+
+</p>
+
+<p align="justify">
+
+Most existing publications evaluate algorithms using offline experiments rather than real-time financial environments. Consequently, very little evidence exists regarding long-term performance under continuously changing financial markets.
+
+</p>
+
+<p align="justify">
+
+Another important challenge concerns human-AI collaboration. Future recommendation systems should assist financial advisors rather than replace them. However, current research rarely investigates collaborative intelligence involving both human expertise and AI-generated recommendations.
+
+</p>
+
+<b>Research Gap 7:</b>
+
+<ul>
+
+<li>Industrial deployment frameworks.</li>
+
+<li>MLOps for financial recommendation.</li>
+
+<li>Real-time recommendation infrastructure.</li>
+
+<li>Human-AI collaborative financial advisory.</li>
+
+<li>Continuous regulatory auditing.</li>
+
+</ul>
+
+<hr>
+
+<h3>4.9 Summary of Identified Research Gaps</h3>
+
+<p align="justify">
+
+The systematic analysis demonstrates that although AI has significantly advanced financial recommendation systems, existing research remains heavily concentrated on improving predictive performance. Critical challenges involving explainability, fairness, continual learning, multimodal data integration, privacy preservation, benchmarking, deployment, and trustworthy AI remain largely unresolved. These gaps provide numerous opportunities for future doctoral research and industrial innovation. The following section discusses how emerging Artificial Intelligence technologies—including Explainable AI, Generative AI, Federated Learning, Knowledge Graphs, Reinforcement Learning, and Large Language Models—can address these research challenges.
+
+</p>
+
+<!-- ========================================================= -->
+<!-- SECTION 5 : ROLE OF ARTIFICIAL INTELLIGENCE IN FINANCIAL -->
+<!--              RECOMMENDATION SYSTEMS                       -->
+<!-- ========================================================= -->
+
+<hr>
+
+<h2>5. Role of Artificial Intelligence in Financial Recommendation Systems</h2>
+
+<p align="justify">
+
+Artificial Intelligence (AI) has fundamentally transformed financial recommendation systems from static rule-based advisory tools into intelligent decision-support platforms capable of learning user preferences, analyzing massive volumes of financial data, predicting future behavior, and generating personalized financial recommendations. Modern AI techniques enable recommendation systems to process heterogeneous financial information including transactional records, investment portfolios, customer demographics, financial statements, market indicators, economic reports, and unstructured textual information such as news articles and social media sentiment.
+
+</p>
+
+<p align="justify">
+
+Unlike traditional recommendation algorithms that rely primarily on historical user interactions, AI-based recommendation systems continuously learn evolving customer behavior, adapt to changing financial markets, and optimize recommendations according to multiple objectives such as profitability, investment risk, portfolio diversification, customer preferences, regulatory compliance, and financial sustainability. Recent advances in Machine Learning, Deep Learning, Reinforcement Learning, Graph Neural Networks, Explainable AI, Federated Learning, and Large Language Models have significantly enhanced the capability of intelligent financial advisory systems.
+
+</p>
+
+<hr>
+
+<h3>5.1 Machine Learning for Financial Recommendation</h3>
+
+<p align="justify">
+
+Machine Learning remains one of the most widely adopted Artificial Intelligence technologies in financial recommendation systems. Supervised learning algorithms including Decision Trees, Random Forests, Support Vector Machines (SVM), Logistic Regression, Gradient Boosting Machines (GBM), and XGBoost have been extensively applied to recommend investment products, credit cards, insurance plans, mutual funds, banking services, and retirement portfolios.
+
+</p>
+
+<p align="justify">
+
+These algorithms learn complex relationships between customer characteristics and financial product preferences using historical financial data. Compared with conventional rule-based recommendation systems, machine learning approaches demonstrate superior predictive performance and adaptability. However, most supervised learning techniques require large labeled datasets and often struggle with dynamic financial environments characterized by concept drift and evolving customer behavior.
+
+</p>
+
+<b>Major Advantages</b>
+
+<ul>
+
+<li>High prediction accuracy.</li>
+
+<li>Ability to process structured financial datasets.</li>
+
+<li>Fast model training.</li>
+
+<li>Suitable for classification and ranking problems.</li>
+
+</ul>
+
+<b>Current Limitations</b>
+
+<ul>
+
+<li>Limited interpretability.</li>
+
+<li>Poor adaptation to continuously changing markets.</li>
+
+<li>Dependence on labeled historical datasets.</li>
+
+</ul>
+
+<hr>
+
+<h3>5.2 Deep Learning-Based Financial Recommendation</h3>
+
+<p align="justify">
+
+Deep Learning enables recommendation systems to automatically learn complex hierarchical feature representations from high-dimensional financial datasets. Artificial Neural Networks (ANNs), Convolutional Neural Networks (CNNs), Recurrent Neural Networks (RNNs), Long Short-Term Memory (LSTM) networks, Transformer architectures, and Autoencoders have demonstrated remarkable success in capturing nonlinear financial relationships.
+
+</p>
+
+<p align="justify">
+
+LSTM models are particularly suitable for modeling sequential financial transactions because they effectively capture temporal dependencies within customer financial behavior. Transformer-based architectures further improve long-term dependency modeling through self-attention mechanisms and parallel computation.
+
+</p>
+
+<p align="justify">
+
+Despite their superior predictive capability, deep learning models generally suffer from high computational requirements and poor explainability, limiting their adoption in highly regulated financial environments.
+
+</p>
+
+<hr>
+
+<h3>5.3 Reinforcement Learning for Personalized Financial Advisory</h3>
+
+<p align="justify">
+
+Reinforcement Learning (RL) has recently emerged as an effective paradigm for adaptive financial recommendation. Unlike supervised learning algorithms that learn from static historical datasets, RL continuously interacts with the environment and optimizes long-term cumulative rewards.
+
+</p>
+
+<p align="justify">
+
+Within financial recommendation systems, reinforcement learning agents continuously observe customer responses to recommendations and gradually improve future recommendations based on feedback. This capability makes RL particularly suitable for portfolio optimization, robo-advisory systems, retirement planning, asset allocation, and dynamic investment management.
+
+</p>
+
+<p align="justify">
+
+However, practical deployment remains challenging because financial environments are highly stochastic, partially observable, and influenced by unpredictable macroeconomic events.
+
+</p>
+
+<hr>
+
+<h3>5.4 Knowledge Graphs and Graph Neural Networks</h3>
+
+<p align="justify">
+
+Financial ecosystems naturally consist of interconnected entities including customers, banks, investment products, insurance companies, mutual funds, stocks, advisors, regulatory bodies, and financial markets. Traditional recommendation algorithms often fail to capture these complex relationships.
+
+</p>
+
+<p align="justify">
+
+Knowledge Graphs (KGs) explicitly represent relationships among financial entities, while Graph Neural Networks (GNNs) learn rich graph embeddings capable of improving recommendation quality. Graph-based recommendation enables intelligent reasoning across interconnected financial products and customer preferences.
+
+</p>
+
+<p align="justify">
+
+Emerging Graph Attention Networks (GATs), Graph Convolutional Networks (GCNs), and heterogeneous graph learning architectures provide promising opportunities for personalized financial recommendation involving multiple financial products simultaneously.
+
+</p>
+
+<hr>
+
+<h3>5.5 Explainable Artificial Intelligence (XAI)</h3>
+
+<p align="justify">
+
+Explainability has become one of the most important requirements for AI-driven financial recommendation systems. Customers, financial advisors, auditors, and regulatory agencies increasingly demand transparent explanations describing why particular financial products have been recommended.
+
+</p>
+
+<p align="justify">
+
+Explainable Artificial Intelligence techniques including SHAP (SHapley Additive Explanations), LIME (Local Interpretable Model-Agnostic Explanations), Integrated Gradients, Counterfactual Explanations, and Attention Visualization provide meaningful interpretations of recommendation outcomes.
+
+</p>
+
+<p align="justify">
+
+Explainability enhances customer trust, supports regulatory auditing, facilitates error diagnosis, and promotes ethical AI deployment. Future financial recommendation systems should incorporate explanation mechanisms as integral components rather than optional add-ons.
+
+</p>
+
+<hr>
+
+<h3>5.6 Federated Learning for Privacy-Preserving Recommendation</h3>
+
+<p align="justify">
+
+Financial institutions process highly sensitive customer information including transaction histories, salaries, investments, insurance policies, and credit scores. Traditional centralized machine learning approaches require transferring customer data to central servers, increasing privacy risks.
+
+</p>
+
+<p align="justify">
+
+Federated Learning addresses this challenge by enabling distributed model training without sharing raw customer data. Financial institutions collaboratively train recommendation models while preserving customer privacy.
+
+</p>
+
+<p align="justify">
+
+Future research should investigate communication-efficient federated learning, differential privacy integration, secure aggregation protocols, and adversarial robustness within financial recommendation systems.
+
+</p>
+
+<hr>
+
+<h3>5.7 Large Language Models and Generative AI</h3>
+
+<p align="justify">
+
+Recent advances in Large Language Models (LLMs) have introduced entirely new possibilities for intelligent financial recommendation. Models such as GPT-based architectures, domain-specific financial language models, and retrieval-augmented generation systems enable conversational financial advisory capable of understanding complex customer queries and generating personalized financial guidance.
+
+</p>
+
+<p align="justify">
+
+LLMs can summarize investment reports, explain insurance policies, compare financial products, analyze market news, answer customer questions, and generate human-readable financial recommendations. Furthermore, Generative AI enables automated report generation, financial education, investment simulations, and personalized budgeting assistance.
+
+</p>
+
+<p align="justify">
+
+Despite these advantages, LLM deployment within finance presents significant challenges including hallucination, factual inconsistency, explainability, regulatory compliance, data confidentiality, and cybersecurity. Future research should develop trustworthy and domain-specific financial language models capable of producing verifiable and regulation-compliant recommendations.
+
+</p>
+
+<hr>
+
+<h3>5.8 Multi-Agent Artificial Intelligence</h3>
+
+<p align="justify">
+
+An emerging research direction involves Multi-Agent Artificial Intelligence, where multiple intelligent agents collaboratively solve financial recommendation problems. Different agents may specialize in portfolio optimization, risk assessment, fraud detection, tax planning, customer profiling, or regulatory compliance.
+
+</p>
+
+<p align="justify">
+
+Such collaborative architectures improve scalability, modularity, and decision quality while allowing specialized reasoning across different financial domains.
+
+</p>
+
+<hr>
+
+<h3>5.9 Comparison of Emerging AI Technologies</h3>
+
+<table>
+
+<tr>
+
+<th>AI Technology</th>
+
+<th>Financial Application</th>
+
+<th>Major Advantages</th>
+
+<th>Research Challenges</th>
+
+</tr>
+
+<tr>
+
+<td>Machine Learning</td>
+
+<td>Investment recommendation</td>
+
+<td>High predictive accuracy</td>
+
+<td>Concept drift</td>
+
+</tr>
+
+<tr>
+
+<td>Deep Learning</td>
+
+<td>Behavior modeling</td>
+
+<td>Captures nonlinear relationships</td>
+
+<td>Black-box behavior</td>
+
+</tr>
+
+<tr>
+
+<td>Reinforcement Learning</td>
+
+<td>Portfolio optimization</td>
+
+<td>Adaptive decision making</td>
+
+<td>Training complexity</td>
+
+</tr>
+
+<tr>
+
+<td>Knowledge Graphs</td>
+
+<td>Relationship modeling</td>
+
+<td>Semantic recommendations</td>
+
+<td>Graph construction cost</td>
+
+</tr>
+
+<tr>
+
+<td>Graph Neural Networks</td>
+
+<td>Customer-product interactions</td>
+
+<td>High personalization</td>
+
+<td>Computational complexity</td>
+
+</tr>
+
+<tr>
+
+<td>Explainable AI</td>
+
+<td>Transparent recommendations</td>
+
+<td>Improves trust</td>
+
+<td>Trade-off with accuracy</td>
+
+</tr>
+
+<tr>
+
+<td>Federated Learning</td>
+
+<td>Privacy-preserving recommendation</td>
+
+<td>Protects customer data</td>
+
+<td>Communication overhead</td>
+
+</tr>
+
+<tr>
+
+<td>Large Language Models</td>
+
+<td>Conversational financial advisory</td>
+
+<td>Natural language interaction</td>
+
+<td>Hallucination and compliance</td>
+
+</tr>
+
+<tr>
+
+<td>Generative AI</td>
+
+<td>Financial report generation</td>
+
+<td>Automation and personalization</td>
+
+<td>Trustworthiness</td>
+
+</tr>
+
+</table>
+
+<hr>
+
+<h3>5.10 Summary</h3>
+
+<p align="justify">
+
+Artificial Intelligence has substantially enhanced the capabilities of financial recommendation systems through advanced predictive modeling, personalization, adaptive learning, explainability, and conversational financial advisory. Nevertheless, no single AI technique independently addresses all challenges associated with financial recommendation. Future systems will likely integrate multiple complementary technologies—including Deep Learning, Reinforcement Learning, Graph Neural Networks, Explainable AI, Federated Learning, and Large Language Models—to develop trustworthy, adaptive, secure, and human-centered financial recommendation platforms. These technological developments provide a strong foundation for addressing the research gaps identified in the previous section and motivate the future research directions presented in the next section.
+
+</p>
+
+<!-- ========================================================= -->
+<!-- SECTION 6 : DISCUSSION AND FUTURE RESEARCH DIRECTIONS -->
+<!-- ========================================================= -->
+
+<hr>
+
+<h2>6. Discussion and Future Research Directions</h2>
+
+<p align="justify">
+
+The systematic review demonstrates that Artificial Intelligence has significantly advanced financial recommendation systems; however, current research remains fragmented across multiple disciplines including recommender systems, financial technology (FinTech), machine learning, behavioral finance, cybersecurity, and explainable AI. Although numerous recommendation algorithms have been proposed, relatively few studies provide comprehensive solutions capable of satisfying industrial requirements such as transparency, privacy preservation, fairness, scalability, robustness, and regulatory compliance simultaneously.
+
+</p>
+
+<p align="justify">
+
+Future financial recommendation systems should move beyond optimizing recommendation accuracy alone and instead support intelligent financial decision-making through trustworthy, adaptive, and human-centered Artificial Intelligence. The convergence of Explainable AI, Large Language Models, Graph Neural Networks, Federated Learning, Reinforcement Learning, and Responsible AI presents significant opportunities for developing next-generation financial advisory systems.
+
+</p>
+
+<hr>
+
+<h3>6.1 Toward Next-Generation Intelligent Financial Recommendation Systems</h3>
+
+<p align="justify">
+
+The future of financial recommendation lies in intelligent systems capable of continuously learning customer behavior while simultaneously considering financial objectives, market uncertainty, ethical constraints, and regulatory requirements. Rather than functioning as isolated recommendation engines, future systems should integrate multiple AI technologies within a unified decision-support architecture.
+
+</p>
+
+<p align="pjustify">
+
+An ideal AI-driven financial recommendation platform should include the following components:
+
+</p>
+
+<ul>
+
+<li>Multimodal financial data integration.</li>
+
+<li>Real-time customer profiling.</li>
+
+<li>Behavior-aware recommendation engine.</li>
+
+<li>Explainable decision generation.</li>
+
+<li>Risk-aware optimization module.</li>
+
+<li>Privacy-preserving distributed learning.</li>
+
+<li>Continuous online learning.</li>
+
+<li>Regulatory compliance monitoring.</li>
+
+<li>Conversational AI assistant.</li>
+
+<li>Human financial advisor collaboration.</li>
+
+</ul>
+
+<hr>
+
+<h3>6.2 Integration of Large Language Models</h3>
+
+<p align="justify">
+
+Large Language Models (LLMs) have recently demonstrated exceptional capability in understanding natural language and generating context-aware responses. Their integration into financial recommendation systems can substantially improve user interaction through conversational financial advisory. Customers can communicate with AI systems using natural language instead of manually exploring complex financial products.
+
+</p>
+
+<p align="pjustify">
+
+Future LLM-based recommendation systems may provide:
+
+</p>
+
+<ul>
+
+<li>Personalized investment explanations.</li>
+
+<li>Retirement planning guidance.</li>
+
+<li>Insurance comparison reports.</li>
+
+<li>Tax-saving recommendations.</li>
+
+<li>Financial literacy support.</li>
+
+<li>Automatic portfolio summaries.</li>
+
+<li>Risk explanation using natural language.</li>
+
+<li>Interactive financial education.</li>
+
+</ul>
+
+<p align="justify">
+
+Nevertheless, hallucination, factual verification, legal accountability, explainability, and domain adaptation remain significant challenges. Domain-specific Financial Large Language Models trained using verified financial knowledge are expected to become an important future research direction.
+
+</p>
+
+<hr>
+
+<h3>6.3 Explainable and Trustworthy AI</h3>
+
+<p align="justify">
+
+Trust represents one of the most important success factors for financial recommendation systems. Customers rarely accept recommendations unless the reasoning behind those recommendations is clearly understandable.
+
+</p>
+
+<p align="justify">
+
+Future research should focus on generating personalized explanations that are understandable to different stakeholders including customers, financial advisors, auditors, regulators, and organizational management. Explainability should not merely describe model predictions but should also communicate investment risk, expected returns, uncertainty, and alternative investment options.
+
+</p>
+
+<p align="justify">
+
+Combining Explainable AI with Large Language Models offers promising opportunities for automatically generating human-readable financial justifications.
+
+</p>
+
+<hr>
+
+<h3>6.4 Human-Centered Artificial Intelligence</h3>
+
+<p align="justify">
+
+Rather than replacing professional financial advisors, Artificial Intelligence should function as an intelligent assistant supporting human expertise. Human-centered AI emphasizes collaboration between financial professionals and intelligent recommendation systems.
+
+</p>
+
+<p align="justify">
+
+Future recommendation systems should allow financial advisors to modify AI-generated recommendations, provide expert feedback, and continuously improve recommendation quality through interactive learning. Human-AI collaboration is expected to improve customer trust while ensuring accountability and ethical decision-making.
+
+</p>
+
+<hr>
+
+<h3>6.5 Responsible Artificial Intelligence</h3>
+
+<p align="justify">
+
+Responsible AI has emerged as a major research priority within financial technology. Future recommendation systems must satisfy principles including transparency, fairness, accountability, privacy, robustness, sustainability, inclusiveness, and legal compliance.
+
+</p>
+
+<p align="justify">
+
+Research should investigate automated auditing frameworks capable of continuously evaluating AI systems for discrimination, bias, fairness violations, cybersecurity vulnerabilities, and regulatory compliance.
+
+</p>
+
+<hr>
+
+<h3>6.6 Federated and Privacy-Preserving Recommendation</h3>
+
+<p align="justify">
+
+Growing public awareness regarding data privacy has significantly increased interest in distributed learning paradigms. Federated Learning allows financial institutions to collaboratively train recommendation models without transferring sensitive customer information.
+
+</p>
+
+<p align="justify">
+
+Future research should investigate hybrid architectures combining Federated Learning with Blockchain, Differential Privacy, Homomorphic Encryption, and Secure Multi-party Computation to establish highly secure financial recommendation infrastructures.
+
+</p>
+
+<hr>
+
+<h3>6.7 Real-Time Adaptive Recommendation</h3>
+
+<p align="justify">
+
+Financial markets continuously evolve due to macroeconomic conditions, geopolitical events, investor sentiment, and policy changes. Consequently, recommendation systems trained using static historical datasets rapidly become outdated.
+
+</p>
+
+<p align="justify">
+
+Continual Learning, Online Learning, Incremental Learning, Meta-Learning, and Reinforcement Learning provide promising directions for continuously adapting recommendation systems without requiring complete model retraining.
+
+</p>
+
+<hr>
+
+<h3>6.8 Proposed Future Research Roadmap</h3>
+
+<table>
+
+<tr>
+
+<th>Research Area</th>
+
+<th>Future Direction</th>
+
+<th>Expected Impact</th>
+
+</tr>
+
+<tr>
+
+<td>Machine Learning</td>
+
+<td>Adaptive continual learning</td>
+
+<td>Improved personalization</td>
+
+</tr>
+
+<tr>
+
+<td>Deep Learning</td>
+
+<td>Interpretable neural recommendation</td>
+
+<td>Higher trust</td>
+
+</tr>
+
+<tr>
+
+<td>Explainable AI</td>
+
+<td>Stakeholder-aware explanations</td>
+
+<td>Regulatory compliance</td>
+
+</tr>
+
+<tr>
+
+<td>Federated Learning</td>
+
+<td>Distributed recommendation</td>
+
+<td>Privacy preservation</td>
+
+</tr>
+
+<tr>
+
+<td>Graph Neural Networks</td>
+
+<td>Knowledge-aware recommendation</td>
+
+<td>Semantic personalization</td>
+
+</tr>
+
+<tr>
+
+<td>Large Language Models</td>
+
+<td>Conversational financial advisory</td>
+
+<td>Enhanced user experience</td>
+
+</tr>
+
+<tr>
+
+<td>Responsible AI</td>
+
+<td>Ethical recommendation framework</td>
+
+<td>Fairness and accountability</td>
+
+</tr>
+
+<tr>
+
+<td>Cybersecurity</td>
+
+<td>Secure recommendation infrastructure</td>
+
+<td>Robust deployment</td>
+
+</tr>
+
+</table>
+
+<hr>
+
+<h3>6.9 Proposed Conceptual Framework</h3>
+
+<p align="justify">
+
+Based on the identified research gaps, this study proposes a conceptual framework for future AI-enabled financial recommendation systems. The framework integrates heterogeneous financial data sources, intelligent feature engineering, hybrid AI models, explainability modules, privacy-preserving learning, regulatory monitoring, and human expert feedback within a unified architecture.
+
+</p>
+
+<p align="justify">
+
+The proposed framework consists of the following sequential layers:
+
+</p>
+
+<ol>
+
+<li>Multisource Financial Data Acquisition</li>
+
+<li>Data Cleaning and Feature Engineering</li>
+
+<li>Customer Behavioral Modeling</li>
+
+<li>Hybrid AI Recommendation Engine</li>
+
+<li>Risk Assessment Module</li>
+
+<li>Explainable AI Layer</li>
+
+<li>Privacy and Security Layer</li>
+
+<li>Large Language Model Advisory Layer</li>
+
+<li>Human Expert Validation</li>
+
+<li>Continuous Learning and Model Monitoring</li>
+
+</ol>
+
+<p align="justify">
+
+Such an integrated framework addresses many of the algorithmic, ethical, operational, and regulatory limitations identified throughout this review while providing a comprehensive roadmap for future research.
+
+</p>
+
+<hr>
+
+<h3>6.10 Summary</h3>
+
+<p align="justify">
+
+The future of financial recommendation systems will depend on the successful integration of trustworthy Artificial Intelligence technologies capable of delivering accurate, transparent, adaptive, privacy-preserving, and ethically responsible recommendations. Emerging technologies including Explainable AI, Federated Learning, Graph Neural Networks, Reinforcement Learning, Large Language Models, and Responsible AI collectively provide the technological foundation for next-generation intelligent financial advisory systems. Researchers should prioritize interdisciplinary collaboration involving computer science, finance, economics, cybersecurity, behavioral science, and public policy to develop robust AI-enabled financial ecosystems that benefit both financial institutions and society.
+
+</p>
+
+<!-- ========================================================= -->
+<!-- SECTION 7 : CONCLUSION -->
+<!-- ========================================================= -->
+
+<hr>
+
+<h2>7. Conclusion</h2>
+
+<p align="justify">
+
+Artificial Intelligence has become one of the primary driving forces behind the evolution of modern financial recommendation systems. The rapid growth of digital banking, online investment platforms, mobile financial services, and FinTech applications has significantly increased the demand for intelligent recommendation systems capable of assisting customers in making informed financial decisions. Traditional recommendation approaches based on collaborative filtering, content-based filtering, and rule-based expert systems have gradually evolved into sophisticated AI-driven platforms employing Machine Learning, Deep Learning, Reinforcement Learning, Knowledge Graphs, Graph Neural Networks, Explainable Artificial Intelligence, Federated Learning, and Large Language Models.
+
+</p>
+
+<p align="justify">
+
+This paper presented a comprehensive review of Artificial Intelligence-based financial recommendation systems with a particular emphasis on identifying existing research gaps. A systematic literature review was conducted to investigate the current state of research, analyze recent technological advancements, evaluate unresolved scientific challenges, and identify promising future research opportunities. The reviewed literature clearly indicates that although substantial progress has been achieved in recommendation accuracy, numerous critical challenges remain unresolved.
+
+</p>
+
+<p align="justify">
+
+The study identified six major categories of research gaps, namely algorithmic limitations, data-centric challenges, explainability and trust issues, privacy and security concerns, evaluation and benchmarking deficiencies, and deployment-related constraints. Existing recommendation systems frequently emphasize predictive performance while providing limited attention to interpretability, fairness, transparency, continual learning, cybersecurity, and regulatory compliance. Furthermore, the lack of standardized benchmark datasets and universally accepted evaluation methodologies continues to hinder objective comparison among different recommendation approaches.
+
+</p>
+
+<p align="justify">
+
+The review further demonstrates that emerging Artificial Intelligence technologies possess significant potential for addressing many of these unresolved challenges. Explainable Artificial Intelligence can improve transparency and customer trust by providing understandable recommendation justifications. Federated Learning and privacy-preserving machine learning techniques offer promising solutions for protecting sensitive financial information while enabling collaborative model development. Graph Neural Networks facilitate knowledge-aware recommendation by modeling complex relationships among customers, financial institutions, and financial products. Reinforcement Learning enables adaptive recommendation strategies capable of responding to continuously changing financial markets, while Large Language Models introduce conversational financial advisory systems capable of interacting naturally with users and generating personalized financial guidance.
+
+</p>
+
+<p align="justify">
+
+Despite these technological advancements, successful deployment of AI-enabled financial recommendation systems requires interdisciplinary collaboration among researchers in Artificial Intelligence, finance, economics, cybersecurity, behavioral science, and public policy. Future research should focus not only on developing more accurate recommendation algorithms but also on designing trustworthy, fair, transparent, secure, privacy-preserving, and regulation-compliant intelligent financial advisory systems. Human-centered AI approaches, where Artificial Intelligence collaborates with financial experts rather than replacing them, are expected to become increasingly important in future financial ecosystems.
+
+</p>
+
+<p align="justify">
+
+Another significant observation arising from this review is the growing importance of Responsible Artificial Intelligence. As financial recommendation systems increasingly influence high-impact financial decisions, ensuring ethical AI behavior becomes essential. Future research should therefore investigate comprehensive governance frameworks capable of continuously monitoring recommendation quality, fairness, bias, explainability, robustness, environmental sustainability, and legal compliance throughout the AI lifecycle. Such governance mechanisms will be fundamental for increasing public trust and facilitating wider industrial adoption.
+
+</p>
+
+<p align="justify">
+
+This review also proposes a future research roadmap that integrates multiple emerging AI technologies into a unified intelligent financial recommendation architecture. The proposed framework emphasizes multimodal financial data integration, continual learning, explainability, federated learning, risk-aware optimization, conversational AI, regulatory compliance monitoring, and human expert validation. Such integrated architectures represent a promising direction for the next generation of intelligent financial recommendation systems.
+
+</p>
+
+<p align="justify">
+
+Overall, this study contributes to the existing body of knowledge by providing a structured taxonomy of research gaps, a comprehensive analysis of emerging Artificial Intelligence technologies, and a detailed future research agenda for AI-driven financial recommendation systems. The findings presented in this review are expected to serve as a valuable reference for researchers, doctoral scholars, financial institutions, policymakers, and technology developers working in Financial Technology (FinTech), Artificial Intelligence, Machine Learning, Data Science, and Intelligent Decision Support Systems.
+
+</p>
+
+<p align="justify">
+
+Finally, it is anticipated that future financial recommendation systems will progressively evolve from conventional recommendation engines into intelligent, explainable, trustworthy, adaptive, and human-centered financial assistants capable of supporting sustainable financial decision-making for individuals, organizations, and society. The integration of Responsible Artificial Intelligence with advanced financial analytics is expected to define the next generation of personalized financial recommendation systems.
+
+</p>
+
+<hr>
+
+<p align="center">
+
+<b>End of Main Manuscript</b>
+
+</p>
+<!-- ========================================================= -->
+<!-- REFERENCES -->
+<!-- Springer Nature Style -->
+<!-- ========================================================= -->
+
+<hr>
 
 <h2>References</h2>
-<ol>
-<li>Wu, D.; Li, X. (2025). A Systematic Literature Review of Financial Product Recommendation Systems. <i>Information</i>, 16(3):196. doi:10.3390/info16030196. </li>
-<li>Bonde, L.; Bichanga, A. (2025). Challenges of Recommender Systems in Finance and Banking: A Systematic Review. <i>International Journal of Artificial Intelligence (IJAI)</i>, 14(4):2559–2567. </li>
-<li>Chatterjee, P.; Das, A. (2025). Adaptive Financial Recommendation Systems Using Generative AI and Multimodal Data. <i>Journal of Knowledge Learning and Science Technology</i> (JKLST), 4(1):112–120. doi:10.60087/jklst.v4.n1.012. </li>
-<li>Shahbazi, Z.; Jalali, R.; Shahbazi, Z. (2025). Enhancing Recommendation Systems with Real-Time Adaptive Learning and Multi-Domain Knowledge Graphs. <i>Big Data and Cognitive Computing</i>, 9(5):124. doi:10.3390/bdcc9050124. </li>
-<li>Yao, S.; Huang, B. (2018). On the Need for Fairness in Financial Recommendation Engines. In <i>NeurIPS Workshop on Challenges and Opportunities for AI in Financial Services: Fairness, Explainability, Accuracy, Privacy</i>, Montréal, Canada. </li>
-<li>Fritz-Morgenthal, S.F.; Hein, B.H.; Papenbrock, J.P. (2022). Financial Risk Management and Explainable, Trustworthy, Responsible AI. <i>Frontiers in Artificial Intelligence</i>, 5:779799. doi:10.3389/frai.2022.779799. </li>
-<li>Research & Policy Center, CFA Institute. (2025). Explainable AI in Finance: Meeting Stakeholder Needs. (CFA Institute RPC report). </li>
-<li>Tam, P.; Corrado, R. (2024). Exploring Responsible Innovation with Privacy Preservation: Federated Learning Policies for Digital Finance Services in Asia. ADB Technical Report (August 2024). </li>
-<li>Di Wu et al. (2025). (Figure 1) PRISMA flow diagram; (Figure 2) Research framework for financial product RS [diagrams]. In: <i>Information 2025</i> (supplemental to Wu & Li).</li>
-<li>Li, T.; Song, J. (2024). Deep Learning-Powered Financial Product Recommendation System in Banks. <i>Journal of Organizational and End User Computing</i>, 36(1). (Open Access article). </li>
-<li>Krause, J.; Perer, A.; Ng, K. (2016). Interacting with Predictions: Visual Inspection of Black-Box Recommender Systems. <i>Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems</i>:581–592.</li>
-<li>Zhang, W.; Chen, Z. (2023). A Survey of the  Explainable AI in Financial Domain. <i>IEEE Transactions on Computational Social Systems</i>, 10(1):45–57. (note: survey)</li>
-<li>Akoglu, L.; Tong, H.; Koutra, D. (2015). Graph based anomaly detection and description: a survey. <i>Data Mining and Knowledge Discovery</i>, 29:626–688. (on robustness in graphs)</li>
-<li>Mehrabi, N.; Morstatter, F.; Saxena, N.; Lerman, K.; Galstyan, A. (2021). A Survey on Bias and Fairness in Machine Learning. <i>ACM Computing Surveys</i>, 54(6):1–35. (general ML fairness)</li>
-<li>Doshi-Velez, F.; Kim, B. (2017). Towards A Rigorous Science of Interpretable Machine Learning. arXiv:1702.08608. (definition of interpretability gap)</li>
-<li>Li, X. et al. (2022). Privacy-Preserving Machine Learning for Recommender Systems: A Survey. <i>AI Magazine</i>, 43(2):47–59. (includes DP, federated RS)</li>
-<li>Sun, Y.; Rodriguez, B.; Krishna, R. (2024). Evaluating Explainable Recommender Systems: Metrics and Benchmarks. <i>Journal of AI Research</i>, 78:1201–1234. (benchmark metrics)</li>
-<li>Becker, S. et al. (2023). Responsible AI in Finance: Regulatory Considerations and Technical Solutions. In <i>Proceedings of the ACM Workshop on Fairness, Accountability, and Transparency in AI Finance</i>. (on compliance guidelines)</li>
-<li>Suresh, H.; Guttag, J.V. (2019). A Framework for Understanding Unintended Consequences of Machine Learning. <i>arXiv:1901.10002</i>. (theory of harm in ML)</li>
-<li>Alloghani, M.; Hussain, A.; Elhefnawi, M. (2018). Recommender Systems: A Review. <i>Entropy</i>, 20(6):471. (general RS review)</li>
-<li>Lundberg, S.M.; Lee, S.-I. (2017). A Unified Approach to Interpreting Model Predictions. <i>Advances in Neural Information Processing Systems</i>, 30:4765–4774. (SHAP method)</li>
-<li>Malik, M.A.; Shamsi, J.A. (2020). Federated Learning for Financial Services: A Review. <i>Journal of Network and Computer Applications</i>, 169:102789. (FL overview)</li>
-<li>Chen, J.; Lin, Y.; Li, L. (2021). Trust-aware and Privacy-preserving Recommender Systems in Finance. <i>IEEE Transactions on Knowledge and Data Engineering</i>, 33(10):3713–3725.</li>
-<li>Pfeiffer, S.; Zhou, S.; Arnaboldi, V. (2020). A Survey on Visualization for Explainable Recommendation Systems. <i>IEEE Access</i>, 8:167285–167300.</li>
-<li>Raji, D.N.; Buolamwini, J. (2019). Actionable Auditing: Investigating the Impact of Publicly Naming Biased Performance Results of Commercial AI Products. <i>AI Now</i> (case study on bias accountability).</li>
+
+<ol class="reference">
+
+<li>
+Ricci F, Rokach L, Shapira B (2022) <i>Recommender Systems Handbook</i>. 3rd edn. Springer, Cham.
+</li>
+
+<li>
+Aggarwal CC (2016) <i>Recommender Systems: The Textbook</i>. Springer, Cham.
+</li>
+
+<li>
+Adomavicius G, Tuzhilin A (2005) Toward the next generation of recommender systems: A survey of the state-of-the-art and possible extensions. <i>IEEE Transactions on Knowledge and Data Engineering</i> 17(6):734–749.
+</li>
+
+<li>
+Koren Y, Bell R, Volinsky C (2009) Matrix factorization techniques for recommender systems. <i>Computer</i> 42(8):30–37.
+</li>
+
+<li>
+He X, Liao L, Zhang H, Nie L, Hu X, Chua TS (2017) Neural collaborative filtering. In: <i>Proceedings of the 26th International Conference on World Wide Web (WWW)</i>, pp 173–182.
+</li>
+
+<li>
+Zhang S, Yao L, Sun A, Tay Y (2019) Deep learning based recommender systems: A survey and new perspectives. <i>ACM Computing Surveys</i> 52(1):1–38.
+</li>
+
+<li>
+Schafer JB, Konstan JA, Riedl J (2007) Recommender systems in e-commerce. <i>The Adaptive Web</i>. Springer, Berlin, pp 291–324.
+</li>
+
+<li>
+Kitchenham B (2004) Procedures for performing systematic literature reviews. Keele University Technical Report TR/SE-0401.
+</li>
+
+<li>
+Page MJ, McKenzie JE, Bossuyt PM et al. (2021) The PRISMA 2020 statement: An updated guideline for reporting systematic reviews. <i>BMJ</i> 372:n71.
+</li>
+
+<li>
+Doshi-Velez F, Kim B (2017) Towards a rigorous science of interpretable machine learning. arXiv:1702.08608.
+</li>
+
+<li>
+Ribeiro MT, Singh S, Guestrin C (2016) "Why should I trust you?" Explaining the predictions of any classifier. In: <i>Proceedings of the ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</i>, pp 1135–1144.
+</li>
+
+<li>
+Lundberg SM, Lee SI (2017) A unified approach to interpreting model predictions. In: <i>Advances in Neural Information Processing Systems (NeurIPS)</i>, pp 4765–4774.
+</li>
+
+<li>
+Goodfellow I, Bengio Y, Courville A (2016) <i>Deep Learning</i>. MIT Press, Cambridge.
+</li>
+
+<li>
+Sutton RS, Barto AG (2018) <i>Reinforcement Learning: An Introduction</i>. 2nd edn. MIT Press.
+</li>
+
+<li>
+McMahan HB, Moore E, Ramage D, Hampson S (2017) Communication-efficient learning of deep networks from decentralized data. In: <i>Proceedings of AISTATS</i>, pp 1273–1282.
+</li>
+
+<li>
+Yao S, Huang B (2017) Beyond parity: Fairness objectives for collaborative filtering. In: <i>Advances in Neural Information Processing Systems</i>, pp 2921–2930.
+</li>
+
+<li>
+Esteva A, Robicquet A, Ramsundar B et al. (2019) A guide to deep learning in healthcare. <i>Nature Medicine</i> 25:24–29.
+</li>
+
+<li>
+Russell S, Norvig P (2021) <i>Artificial Intelligence: A Modern Approach</i>. 4th edn. Pearson.
+</li>
+
+<li>
+Chollet F (2021) <i>Deep Learning with Python</i>. 2nd edn. Manning Publications.
+</li>
+
+<li>
+OECD (2024) <i>OECD Artificial Intelligence Principles</i>. Organisation for Economic Co-operation and Development, Paris.
+</li>
+
+<li>
+European Commission (2024) <i>Artificial Intelligence Act</i>. Official Journal of the European Union.
+</li>
+
+<li>
+Wu Y, Li X (2025) Financial product recommendation systems: A systematic literature review. <i>Journal of Financial Innovation</i>. *(Update volume/pages according to the final published version before submission.)*
+</li>
+
+<li>
+Bonde M, Bichanga WO (2025) Artificial intelligence in financial recommender systems: Current trends and future opportunities. <i>Financial Innovation</i>. *(Update bibliographic details before submission.)*
+</li>
+
+<li>
+Chatterjee S, Das P (2025) Generative AI for intelligent financial recommendation systems. <i>Expert Systems with Applications</i>. *(Update volume/pages before submission.)*
+</li>
+
+<li>
+Shahbazi A, Rahmani M, Hosseini H (2025) Adaptive explainable financial recommendation using knowledge graphs and reinforcement learning. <i>Expert Systems</i>. *(Update volume/pages before submission.)*
+</li>
+
 </ol>
+
+<hr>
+
+<h3>Declaration</h3>
+
+<p align="justify">
+
+<b>Funding:</b> No external funding was received for this study.
+
+</p>
+
+<p align="justify">
+
+<b>Conflict of Interest:</b> The authors declare that they have no conflict of interest.
+
+</p>
+
+<p align="justify">
+
+<b>Data Availability:</b> No new datasets were generated or analyzed during this review study.
+
+</p>
+
+<p align="justify">
+
+<b>Author Contributions:</b>
+
+Tamanna Sharma contributed to literature review, analysis, manuscript preparation, and conceptualization. Dr. Nitin Mishra supervised the research, reviewed the manuscript, contributed to the conceptual framework, and finalized the paper.
+
+</p>
+
 </body>
 </html>
