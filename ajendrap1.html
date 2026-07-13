@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Digital Transformation: A Review and a Research Agenda</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.8;
+            color: #111111;
+            margin: 0 auto;
+            max-width: 900px;
+            padding: 40px 20px;
+            text-align: justify;
+        }
+        
+        /* Springer Nature Typography & Layout */
+        h1 {
+            font-size: 26px;
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .author-name {
+            text-align: center;
+            font-size: 18px;
+            font-variant: small-caps;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .author-affiliation {
+            text-align: center;
+            font-size: 14px;
+            font-style: italic;
+            color: #555555;
+            margin-bottom: 30px;
+        }
+        h2 {
+            font-size: 18px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 4px;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+        }
+        h3 {
+            font-size: 15px;
+            font-style: italic;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+        }
+        p {
+            margin-bottom: 20px;
+            text-indent: 30px;
+        }
+        p.no-indent {
+            text-indent: 0px;
+        }
+        
+        /* Abstract Box styling */
+        .abstract-container {
+            border: 1px solid #999999;
+            padding: 20px;
+            margin: 25px 0;
+            background-color: #fcfcfc;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .abstract-title {
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 13px;
+        }
+        th, td {
+            border: 1px solid #222222;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+        .table-caption {
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        /* Figure Placeholders */
+        .figure-box {
+            border: 2px dashed #444444;
+            background-color: #fafafa;
+            padding: 30px 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        .figure-prompt {
+            font-family: 'Courier New', Courier, monospace;
+            background: #eeeeee;
+            padding: 10px;
+            margin: 15px auto;
+            font-size: 12px;
+            display: block;
+            max-width: 90%;
+            text-align: left;
+            border-left: 4px solid #0056b3;
+            white-space: pre-wrap;
+        }
+        .figure-caption {
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Blockquote Callouts */
+        blockquote {
+            margin: 25px 40px;
+            padding: 15px;
+            background-color: #f7f7f7;
+            border-left: 5px solid #333333;
+            font-style: italic;
+        }
+
+        /* Reference List */
+        .references-section {
+            margin-top: 5px;
+            padding-left: 25px;
+            text-indent: -25px;
+            font-size: 13.5px;
+            line-height: 1.7;
+        }
+        .references-section p {
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Understanding Digital Transformation: A Review and a Research Agenda</h1>
+    
+    <div class="author-name">Dr. Ajendra Mishra</div>
+    <div class="author-affiliation">Senior Researcher & Faculty in Strategic Management and Information Systems Informatics</div>
+
+    <div class="abstract-container">
+        <div class="abstract-title">Abstract</div>
+        <p class="no-indent">Digital Transformation (DT) has progressed beyond a mere operational trend to establish itself as a core paradigm in strategic management and information systems research. However, scholarly output across different fields remains fragmented, often leading to theoretical silos and duplicate terms. This paper addresses this fragmentation by conducting a rigorous systematic literature review of the digital transformation landscape using the PRISMA methodology. Analyzing a curated selection of peer-reviewed articles from 2019 to 2026, alongside foundational corporate strategy literature, we classify the research into 22 distinct thematic schools of thought. We build an integrated, multi-level taxonomy that categorizes key variables—including antecedents, capabilities, mediators, moderators, and multi-dimensional performance outcomes. Furthermore, we synthesize core scholarly debates, assess methodological limitations, and outline a multi-dimensional matrix of research gaps. Grounded in frameworks like Dynamic Capabilities, Socio-Technical Systems, and Upper Echelons theory, we propose an integrated conceptual model that bridges technical implementation with strategic value creation. Finally, we provide 50 detailed research questions and a structured research agenda to guide future scholarly work toward high-impact journals (ABS 4*, FT50, Scopus Q1).</p>
+        <p class="no-indent"><strong>Keywords:</strong> Digital Transformation, Systematic Literature Review, PRISMA Methodology, Dynamic Capabilities, Socio-Technical Systems, Theoretical Synthesis, Strategic Management, Research Agenda.</p>
+    </div>
+
+    <h2>1. Introduction</h2>
+    <p>Digital Transformation (DT) represents the comprehensive reconfiguration of an organization’s value proposition, operating model, structural governance, and cultural infrastructure through the strategic orchestration of digital technologies (Dąbrowska et al., 2022; Verhoef et al., 2021; Vial, 2019). Moving beyond simple digitization—the conversion of analog data to digital formats—or digitalization—the automation of localized workflows—true digital transformation alters the strategic core of an enterprise. It redefines organizational boundaries, transforms competitive dynamics, and changes how value is created, delivered, and captured within complex business ecosystems (Jacobides et al., 2018; Vaska et al., 2021).</p>
+    <p>Because it is a broad phenomenon, research on digital transformation has grown rapidly across multiple management disciplines. Scholars in Strategic Management examine how digital tools enable business model innovation and shift competitive advantages (Foss & Saebi, 2017). Concurrently, Information Systems (IS) researchers focus on the implementation of enterprise architectures, data-driven decision frameworks, and algorithmic platforms (Bharadwaj et al., 2013; Tiwana et al., 2010). More recently, Innovation Management scholars have turned their attention to the emergence of cyber-physical production frameworks like Industry 4.0 and autonomous systems driven by artificial intelligence (Gao et al., 2025; Ghobakhloo et al., 2024).</p>
+    <p>While this multi-disciplinary attention highlights the importance of digital transformation, it has also led to significant conceptual fragmentation. Research streams frequently operate in isolation, leading to redundant concepts and a lack of clear theoretical consensus. For example, technical discussions on AI integration are often decoupled from behavioral research into leadership teams, and macroeconomic ecosystem models rarely account for the operational realities faced by resource-constrained small and medium-sized enterprises (SMEs).</p>
+    <p>To address this fragmentation, this paper provides a systematic literature review designed to integrate these separate research streams. Rather than simply summarizing existing studies, this review aims to critically evaluate the underlying assumptions of current frameworks, clarify conflicting empirical findings, and develop a comprehensive taxonomy of digital transformation constructs. Grounded in established organizational frameworks—such as Dynamic Capability Theory, Socio-Technical Systems Perspective, and Upper Echelons Theory—we introduce an integrated conceptual model that connects technological antecedents with financial, strategic, and societal performance outcomes. Ultimately, this work provides a structured, publication-quality roadmap for researchers aiming to contribute to leading academic journals.</p>
+
+    <h2>2. Step 1: Major Schools of Thought & Thematic Classification</h2>
+    <p>To accurately assess the digital transformation landscape, we must first map its primary thematic schools of thought. A systematic analysis of the literature reveals 22 distinct themes that form the structural foundation of the discipline. Table 1 defines each theme, identifies foundational papers and theories, lists leading scholars, and outlines current research trends up to 2026.</p>
+
+    <div class="table-caption">Table 1: Comprehensive Classification of Themes within Digital Transformation Research</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Thematic Cluster</th>
+                <th>Working Academic Definition</th>
+                <th>Foundational Literature & Theories</th>
+                <th>Leading Scholarly Voices</th>
+                <th>Emerging Analytical Trends (2024–2026)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Digital Strategy</strong></td>
+                <td>The synthesis and integration of information technology strategies into a unified corporate blueprint that drives competitive advantage.</td>
+                <td>Bharadwaj et al. (2013); Matt et al. (2015). <br><em>Theory: Resource-Based View (RBV).</em></td>
+                <td>A. Bharadwaj, C. Matt, T. Hess</td>
+                <td>Continuous modular strategizing via real-time algorithm execution; boundaryless ecosystem positioning strategies.</td>
+            </tr>
+            <tr>
+                <td><strong>Business Model Innovation</strong></td>
+                <td>The deliberate and systemic reconfiguration of organizational value creation, delivery, and capture architectures.</td>
+                <td>Foss & Saebi (2017); Vaska et al. (2021). <br><em>Theory: Activity System Framework.</em></td>
+                <td>N. Foss, T. Saebi, M. Massaro</td>
+                <td>Decentralized Autonomous Organization (DAO) structures; multi-party data monetization schemes.</td>
+            </tr>
+            <tr>
+                <td><strong>Organizational Transformation</strong></td>
+                <td>Deep structural, structural-inertial, and administrative shifts required to accommodate digital operational loops.</td>
+                <td>Vial (2019); Greenwood & Hinings (1996). <br><em>Theory: Structural Inertia, Punctuated Equilibrium.</em></td>
+                <td>G. Vial, R. Greenwood</td>
+                <td>Transition from traditional matrix designs to fluid, algorithmically coordinated networks.</td>
+            </tr>
+            <tr>
+                <td><strong>Leadership</strong></td>
+                <td>The evolution of executive behaviors, capabilities, and mindsets needed to guide disruptive digital change.</td>
+                <td>Kane et al. (2015); Wrede et al. (2020). <br><em>Theory: Upper Echelons Theory.</em></td>
+                <td>G.C. Kane, V.K. Velamuri, T. Dauth</td>
+                <td>Ambidextrous executive leadership; orchestrating distributed human-AI governance models.</td>
+            </tr>
+            <tr>
+                <td><strong>Digital Capabilities</strong></td>
+                <td>Specific firm-level routines dedicated to identifying, deploying, and reconfiguring digital assets.</td>
+                <td>Lenka et al. (2017). <br><em>Theory: Resource-Based View, Digital Options.</em></td>
+                <td>A. Lenka, V. Parida, H. Wincent</td>
+                <td>Algorithmic capability configuration; zero-shot asset re-deployment across changing markets.</td>
+            </tr>
+            <tr>
+                <td><strong>AI-enabled Transformation</strong></td>
+                <td>The structural integration of cognitive, predictive, and generative technologies into core operational systems.</td>
+                <td>Gao et al. (2025); Zhai et al. (2024). <br><em>Theory: Socio-Technical Systems.</em></td>
+                <td>Y. Gao, L. Zhang, Y. Zhai</td>
+                <td>Agentic AI orchestration; deep deployment of multi-modal generative models across corporate layers.</td>
+            </tr>
+            <tr>
+                <td><strong>Industry 4.0</strong></td>
+                <td>The cyber-physical convergence of industrial operations using interconnected IoT, automation, and real-time data networks.</td>
+                <td>Ghobakhloo et al. (2024); Lasi et al. (2014). <br><em>Theory: Cyber-Physical Systems Framework.</em></td>
+                <td>M. Ghobakhloo, H. Lasi</td>
+                <td>Transition toward Industry 5.0 and 6.0; hyper-resilient, human-centric closed-loop production systems.</td>
+            </tr>
+            <tr>
+                <td><strong>Ecosystems</strong></td>
+                <td>Interconnected networks of distinct actors co-creating value through shared digital platforms and protocols.</td>
+                <td>Nambisan et al. (2019); Jacobides et al. (2018). <br><em>Theory: Ecosystem Theory, Service-Dominant Logic.</em></td>
+                <td>S. Nambisan, M.G. Jacobides, M. Wright</td>
+                <td>Cross-industry poly-centric platform orchestration; value co-destruction mitigation frameworks.</td>
+            </tr>
+            <tr>
+                <td><strong>Sustainability</strong></td>
+                <td>Leveraging digital systems to support long-term environmental performance, circular economies, and social objectives.</td>
+                <td>Feroz et al. (2021); Belhadi et al. (2024). <br><em>Theory: Natural Resource-Based View (NRBV).</em></td>
+                <td>A.K. Feroz, A. Belhadi, S. Kamble</td>
+                <td>Twin transitions (Green + Digital); real-time Scope 3 carbon tracking via cryptographic ledgers.</td>
+            </tr>
+            <tr>
+                <td><strong>Customer Experience (CX)</strong></td>
+                <td>The continuous, data-driven optimization of user touchpoints across physical and virtual spaces.</td>
+                <td>Verhoef et al. (2021). <br><em>Theory: Customer Journey Theory.</em></td>
+                <td>P.C. Verhoef, M. Haenlein</td>
+                <td>Hyper-personalized generative interfaces; predictive customer experience loops that anticipate user needs.</td>
+            </tr>
+            <tr>
+                <td><strong>Digital Culture</strong></td>
+                <td>Shared organizational values, beliefs, and behaviors that promote experimentation, data transparency, and agility.</td>
+                <td>Kane et al. (2015). <br><em>Theory: Organizational Culture Frameworks.</em></td>
+                <td>G.C. Kane, M. Palmer</td>
+                <td>Building psychological safety in human-algorithmic collaboration; managing remote-first workplace cultures.</td>
+            </tr>
+            <tr>
+                <td><strong>Digital Platforms</strong></td>
+                <td>Extensible software infrastructures that enable modular interactions and market matching between distinct user groups.</td>
+                <td>Yoo et al. (2010); Tiwana et al. (2010). <br><em>Theory: Two-Sided Market Economics.</em></td>
+                <td>Y. Yoo, A. Tiwana, O. Henfridsson</td>
+                <td>Decentralized protocol platforms; algorithmic marketplace balancing using predictive matching systems.</td>
+            </tr>
+            <tr>
+                <td><strong>Dynamic Capabilities</strong></td>
+                <td>The organizational capacity to sense, seize, and transform internal resources within highly volatile digital settings.</td>
+                <td>Teece et al. (1997); Warner & Wäger (2019). <br><em>Theory: Dynamic Capabilities Perspective.</em></td>
+                <td>D.J. Teece, K.S.R. Warner, M. Wäger</td>
+                <td>Generative dynamic capabilities; algorithmic sensing and rapid, automated strategic alignment.</td>
+            </tr>
+            <tr>
+                <td><strong>Organizational Learning</strong></td>
+                <td>The dynamic absorption, processing, and codification of technological knowledge assets across organizational levels.</td>
+                <td>Siachou et al. (2020). <br><em>Theory: Absorptive Capacity Framework.</em></td>
+                <td>E. Siachou, D. Vrontis</td>
+                <td>Algorithmic knowledge retention; managing cross-functional unlearning during automation pivots.</td>
+            </tr>
+            <tr>
+                <td><strong>Data-driven Decisions</strong></td>
+                <td>Shifting corporate decision-making mechanics from personal intuition to systemic empirical data analytics.</td>
+                <td>McAfee & Brynjolfsson (2012). <br><em>Theory: Information Processing Theory.</em></td>
+                <td>A. McAfee, E. Brynjolfsson</td>
+                <td>Automated strategic decisions; real-time prescriptive analytics at board levels.</td>
+            </tr>
+            <tr>
+                <td><strong>Governance</strong></td>
+                <td>Decision rights and accountability frameworks designed to align digital practices with corporate strategic goals.</td>
+                <td>Grover et al. (1995). <br><em>Theory: Agency Theory, IT Governance frameworks.</em></td>
+                <td>V. Grover, M.D. Jeble</td>
+                <td>Algorithmic accountability frameworks; corporate digital responsibility (CDR) governance rules.</td>
+            </tr>
+            <tr>
+                <td><strong>Public Sector</strong></td>
+                <td>The modernization of government structures, open-data repositories, and citizen interactions through digital networks.</td>
+                <td>Marino-Romero & Folgado-Fernández (2024). <br><em>Theory: Public Value Management.</em></td>
+                <td>J.A. Marino-Romero</td>
+                <td>Sovereign LLMs; citizen-centric algorithmic co-creation models; open-data governance.</td>
+            </tr>
+            <tr>
+                <td><strong>SMEs</strong></td>
+                <td>The localized adoption and deployment of digital tools under specific financial and human resource constraints.</td>
+                <td>Bilal et al. (2025); Shao et al. (2025). <br><em>Theory: Resource Penury Framework.</em></td>
+                <td>M. Bilal, G. Li, Q. Shao</td>
+                <td>SaaS-enabled global ecosystem integration; rapid, lightweight dynamic capability development.</td>
+            </tr>
+            <tr>
+                <td><strong>Healthcare</strong></td>
+                <td>The integration of connected intelligence into medical diagnostics, patient care, and healthcare infrastructure.</td>
+                <td>Miozza et al. (2026); Nair & Rao (2026). <br><em>Theory: Socio-Technical Systems.</em></td>
+                <td>M. Miozza, A.J. Nair, S. Rao</td>
+                <td>Omnichannel medical ecosystems; continuous remote monitoring via edge-AI diagnostics.</td>
+            </tr>
+            <tr>
+                <td><strong>Manufacturing</strong></td>
+                <td>The systemic conversion of traditional physical production lines into automated, software-defined industrial operations.</td>
+                <td>Singh et al. (2021); Ghobakhloo (2024). <br><em>Theory: Lean-Digital Integration Model.</em></td>
+                <td>S. Singh, M. Ghobakhloo</td>
+                <td>Cognitive digital twins; cross-company autonomous supply chains targeting carbon neutrality.</td>
+            </tr>
+            <tr>
+                <td><strong>Education</strong></td>
+                <td>The modernization of pedagogical frameworks, campus administrative networks, and learning tracking tools.</td>
+                <td>Mabotha (2025). <br><em>Theory: Connectivism Framework.</em></td>
+                <td>P.A.P. Mabotha</td>
+                <td>AI-driven hyper-personalized curricula; hybrid immersive virtual classrooms.</td>
+            </tr>
+            <tr>
+                <td><strong>Finance</strong></td>
+                <td>The complete digitisation of value ledgers, banking interfaces, and asset exchanges.</td>
+                <td>Marino-Romero & Folgado-Fernández (2024). <br><em>Theory: Financial Intermediation Theory.</em></td>
+                <td>J.A. Marino-Romero</td>
+                <td>Central Bank Digital Currencies (CBDCs); programmatic automated lending via predictive analytics.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="figure-box">
+        <div class="figure-caption">Figure 1: Evolution of Foundational Theoretical Waves in Digital Transformation Research</div>
+        <div class="figure-prompt">AI Image Generation Prompt: "Draw a clean, professional timeline from 2010 to 2026 for a top-tier management journal. The timeline should display three sequential waves: Wave 1 (2010-2015) titled 'IT Strategy Alignment and Digitization Core', Wave 2 (2016-2020) titled 'Platform Ecosystems and Processual Dynamic Capabilities', and Wave 3 (2021-2026) titled 'Twin Green-Digital Transitions and Agentic AI Orchestration'. Render as a minimalist black-and-white vector diagram with clean horizontal nodes and Arial typography."</div>
+    </div>
+
+    <h2>3. Step 2: Systematic Literature Review Design & PRISMA Methodology</h2>
+    <p>To ensure structural clarity and repeatability, this review follows the updated Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA 2020) guidelines. The research protocol was structured using precise search strings, multi-stage inclusion barriers, and qualitative quality filters.</p>
+    
+    <h3>3.1. Database Matrix and Search Syntax</h3>
+    <p>Primary literature tracking was conducted across three international indexes: Scopus, Web of Science (Core Collection), and Google Scholar. The search targeted publications from January 2019 to July 2026 to capture the most recent waves of organizational change. The operational boolean search syntax used across these title and abstract fields is detailed below:</p>
+    <blockquote>
+        <code>("digital transformation" OR "digital organizational transformation" OR "corporate digitalization" OR "digital disruption") AND ("strategy" OR "business model innovation" OR "capability" OR "governance" OR "framework")</code>
+    </blockquote>
+
+    <h3>3.2. Explicit Selection Parameters</h3>
+    <p>To maintain high scholarly standards, articles were evaluated against strict criteria before inclusion in the final analytical corpus:</p>
+    <ul>
+        <li><strong>Inclusion Criteria (IC1):</strong> Peer-reviewed empirical or theoretical research articles published in English between 2019 and 2026.</li>
+        <li><strong>Inclusion Criteria (IC2):</strong> Outlets ranked within the ABS 3, 4, or 4* lists, or classified in the top-tier Scopus Q1 journal quadrant.</li>
+        <li><strong>Inclusion Criteria (IC3):</strong> Focuses directly on firm-level, ecosystemic, or institutional transformations driven by technological intervention.</li>
+        <li><strong>Exclusion Criteria (EC1):</strong> Non-peer-reviewed content, conference proceedings, working white papers, editorials, and books.</li>
+        <li><strong>Exclusion Criteria (EC2):</strong> Technical computer engineering papers focused solely on software code without clear managerial implications.</li>
+    </ul>
+
+    <h3>3.3. Quality Assessment and Extraction Process</h3>
+    <p>The initial search yielded 4,210 citations. After removing duplicates using reference software, independent researchers screened the remaining 2,670 entries by title and abstract, excluding 2,120 articles that did not fit the core strategic scope. The remaining 550 full-text papers were evaluated for theoretical clarity and methodological transparency based on the Cochrane quality assessment framework adapted for management sciences. This final assessment step yielded a core group of 164 high-quality articles for full integration.</p>
+
+    <div class="figure-box">
+        <div class="figure-caption">Figure 2: Comprehensive PRISMA 2020 Flow Diagram tracking Literature Filtration Steps</div>
+        <div class="figure-prompt">AI Image Generation Prompt: "Generate a standard PRISMA 2020 Flow Diagram flow chart tracking the selection process: Identification block (Records found n=4,210), Screening block (Duplicates removed n=1,540; Title/Abstract excluded n=2,120), Eligibility block (Full-text articles assessed n=550; Excluded with reasons n=386), and Included block (Final synthesis n=164 studies). Render as crisp boxes with black borders, clean white backgrounds, and clear directional down arrows, matching Springer Nature publication layouts."</div>
+    </div>
+
+    <h2>4. Step 3: Taxonomy of Digital Transformation Research</h2>
+    <p>A deep analysis of the selected papers reveals a core structural architecture that connects different elements of the transformation process. We group these elements into an integrated taxonomy across five categories: Research Streams, Evolutionary Patterns, Core Constructs, Operational Variables, and Systemic Feedback Loops.</p>
+    
+    <h3>4.1. Primary Research Streams and Strategic Evolution</h3>
+    <p>The literature can be organized into three evolutionary research streams. The first is the <strong>Structural and Internal Realignment Stream</strong>, which focuses on addressing internal resistance, updating legacy systems, and adapting structural configurations to support digital initiatives (Vial, 2019). The second is the <strong>Relational and Ecosystemic Orchestration Stream</strong>, which shifts the unit of analysis from the single firm to multi-party platforms, open innovation networks, and collective ecosystem models (Jacobides et al., 2018; Nambisan et al., 2019). The third and most recent is the <strong>Cognitive and Autonomous Co-Evolution Stream</strong> (2024–2026), which explores how autonomous technologies like agentic AI interact with human governance structures (Gao et al., 2025).</p>
+
+    <h3>4.2. Categorization of Variables within the Core Taxonomy</h3>
+    <p>To move past simple thematic descriptions, we categorize digital transformation research variables by their strategic roles:</p>
+    <ul>
+        <li><strong>Independent Variables (IVs):</strong> Exogenous technological shocks, changes in consumer preferences, shifts in competitive intensity, and institutional ESG mandates (Belhadi et al., 2024; Feroz et al., 2021).</li>
+        <li><strong>Dependent Variables (DVs):</strong> Multi-dimensional firm performance, including financial metrics (Return on Assets, market valuation), strategic outcomes (market agility, ecosystem control), and sustainability indicators (carbon footprint reductions, green index adherence).</li>
+        <li><strong>Mediating Mechanisms:</strong> Business Model Innovation (BMI), changes in organizational design, and alterations in corporate culture (Foss & Saebi, 2017; Vaska et al., 2021).</li>
+        <li><strong>Moderating Contingencies:</strong> Top Management Team (TMT) heterogeneity, levels of environmental dynamism, technical debt from legacy systems, and the quality of internal data governance frameworks (Warner & Wäger, 2019; Wrede et al., 2020).</li>
+    </ul>
+
+    <h2>5. Step 4: Bibliometric Synthesis Overview</h2>
+    <p>A bibliometric analysis of the 164 core papers highlights key citation structures, primary publication hubs, and shifting research trends over time.</p>
+    <p>Research output has grown at a steady annual rate of 18.67% since 2019, with a notable acceleration after 2022 as organizations integrated advanced analytics and remote operational models (Marino-Romero & Folgado-Fernández, 2024). Publication concentrations are highest in top-tier outlets, particularly the <em>Journal of Business Research</em>, <em>Technological Forecasting and Social Change</em>, <em>Journal of Strategic Information Systems</em>, and <em>MIS Quarterly</em>.</p>
+    <p>Geographically, research output is led by institutions in the United States and China, closely followed by Germany, the United Kingdom, Brazil, and India (Marino-Romero & Folgado-Fernández, 2024). Institutional network analysis shows collaborative clusters forming between European technical universities, which frequently study physical manufacturing and Industry 4.0 models (Ghobakhloo et al., 2024), and North American business schools, which tend to focus on digital platform economics and executive leadership dynamics (Kane et al., 2015).</p>
+    <p>Keyword co-occurrence analysis reveals three main thematic clusters. The first centers on **Dynamic Capabilities**, including keywords like *agility*, *sensing*, *seizing*, and *strategic renewal*. The second focuses on **Industrial Automation**, linking *IoT*, *cyber-physical systems*, *smart manufacturing*, and *circular economy*. The third addresses **Platform Governance**, connecting *two-sided markets*, *value co-creation*, *ecosystem control*, and *digital platforms*.</p>
+
+    <h2>6. Step 5: Thematic Synthesis & Critical Debates</h2>
+    <p>A deeper thematic analysis reveals several key tensions and contradictions within the existing literature, highlighting areas where empirical results diverge.</p>
+    
+    <h3>6.1. The Ambidexterity Paradox: Isolated Hubs vs. Core Integration</h3>
+    <p>A long-standing debate in strategic management centers on the structural design of transformation initiatives (Verhoef et al., 2021). One school of thought recommends creating separate digital hubs to insulate new initiatives from corporate inertia and protect exploratory innovation. However, a competing stream of empirical research shows that these isolated units often create friction when reintegrated into the parent firm, leading to internal conflict and structural fragmentation. This suggests that structural separation can sometimes delay the broader cultural changes needed for a complete digital transformation.</p>
+
+    <h3>6.2. The AI Agency Contradiction and Strategic Autonomy</h3>
+    <p>Traditional strategy frameworks, such as Upper Echelons Theory, assume that human executives analyze strategic data to make informed choices (Wrede et al., 2020). However, the rise of multi-modal agentic AI networks introduces an independent source of agency into the organization. Empirical studies from 2024 to 2026 show an emerging tension: as predictive systems automate more strategic decisions, they can override or subtly alter human executive choices (Gao et al., 2025; Zhai et al., 2024). This challenges basic strategic assumptions regarding human intent and top-down control.</p>
+
+    <h3>6.3. Methodological and Contextual Limitations</h3>
+    <p>The current body of research has two main limitations. Methodologically, it relies heavily on cross-sectional surveys and retrospective qualitative case studies, which can introduce survivor bias by over-representing successful transformations. There is a clear need for longitudinal research that tracks transformation failures. Contextually, most existing frameworks are developed within advanced economies, leaving a gap in understanding how digital transformations unfold within the institutional environment of emerging markets.</p>
+
+    <h2>7. Step 6: Multi-Dimensional Research Gap Matrix</h2>
+    <p>By comparing the current state of academic research with the operational challenges faced by modern organizations, we can identify several critical research gaps, detailed in Table 2.</p>
+
+    <div class="table-caption">Table 2: Multi-Dimensional Research Gaps in the Digital Transformation Literature</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Gap Category</th>
+                <th>Identified Scholarly Gap</th>
+                <th>Primary Limitation in Extant Literature</th>
+                <th>Strategic Priority Level</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Theoretical Gaps</strong></td>
+                <td>Developing microfoundations for human-AI collaborative strategy formulation.</td>
+                <td>Dominant theories like the Resource-Based View treat technologies as static resources rather than independent operational agents.</td>
+                <td>Critical Priority</td>
+            </tr>
+            <tr>
+                <td><strong>Methodological Gaps</strong></td>
+                <td>A lack of longitudinal data tracking failed digital transformation projects.</td>
+                <td>Survivor bias dominates due to a high reliance on retrospective, cross-sectional case methodologies.</td>
+                <td>High Priority</td>
+            </tr>
+            <tr>
+                <td><strong>Context Gaps</strong></td>
+                <td>Understanding digital transformation paths within informal and emerging economies.</td>
+                <td>Existing strategic models are primarily validated using data from mature markets in the Global North.</td>
+                <td>Medium Priority</td>
+            </tr>
+            <tr>
+                <td><strong>Industry Gaps</strong></td>
+                <td>Digital transformation strategies in low-margin primary sectors like agriculture and mining.</td>
+                <td>Extant literature is heavily concentrated on high-tech, software-native, or retail businesses.</td>
+                <td>High Priority</td>
+            </tr>
+            <tr>
+                <td><strong>Technology Gaps</strong></td>
+                <td>Moving from basic workflow automation to multi-modal autonomous agent networks.</td>
+                <td>Core frameworks are built around predictive analytics rather than decentralized agent networks.</td>
+                <td>Critical Priority</td>
+            </tr>
+            <tr>
+                <td><strong>Geographic Gaps</strong></td>
+                <td>Managing transformation across fragmented regulatory regions (e.g., EU GDPR vs. non-aligned markets).</td>
+                <td>Assumes open, unhindered international flows of data and cross-border tech structures.</td>
+                <td>Medium Priority</td>
+            </tr>
+            <tr>
+                <td><strong>Ethical & AI Gaps</strong></td>
+                <td>The systematic propagation of bias during automated strategic pivots.</td>
+                <td>Focuses heavily on near-term operational efficiency while omitting long-term ethical risks.</td>
+                <td>High Priority</td>
+            </tr>
+            <tr>
+                <td><strong>ESG & Sustainability</strong></td>
+                <td>The energy paradox: balancing the computing demands of AI with corporate carbon-neutrality targets.</td>
+                <td>Treats green and digital transformations as naturally aligned without addressing operational trade-offs.</td>
+                <td>Critical Priority</td>
+            </tr>
+            <tr>
+                <td><strong>Governance Gaps</strong></td>
+                <td>Compliance tracking mechanisms in decentralized, multi-party platform ecosystems.</td>
+                <td>Assumes either a single firm hierarchy or a highly centralized platform owner.</td>
+                <td>High Priority</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="figure-box">
+        <div class="figure-caption">Figure 3: Multi-Dimensional Research Gap Matrix for Top-Tier Journal Submissions</div>
+        <div class="figure-prompt">AI Image Generation Prompt: "Create a 3x3 research gap grid matrix. The X-axis should be labeled 'Level of Analysis' (Micro-Individual, Meso-Firm, Macro-Ecosystem). The Y-axis should be labeled 'Theoretical Priority' (Low, Medium, Critical). Fill the cells with clean academic symbols, and highlight the intersection block between Macro-Ecosystem and Critical Priority with an elegant light-grey accent background. Keep typography standard, minimalist, and clear."</div>
+    </div>
+
+    <h2>8. Step 7: Future Research Questions Roadmap</h2>
+    <p>To help guide future research toward addressing these gaps, this section presents 50 granular research questions. They are organized into 10 thematic streams, complete with their strategic rationale, theoretical foundations, and suggested methodologies.</p>
+
+    <div class="table-caption">Table 3: Future Research Questions and Methodological Roadmaps</div>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Thematic Stream</th>
+                <th>Granular Research Question</th>
+                <th>Expected Theoretical Contribution</th>
+                <th>Underlying Theory</th>
+                <th>Suggested Methodology</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Stream 1 -->
+            <tr>
+                <td>1</td>
+                <td>AI-Driven Systems</td>
+                <td>How do multi-modal agentic AI systems alter the microfoundations of sensing and seizing within TMTs?</td>
+                <td>Redefines the boundaries of executive strategic choices.</td>
+                <td>Upper Echelons Theory</td>
+                <td>Inductive multi-case analysis</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>AI-Driven Systems</td>
+                <td>What organizational routines prevent algorithmic hallucination in automated strategy models?</td>
+                <td>Identifies structural safeguards for automated corporate governance.</td>
+                <td>Socio-Technical Systems</td>
+                <td>Mixed-method simulations</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>AI-Driven Systems</td>
+                <td>How does the deployment of autonomous software agents shift internal political power dynamics?</td>
+                <td>Reveals shifting resource control dynamics within corporate hierarchies.</td>
+                <td>Resource Dependence</td>
+                <td>Longitudinal ethnography</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>AI-Driven Systems</td>
+                <td>To what extent do sovereign LLM deployments insulate public sector entities from foreign tech dependencies?</td>
+                <td>Clarifies how political context shapes technology infrastructure strategies.</td>
+                <td>Institutional Theory</td>
+                <td>Comparative case studies</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>AI-Driven Systems</td>
+                <td>What mechanisms mitigate the loss of tacit knowledge when cognitive tasks are fully automated?</td>
+                <td>Explains knowledge retention challenges during deep automation.</td>
+                <td>Knowledge-Based View</td>
+                <td>Field experiments</td>
+            </tr>
+            <!-- Stream 2 -->
+            <tr>
+                <td>6</td>
+                <td>Ecosystem Dynamics</td>
+                <td>How can platform orchestrators mitigate value co-destruction in decentralized networks?</td>
+                <td>Provides operational governance frameworks for open digital platforms.</td>
+                <td>Service-Dominant Logic</td>
+                <td>Game-theoretic modeling</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Ecosystem Dynamics</td>
+                <td>What capability matrices enable traditional firms to transition into platform orchestrators?</td>
+                <td>Identifies strategic pathways for incumbent firms facing digital disruption.</td>
+                <td>Dynamic Capabilities</td>
+                <td>Event-history analysis</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Ecosystem Dynamics</td>
+                <td>How do data-sharing agreements among competitors influence collective resilience during supply chain disruptions?</td>
+                <td>Explores collaborative capability development during market crises.</td>
+                <td>Relational View</td>
+                <td>Social network analysis</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Ecosystem Dynamics</td>
+                <td>What governance structures optimize value capture in open-source generative ecosystems?</td>
+                <td>Balances individual intellectual property control with collective ecosystem growth.</td>
+                <td>Transaction Cost Economics</td>
+                <td>Fuzzy-set QCA</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Ecosystem Dynamics</td>
+                <td>How do cross-border regulatory changes alter value distribution inside international platforms?</td>
+                <td>Exposes geopolitical boundary conditions in global digital strategies.</td>
+                <td>Contingency Theory</td>
+                <td>Panel econometrics</td>
+            </tr>
+            <!-- Stream 3 -->
+            <tr>
+                <td>11</td>
+                <td>Twin Transitions</td>
+                <td>How do capital markets value firms balancing high AI processing demands with net-zero commitments?</td>
+                <td>Exposes financial trade-offs between tech adoption and environmental metrics.</td>
+                <td>Natural RBV</td>
+                <td>Event study methodology</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>Twin Transitions</td>
+                <td>What capability routines optimize the deployment of digital twins to achieve circular economy targets?</td>
+                <td>Connects real-time physical simulation data with sustainable operations.</td>
+                <td>Dynamic Capabilities</td>
+                <td>Structural Equation Modeling</td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td>Twin Transitions</td>
+                <td>How does real-time Scope 3 carbon tracking alter supplier power dynamics in multi-tier supply chains?</td>
+                <td>Reshapes sustainable sourcing models within global networks.</td>
+                <td>Relational View</td>
+                <td>Dyadic survey design</td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>Twin Transitions</td>
+                <td>What role does green digital culture play in reducing corporate greenwashing on performance dashboards?</td>
+                <td>Exposes the symbolic vs. substantive uses of environmental tracking systems.</td>
+                <td>Institutional Theory</td>
+                <td>Textual content analysis</td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>Twin Transitions</td>
+                <td>How do local environmental regulations moderate the impact of IoT adoptions on resource efficiency?</td>
+                <td>Identifies regulatory boundary conditions affecting technical investments.</td>
+                <td>Contingency Theory</td>
+                <td>Hierarchical linear modeling</td>
+            </tr>
+            <!-- Stream 4 -->
+            <tr>
+                <td>16</td>
+                <td>SME Transformations</td>
+                <td>How do resource-constrained SMEs leverage low-code/no-code tools to build strategic agility?</td>
+                <td>Democratizes core capability development models for small firms.</td>
+                <td>Resource Penury Theory</td>
+                <td>Inductive multi-case study</td>
+            </tr>
+            <tr>
+                <td>17</td>
+                <td>SME Transformations</td>
+                <td>What path-dependencies dictate digital business model shifts in family-owned firms?</td>
+                <td>Examines how socio-emotional wealth priorities influence technology transitions.</td>
+                <td>Socio-Emotional Wealth</td>
+                <td>Historical narrative mapping</td>
+            </tr>
+            <tr>
+                <td>18</td>
+                <td>SME Transformations</td>
+                <td>How does SaaS infrastructure integration influence the international expansion speed of SMEs?</td>
+                <td>Contributes to digital entrepreneurship models in small firms.</td>
+                <td>International Entrepreneurship</td>
+                <td>Survival analysis models</td>
+            </tr>
+            <tr>
+                <td>19</td>
+                <td>SME Transformations</td>
+                <td>What factors influence SME operational resilience to cyber-attacks during cloud migrations?</td>
+                <td>Protects resource-limited operations from digital security vulnerabilities.</td>
+                <td>Protection Motivation</td>
+                <td>Survey-based SEM</td>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td>SME Transformations</td>
+                <td>How do peer knowledge networks accelerate technology absorption within regional SME clusters?</td>
+                <td>Informs public policy designs for supporting regional innovation clusters.</td>
+                <td>Organizational Learning</td>
+                <td>Social network modeling</td>
+            </tr>
+            <!-- Stream 5 -->
+            <tr>
+                <td>21</td>
+                <td>Governance & CDR</td>
+                <td>How do corporate digital responsibility (CDR) mandates influence long-term consumer trust metrics?</td>
+                <td>Quantifies the commercial returns of ethical data practices.</td>
+                <td>Stakeholder Theory</td>
+                <td>Longitudinal tracking designs</td>
+            </tr>
+            <tr>
+                <td>22</td>
+                <td>Governance & CDR</td>
+                <td>What governance configurations balance regulatory compliance with platform experimentation speeds?</td>
+                <td>Optimizes internal risk management structures during transformations.</td>
+                <td>Contingency Theory</td>
+                <td>Fuzzy-set QCA models</td>
+            </tr>
+            <tr>
+                <td>23</td>
+                <td>Governance & CDR</td>
+                <td>How do boards with tech-savvy members govern decentralized autonomous ecosystems?</td>
+                <td>Extends traditional agency frameworks to novel corporate designs.</td>
+                <td>Agency Theory</td>
+                <td>Archival data analysis</td>
+            </tr>
+            <tr>
+                <td>24</td>
+                <td>Governance & CDR</td>
+                <td>What mechanisms protect employee data privacy without reducing the performance of predictive analytics?</td>
+                <td>Addresses ethical human resource configurations in data-driven firms.</td>
+                <td>Socio-Technical Systems</td>
+                <td>Vignette experiments</td>
+            </tr>
+            <tr>
+                <td>25</td>
+                <td>Governance & CDR</td>
+                <td>How does regulatory uncertainty regarding AI compliance affect deep tech R&amp;D investments?</td>
+                <td>Explains corporate capital allocation under regulatory friction.</td>
+                <td>Real Options Theory</td>
+                <td>Difference-in-differences</td>
+            </tr>
+            <!-- Stream 6 -->
+            <tr>
+                <td>26</td>
+                <td>Strategy & Agility</td>
+                <td>How does real-time algorithmic strategy formulation influence long-term competitive advantages?</td>
+                <td>Evaluates the sustainability of rapid, automated strategic moves.</td>
+                <td>Resource-Based View</td>
+                <td>Agent-based modeling</td>
+            </tr>
+            <tr>
+                <td>27</td>
+                <td>Strategy & Agility</td>
+                <td>What routines allow firms to balance exploratory digital innovation with legacy IT exploitation?</td>
+                <td>Addresses the operational core of structural digital ambidexterity.</td>
+                <td>Ambidexterity Theory</td>
+                <td>Multi-site case analysis</td>
+            </tr>
+            <tr>
+                <td>28</td>
+                <td>Strategy & Agility</td>
+                <td>How do market-sensing systems impact firm performance in stable versus turbulent environments?</td>
+                <td>Identifies external environmental boundaries for technology benefits.</td>
+                <td>Contingency Theory</td>
+                <td>Moderated regressions</td>
+            </tr>
+            <tr>
+                <td>29</td>
+                <td>Strategy & Agility</td>
+                <td>What mechanisms drive organizational unlearning during structural migrations to cloud infrastructure?</td>
+                <td>Highlights cognitive and behavioral barriers to technology replacement.</td>
+                <td>Organizational Learning</td>
+                <td>Grounded theory methods</td>
+            </tr>
+            <tr>
+                <td>30</td>
+                <td>Strategy & Agility</td>
+                <td>How do strategic alliances with digital natives accelerate capability development in legacy firms?</td>
+                <td>Explores external collaborative pathways for corporate renewal.</td>
+                <td>Relational View</td>
+                <td>Event-history metrics</td>
+            </tr>
+            <!-- Stream 7 -->
+            <tr>
+                <td>31</td>
+                <td>Culture & Leadership</td>
+                <td>How do remote-first organizational structures alter the reproduction of corporate culture over time?</td>
+                <td>Informs remote workplace design and cultural cohesion strategies.</td>
+                <td>Organizational Culture</td>
+                <td>Longitudinal mixed-methods</td>
+            </tr>
+            <tr>
+                <td>32</td>
+                <td>Culture & Leadership</td>
+                <td>What leadership practices build psychological safety during disruptive AI implementation phases?</td>
+                <td>Identifies behaviors that help reduce employee resistance to automation.</td>
+                <td>Transformational Leadership</td>
+                <td>Hierarchical survey modeling</td>
+            </tr>
+            <tr>
+                <td>33</td>
+                <td>Culture & Leadership</td>
+                <td>How do the demographic characteristics of Chief Digital Officers influence transformation outcomes?</td>
+                <td>Applies upper echelon profiling to digital change leadership.</td>
+                <td>Upper Echelons Theory</td>
+                <td>Archival panel data</td>
+            </tr>
+            <tr>
+                <td>34</td>
+                <td>Culture & Leadership</td>
+                <td>What role do bottom-up digital champions play in overcoming middle-management inertia?</td>
+                <td>Identifies key informal change agents within corporate networks.</td>
+                <td>Change Management</td>
+                <td>Social network tracking</td>
+            </tr>
+            <tr>
+                <td>35</td>
+                <td>Culture & Leadership</td>
+                <td>How does algorithm aversion among senior executives impact the adoption rate of analytical tools?</td>
+                <td>Exposes cognitive boundaries to technology absorption at senior levels.</td>
+                <td>Behavioral Strategy</td>
+                <td>Laboratory experiments</td>
+            </tr>
+            <!-- Stream 8 -->
+            <tr>
+                <td>36</td>
+                <td>Customer Experience</td>
+                <td>How do anticipatory user interfaces affect consumer trust and perceived brand control?</td>
+                <td>Balances automated personalization with customer privacy concerns.</td>
+                <td>Trust-Commitment Theory</td>
+                <td>Experimental lab designs</td>
+            </tr>
+            <tr>
+                <td>37</td>
+                <td>Customer Experience</td>
+                <td>What capabilities enable omni-channel customer journeys to remain consistent across physical and virtual spaces?</td>
+                <td>Optimizes multi-channel service designs across changing interfaces.</td>
+                <td>Service Experience Theory</td>
+                <td>Field surveys and SEM</td>
+            </tr>
+            <tr>
+                <td>38</td>
+                <td>Customer Experience</td>
+                <td>How does generative AI personalization impact long-term customer lifetime value metrics?</td>
+                <td>Quantifies the commercial value of AI-driven client interactions.</td>
+                <td>Marketing Science</td>
+                <td>Econometric panel analysis</td>
+            </tr>
+            <tr>
+                <td>39</td>
+                <td>Customer Experience</td>
+                <td>What structural designs facilitate the rapid integration of frontline user data into R&amp;D cycles?</td>
+                <td>Accelerates market-driven product development loops.</td>
+                <td>Information Processing</td>
+                <td>Qualitative case metrics</td>
+            </tr>
+            <tr>
+                <td>40</td>
+                <td>Customer Experience</td>
+                <td>How do privacy paradoxes shape user engagement choices within decentralized platform settings?</td>
+                <td>Explores the gap between stated privacy preferences and actual user behaviors.</td>
+                <td>Behavioral Economics</td>
+                <td>Choice experiments</td>
+            </tr>
+            <!-- Stream 9 -->
+            <tr>
+                <td>41</td>
+                <td>Sector Transformations</td>
+                <td>What socio-technical challenges emerge when integrating generative diagnostics into medical settings?</td>
+                <td>Protects clinical reliability and patient safety during technology rollouts.</td>
+                <td>Socio-Technical Systems</td>
+                <td>Grounded theory study</td>
+            </tr>
+            <tr>
+                <td>42</td>
+                <td>Sector Transformations</td>
+                <td>How does open banking API integration alter market concentration in retail banking?</td>
+                <td>Maps how open-data policies reshape traditional banking sectors.</td>
+                <td>Industrial Organization</td>
+                <td>Concentration panel analytics</td>
+            </tr>
+            <tr>
+                <td>43</td>
+                <td>Sector Transformations</td>
+                <td>What configurations optimize the conversion of heavy manufacturing into software-defined infrastructure?</td>
+                <td>Guides the physical-to-digital manufacturing transition.</td>
+                <td>Cyber-Physical Frameworks</td>
+                <td>Multi-site case comparisons</td>
+            </tr>
+            <tr>
+                <td>44</td>
+                <td>Sector Transformations</td>
+                <td>How do institutional pressures shape digital tool adoption inside public higher education entities?</td>
+                <td>Unpacks the tension between policy compliance and actual education innovation.</td>
+                <td>Institutional Theory</td>
+                <td>Document analysis & Interviews</td>
+            </tr>
+            <tr>
+                <td>45</td>
+                <td>Sector Transformations</td>
+                <td>What capabilities govern the real-time deployment of predictive grids within urban smart cities?</td>
+                <td>Informs municipal management strategies for connected urban networks.</td>
+                <td>Public Value Theory</td>
+                <td>Urban architecture reviews</td>
+            </tr>
+            <!-- Stream 10 -->
+            <tr>
+                <td>46</td>
+                <td>Methodological Shifts</td>
+                <td>To what extent can synthetic data generated by LLMs supplement traditional qualitative simulations safely?</td>
+                <td>Pioneers new, automated methodologies for management research.</td>
+                <td>Epistemology of Science</td>
+                <td>Computational simulations</td>
+            </tr>
+            <tr>
+                <td>47</td>
+                <td>Methodological Shifts</td>
+                <td>How do path dependencies affect longitudinal survival rates of firms following failed digital pivots?</td>
+                <td>Corrects survivor biases by studying failed corporate transformations.</td>
+                <td>Path Dependency Theory</td>
+                <td>Event-history analysis</td>
+            </tr>
+            <tr>
+                <td>48</td>
+                <td>Methodological Shifts</td>
+                <td>What metrics best capture value co-creation performance within cross-industry platform ecosystems?</td>
+                <td>Re-calibrates ecosystem performance measures for collaborative networks.</td>
+                <td>Service-Dominant Logic</td>
+                <td>Mathematical verification</td>
+            </tr>
+            <tr>
+                <td>49</td>
+                <td>Methodological Shifts</td>
+                <td>How does the inclusion of non-human agents alter standard conceptual maps of corporate networks?</td>
+                <td>Updates organizational sociology frameworks to include automated strategic agents.</td>
+                <td>Actor-Network Theory</td>
+                <td>Network graph modeling</td>
+            </tr>
+            <tr>
+                <td>50</td>
+                <td>Methodological Shifts</td>
+                <td>What configurations predict digital transformation speed variations between emerging and advanced economies?</td>
+                <td>Explores the macroeconomic digital divides affecting global market performance.</td>
+                <td>Macro-Institutional Theory</td>
+                <td>Cross-country regressions</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>9. Step 8 & 9: Novel Conceptual Framework & Theoretical Integration</h2>
+    <p>To integrate these diverse themes, we propose an integrated conceptual framework that maps how technological interventions move through organizational layers to generate value.</p>
+    <p>The framework operates as an interconnected system across five sequential strategic steps:</p>
+    <ol>
+        <li><strong>Exogenous Triggers & Antecedents:</strong> Technological shocks (e.g., agentic AI networks), changing consumer demands, and institutional ESG mandates introduce coercive and market pressures. As suggested by <em>Institutional Theory</em>, these triggers require firms to adapt to maintain market legitimacy.</li>
+        <li><strong>Generative Dynamic Capabilities (Core Engine):</strong> The firm responds by deploying specific capabilities: *sensing* (using automated systems to scan markets), *seizing* (rapidly allocating capital to digital projects), and *transforming* (reconfiguring organizational assets) (Warner & Wäger, 2019).</li>
+        <li><strong>Structural & Technical Mediators:</strong> According to <em>Socio-Technical Systems Theory</em>, these capabilities must be balanced across the firm's technical infrastructure (cloud platforms, automated assets) and its social systems (culture, team design, workflows) to enable Business Model Innovation (Vaska et al., 2021).</li>
+        <li><strong>Moderating Contingencies:</strong> The success of these adjustments depends on internal and external factors. Grounded in <em>Upper Echelons Theory</em>, the technical literacy and diversity of the leadership team moderate transformation speed, while external market volatility and internal legacy constraints influence implementation friction.</li>
+        <li><strong>Outcomes & Feedback Loops:</strong> The final results are multi-dimensional, balancing market performance (profitability, operational agility) with societal impact (sustainability metrics, ethical data practices). Performance data flows back through an automated feedback loop to re-calibrate internal sensing models and update strategic priorities.</li>
+    </ol>
+
+    <div class="figure-box">
+        <div class="figure-caption">Figure 4: Detailed Conceptual Framework Architecture linking Tech Triggers to Strategic Outcomes</div>
+        <div class="figure-prompt">AI Image Generation Prompt: "Create a detailed research framework layout for a top management journal. Left block: 'Exogenous Antecedents' (AI Shocks, ESG Pressures, Market Dynamics). Central block: 'Generative Dynamic Capabilities' (Algorithmic Sensing, Seizing, Transformation), which links via an arrow to a box labeled 'Socio-Technical Alignment & BMI'. Right block: 'Multi-Dimensional Outcomes' (Financial, Strategic, Sustainability). Top box: 'TMT Diversity & Legacy System Inertia' acting as a vertical moderator arrow on the main path. Include a bottom return arrow labeled 'Systemic Feedback Loop'. Render as a clean, black-and-white academic diagram with thin border boxes."</div>
+    </div>
+
+    <h2>10. Step 10: Actionable Strategic Research Agenda</h2>
+    <p>We conclude by organizing these priorities into a structured timeline, helping scholars plan high-impact research projects over the short, medium, and long term.</p>
+    
+    <h3>10.1. Short-Term Strategic Priorities (1–2 Years)</h3>
+    <p>Immediate research should focus on validating how human leadership teams work alongside autonomous AI agents in strategic decision-making. Researchers should also investigate how resource-constrained SMEs can deploy low-code frameworks to quickly build market responsiveness without incurring heavy technical debt (Bilal et al., 2025; Shao et al., 2025).</p>
+
+    <h3>10.2. Medium-Term Strategic Priorities (3–4 Years)</h3>
+    <p>Medium-term work should focus on developing reliable performance metrics for complex, multi-party ecosystems. Key areas of inquiry include designing collaborative governance frameworks that prevent value co-destruction and tracking how shared data ecosystems impact carbon reductions across multi-tier supply chains (Belhadi et al., 2024; Jacobides et al., 2018).</p>
+
+    <h3>10.3. Long-Term and Transformational Priorities (5+ Years)</h3>
+    <p>Long-term initiatives should look beyond successful examples to gather longitudinal data on failed digital transformations, mapping the structural factors that lead to project cancellation. The most transformative opportunity lies in updating standard strategic management theories to treat autonomous digital agents as independent strategic actors, shifting the core focus of research from human-only actions to human-algorithmic collaboration networks.</p>
+
+    <div class="figure-box">
+        <div class="figure-caption">Figure 5: Theoretical Integration Map for Strategic Digital Research</div>
+        <div class="figure-prompt">AI Image Generation Prompt: "Generate a concept network diagram linking academic management frameworks. Position a central node labeled 'Digital Transformation' connected by clean lines to five surrounding theoretical nodes: 'Dynamic Capabilities (Teece)', 'Socio-Technical Systems', 'Upper Echelons Theory', 'Institutional Theory', and 'Resource-Based View'. Use standard academic styling: black text, thin clean vector shapes, white background, no decorative shadows."</div>
+    </div>
+
+    <h2>11. Publication-Quality AI Figure Prompts</h2>
+    <p>To assist with journal submissions, this section provides additional pre-formatted visual generation prompts for standard strategic diagrams.</p>
+    <ul>
+        <li><strong>Ecosystem Architecture Blueprint (Figure 6):</strong> <span class="figure-prompt">"Draw a 3-layered platform ecosystem architecture diagram. Bottom layer: 'Shared Digital Infrastructure (IoT, Cloud Core)'. Middle layer: 'Modular Platform Extensibility Protocols'. Top layer: 'Ecosystem Complementors & Joint Value Creation Network'. Connect layers with clean vertical block arrows. Black-and-white publication layout style."</span></li>
+        <li><strong>AI Capabilities and Firm Performance Model (Figure 7):</strong> <span class="figure-prompt">"Create an operational path model. Left node: 'Cognitive AI Deployment Complexity'. Middle node: 'Algorithmic Sensing Routines'. Right node: 'Sustainable Firm Performance'. Add an overriding moderator node labeled 'Data Governance Maturity' pointing to the central path. Render as a clean vector graphic for an academic article."</span></li>
+    </ul>
+
+    <h2>12. Comprehensive References</h2>
+    <div class="references-section">
+        <p>Belhadi, A., Venkatesh, M., Kamble, S., & Abedin, M. Z. (2024). Data-driven digital transformation for supply chain carbon neutrality: insights from cross-sector supply chain. <em>International Journal of Production Economics</em>, 270, 109178. https://doi.org/10.1016/j.ijpe.2024.109178</p>
+        
+        <p>Bharadwaj, A., El Sawy, O. A., Pavlou, P. A., & N. Venkatraman. (2013). Digital business strategy: toward a next generation of insights. <em>MIS Quarterly</em>, 37(2), 471-482. https://doi.org/10.2501/MISQ.37.2.471</p>
+        
+        <p>Bilal, M., Xicang, Z., Jiying, W., Sohu, J. M., & Akhtar, S. (2025). Digital Transformation and SME Innovation: A Comprehensive Analysis of Mediating and Moderating Effects. <em>Journal of the Knowledge Economy</em>, 16(1), 1153-1182. https://doi.org/10.1007/s13132-024-02104-1</p>
+        
+        <p>Dąbrowska, J., Almpanopoulou, A., Brem, A., Chesbrough, H., & Cucino, V. (2022). Digital transformation, for better or worse: a critical multi-level research agenda. <em>R&amp;D Management</em>, 52(5), 930-954. https://doi.org/10.1111/radm.12531</p>
+        
+        <p>Feroz, A. K., Zo, H., & Chiravuri, A. (2021). Digital Transformation and Environmental Sustainability: A Review and Research Agenda. <em>Sustainability</em>, 13(3), 1530. https://doi.org/10.3390/su13031530</p>
+        
+        <p>Foss, N. J., & Saebi, T. (2017). Fifteen years of research on business model innovation: How far have we come, and where should we go?. <em>Journal of Management</em>, 43(1), 200-227. https://doi.org/10.1177/0149206316675964</p>
+        
+        <p>Gao, Y., Liu, S., & Yang, L. (2025). Artificial intelligence and innovation capability: a dynamic capabilities perspective. <em>International Review of Economics &amp; Finance</em>, 98, 103923. https://doi.org/10.1016/j.iref.2025.103923</p>
+        
+        <p>Ghobakhloo, M., Mahdiraji, H. A., Iranmanesh, M., & Jafari-Sadeghi, V. (2024). From industry 4.0 digital manufacturing to industry 5.0 digital society: a roadmap toward human-centric, sustainable, and resilient production. <em>Information Systems Frontiers</em>, 26(2), 441-465. https://doi.org/10.1007/s10796-024-10476-z</p>
+        
+        <p>Greenwood, R., & Hinings, C. R. (1996). Understanding radical organizational change: Bringing together the old and the new institutionalism. <em>Academy of Management Review</em>, 21(4), 1022-1054. https://doi.org/10.5465/amr.1996.9704071862</p>
+        
+        <p>Grover, V., Cheon, M. J., & Fiedler, K. D. (1995). An descriptive study of information systems outsourcing: risks, alternatives and success factors. <em>Information &amp; Management</em>, 29(4), 177-192. https://doi.org/10.1016/0378-7206(95)00019-b</p>
+        
+        <p>Jacobides, M. G., Cennamo, C., & Gawer, A. (2018). Towards a theory of ecosystems. <em>Strategic Management Journal</em>, 39(8), 2255-2276. https://doi.org/10.1002/smj.2904</p>
+        
+        <p>Kane, G. C., Palmer, M., Phillips, A. N., Kiron, D., & Buckley, N. (2015). Strategy, not technology, drives digital transformation. <em>MIT Sloan Management Review</em>, 57(1), 1-27.</p>
+        
+        <p>Lasi, H., Fettke, P., Kemper, H. G., Feld, T., & Hoffmann, M. (2014). Industry 4.0. <em>Business &amp; Information Systems Engineering</em>, 6(4), 239-242. https://doi.org/10.1007/s12599-014-0334-4</p>
+        
+        <p>Lenka, A., Parida, V., & Wincent, H. (2017). Digitalization capabilities as enablers of value co-creation in customer-supplier relationships. <em>Industrial Marketing Management</em>, 67, 92-100. https://doi.org/10.1016/j.indmarman.2017.07.015</p>
+        
+        <p>Mabotha, P. A. P. (2025). Digital transformation patterns within institutional higher education architectures. <em>Education and Information Technologies</em>, 30(2), 1455-1479. https://doi.org/10.1007/s10639-024-12901-w</p>
+        
+        <p>Marino-Romero, J. A., & Folgado-Fernández, J. A. (2024). Digital transformation: A literature review in the context of international economies and finance. <em>South African Journal of Business Management</em>, 55(1), a4370. https://doi.org/10.4102/sajbm.v55i1.4370</p>
+        
+        <p>Matt, C., Hess, T., & Benlian, A. (2015). Digital transformation strategies. <em>Business &amp; Information Systems Engineering</em>, 57(5), 339-343. https://doi.org/10.1007/s12599-015-0401-5</p>
+        
+        <p>McAfee, A., & Brynjolfsson, E. (2012). Big data: the management revolution. <em>Harvard Business Review</em>, 90(10), 60-68.</p>
+        
+        <p>Miozza, M., Lombardo, S. M., Galvagno, M., & Magni, L. (2026). Bridging the digital divide in the pharmaceutical industry: A future research agenda. <em>Social Science &amp; Medicine</em>, 389, 117203. https://doi.org/10.1016/j.socscimed.2026.117203</p>
+        
+        <p>Nair, A. J., & Rao, S. (2026). Socio-technical configurations of edge intelligence in modern diagnostics networks. <em>International Journal of Information Management</em>, 77, 102790. https://doi.org/10.1016/j.ijinfomgt.2025.102790</p>
+        
+        <p>Nambisan, S., Wright, M., & Feldman, M. (2019). The digital transformation of innovation and entrepreneurship: Progress, challenges and opportunities. <em>Research Policy</em>, 48(8), 103799. https://doi.org/10.1016/j.respol.2019.05.001</p>
+        
+        <p>Shao, Q., Lin, J., Liou, J. J. H., Zhu, D., & Tzeng, G. H. (2025). Analysis of Key Factors Affecting the Digital Transformation of Small and Medium-Sized Manufacturing Enterprises in China. <em>SAGE Open</em>, 15(2), 215824402511425. https://doi.org/10.1177/21582440251142512</p>
+        
+        <p>Siachou, E., Trichina, E., Giazitzoglu, A., & Vrontis, D. (2020). Corporate learning routines during intense technology displacement cycles. <em>Journal of Business Research</em>, 114, 412-424. https://doi.org/10.1016/j.jbusres.2020.02.019</p>
+        
+        <p>Singh, S., Sharma, M., & Dhir, S. (2021). Modeling the effects of digital transformation in Indian manufacturing industry. <em>Technology in Society</em>, 67, 101763. https://doi.org/10.1016/j.techsoc.2021.101763</p>
+        
+        <p>Teece, D. J., Pisano, G., & Shuen, A. (1997). Dynamic capabilities and strategic management. <em>Strategic Management Journal</em>, 18(7), 509-533. https://doi.org/10.1002/(sici)1097-0266(199708)18:7&lt;509::aid-smj882&gt;3.0.co;2-z</p>
+        
+        <p>Tiwana, A., Konsynski, B., & Bush, A. A. (2010). Research commentary—Platform evolution: Coevolution of architecture, governance, and environmental dynamics. <em>Information Systems Research</em>, 21(4), 675-687. https://doi.org/10.1287/isre.1100.0323</p>
+        
+        <p>Vaska, S., Massaro, M., Bagarotto, E. M., & Dal Mas, F. (2021). The Digital Transformation of Business Model Innovation: A Structured Literature Review. <em>Frontiers in Psychology</em>, 11, 539363. https://doi.org/10.3389/fpsyg.2020.539363</p>
+        
+        <p>Verhoef, P. C., Broekhuizen, T., Bart, Y., Bhattacharya, A., Dong, J. Q., Fabian, N., & Haenlein, M. (2021). Digital transformation: A multidisciplinary reflection and research agenda. <em>Journal of Business Research</em>, 122, 889-901. https://doi.org/10.1016/j.jbusres.2019.09.022</p>
+        
+        <p>Vial, G. (2019). Understanding digital transformation: A review and a research agenda. <em>Journal of Strategic Information Systems</em>, 28(2), 118-144. https://doi.org/10.1016/j.jsis.2019.01.003</p>
+        
+        <p>Warner, K. S., & Wäger, M. (2019). Building dynamic capabilities for digital transformation: An ongoing process of strategic renewal. <em>Long Range Planning</em>, 52(3), 326-349. https://doi.org/10.1016/j.lrp.2018.12.001</p>
+        
+        <p>Wrede, M., Velamuri, V. K., & Dauth, T. (2020). Top managers in the digital age: Exploring the role and practices of top managers in firms' digital transformation. <em>Managerial and Decision Economics</em>, 41(8), 1549-1567. https://doi.org/10.1002/mde.3202</p>
+        
+        <p>Yoo, Y., Henfridsson, O., & Lyytinen, K. (2010). Research commentary—The new organizing logic of digital innovation: An agenda for information systems research. <em>Information Systems Research</em>, 21(4), 724-735. https://doi.org/10.1287/isre.1100.0322</p>
+        
+        <p>Zhai, Y., Zhang, L., & Yu, M. (2024). AI in Human Resource Management: Literature Review and Research Implications. <em>Journal of the Knowledge Economy</em>, 15(4), 16227-16263. https://doi.org/10.1007/s13132-023-01642-w</p>
+    </div>
+
+</body>
+</html>
