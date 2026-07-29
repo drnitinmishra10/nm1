@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artificial Intelligence in Effective Diagnosis of Diseases: Applications, Challenges, and Future Directions</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Times+New+Roman&display=swap');
+body {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 10pt;
+  line-height: 1.15;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  color: #000;
+}
+.page {
+  width: 8.5in;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0.7in 0.55in;
+  box-sizing: border-box;
+  column-count: 2;
+  column-gap: 0.22in;
+}
+.header {
+  column-span: all;
+  text-align: center;
+  margin-bottom: 10pt;
+}
+.conference {
+  font-size: 9pt;
+  font-weight: bold;
+  margin-bottom: 5pt;
+}
+.title {
+  font-size: 13.5pt;
+  font-weight: bold;
+  margin: 6pt 0;
+  line-height: 1.2;
+}
+.authors {
+  font-size: 10pt;
+  margin: 5pt 0;
+}
+.affiliation {
+  font-size: 8.5pt;
+  font-style: italic;
+  margin-bottom: 8pt;
+}
+.abstract-title, .keywords-title, h2 {
+  font-size: 10pt;
+  font-weight: bold;
+  margin: 9pt 0 3pt 0;
+  column-span: all;
+}
+h3 {
+  font-size: 10pt;
+  font-weight: bold;
+  font-style: italic;
+  margin: 7pt 0 2pt 0;
+}
+.abstract, .keywords {
+  font-size: 9pt;
+  text-align: justify;
+  margin-bottom: 6pt;
+  column-span: all;
+}
+p {
+  margin: 0 0 5pt 0;
+  text-align: justify;
+  text-indent: 0.18in;
+}
+p.noindent { text-indent: 0; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 7.5pt;
+  margin: 6pt 0;
+  column-span: all;
+}
+th, td {
+  border: 1px solid #000;
+  padding: 2.5pt 3pt;
+  text-align: left;
+  vertical-align: top;
+}
+th { background: #f0f0f0; font-weight: bold; }
+.caption {
+  font-size: 8pt;
+  text-align: center;
+  column-span: all;
+  margin: 2pt 0 6pt 0;
+  font-style: italic;
+}
+.ref {
+  font-size: 7.5pt;
+  margin: 1.5pt 0;
+  text-indent: -0.18in;
+  padding-left: 0.18in;
+  text-align: left;
+}
+.footer {
+  column-span: all;
+  font-size: 8pt;
+  text-align: center;
+  margin-top: 10pt;
+  border-top: 1px solid #000;
+  padding-top: 3pt;
+}
+@media (max-width: 700px) {
+  .page { column-count: 1; padding: 0.4in; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <div class="conference">2026 IEEE International Conference on Artificial Intelligence in Healthcare</div>
+  <div class="title">Artificial Intelligence in Effective Diagnosis of Diseases: Applications, Challenges, and Future Directions</div>
+  <div class="authors">Nitin Mishra<sup>1</sup></div>
+  <div class="affiliation">
+    <sup>1</sup>Professor, Department of Computer Science and Engineering<br>
+    Email: drnitinmishra10@gmail.com
+  </div>
+</div>
+
+<div class="abstract-title">Abstract</div>
+<div class="abstract">
+Artificial Intelligence (AI), encompassing machine learning (ML) and deep learning (DL), is rapidly transforming medical diagnostics by enabling high-accuracy analysis of complex multimodal data streams such as medical images, electronic health records (EHRs), genomic sequences, physiological signals, and clinical notes. Traditional diagnostic pathways, while foundational, are constrained by clinician workload, inter-observer variability, and limited capacity for large-scale screening. AI systems address these limitations by detecting subtle patterns, providing quantitative risk stratification, and supporting earlier intervention. This paper presents a comprehensive review of AI applications across major clinical domains including oncology, cardiology, neurology, ophthalmology, dermatology, pulmonology, infectious diseases, and mental health. We detail enabling algorithmic techniques, representative clinical systems, reported performance metrics from recent literature, and real-world deployment examples. Critical challenges—data quality and bias, model interpretability, regulatory pathways, workflow integration, and ethical considerations—are examined in depth. Finally, we outline future research directions centered on explainable AI, multimodal foundation models, federated learning, digital twins, and rigorous prospective validation. The evidence indicates that, when carefully developed, validated, and integrated, AI can substantially improve diagnostic precision, equity of access, and patient outcomes while augmenting rather than replacing clinical expertise.
+</div>
+
+<div class="keywords-title">Keywords</div>
+<div class="keywords">
+Artificial intelligence, disease diagnosis, deep learning, medical imaging, clinical decision support systems, machine learning, explainable AI, multimodal learning, healthcare AI, precision medicine
+</div>
+
+<h2>I. Introduction</h2>
+<p class="noindent">Accurate, timely, and equitable disease diagnosis remains one of the most critical determinants of patient outcomes and healthcare system efficiency. Conventional diagnostic processes rely on a combination of clinical history, physical examination, laboratory testing, and imaging interpretation performed by trained specialists. While these methods have driven remarkable advances in medicine, they are inherently limited by human cognitive capacity, fatigue, inter- and intra-observer variability, geographic shortages of specialists, and the growing volume and complexity of medical data [1], [2].</p>
+<p>The past decade has witnessed an unprecedented convergence of large-scale digital health data, increased computational power, and algorithmic breakthroughs in machine learning and deep learning. These developments have positioned Artificial Intelligence as a powerful adjunct to clinical decision-making. AI systems can rapidly process high-dimensional data, identify non-linear patterns that may escape human perception, and deliver consistent quantitative assessments across large populations [3]. In imaging alone, convolutional neural networks (CNNs) and vision transformers have achieved expert-level or superior performance in tasks such as diabetic retinopathy screening, breast cancer detection on mammography, and pulmonary nodule classification on chest radiographs and CT [4], [5].</p>
+<p>Beyond imaging, AI models now integrate longitudinal EHR data, wearable sensor streams, genomic profiles, and free-text clinical notes to support differential diagnosis, risk prediction, and treatment response forecasting. The potential impact extends from early detection of common diseases to accelerated identification of rare conditions and improved antimicrobial stewardship. However, translation from research prototypes to reliable clinical tools remains incomplete. Issues of generalizability, fairness, transparency, regulatory acceptance, and seamless workflow integration continue to limit widespread adoption [1], [6].</p>
+<p>This paper provides a structured review of the current landscape of AI in disease diagnosis. Section II outlines the principal enabling technologies. Section III surveys applications across major clinical specialties, supported by a summary table. Section IV synthesizes evidence on clinical performance. Section V analyzes key challenges and limitations. Section VI discusses emerging research directions, and Section VII concludes with implications for research and practice.</p>
+
+<h2>II. Enabling Technologies for AI-Based Diagnosis</h2>
+<p class="noindent">Modern diagnostic AI rests on several complementary technical pillars. Supervised learning remains the dominant paradigm, training models on labeled datasets of images, signals, or structured clinical variables to map inputs to diagnostic labels or continuous risk scores. Convolutional neural networks excel at hierarchical spatial feature extraction from medical images and have formed the backbone of most imaging-based diagnostic systems [5], [7]. More recently, transformer architectures and hybrid CNN-transformer models have demonstrated strong performance on both 2D and 3D volumetric data by capturing long-range dependencies [8].</p>
+<p>For sequential and longitudinal data—ECG waveforms, continuous vital-sign streams, and time-stamped EHR events—recurrent neural networks, temporal convolutional networks, and transformer-based sequence models are widely employed. Multimodal fusion strategies that combine imaging, laboratory values, genomics, and clinical text at the data, feature, or decision level have been shown to improve robustness and diagnostic accuracy compared with single-modality approaches [8].</p>
+<p>Transfer learning and self-supervised pretraining address the chronic problem of limited labeled medical data by initializing models on large natural-image corpora or unlabeled medical archives and then fine-tuning on smaller task-specific datasets. Federated learning frameworks enable multi-institutional model training without centralizing sensitive patient data, thereby supporting privacy regulations while increasing training-set diversity [9], [10]. Explainable AI (XAI) techniques—including Grad-CAM, SHAP values, attention visualization, and concept bottleneck models—are increasingly required to provide clinicians with interpretable rationales for model outputs, fostering trust and facilitating error analysis [9].</p>
+<p>Finally, large language models (LLMs) and multimodal foundation models are beginning to influence diagnostic workflows by supporting differential diagnosis generation, report summarization, and visual question answering over medical images and clinical notes [11]. These models, while powerful, introduce new challenges related to hallucination, calibration, and domain adaptation that must be carefully managed before clinical deployment.</p>
+
+<h2>III. Applications of AI in Disease Diagnosis</h2>
+<p class="noindent">AI has been applied across virtually every major medical specialty. Table I consolidates representative disease areas and the corresponding diagnostic contributions of AI systems, drawing on the taxonomy presented in the source material and expanded with recent literature.</p>
+
+<table>
+<thead>
+<tr>
+  <th style="width:5%">Sr.</th>
+  <th style="width:22%">Disease / Area</th>
+  <th>How AI Contributes to Diagnosis</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>Cancer Diagnosis</td><td>CNNs and vision transformers analyze CT, MRI, PET, ultrasound, and whole-slide histopathology for early detection, tumor segmentation, subtyping, and molecular feature prediction [12], [13].</td></tr>
+<tr><td>2</td><td>Diabetic Retinopathy</td><td>Deep learning systems screen retinal fundus photographs with sensitivity and specificity often exceeding 90 %, enabling scalable screening programs in primary care [4].</td></tr>
+<tr><td>3</td><td>Breast Cancer</td><td>AI-assisted mammography and ultrasound improve lesion detection, reduce false negatives, and help identify interval cancers that were missed on prior screening [14], [15].</td></tr>
+<tr><td>4</td><td>Lung Diseases</td><td>Models detect pneumonia, tuberculosis, COVID-19, and lung cancer on chest X-rays and CT; some systems achieve radiologist-level performance in controlled studies [16], [17].</td></tr>
+<tr><td>5</td><td>Heart Diseases</td><td>AI interprets 12-lead ECG, echocardiography, and cardiac MRI for arrhythmia classification, ejection-fraction estimation, and cardiovascular risk prediction [18], [19].</td></tr>
+<tr><td>6</td><td>Parkinson’s Disease</td><td>Multimodal pipelines fuse voice acoustics, gait sensors, motor assessments, and neuroimaging for early detection and differential diagnosis [20].</td></tr>
+<tr><td>7</td><td>Mental Health Disorders</td><td>Natural language processing of clinical notes and speech, combined with wearable data, supports detection and monitoring of depression, anxiety, and suicide risk [21].</td></tr>
+<tr><td>8</td><td>Sepsis Detection</td><td>Real-time predictive models operating on vital signs and laboratory results can flag elevated sepsis risk hours before clinical recognition [22].</td></tr>
+<tr><td>9</td><td>Retinal Diseases</td><td>AI diagnoses age-related macular degeneration, glaucoma, and diabetic macular edema from optical coherence tomography and fundus images [4].</td></tr>
+<tr><td>10</td><td>Neurological Disorders</td><td>Deep learning assists diagnosis of Alzheimer’s disease, acute stroke, epilepsy, and brain tumors using MRI, CT, and EEG [20], [23].</td></tr>
+<tr><td>11</td><td>Skin Diseases</td><td>CNNs classify dermoscopic images of melanoma and other lesions at or above dermatologist-level accuracy in retrospective evaluations [24].</td></tr>
+<tr><td>12</td><td>Infectious Diseases</td><td>AI supports pathogen identification, outbreak forecasting, and prediction of antimicrobial resistance from genomic and clinical data [25], [26].</td></tr>
+<tr><td>13</td><td>Gastrointestinal Diseases</td><td>Computer-aided detection during colonoscopy improves adenoma and polyp detection rates [27].</td></tr>
+<tr><td>14</td><td>Kidney Diseases</td><td>Machine learning models predict chronic kidney disease progression and risk of kidney failure from clinical and imaging features [28].</td></tr>
+<tr><td>15</td><td>Liver Diseases</td><td>AI assesses hepatic steatosis, fibrosis, cirrhosis, and hepatocellular carcinoma on ultrasound, CT, and MRI [29].</td></tr>
+<tr><td>16</td><td>Oral &amp; Dental</td><td>Deep learning detects caries, periodontal disease, and oral cancer from radiographic and clinical photographs.</td></tr>
+<tr><td>17</td><td>Pediatric Diseases</td><td>AI supports early diagnosis using age-adjusted imaging and clinical records, addressing limited pediatric specialist availability.</td></tr>
+<tr><td>18</td><td>Rare Diseases</td><td>Pattern recognition in genomic and phenotypic data accelerates diagnosis of rare and ultra-rare conditions.</td></tr>
+<tr><td>19</td><td>Laboratory Diagnosis</td><td>AI improves interpretation of blood tests, cytology, and microbiology reports, reducing turnaround time and error rates.</td></tr>
+<tr><td>20</td><td>Personalized Prediction</td><td>Multimodal models forecast individual disease risk, progression trajectories, complications, and treatment response [8].</td></tr>
+</tbody>
+</table>
+<p class="caption">TABLE I. Representative applications of AI across major disease categories and diagnostic modalities.</p>
+
+<h3>A. Oncology</h3>
+<p class="noindent">Cancer diagnosis has been one of the most intensively studied domains for AI. Deep learning models applied to histopathology whole-slide images achieve high sensitivity and specificity for detecting malignant cells and can even predict molecular alterations from morphology alone [7], [12]. Unified multi-organ models such as CancerUniT demonstrate the feasibility of a single architecture handling detection, segmentation, and diagnosis across multiple cancer types on CT [13]. Multimodal approaches that fuse imaging with genomics further support precision oncology by refining risk stratification and therapy selection [30].</p>
+
+<h3>B. Cardiology and Pulmonology</h3>
+<p>In cardiology, AI algorithms interpreting ECGs can detect atrial fibrillation, left ventricular dysfunction, and other conditions with accuracy comparable to expert cardiologists, sometimes identifying disease before it becomes clinically apparent [18], [19]. Echocardiography analysis models automate chamber quantification and valvular assessment. In pulmonology, CNN-based systems have been widely evaluated for pneumonia, tuberculosis, and COVID-19 detection on chest radiographs; performance is generally strong in single-center studies but can degrade under domain shift [16], [17].</p>
+
+<h3>C. Ophthalmology and Dermatology</h3>
+<p>Diabetic retinopathy screening represents one of the earliest and most successful clinical deployments of AI diagnostics. Regulatory-cleared systems now operate in primary-care settings, referring only high-risk patients for specialist review [4]. Similar progress is occurring in the detection of macular degeneration and glaucoma. In dermatology, image-based classifiers trained on large dermoscopic datasets reach dermatologist-level performance for melanoma and other skin cancers in controlled evaluations, although real-world generalizability across skin tones and acquisition devices remains an active research area [24].</p>
+
+<h3>D. Neurology and Mental Health</h3>
+<p>Neuroimaging-based AI supports early detection of Alzheimer’s disease, automated stroke segmentation for triage, and seizure detection from EEG. Multimodal models combining imaging with clinical and sensor data improve diagnosis of Parkinson’s disease [20]. In mental health, speech analysis, facial expression recognition, and natural language processing of clinical notes are being explored for depression, anxiety, and suicide-risk assessment, offering the possibility of continuous, low-burden monitoring [21].</p>
+
+<!-- END OF PART 1 -->
+
+<!-- CONTINUATION – paste after the last content of Part 1, before </div></body></html> -->
+
+<h2>IV. Clinical Performance and Evidence Base</h2>
+<p class="noindent">Systematic reviews and meta-analyses provide quantitative evidence of AI diagnostic capability. In digital pathology, a meta-analysis of 48 studies reported pooled sensitivity of 96.3 % and specificity of 93.3 % across a wide range of diseases [7]. For prostate cancer detection on multiparametric MRI, AI models have shown pooled sensitivity of approximately 0.90 and specificity of 0.69, performing comparably to experienced radiologists [15]. In breast imaging, retrospective analyses indicate that AI can flag a substantial fraction of interval cancers that were originally interpreted as normal, potentially reducing missed diagnoses [14].</p>
+<p>Diabetic retinopathy screening systems have demonstrated sensitivity and specificity exceeding 90 % in pivotal trials and have received regulatory clearance in multiple jurisdictions. Similar high performance has been reported for specific narrow tasks in chest radiography, skin lesion classification, and polyp detection during colonoscopy. However, these headline figures must be interpreted cautiously. Many studies are retrospective, single-center, and use enriched datasets; external validation frequently reveals performance drops due to differences in patient demographics, imaging protocols, and disease prevalence [5], [6], [10].</p>
+<p>Prospective clinical trials and post-market surveillance studies remain relatively scarce compared with the volume of retrospective literature. Where such evidence exists, results are mixed: some systems maintain high accuracy and improve clinician performance when used as a second reader, while others show limited incremental benefit or introduce new failure modes. Consequently, high-quality evidence of clinical utility—rather than technical accuracy alone—is increasingly demanded by regulators and health systems [2], [9].</p>
+
+<h2>V. Challenges and Limitations</h2>
+<p class="noindent">Despite impressive technical progress, several interrelated challenges impede safe and equitable clinical adoption of AI diagnostic systems.</p>
+<p><strong>Data quality, quantity, and bias.</strong> High-performing models require large, diverse, and carefully annotated datasets. Annotation is expensive and subject to inter-observer variability. Under-representation of certain demographic groups, rare disease subtypes, or imaging devices can produce biased models that underperform for the very populations that might benefit most [1], [6], [10]. Domain shift between training and deployment environments remains a major cause of performance degradation.</p>
+<p><strong>Interpretability and trust.</strong> Many high-accuracy deep learning models function as black boxes. Clinicians are appropriately reluctant to act on opaque recommendations, particularly in high-stakes diagnostic settings. Although XAI methods provide useful visualizations and feature attributions, they do not fully solve the problem of causal understanding or guarantee that the model is relying on clinically valid features [9].</p>
+<p><strong>Regulatory, legal, and liability frameworks.</strong> Regulatory pathways for AI as a medical device continue to evolve. Questions of liability—whether responsibility for an AI-assisted error rests with the developer, the deploying institution, or the supervising clinician—remain incompletely resolved in many jurisdictions. Continuous learning systems that update after deployment pose additional regulatory challenges.</p>
+<p><strong>Workflow integration and human factors.</strong> Even accurate models fail if they are poorly integrated into clinical workflows, generate excessive false positives, or increase cognitive load. User-centered design, seamless EHR interoperability, and clear presentation of uncertainty are essential for sustained adoption [2].</p>
+<p><strong>Ethical and societal considerations.</strong> Issues of informed consent for AI use, data privacy, secondary use of health data, and the potential for automation bias (over-reliance on AI recommendations) require ongoing attention from ethics boards, professional societies, and policymakers.</p>
+
+<h2>VI. Future Directions</h2>
+<p class="noindent">Several technological and methodological trends are poised to address current limitations and expand the impact of diagnostic AI.</p>
+<p><strong>Multimodal and foundation models.</strong> Next-generation systems will increasingly reason jointly over images, structured data, genomics, and clinical text. Multimodal foundation models pre-trained on massive heterogeneous medical corpora promise improved sample efficiency and cross-task generalization [8], [11].</p>
+<p><strong>Federated and privacy-preserving learning.</strong> Federated learning, differential privacy, and secure multi-party computation will enable training on larger and more diverse datasets while respecting data-protection regulations, thereby improving generalizability and fairness [10].</p>
+<p><strong>Explainability, causality, and uncertainty quantification.</strong> Advances in concept-based explanations, counterfactual reasoning, and calibrated uncertainty estimates will make model outputs more actionable and trustworthy for clinicians.</p>
+<p><strong>Digital twins and continuous learning.</strong> Patient-specific digital twins that integrate real-time sensor data with predictive models may enable continuous diagnostic monitoring and early warning systems. Carefully designed continuous-learning pipelines can keep models current while maintaining regulatory compliance [29].</p>
+<p><strong>Rigorous evaluation science.</strong> The field must move beyond retrospective technical metrics toward prospective, multi-center clinical trials, health-economic evaluations, and post-deployment monitoring frameworks. Standardized reporting guidelines (STARD-AI, CONSORT-AI, TRIPOD-AI) and open, diverse benchmarks will accelerate this transition.</p>
+<p>Interdisciplinary collaboration among clinicians, computer scientists, ethicists, regulators, and patients will be indispensable for translating these technical advances into safe, equitable, and clinically meaningful diagnostic tools.</p>
+
+<h2>VII. Conclusion</h2>
+<p class="noindent">Artificial Intelligence has already demonstrated the ability to match or exceed expert performance on a growing number of well-defined diagnostic tasks and to surface clinically relevant patterns that may otherwise be overlooked. Applications span oncology, cardiology, neurology, ophthalmology, dermatology, infectious diseases, and beyond, with particular promise for large-scale screening, rare-disease identification, and personalized risk prediction. Realization of this potential at scale, however, depends on addressing persistent challenges of data diversity, interpretability, bias, regulatory science, and human–AI interaction.</p>
+<p>When developed with rigorous validation, transparent design, and careful attention to clinical context, AI systems can augment rather than replace clinician judgment, expand access to high-quality diagnostics, and ultimately improve patient outcomes. Continued investment in multimodal methods, privacy-preserving collaboration, explainability, and prospective evidence generation will determine how rapidly and how equitably these benefits are realized across healthcare systems worldwide.</p>
+
+<h2>References</h2>
+<div class="ref">[1] S. A. Alowais et al., “Revolutionizing healthcare: the role of artificial intelligence in clinical practice,” <em>BMC Medical Education</em>, vol. 23, p. 689, 2023.</div>
+<div class="ref">[2] O. Yin, K. Y. Ngiam, and H. H. Teo, “Role of artificial intelligence applications in real-life clinical practice,” <em>Journal of Medical Internet Research</em>, vol. 22, no. 4, e19016, 2020.</div>
+<div class="ref">[3] M. M. Ahsan and Z. Siddique, “Machine-learning-based disease diagnosis: A comprehensive review,” <em>Healthcare</em>, vol. 10, no. 3, p. 541, 2022.</div>
+<div class="ref">[4] V. Gulshan et al., “Development and validation of a deep learning algorithm for detection of diabetic retinopathy in retinal fundus photographs,” <em>JAMA</em>, vol. 316, no. 22, pp. 2402–2410, 2016.</div>
+<div class="ref">[5] M. Khalifa and M. Albadawy, “AI in diagnostic imaging: Revolutionising accuracy and efficiency,” <em>Computer Methods and Programs in Biomedicine Update</em>, vol. 5, p. 100146, 2024.</div>
+<div class="ref">[6] H. Sadr et al., “Unveiling the potential of artificial intelligence in revolutionizing disease diagnosis and prediction,” <em>European Journal of Medical Research</em>, vol. 30, p. 418, 2025.</div>
+<div class="ref">[7] C. McGenity et al., “Artificial intelligence in digital pathology: a systematic review and meta-analysis of diagnostic test accuracy,” <em>npj Digital Medicine</em>, vol. 7, p. 114, 2024.</div>
+<div class="ref">[8] “Multimodal artificial intelligence for disease diagnosis: Advances, applications, and challenges,” <em>Pattern Recognition</em>, 2026.</div>
+<div class="ref">[9] A. Tiwari, N. Mishra, and K.-T. Kuo, “Current AI technologies in cancer diagnostics and treatment,” <em>Molecular Cancer</em>, 2025.</div>
+<div class="ref">[10] “A decade’s overview of artificial intelligence in diagnosing: a scoping review,” <em>Int. J. Mach. Learn. Cybern.</em>, 2024.</div>
+<div class="ref">[11] “Large language models for disease diagnosis: a scoping review,” <em>npj Artificial Intelligence</em>, 2025.</div>
+<div class="ref">[12] “Early cancer detection using deep learning and medical imaging: A survey,” <em>Critical Reviews in Oncology/Hematology</em>, vol. 204, p. 104528, 2024.</div>
+<div class="ref">[13] J. Chen et al., “CancerUniT: Towards a single unified model for effective detection, segmentation, and diagnosis of eight major cancers,” in <em>Proc. ICCV</em>, 2023.</div>
+<div class="ref">[14] “AI could help improve early detection of interval breast cancers,” UCLA Health / <em>J. Natl. Cancer Inst.</em>, 2026.</div>
+<div class="ref">[15] “Artificial-intelligence models vs. radiologists in the detection of clinically significant prostate cancer on mpMRI: a meta-analysis,” <em>Eur. Radiol.</em>, 2026.</div>
+<div class="ref">[16] “Artificial intelligence in disease diagnostics: A critical review and classification,” <em>Health and Technology</em>, vol. 11, pp. 693–731, 2021.</div>
+<div class="ref">[17] “Deep Learning Applications in Clinical Cancer Detection: A Review of Implementation Challenges and Solutions,” <em>Mayo Clin. Proc. Digit. Health</em>, 2025.</div>
+<div class="ref">[18] “Machine learning-based heart disease diagnosis: A systematic literature review,” <em>Artif. Intell. Med.</em>, vol. 128, p. 102289, 2022.</div>
+<div class="ref">[19] “Artificial intelligence to improve cardiovascular population health,” <em>Eur. Heart J.</em>, 2025.</div>
+<div class="ref">[20] “Machine Learning and Deep Learning for Neurological Disease Analysis: A Systematic Review Across Five Major Disorders,” <em>Neuroscience</em>, 2026.</div>
+<div class="ref">[21] J. Cruz-Gonzalez et al., “Artificial intelligence in mental health care: a systematic review,” <em>Psychological Medicine</em>, 2025.</div>
+<div class="ref">[22] “Artificial intelligence applications in antimicrobial resistance and sepsis prediction,” representative clinical studies, 2015–2026.</div>
+<div class="ref">[23] “Artificial intelligence in dermatology: A literature review of current evidence and clinical implementation,” <em>JID Innovations</em>, 2026.</div>
+<div class="ref">[24] “Artificial intelligence and infectious disease diagnostics: state of the art and future perspectives,” <em>Lancet Infect. Dis.</em>, 2025.</div>
+<div class="ref">[25] “Efficient deep neural networks for cancer detection on histopathology,” <em>Sci. Rep.</em>, 2025.</div>
+<div class="ref">[26] “Survey on deep learning in multimodal medical imaging for cancer detection,” <em>Neural Comput. Appl.</em>, 2023.</div>
+<div class="ref">[27] “Mapping the landscape of AI-driven digital twins in medical diagnosis,” <em>Artif. Intell. Med.</em>, 2026.</div>
+<div class="ref">[28] “AI-based digital pathology and spatial proteomics enable precision oncology,” <em>npj Precis. Oncol.</em>, 2026.</div>
+<div class="ref">[29] “A Review on Deep Learning and Interpretable AI Techniques for the Detection of Lung and Colon Cancer,” Springer Conf. Proc., 2025.</div>
+<div class="ref">[30] Representative works on multimodal fusion and personalized prediction models in diagnostic AI, 2023–2026.</div>
+
+<div class="footer">
+978-1-XXXX-XXXX-X/26/$31.00 ©2026 IEEE &nbsp;&nbsp;|&nbsp;&nbsp; Authorized licensed use limited to IEEE Xplore.
+</div>
+
+</div>
+</body>
+</html>
