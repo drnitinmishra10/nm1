@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upcoming Academic Conferences | Compiled by Dr. Nitin Mishra</title>
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --primary-light: #2563eb;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-dark: #0f172a;
+      --text-muted: #475569;
+      --border: #e2e8f0;
+      --badge-ieee: #00629b;
+      --badge-springer: #da291c;
+      --badge-scopus: #0284c7;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-dark);
+      padding: 2rem 1rem;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+      color: white;
+      padding: 2.5rem 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    header .compiler {
+      font-size: 1.1rem;
+      opacity: 0.95;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 280px;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      background: white;
+    }
+
+    .search-box:focus {
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .table-container {
+      background: var(--card-bg);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow-x: auto;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    th {
+      background-color: #f1f5f9;
+      color: var(--text-dark);
+      padding: 1rem;
+      font-weight: 600;
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    tr:hover {
+      background-color: #f8fafc;
+    }
+
+    .conf-name {
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .conf-name:hover {
+      text-decoration: underline;
+    }
+
+    .venue {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: white;
+      margin-top: 0.3rem;
+    }
+
+    .badge-springer { background-color: var(--badge-springer); }
+    .badge-ieee { background-color: var(--badge-ieee); }
+    .badge-scopus { background-color: var(--badge-scopus); }
+
+    .date-highlight {
+      font-weight: 600;
+      color: #b91c1c;
+      background-color: #fef2f2;
+      padding: 0.35rem 0.6rem;
+      border-radius: 6px;
+      display: inline-block;
+      border: 1px solid #fecaca;
+    }
+
+    .btn-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.5rem 0.9rem;
+      background-color: var(--primary-light);
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: background-color 0.2s;
+    }
+
+    .btn-link:hover {
+      background-color: var(--primary);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2.5rem;
+      padding: 1rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      header h1 { font-size: 1.6rem; }
+      th, td { padding: 0.75rem 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Upcoming International Conferences</h1>
+      <p class="compiler">Compiled by Dr. Nitin Mishra</p>
+    </header>
+
+    <div class="controls">
+      <input type="text" id="searchInput" class="search-box" placeholder="Search by conference name, venue, indexing, or location..." onkeyup="filterConferences()">
+    </div>
+
+    <div class="table-container">
+      <table id="conferenceTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Conference & Venue</th>
+            <th>Submission Deadline</th>
+            <th>Conference Dates</th>
+            <th>Indexed Proceedings</th>
+            <th>Official Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>
+              <a href="https://scrs.in/conference/pccda2026" target="_blank" class="conf-name">PCCDA 2026</a>
+              <div class="venue">Sejong University, Seoul, South Korea</div>
+            </td>
+            <td><span class="date-highlight">April 27, 2026</span></td>
+            <td>June 27–28, 2026</td>
+            <td><span class="badge badge-springer">Springer LNNS</span> <span class="badge badge-scopus">SCOPUS</span></td>
+            <td><a href="https://scrs.in/conference/pccda2026" target="_blank" class="btn-link">Visit Website &#11157;</a></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>
+              <a href="https://scrs.in/conference/icdsa2026" target="_blank" class="conf-name">ICDSA 2026</a>
+              <div class="venue">VIT Mauritius, Pierrefonds, Mauritius</div>
+            </td>
+            <td><span class="date-highlight">May 02, 2026</span></td>
+            <td>July 11–12, 2026</td>
+            <td><span class="badge badge-springer">Springer LNNS</span> <span class="badge badge-scopus">SCOPUS</span></td>
+            <td><a href="https://scrs.in/conference/icdsa2026" target="_blank" class="btn-link">Visit Website &#11157;</a></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>
+              <a href="https://theioes.org/conference/ijcaci2026" target="_blank" class="conf-name">IJCACI 2026</a>
+              <div class="venue">WUST Alexandria, United States</div>
+            </td>
+            <td><span class="date-highlight">May 15, 2026</span></td>
+            <td>July 24–25, 2026</td>
+            <td><span class="badge badge-springer">Springer LNNS</span> <span class="badge badge-scopus">SCOPUS</span></td>
+            <td><a href="https://theioes.org/conference/ijcaci2026" target="_blank" class="btn-link">Visit Website &#11157;</a></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>
+              <a href="https://scrs.in/conference/icst2026" target="_blank" class="conf-name">ICST 2026</a>
+              <div class="venue">IIT Patna, India</div>
+            </td>
+            <td><span class="date-highlight">June 05, 2026</span></td>
+            <td>August 01–02, 2026</td>
+            <td><span class="badge badge-springer">Springer Series</span> <span class="badge badge-scopus">SCOPUS</span></td>
+            <td><a href="https://scrs.in/conference/icst2026" target="_blank" class="btn-link">Visit Website &#11157;</a></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>
+              <a href="https://theioes.org/aita2026/" target="_blank" class="conf-name">AITA 2026</a>
+              <div class="venue">IBS Bangalore, India</div>
+            </td>
+            <td><span class="date-highlight">June 15, 2026</span></td>
+            <td>August 07–08, 2026</td>
+            <td><span class="badge badge-springer">Springer LNNS</span> <span class="badge badge-scopus">SCOPUS</span></td>
+            <td><a href="https://theioes.org/aita2026/" target="_blank" class="btn-link">Visit Website &#11157;</a></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>
+              <a href="https://scrs.in/conference/aic2026" target="_blank" class="conf-name">AIC 2026</a>
+              <div class="venue">Shri Ram Institute of Technology, Jabalpur, India</div>
+            </td>
+            <td><span class="date-highlight">June 20, 2026</span></td>
+            <td>August 29–30, 2026</td>
+            <td><span class="badge badge-ieee">IEEE Xplore</span> <span class="badge badge-scopus">SCOPUS</span></td>
+            <td><a href="https://scrs.in/conference/aic2026" target="_blank" class="btn-link">Visit Website &#11157;</a></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>
+              <a href="https://scrs.in/conference/cis2026" target="_blank" class="conf-name">CIS 2026</a>
+              <div class="venue">NIT Warangal, India</div>
+            </td>
+            <td><span class="date-highlight">July 10, 2026</span></td>
+            <td>September 05–06, 2026</td>
+            <td><span class="badge badge-springer">Springer LNNS</span> <span class="badge badge-scopus">SCOPUS</span></td>
+            <td><a href="https://scrs.in/conference/cis2026" target="_blank" class="btn-link">Visit Website &#11157;</a></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>
+              <a href="https://scrs.in/conference/iccis2026" target="_blank" class="conf-name">ICCIS 2026</a>
+              <div class="venue">BITS Pilani, K K Birla Goa Campus, India</div>
+            </td>
+            <td><span class="date-highlight">July 18, 2026</span></td>
+            <td>September 26–27, 2026</td>
+            <td><span class="badge badge-springer">Springer LNNS</span> <span class="badge badge-scopus">SCOPUS</span></td>
+            <td><a href="https://scrs.in/conference/iccis2026" target="_blank" class="btn-link">Visit Website &#11157;</a></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>
+              <a href="https://scrs.in/conference/adcis2026" target="_blank" class="conf-name">ADCIS 2026</a>
+              <div class="venue">MNIT Jaipur, India</div>
+            </td>
+            <td><span class="date-highlight">July 31, 2026</span></td>
+            <td>October 09–10, 2026</td>
+            <td><span class="badge badge-springer">Springer LNNS</span> <span class="badge badge-scopus">SCOPUS</span></td>
+            <td><a href="https://scrs.in/conference/adcis2026" target="_blank" class="btn-link">Visit Website &#11157;</a></td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>
+              <a href="https://theioes.org/conference/hpcai2026" target="_blank" class="conf-name">HPCAI 2026</a>
+              <div class="venue">Wenzhou-Kean University, China</div>
+            </td>
+            <td><span class="date-highlight">August 10, 2026</span></td>
+            <td>September 12–13, 2026</td>
+            <td><span class="badge badge-springer">Springer LNNS</span> <span class="badge badge-scopus">SCOPUS</span></td>
+            <td><a href="https://theioes.org/conference/hpcai2026" target="_blank" class="btn-link">Visit Website &#11157;</a></td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td>
+              <a href="https://scrs.in/conference/ceee2026" target="_blank" class="conf-name">CEEE 2026</a>
+              <div class="venue">Hotel Adityaz, Gwalior / Trinity University</div>
+            </td>
+            <td><span class="date-highlight">August 14, 2026</span></td>
+            <td>October 23–24, 2026</td>
+            <td><span class="badge badge-ieee">IEEE Xplore</span> <span class="badge badge-scopus">SCOPUS</span></td>
+            <td><a href="https://scrs.in/conference/ceee2026" target="_blank" class="btn-link">Visit Website &#11157;</a></td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td>
+              <a href="https://scrs.in/conference/icsiscet2026" target="_blank" class="conf-name">ICSISCET 2026</a>
+              <div class="venue">MITS Gwalior, India</div>
+            </td>
+            <td><span class="date-highlight">August 30, 2026</span></td>
+            <td>October 30–31, 2026</td>
+            <td><span class="badge badge-springer">Springer LNEE</span> <span class="badge badge-scopus">SCOPUS</span></td>
+            <td><a href="https://scrs.in/conference/icsiscet2026" target="_blank" class="btn-link">Visit Website &#11157;</a></td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td>
+              <a href="https://scrs.in/conference/iti2026" target="_blank" class="conf-name">ITI 2026</a>
+              <div class="venue">NIT Agartala, India</div>
+            </td>
+            <td><span class="date-highlight">September 04, 2026</span></td>
+            <td>November 13–14, 2026</td>
+            <td><span class="badge badge-springer">Springer LNNS</span> <span class="badge badge-scopus">SCOPUS</span></td>
+            <td><a href="https://scrs.in/conference/iti2026" target="_blank" class="btn-link">Visit Website &#11157;</a></td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td>
+              <a href="https://icaist.com/" target="_blank" class="conf-name">ICAIST 2027</a>
+              <div class="venue">WSG University, Bydgoszcz, Poland</div>
+            </td>
+            <td><span class="date-highlight">September 11, 2026</span></td>
+            <td>February 26–27, 2027</td>
+            <td><span class="badge badge-springer">Springer</span> <span class="badge badge-scopus">SCOPUS</span></td>
+            <td><a href="https://icaist.com/" target="_blank" class="btn-link">Visit Website &#11157;</a></td>
+          </tr>
+          <tr>
+            <td>15</td>
+            <td>
+              <a href="https://scrs.in/conference/scis2026" target="_blank" class="conf-name">SCIS 2026</a>
+              <div class="venue">University of Canberra, Australia</div>
+            </td>
+            <td><span class="date-highlight">September 12, 2026</span></td>
+            <td>November 21–22, 2026</td>
+            <td><span class="badge badge-springer">Springer LNNS</span> <span class="badge badge-scopus">SCOPUS</span></td>
+            <td><a href="https://scrs.in/conference/scis2026" target="_blank" class="btn-link">Visit Website &#11157;</a></td>
+          </tr>
+          <tr>
+            <td>16</td>
+            <td>
+              <a href="https://scrs.in/conference/csct2026" target="_blank" class="conf-name">CSCT 2026</a>
+              <div class="venue">NIT Sikkim, India</div>
+            </td>
+            <td><span class="date-highlight">October 03, 2026</span></td>
+            <td>December 12–13, 2026</td>
+            <td><span class="badge badge-springer">Springer SIST</span> <span class="badge badge-scopus">SCOPUS</span></td>
+            <td><a href="https://scrs.in/conference/csct2026" target="_blank" class="btn-link">Visit Website &#11157;</a></td>
+          </tr>
+          <tr>
+            <td>17</td>
+            <td>
+              <a href="https://scrs.in/conference/icci2026" target="_blank" class="conf-name">ICCI 2026</a>
+              <div class="venue">SVNIT Surat, India</div>
+            </td>
+            <td><span class="date-highlight">October 18, 2026</span></td>
+            <td>December 27–28, 2026</td>
+            <td><span class="badge badge-springer">Springer LNNS</span> <span class="badge badge-scopus">SCOPUS</span></td>
+            <td><a href="https://scrs.in/conference/icci2026" target="_blank" class="btn-link">Visit Website &#11157;</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <footer>
+      <p>&copy; Compiled by Dr. Nitin Mishra. All details verified with official conference portals.</p>
+    </footer>
+  </div>
+
+  <script>
+    function filterConferences() {
+      const input = document.getElementById('searchInput');
+      const filter = input.value.toLowerCase();
+      const table = document.getElementById('conferenceTable');
+      const tr = table.getElementsByTagName('tr');
+
+      for (let i = 1; i < tr.length; i++) {
+        const rowText = tr[i].innerText.toLowerCase();
+        if (rowText.includes(filter)) {
+          tr[i].style.display = '';
+        } else {
+          tr[i].style.display = 'none';
+        }
+      }
+    }
+  </script>
+</body>
+</html>
