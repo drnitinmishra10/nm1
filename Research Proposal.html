@@ -1,0 +1,1879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BiasGuard-ML | Research Funding Proposal</title>
+
+<style>
+    @page {
+        size: A4;
+        margin: 20mm 18mm 20mm 18mm;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+        color: #222;
+        background: #f4f6f8;
+        line-height: 1.65;
+        font-size: 14px;
+    }
+
+    .page {
+        width: 210mm;
+        margin: 30px auto;
+        background: #ffffff;
+        padding: 25mm 20mm;
+        box-shadow: 0 3px 15px rgba(0,0,0,0.10);
+    }
+
+    .cover {
+        min-height: 250mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        border-bottom: 4px solid #17365d;
+    }
+
+    .cover .university {
+        font-size: 17px;
+        font-weight: 700;
+        color: #17365d;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 30px;
+    }
+
+    .cover .proposal-label {
+        font-size: 18px;
+        font-weight: 600;
+        color: #666;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .cover h1 {
+        font-size: 31px;
+        line-height: 1.25;
+        color: #17365d;
+        margin: 15px 0 35px;
+    }
+
+    .cover .subtitle {
+        font-size: 18px;
+        color: #555;
+        margin-bottom: 40px;
+    }
+
+    .investigators {
+        margin: 25px auto;
+        max-width: 700px;
+    }
+
+    .investigator {
+        margin: 20px 0;
+    }
+
+    .investigator .name {
+        font-size: 18px;
+        font-weight: 700;
+        color: #17365d;
+    }
+
+    .investigator .designation {
+        font-size: 14px;
+        color: #444;
+    }
+
+    .funding-box {
+        margin: 40px auto;
+        border: 2px solid #17365d;
+        padding: 18px 30px;
+        display: inline-block;
+        background: #f1f5fa;
+    }
+
+    .funding-box .label {
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #666;
+    }
+
+    .funding-box .amount {
+        font-size: 28px;
+        font-weight: 800;
+        color: #17365d;
+    }
+
+    .duration {
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    h2 {
+        color: #17365d;
+        font-size: 21px;
+        margin-top: 34px;
+        padding-bottom: 7px;
+        border-bottom: 2px solid #d7e0eb;
+    }
+
+    h3 {
+        color: #244f7d;
+        font-size: 17px;
+        margin-top: 24px;
+    }
+
+    h4 {
+        color: #333;
+        font-size: 15px;
+        margin-top: 18px;
+    }
+
+    p {
+        text-align: justify;
+        margin: 10px 0;
+    }
+
+    ul, ol {
+        padding-left: 25px;
+    }
+
+    li {
+        margin-bottom: 7px;
+    }
+
+    .highlight {
+        background: #eef5fb;
+        border-left: 5px solid #17365d;
+        padding: 16px 20px;
+        margin: 18px 0;
+    }
+
+    .objective {
+        background: #fafafa;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 13px 17px;
+        margin: 9px 0;
+    }
+
+    .research-question {
+        background: #f5f8fb;
+        padding: 12px 16px;
+        margin: 8px 0;
+        border-left: 4px solid #557a9e;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 18px 0 25px;
+        font-size: 13px;
+    }
+
+    th {
+        background: #17365d;
+        color: white;
+        padding: 10px;
+        border: 1px solid #17365d;
+        text-align: left;
+    }
+
+    td {
+        padding: 9px 10px;
+        border: 1px solid #ccd4dc;
+        vertical-align: top;
+    }
+
+    tr:nth-child(even) td {
+        background: #f7f9fb;
+    }
+
+    .budget-total td {
+        font-weight: 800;
+        background: #e9f0f7 !important;
+        color: #17365d;
+    }
+
+    .formula {
+        background: #f6f6f6;
+        border: 1px solid #ddd;
+        padding: 16px;
+        text-align: center;
+        font-family: "Times New Roman", serif;
+        font-size: 18px;
+        margin: 18px 0;
+    }
+
+    .architecture {
+        background: #f7f9fb;
+        border: 1px solid #ccd4dc;
+        padding: 20px;
+        text-align: center;
+        font-weight: 600;
+        line-height: 2.1;
+        margin: 20px 0;
+    }
+
+    .arrow {
+        color: #17365d;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .metric-box {
+        display: inline-block;
+        width: 46%;
+        margin: 1%;
+        vertical-align: top;
+        border: 1px solid #d5dce4;
+        padding: 14px;
+        background: #fafbfd;
+        min-height: 100px;
+    }
+
+    .metric-box strong {
+        color: #17365d;
+    }
+
+    .reference {
+        margin-bottom: 9px;
+        padding-left: 22px;
+        text-indent: -22px;
+    }
+
+    .signature {
+        margin-top: 55px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .signature-box {
+        width: 42%;
+        text-align: center;
+        padding-top: 45px;
+        border-top: 1px solid #777;
+    }
+
+    .footer {
+        margin-top: 50px;
+        padding-top: 15px;
+        border-top: 1px solid #ccc;
+        text-align: center;
+        color: #777;
+        font-size: 11px;
+    }
+
+    .page-break {
+        page-break-before: always;
+    }
+
+    @media print {
+        body {
+            background: white;
+        }
+
+        .page {
+            width: auto;
+            margin: 0;
+            box-shadow: none;
+            padding: 0;
+        }
+
+        .cover {
+            min-height: 260mm;
+        }
+
+        table {
+            page-break-inside: avoid;
+        }
+
+        h2, h3 {
+            page-break-after: avoid;
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+        .page {
+            width: 95%;
+            padding: 30px;
+        }
+
+        .metric-box {
+            width: 100%;
+            margin: 5px 0;
+        }
+
+        .signature {
+            display: block;
+        }
+
+        .signature-box {
+            width: 100%;
+            margin-bottom: 50px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- COVER PAGE -->
+    <section class="cover">
+
+        <div class="university">
+            Parul University, Vadodara, Gujarat, India
+        </div>
+
+        <div class="proposal-label">
+            Research Funding Proposal
+        </div>
+
+        <h1>
+            BiasGuard-ML:<br>
+            Design and Development of an Adaptive Algorithmic Framework
+            for Detection, Quantification and Mitigation of Data Bias
+            in Machine Learning Datasets
+        </h1>
+
+        <div class="cover subtitle">
+            A Research Project Proposal in Artificial Intelligence,
+            Machine Learning and Responsible AI
+        </div>
+
+        <div class="investigators">
+
+            <div class="investigator">
+                <div class="name">Dr. Nitin Mishra</div>
+                <div class="designation">
+                    Professor, Department of Computer Science and Engineering<br>
+                    Parul University, Vadodara, India
+                </div>
+            </div>
+
+            <div class="investigator">
+                <div class="name">Dr. Sneha Soni</div>
+                <div class="designation">
+                    Associate Professor, Department of Computer Science and Engineering<br>
+                    Parul University, Vadodara, India
+                </div>
+            </div>
+
+        </div>
+
+        <div class="funding-box">
+            <div class="label">Total Funding Requested</div>
+            <div class="amount">₹5,00,000</div>
+        </div>
+
+        <div class="duration">
+            Proposed Project Duration: 12 Months
+        </div>
+
+    </section>
+
+
+    <!-- EXECUTIVE SUMMARY -->
+
+    <h2>1. Project Summary</h2>
+
+    <p>
+        Machine Learning (ML) systems are increasingly being deployed in
+        healthcare, finance, education, recruitment, security, agriculture,
+        and other socially important domains. However, the reliability and
+        fairness of these systems depend heavily on the quality,
+        diversity, and representativeness of the data used for training.
+        Machine learning datasets frequently contain various forms of bias
+        arising from sampling procedures, demographic imbalance, class
+        imbalance, data collection practices, labeling errors, geographical
+        concentration, historical inequalities, and under-representation
+        of specific groups.
+    </p>
+
+    <p>
+        Existing approaches generally address bias at individual stages
+        of the machine learning pipeline, such as preprocessing,
+        model training, or post-processing. A significant research challenge
+        is the development of an integrated algorithmic framework capable
+        of identifying different forms of data bias, quantifying their
+        severity, automatically recommending appropriate mitigation
+        strategies, and evaluating whether the resulting dataset produces
+        a more robust and equitable machine learning model.
+    </p>
+
+    <p>
+        The proposed research aims to design and develop
+        <strong>BiasGuard-ML</strong>, an intelligent algorithmic framework
+        for systematic detection, measurement, and mitigation of bias in
+        machine learning datasets. The proposed framework will investigate
+        multiple dimensions of bias, including class imbalance,
+        demographic bias, representation bias, sampling bias, label bias,
+        and distributional bias.
+    </p>
+
+    <p>
+        A central component of the proposed research will be the development
+        of a quantitative <strong>Dataset Bias Score (DBS)</strong> that
+        will provide an interpretable indication of the severity and
+        dimensions of bias within a dataset.
+    </p>
+
+    <p>
+        The project will subsequently investigate adaptive bias mitigation
+        techniques involving data re-sampling, synthetic data generation,
+        re-weighting, intelligent augmentation, and bias-aware
+        preprocessing. The effectiveness of the proposed algorithms will
+        be evaluated using multiple benchmark datasets and machine
+        learning models.
+    </p>
+
+    <div class="highlight">
+        <strong>Proposed Outcome:</strong>
+        A validated and reusable algorithmic framework capable of
+        detecting, quantifying, mitigating, and reporting multiple forms
+        of machine learning dataset bias.
+    </div>
+
+
+    <!-- KEYWORDS -->
+
+    <h2>2. Keywords</h2>
+
+    <p>
+        Machine Learning, Dataset Bias, Data Bias Detection,
+        Bias Mitigation, Fairness-Aware Machine Learning,
+        Class Imbalance, Representation Bias, Algorithmic Fairness,
+        Data Preprocessing, Responsible AI, Trustworthy AI,
+        Data-Centric AI.
+    </p>
+
+
+    <!-- INTRODUCTION -->
+
+    <h2>3. Introduction</h2>
+
+    <p>
+        Machine Learning has become a fundamental technology for intelligent
+        decision-making and automated prediction. The performance of an
+        ML model is commonly evaluated using metrics such as accuracy,
+        precision, recall, F1-score, and area under the ROC curve.
+        However, high predictive performance does not necessarily imply
+        that a model is reliable, generalizable, or fair.
+    </p>
+
+    <p>
+        A major source of this problem lies in the training data.
+        If a dataset inadequately represents certain classes, demographic
+        groups, geographical regions, environmental conditions, or other
+        relevant characteristics, the resulting machine learning model
+        may systematically perform poorly for underrepresented groups.
+    </p>
+
+    <p>
+        For example, a medical diagnostic model trained predominantly
+        on data from one population may demonstrate excellent overall
+        accuracy while producing significantly lower performance for
+        populations that are poorly represented in the training data.
+        Similarly, a financial prediction system trained on historically
+        biased data may reproduce existing patterns of inequality.
+    </p>
+
+    <p>
+        Consequently, addressing data bias before and during model
+        development is an important research challenge in responsible
+        artificial intelligence.
+    </p>
+
+    <p>
+        The proposed project focuses on developing an algorithmic framework
+        that treats <strong>dataset bias as a measurable and mitigable
+        computational problem</strong>.
+    </p>
+
+
+    <!-- PROBLEM STATEMENT -->
+
+    <h2>4. Problem Statement</h2>
+
+    <p>
+        Existing machine learning workflows frequently assume that datasets
+        are sufficiently representative before model development begins.
+        In practical scenarios, however, datasets may contain multiple
+        interacting forms of bias.
+    </p>
+
+    <ol>
+        <li>Bias is often identified manually through statistical inspection.</li>
+        <li>Different types of bias are generally evaluated independently.</li>
+        <li>There is no universally applicable measure representing the overall bias of a dataset.</li>
+        <li>A mitigation technique effective for one dataset may not work effectively for another.</li>
+        <li>Blind application of oversampling may introduce synthetic artifacts or overfitting.</li>
+        <li>Dataset-level improvements are not always evaluated against downstream ML performance.</li>
+        <li>Bias may remain hidden even when conventional performance metrics are high.</li>
+    </ol>
+
+    <div class="highlight">
+        <strong>Research Need:</strong><br>
+        Detecting → Quantifying → Diagnosing → Mitigating → Validating
+        different forms of dataset bias through a unified computational
+        framework.
+    </div>
+
+
+    <!-- RESEARCH GAP -->
+
+    <h2>5. Research Gap</h2>
+
+    <h3>5.1 Lack of Integrated Bias Detection</h3>
+
+    <p>
+        Existing research often focuses on a particular bias, such as
+        class imbalance or demographic bias. A unified framework capable
+        of analyzing multiple dimensions of dataset bias is required.
+    </p>
+
+    <h3>5.2 Lack of Quantitative Dataset-Level Bias Measurement</h3>
+
+    <p>
+        Traditional statistical measures provide information about
+        individual attributes but do not necessarily provide a consolidated
+        measure of overall dataset bias.
+    </p>
+
+    <h3>5.3 Limited Automatic Selection of Mitigation Strategies</h3>
+
+    <p>
+        Different datasets require different mitigation strategies.
+        An intelligent mechanism for selecting an appropriate mitigation
+        technique based on the identified bias characteristics is needed.
+    </p>
+
+    <h3>5.4 Interaction Between Multiple Biases</h3>
+
+    <p>
+        Real-world datasets may simultaneously suffer from class imbalance,
+        representation bias, sampling bias, and label bias. These biases
+        may interact with one another.
+    </p>
+
+    <h3>5.5 Dataset Bias Versus Model Performance</h3>
+
+    <p>
+        Reducing statistical imbalance does not automatically guarantee
+        improved model reliability. Bias mitigation must therefore be
+        evaluated through downstream model performance and group-wise
+        performance analysis.
+    </p>
+
+
+    <!-- AIM -->
+
+    <h2>6. Aim of the Project</h2>
+
+    <div class="highlight">
+        <strong>
+            To design, develop, and validate an algorithmic framework
+            for detecting, quantifying, and mitigating multiple forms
+            of data bias in machine learning datasets to improve the
+            robustness, generalizability, and fairness of downstream
+            machine learning models.
+        </strong>
+    </div>
+
+
+    <!-- OBJECTIVES -->
+
+    <h2>7. Research Objectives</h2>
+
+    <div class="objective">
+        <strong>Objective 1:</strong>
+        Study and categorize major forms of bias present in machine
+        learning datasets.
+    </div>
+
+    <div class="objective">
+        <strong>Objective 2:</strong>
+        Develop statistical and algorithmic techniques for automatic
+        detection of dataset bias.
+    </div>
+
+    <div class="objective">
+        <strong>Objective 3:</strong>
+        Develop a quantitative <strong>Dataset Bias Score (DBS)</strong>
+        for measuring bias severity.
+    </div>
+
+    <div class="objective">
+        <strong>Objective 4:</strong>
+        Design adaptive bias mitigation algorithms based on the
+        characteristics of the identified bias.
+    </div>
+
+    <div class="objective">
+        <strong>Objective 5:</strong>
+        Investigate data-level techniques including re-sampling,
+        re-weighting, augmentation, and synthetic data generation.
+    </div>
+
+    <div class="objective">
+        <strong>Objective 6:</strong>
+        Evaluate the influence of bias mitigation on downstream
+        machine learning performance.
+    </div>
+
+    <div class="objective">
+        <strong>Objective 7:</strong>
+        Develop a prototype software framework for automated dataset
+        bias analysis.
+    </div>
+
+    <div class="objective">
+        <strong>Objective 8:</strong>
+        Validate the proposed framework using multiple publicly
+        available benchmark datasets.
+    </div>
+
+
+    <!-- RESEARCH QUESTIONS -->
+
+    <h2>8. Research Questions</h2>
+
+    <div class="research-question">
+        <strong>RQ1:</strong>
+        How can different forms of bias in machine learning datasets
+        be automatically detected?
+    </div>
+
+    <div class="research-question">
+        <strong>RQ2:</strong>
+        Can a unified quantitative metric be developed to represent
+        the overall bias level of a dataset?
+    </div>
+
+    <div class="research-question">
+        <strong>RQ3:</strong>
+        Can the appropriate bias mitigation strategy be selected
+        automatically based on dataset characteristics?
+    </div>
+
+    <div class="research-question">
+        <strong>RQ4:</strong>
+        How does data-level bias mitigation affect the predictive
+        performance of machine learning models?
+    </div>
+
+    <div class="research-question">
+        <strong>RQ5:</strong>
+        Can the proposed framework simultaneously improve model
+        robustness and group-wise fairness without significantly
+        degrading overall predictive performance?
+    </div>
+
+
+    <!-- METHODOLOGY -->
+
+    <h2>9. Proposed Research Methodology</h2>
+
+    <h3>Stage 1: Dataset Collection and Preparation</h3>
+
+    <p>
+        A collection of publicly available benchmark datasets will be
+        selected from appropriate application domains such as healthcare,
+        finance, education, social data, image classification, and
+        tabular classification.
+    </p>
+
+    <p>The datasets will undergo:</p>
+
+    <ul>
+        <li>Data cleaning</li>
+        <li>Missing-value analysis</li>
+        <li>Duplicate detection</li>
+        <li>Feature analysis</li>
+        <li>Class distribution analysis</li>
+        <li>Attribute distribution analysis</li>
+        <li>Outlier analysis</li>
+        <li>Label consistency analysis</li>
+    </ul>
+
+
+    <h3>Stage 2: Bias Detection</h3>
+
+    <h4>A. Class Imbalance</h4>
+
+    <p>
+        Class distribution will be analyzed using class frequency ratio,
+        imbalance ratio, entropy, and Gini-based measures.
+    </p>
+
+    <h4>B. Representation Bias</h4>
+
+    <p>
+        The framework will identify underrepresented groups or attributes
+        within the dataset.
+    </p>
+
+    <h4>C. Sampling Bias</h4>
+
+    <p>
+        Where appropriate, the distribution of the collected sample will
+        be compared with available reference distributions.
+    </p>
+
+    <h4>D. Label Bias</h4>
+
+    <p>
+        Potential inconsistencies, noisy labels, and class-dependent
+        labeling patterns will be investigated.
+    </p>
+
+    <h4>E. Distributional Bias</h4>
+
+    <p>
+        Training and evaluation distributions will be compared to identify
+        distributional differences and potential shifts.
+    </p>
+
+    <h4>F. Intersectional Bias</h4>
+
+    <p>
+        Interactions between multiple relevant attributes will be analyzed
+        where the dataset permits such analysis.
+    </p>
+
+
+    <!-- DATASET BIAS SCORE -->
+
+    <h2>10. Proposed Dataset Bias Score</h2>
+
+    <p>
+        One of the central contributions of the proposed research will
+        be the development of a composite <strong>Dataset Bias Score
+        (DBS)</strong>.
+    </p>
+
+    <div class="formula">
+        DBS = Σ<sub>i=1</sub><sup>n</sup> w<sub>i</sub>B<sub>i</sub>
+    </div>
+
+    <p>where:</p>
+
+    <ul>
+        <li><strong>B<sub>i</sub></strong> represents an individual bias indicator.</li>
+        <li><strong>w<sub>i</sub></strong> represents the corresponding importance weight.</li>
+        <li><strong>n</strong> represents the number of bias dimensions.</li>
+    </ul>
+
+    <p>
+        The framework will investigate normalization and weighting
+        mechanisms so that different bias indicators can be combined
+        into an interpretable score.
+    </p>
+
+    <p>The resulting score may classify datasets into:</p>
+
+    <ul>
+        <li>Low Bias</li>
+        <li>Moderate Bias</li>
+        <li>High Bias</li>
+        <li>Critical Bias</li>
+    </ul>
+
+    <p>
+        The final formulation and thresholds will be determined
+        experimentally through empirical validation.
+    </p>
+
+
+    <!-- MITIGATION -->
+
+    <h2>11. Proposed Bias Mitigation Framework</h2>
+
+    <h3>11.1 Intelligent Re-Sampling</h3>
+
+    <ul>
+        <li>Random Oversampling</li>
+        <li>Random Undersampling</li>
+        <li>Stratified Sampling</li>
+        <li>Adaptive Sampling</li>
+        <li>Cluster-Based Sampling</li>
+    </ul>
+
+    <h3>11.2 Data Re-Weighting</h3>
+
+    <p>
+        Samples will be assigned adaptive weights according to their
+        representation and contribution to model-level bias.
+    </p>
+
+    <h3>11.3 Synthetic Data Generation</h3>
+
+    <p>
+        Synthetic samples may be generated for underrepresented classes
+        or groups using suitable generative techniques.
+    </p>
+
+    <h3>11.4 Intelligent Data Augmentation</h3>
+
+    <p>
+        For image and other suitable datasets, controlled augmentation
+        techniques will be investigated to improve representation diversity.
+    </p>
+
+    <h3>11.5 Bias-Aware Preprocessing</h3>
+
+    <p>
+        Preprocessing methods will be investigated that preserve useful
+        information while reducing systematic distributional disparities.
+    </p>
+
+
+    <!-- ARCHITECTURE -->
+
+    <h2>12. Proposed BiasGuard-ML Architecture</h2>
+
+    <div class="architecture">
+
+        Input Dataset
+        <div class="arrow">↓</div>
+
+        Data Quality Analyzer
+        <div class="arrow">↓</div>
+
+        Bias Detection Engine
+        <div class="arrow">↓</div>
+
+        Bias Classification Module
+        <div class="arrow">↓</div>
+
+        Dataset Bias Score Generator
+        <div class="arrow">↓</div>
+
+        Mitigation Strategy Selection Engine
+        <div class="arrow">↓</div>
+
+        Bias Mitigation Module
+        <div class="arrow">↓</div>
+
+        Mitigated Dataset
+        <div class="arrow">↓</div>
+
+        Machine Learning Model Training
+        <div class="arrow">↓</div>
+
+        Performance &amp; Fairness Evaluation
+        <div class="arrow">↓</div>
+
+        BiasGuard-ML Report
+
+    </div>
+
+    <p>The system will generate a comprehensive report containing:</p>
+
+    <ul>
+        <li>Identified bias types</li>
+        <li>Bias severity</li>
+        <li>Affected classes/groups</li>
+        <li>Recommended mitigation techniques</li>
+        <li>Before/after bias measurements</li>
+        <li>Model performance</li>
+        <li>Group-wise performance</li>
+        <li>Fairness indicators</li>
+        <li>Robustness indicators</li>
+    </ul>
+
+
+    <!-- EXPERIMENTAL DESIGN -->
+
+    <h2>13. Experimental Design</h2>
+
+    <p>
+        The proposed algorithms will be compared against established
+        baseline techniques.
+    </p>
+
+    <table>
+        <tr>
+            <th>Baseline Technique</th>
+            <th>Purpose</th>
+        </tr>
+        <tr>
+            <td>Random Oversampling</td>
+            <td>Increase representation of minority classes.</td>
+        </tr>
+        <tr>
+            <td>Random Undersampling</td>
+            <td>Reduce dominance of majority classes.</td>
+        </tr>
+        <tr>
+            <td>SMOTE</td>
+            <td>Synthetic generation of minority samples.</td>
+        </tr>
+        <tr>
+            <td>Class Weighting</td>
+            <td>Assign higher learning importance to minority classes.</td>
+        </tr>
+        <tr>
+            <td>Stratified Sampling</td>
+            <td>Preserve representative class/group distributions.</td>
+        </tr>
+        <tr>
+            <td>Conventional Data Augmentation</td>
+            <td>Increase diversity of suitable datasets.</td>
+        </tr>
+        <tr>
+            <td><strong>BiasGuard-ML</strong></td>
+            <td><strong>Adaptive selection and combination of mitigation strategies.</strong></td>
+        </tr>
+    </table>
+
+
+    <!-- ML MODELS -->
+
+    <h2>14. Machine Learning Models for Evaluation</h2>
+
+    <ol>
+        <li>Logistic Regression</li>
+        <li>Decision Tree</li>
+        <li>Random Forest</li>
+        <li>Support Vector Machine</li>
+        <li>K-Nearest Neighbour</li>
+        <li>Gradient Boosting</li>
+        <li>XGBoost, where appropriate</li>
+        <li>Selected Neural Network architectures for suitable datasets</li>
+    </ol>
+
+    <p>
+        This multi-model evaluation will help determine whether the
+        proposed bias mitigation framework is model-independent or
+        model-specific.
+    </p>
+
+
+    <!-- EVALUATION -->
+
+    <h2>15. Evaluation Metrics</h2>
+
+    <div class="metric-box">
+        <strong>Predictive Performance</strong>
+        <ul>
+            <li>Accuracy</li>
+            <li>Precision</li>
+            <li>Recall</li>
+            <li>F1-score</li>
+            <li>ROC-AUC</li>
+            <li>PR-AUC</li>
+        </ul>
+    </div>
+
+    <div class="metric-box">
+        <strong>Dataset-Level Metrics</strong>
+        <ul>
+            <li>Class distribution</li>
+            <li>Imbalance ratio</li>
+            <li>Entropy</li>
+            <li>Distribution divergence</li>
+            <li>Representation ratio</li>
+        </ul>
+    </div>
+
+    <div class="metric-box">
+        <strong>Group-Level Evaluation</strong>
+        <ul>
+            <li>Group-wise accuracy</li>
+            <li>Group-wise recall</li>
+            <li>Group-wise F1-score</li>
+            <li>Error-rate differences</li>
+            <li>Demographic parity-related measures</li>
+            <li>Equal opportunity-related measures</li>
+        </ul>
+    </div>
+
+    <div class="metric-box">
+        <strong>Overall Evaluation</strong>
+        <p>
+            Lower dataset bias, improved minority-group performance,
+            and acceptable overall predictive performance.
+        </p>
+    </div>
+
+
+    <!-- ALGORITHM -->
+
+    <h2>16. Proposed Algorithm</h2>
+
+    <h3>Algorithm: BiasGuard-ML</h3>
+
+    <p><strong>Input:</strong> Machine Learning Dataset D</p>
+    <p><strong>Output:</strong> Bias-Mitigated Dataset D′</p>
+
+    <ol>
+        <li>Load dataset D.</li>
+        <li>Perform data quality assessment.</li>
+        <li>Identify target and relevant attributes.</li>
+        <li>Analyze class distributions.</li>
+        <li>Analyze attribute representation.</li>
+        <li>Detect sampling and distributional irregularities.</li>
+        <li>Analyze potential label inconsistencies.</li>
+        <li>Calculate individual bias indicators.</li>
+        <li>Calculate normalized Dataset Bias Score.</li>
+        <li>Classify the dominant bias type.</li>
+        <li>Select an appropriate mitigation strategy.</li>
+        <li>Generate, re-weight, or re-sample data.</li>
+        <li>Produce mitigated dataset D′.</li>
+        <li>Train baseline ML models on D.</li>
+        <li>Train corresponding models on D′.</li>
+        <li>Compare predictive and group-wise performance.</li>
+        <li>Calculate improvement in bias indicators.</li>
+        <li>Validate robustness using cross-validation and statistical analysis.</li>
+        <li>Generate BiasGuard-ML report.</li>
+        <li>Return optimized dataset and evaluation results.</li>
+    </ol>
+
+
+    <!-- NOVELTY -->
+
+    <h2>17. Innovation and Novelty</h2>
+
+    <h3>17.1 Unified Bias Detection</h3>
+    <p>
+        Development of a single framework capable of analyzing multiple
+        dimensions of dataset bias.
+    </p>
+
+    <h3>17.2 Dataset Bias Score</h3>
+    <p>
+        Development and empirical validation of a composite score
+        representing dataset-level bias.
+    </p>
+
+    <h3>17.3 Adaptive Mitigation</h3>
+    <p>
+        Rather than applying a fixed technique, the framework will
+        investigate automatic selection of mitigation strategies
+        according to detected bias characteristics.
+    </p>
+
+    <h3>17.4 Bias-Performance Trade-Off Analysis</h3>
+    <p>
+        The framework will explicitly analyze the relationship between
+        bias reduction and predictive performance.
+    </p>
+
+    <h3>17.5 Reusable Framework</h3>
+    <p>
+        The proposed framework will be designed to support different
+        datasets and machine learning models.
+    </p>
+
+    <h3>17.6 Explainable Bias Analysis</h3>
+    <p>
+        The system will provide interpretable information regarding:
+    </p>
+
+    <div class="highlight">
+        <strong>
+            What is biased? Why is it biased? How severe is the bias?
+            What mitigation strategy is recommended? Did the mitigation work?
+        </strong>
+    </div>
+
+
+    <!-- EXPECTED OUTCOMES -->
+
+    <h2>18. Expected Outcomes</h2>
+
+    <h3>Technical Outcomes</h3>
+
+    <ol>
+        <li>Dataset bias detection framework.</li>
+        <li>Quantitative Dataset Bias Score.</li>
+        <li>Adaptive bias mitigation algorithms.</li>
+        <li>Prototype software implementation.</li>
+        <li>Benchmark evaluation of bias mitigation techniques.</li>
+        <li>Comprehensive bias analysis report.</li>
+    </ol>
+
+    <h3>Research Outcomes</h3>
+
+    <ul>
+        <li>Research papers in reputed journals/conferences.</li>
+        <li>Software prototype.</li>
+        <li>Potential intellectual property/patent opportunities.</li>
+        <li>Benchmark experimental results.</li>
+        <li>Reusable research data-processing pipeline.</li>
+    </ul>
+
+
+    <!-- DELIVERABLES -->
+
+    <h2>19. Expected Deliverables</h2>
+
+    <table>
+        <tr>
+            <th>S. No.</th>
+            <th>Deliverable</th>
+            <th>Expected Timeline</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Literature review and research gap analysis</td>
+            <td>Month 1–2</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Dataset collection and preprocessing framework</td>
+            <td>Month 2–3</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Bias detection module</td>
+            <td>Month 3–5</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Dataset Bias Score model</td>
+            <td>Month 4–6</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Bias mitigation algorithms</td>
+            <td>Month 5–8</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Integrated BiasGuard-ML prototype</td>
+            <td>Month 7–9</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Experimental validation</td>
+            <td>Month 8–10</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Research paper preparation</td>
+            <td>Month 10–11</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>Final framework and documentation</td>
+            <td>Month 11–12</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>Final technical report</td>
+            <td>Month 12</td>
+        </tr>
+    </table>
+
+
+    <!-- WORK PLAN -->
+
+    <h2>20. Work Plan and Timeline</h2>
+
+    <table>
+        <tr>
+            <th>Activity</th>
+            <th>M1</th>
+            <th>M2</th>
+            <th>M3</th>
+            <th>M4</th>
+            <th>M5</th>
+            <th>M6</th>
+            <th>M7</th>
+            <th>M8</th>
+            <th>M9</th>
+            <th>M10</th>
+            <th>M11</th>
+            <th>M12</th>
+        </tr>
+        <tr>
+            <td>Literature Review</td>
+            <td>✓</td><td>✓</td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>Dataset Identification</td>
+            <td>✓</td><td>✓</td><td>✓</td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>Data Preprocessing</td>
+            <td></td><td>✓</td><td>✓</td><td>✓</td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>Bias Detection</td>
+            <td></td><td></td><td>✓</td><td>✓</td><td>✓</td><td></td>
+            <td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>Bias Score Development</td>
+            <td></td><td></td><td></td><td>✓</td><td>✓</td><td>✓</td>
+            <td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>Mitigation Algorithms</td>
+            <td></td><td></td><td></td><td></td><td>✓</td><td>✓</td>
+            <td>✓</td><td>✓</td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>Prototype Development</td>
+            <td></td><td></td><td></td><td></td><td></td><td>✓</td>
+            <td>✓</td><td>✓</td><td>✓</td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>Experimental Evaluation</td>
+            <td></td><td></td><td></td><td></td><td></td><td></td>
+            <td>✓</td><td>✓</td><td>✓</td><td>✓</td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>Research Publication</td>
+            <td></td><td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td>✓</td><td>✓</td><td>✓</td><td></td>
+        </tr>
+        <tr>
+            <td>Final Report</td>
+            <td></td><td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td>✓</td><td>✓</td>
+        </tr>
+    </table>
+
+
+    <!-- BUDGET -->
+
+    <h2>21. Budget Requirement</h2>
+
+    <div class="highlight">
+        <strong>Total Proposed Budget: ₹5,00,000</strong>
+    </div>
+
+    <table>
+        <tr>
+            <th>Budget Head</th>
+            <th>Amount (₹)</th>
+        </tr>
+        <tr>
+            <td>Research Assistant / Project Manpower Support</td>
+            <td>1,80,000</td>
+        </tr>
+        <tr>
+            <td>Computing Infrastructure / GPU &amp; Cloud Computing</td>
+            <td>1,20,000</td>
+        </tr>
+        <tr>
+            <td>Software, Tools and Research Resources</td>
+            <td>40,000</td>
+        </tr>
+        <tr>
+            <td>Dataset Processing, Storage and Computational Resources</td>
+            <td>35,000</td>
+        </tr>
+        <tr>
+            <td>Conference / Publication / Dissemination</td>
+            <td>50,000</td>
+        </tr>
+        <tr>
+            <td>Research Meetings, Travel and Institutional Visits</td>
+            <td>35,000</td>
+        </tr>
+        <tr>
+            <td>Contingency and Miscellaneous Expenses</td>
+            <td>40,000</td>
+        </tr>
+        <tr class="budget-total">
+            <td>Total</td>
+            <td>₹5,00,000</td>
+        </tr>
+    </table>
+
+
+    <!-- BUDGET JUSTIFICATION -->
+
+    <h2>22. Budget Justification</h2>
+
+    <h3>Research Manpower – ₹1,80,000</h3>
+    <p>
+        Support for a student/research assistant responsible for dataset
+        preparation, experimentation, implementation, documentation,
+        and evaluation.
+    </p>
+
+    <h3>Computing/GPU/Cloud – ₹1,20,000</h3>
+    <p>
+        Required for machine learning experiments, large-scale data
+        processing, model training, synthetic data generation, and
+        comparative evaluation.
+    </p>
+
+    <h3>Software and Research Resources – ₹40,000</h3>
+    <p>
+        Includes computational software resources, specialized tools,
+        storage, APIs, and research-related technical resources.
+    </p>
+
+    <h3>Dataset Processing and Storage – ₹35,000</h3>
+    <p>
+        Required for data storage, preprocessing, backup, computational
+        processing, and experimental infrastructure.
+    </p>
+
+    <h3>Conference/Publication – ₹50,000</h3>
+    <p>
+        Dissemination of research findings through suitable conferences
+        and peer-reviewed journals.
+    </p>
+
+    <h3>Travel and Research Meetings – ₹35,000</h3>
+    <p>
+        Participation in research meetings, technical workshops,
+        conferences, and collaborative activities.
+    </p>
+
+    <h3>Contingency – ₹40,000</h3>
+    <p>
+        To meet unforeseen computational, software, data-processing,
+        or research-related expenses.
+    </p>
+
+
+    <!-- RESOURCE REQUIREMENTS -->
+
+    <h2>23. Resource Requirements</h2>
+
+    <ul>
+        <li>High-performance computing/GPU resources</li>
+        <li>Machine learning development environment</li>
+        <li>Python-based data science ecosystem</li>
+        <li>Machine learning libraries</li>
+        <li>Secure data storage</li>
+        <li>Public benchmark datasets</li>
+        <li>Statistical analysis tools</li>
+        <li>Version-control and documentation infrastructure</li>
+    </ul>
+
+    <p>
+        The proposed research can largely utilize existing institutional
+        computing and laboratory infrastructure, thereby reducing
+        additional capital expenditure.
+    </p>
+
+
+    <!-- RISK -->
+
+    <h2>24. Risk Analysis and Mitigation</h2>
+
+    <table>
+        <tr>
+            <th>Risk</th>
+            <th>Impact</th>
+            <th>Mitigation Strategy</th>
+        </tr>
+        <tr>
+            <td>Availability of suitable datasets</td>
+            <td>Medium</td>
+            <td>Use multiple established public datasets.</td>
+        </tr>
+        <tr>
+            <td>Bias difficult to quantify</td>
+            <td>High</td>
+            <td>Combine statistical and model-based indicators.</td>
+        </tr>
+        <tr>
+            <td>Mitigation reduces model accuracy</td>
+            <td>Medium</td>
+            <td>Conduct multi-objective optimization.</td>
+        </tr>
+        <tr>
+            <td>Synthetic data introduces artifacts</td>
+            <td>Medium</td>
+            <td>Compare against real-data validation.</td>
+        </tr>
+        <tr>
+            <td>Computational requirements increase</td>
+            <td>Medium</td>
+            <td>Use GPU/cloud resources and efficient models.</td>
+        </tr>
+        <tr>
+            <td>Results vary across datasets</td>
+            <td>Medium</td>
+            <td>Conduct cross-dataset validation.</td>
+        </tr>
+    </table>
+
+
+    <!-- ETHICS -->
+
+    <h2>25. Ethical Considerations</h2>
+
+    <p>
+        The project will primarily utilize publicly available or
+        appropriately licensed datasets.
+    </p>
+
+    <ul>
+        <li>Protection of sensitive information</li>
+        <li>Appropriate anonymization where necessary</li>
+        <li>Responsible use of demographic attributes</li>
+        <li>Avoidance of discriminatory decision-making</li>
+        <li>Transparent reporting of limitations</li>
+        <li>Reproducibility of experiments</li>
+        <li>Responsible interpretation of fairness metrics</li>
+    </ul>
+
+    <p>
+        The project will not attempt to eliminate legitimate differences
+        in data. Instead, it will focus on identifying unintended,
+        unjustified, or harmful biases that can negatively affect
+        machine learning model reliability and fairness.
+    </p>
+
+
+    <!-- IMPACT -->
+
+    <h2>26. Expected Impact</h2>
+
+    <h3>Healthcare</h3>
+    <p>
+        Improved representation of patient populations can contribute
+        to more reliable diagnostic machine learning systems.
+    </p>
+
+    <h3>Finance</h3>
+    <p>
+        Bias-aware datasets can support more robust financial prediction
+        and decision-support systems.
+    </p>
+
+    <h3>Education</h3>
+    <p>
+        Student analytics systems can be evaluated for representation
+        and group-wise performance differences.
+    </p>
+
+    <h3>Recruitment</h3>
+    <p>
+        Bias detection can help identify problematic patterns in datasets
+        used for automated recruitment systems.
+    </p>
+
+    <h3>Computer Vision</h3>
+    <p>
+        The framework can help identify underrepresentation of demographic
+        or environmental conditions in image datasets.
+    </p>
+
+    <h3>Responsible AI</h3>
+    <p>
+        The project will contribute to the broader objective of developing
+        trustworthy, transparent, robust, and responsible AI systems.
+    </p>
+
+
+    <!-- APPLICATIONS -->
+
+    <h2>27. Potential Applications</h2>
+
+    <ol>
+        <li>Medical diagnosis datasets</li>
+        <li>Financial risk prediction</li>
+        <li>Credit scoring</li>
+        <li>Educational analytics</li>
+        <li>Recruitment systems</li>
+        <li>Facial and image recognition</li>
+        <li>Natural Language Processing</li>
+        <li>Fraud detection</li>
+        <li>Smart agriculture</li>
+        <li>Public-sector AI applications</li>
+    </ol>
+
+
+    <!-- IP -->
+
+    <h2>28. Potential Intellectual Property</h2>
+
+    <div class="highlight">
+        <strong>
+            “An Adaptive Algorithmic Framework for Automated Detection,
+            Quantification and Mitigation of Bias in Machine Learning
+            Datasets”
+        </strong>
+    </div>
+
+    <p>Potential IP components include:</p>
+
+    <ul>
+        <li>Dataset Bias Score computation mechanism</li>
+        <li>Adaptive bias detection engine</li>
+        <li>Mitigation strategy selection algorithm</li>
+        <li>Multi-dimensional bias analysis mechanism</li>
+        <li>Automated bias-performance optimization framework</li>
+    </ul>
+
+    <p>
+        A patentability assessment may be undertaken after experimental
+        validation and identification of the final technical contribution.
+    </p>
+
+
+    <!-- PUBLICATION -->
+
+    <h2>29. Publication Plan</h2>
+
+    <p>
+        The research findings will be targeted for publication in reputed
+        peer-reviewed journals and conferences in areas including:
+    </p>
+
+    <ul>
+        <li>Machine Learning</li>
+        <li>Artificial Intelligence</li>
+        <li>Data Science</li>
+        <li>Responsible AI</li>
+        <li>Trustworthy AI</li>
+        <li>Fairness in Machine Learning</li>
+    </ul>
+
+    <p>The project will aim for:</p>
+
+    <ul>
+        <li><strong>1–2 quality research publications</strong></li>
+        <li><strong>1 software/prototype outcome</strong></li>
+        <li><strong>1 potential patent/IP application</strong>, subject to novelty assessment</li>
+    </ul>
+
+
+    <!-- FUTURE SCOPE -->
+
+    <h2>30. Sustainability and Future Scope</h2>
+
+    <p>
+        The proposed research can serve as the foundation for a larger
+        research program in <strong>Responsible and Trustworthy
+        Artificial Intelligence</strong>.
+    </p>
+
+    <h3>Phase II</h3>
+    <p>
+        Development of deep learning-based bias detection.
+    </p>
+
+    <h3>Phase III</h3>
+    <p>
+        Integration with generative AI and Large Language Model datasets.
+    </p>
+
+    <h3>Phase IV</h3>
+    <p>
+        Development of a cloud-based automated dataset auditing platform.
+    </p>
+
+    <h3>Phase V</h3>
+    <p>
+        Real-world validation using healthcare, financial, and educational
+        datasets.
+    </p>
+
+    <div class="highlight">
+        <strong>
+            Long-Term Vision:
+        </strong>
+        The framework may ultimately evolve into a
+        <strong>Data Bias Audit Platform for AI Systems</strong>.
+    </div>
+
+
+    <!-- PROJECT MANAGEMENT -->
+
+    <h2>31. Project Management Structure</h2>
+
+    <h3>Principal Investigator</h3>
+
+    <p>
+        <strong>Dr. Nitin Mishra</strong><br>
+        Professor<br>
+        Department of Computer Science and Engineering<br>
+        Parul University, Vadodara, India
+    </p>
+
+    <h3>Co-Principal Investigator</h3>
+
+    <p>
+        <strong>Dr. Sneha Soni</strong><br>
+        Associate Professor<br>
+        Department of Computer Science and Engineering<br>
+        Parul University, Vadodara, India
+    </p>
+
+    <h3>Proposed Research Team</h3>
+
+    <ul>
+        <li>Principal Investigator</li>
+        <li>Co-Principal Investigator</li>
+        <li>One Research Assistant / Project Associate</li>
+        <li>Student Researchers</li>
+        <li>Technical/Domain Collaborators, wherever required</li>
+    </ul>
+
+    <p>
+        The Principal Investigator will supervise the research methodology,
+        algorithm development, experimental validation, publication,
+        intellectual property, and final project reporting. The
+        Co-Principal Investigator will contribute to algorithm design,
+        experimental analysis, validation, documentation, and research
+        dissemination.
+    </p>
+
+
+    <!-- SUCCESS INDICATORS -->
+
+    <h2>32. Measurable Success Indicators</h2>
+
+    <ol>
+        <li>Development of an operational bias detection framework.</li>
+        <li>Successful identification of multiple bias types.</li>
+        <li>Development and validation of a Dataset Bias Score.</li>
+        <li>Demonstrable reduction in selected bias indicators.</li>
+        <li>Improved or maintained performance for underrepresented groups.</li>
+        <li>Competitive overall predictive performance.</li>
+        <li>Successful validation across multiple datasets.</li>
+        <li>Development of a functional prototype.</li>
+        <li>At least one research publication.</li>
+        <li>Identification of potential IP/patentable contributions.</li>
+    </ol>
+
+
+    <!-- KPI -->
+
+    <h2>33. Proposed Key Performance Indicators</h2>
+
+    <ul>
+        <li>Reduction in class/distribution imbalance.</li>
+        <li>Reduction in group-wise performance disparity.</li>
+        <li>Improvement in minority-group recall/F1-score.</li>
+        <li>Maintenance of acceptable overall model performance.</li>
+        <li>Improved robustness across datasets.</li>
+        <li>Demonstrated statistical significance of major experimental findings wherever applicable.</li>
+    </ul>
+
+    <p>
+        Exact numerical targets will be finalized after baseline
+        experiments because achievable improvements will depend on
+        individual dataset characteristics.
+    </p>
+
+
+    <!-- CONCLUSION -->
+
+    <h2>34. Conclusion</h2>
+
+    <p>
+        Data bias represents one of the fundamental challenges in
+        developing reliable and responsible machine learning systems.
+        While substantial research has been conducted on algorithmic
+        fairness and bias mitigation, there remains a need for practical
+        and integrated mechanisms capable of systematically examining
+        bias at the dataset level.
+    </p>
+
+    <p>
+        The proposed <strong>BiasGuard-ML</strong> project addresses this
+        challenge through the design and development of an integrated
+        algorithmic framework for <strong>bias detection, quantitative
+        assessment, adaptive mitigation, and downstream validation</strong>.
+    </p>
+
+    <p>
+        The proposed research will move beyond simple class balancing by
+        investigating multiple dimensions of dataset bias and their impact
+        on machine learning models. The development of a Dataset Bias
+        Score, adaptive mitigation mechanism, and reusable software
+        prototype will provide significant potential research and
+        practical contributions.
+    </p>
+
+    <p>
+        With a proposed funding requirement of <strong>₹5,00,000</strong>
+        for a <strong>12-month project</strong>, the research is technically
+        feasible using existing institutional infrastructure supplemented
+        by targeted manpower and computational resources.
+    </p>
+
+    <p>
+        The expected outcomes—including algorithms, a prototype framework,
+        research publications, and potential intellectual property—will
+        contribute to the emerging field of
+        <strong>Responsible, Fair, and Trustworthy Artificial Intelligence</strong>.
+    </p>
+
+
+    <!-- REFERENCES -->
+
+    <h2>35. Selected References</h2>
+
+    <div class="reference">
+        1. Barocas, S., Hardt, M., &amp; Narayanan, A.
+        <em>Fairness and Machine Learning: Limitations and Opportunities.</em>
+        MIT Press.
+    </div>
+
+    <div class="reference">
+        2. Mehrabi, N., Morstatter, F., Saxena, N., Lerman, K., &amp;
+        Galstyan, A. (2021). A survey on bias and fairness in machine
+        learning. <em>ACM Computing Surveys</em>, 54(6).
+    </div>
+
+    <div class="reference">
+        3. Suresh, H., &amp; Guttag, J. V. (2021). A framework for
+        understanding sources of harm throughout the machine learning
+        life cycle. <em>Proceedings of the 2021 ACM Conference on
+        Fairness, Accountability, and Transparency.</em>
+    </div>
+
+    <div class="reference">
+        4. Chouldechova, A., &amp; Roth, A. (2018). The frontiers of
+        fairness in machine learning. <em>arXiv preprint arXiv:1810.08810.</em>
+    </div>
+
+    <div class="reference">
+        5. Hardt, M., Price, E., &amp; Srebro, N. (2016). Equality of
+        opportunity in supervised learning.
+        <em>Advances in Neural Information Processing Systems.</em>
+    </div>
+
+    <div class="reference">
+        6. He, H., &amp; Garcia, E. A. (2009). Learning from imbalanced
+        data. <em>IEEE Transactions on Knowledge and Data Engineering</em>,
+        21(9), 1263–1284.
+    </div>
+
+    <div class="reference">
+        7. Chawla, N. V., Bowyer, K. W., Hall, L. O., &amp; Kegelmeyer,
+        W. P. (2002). SMOTE: Synthetic minority over-sampling technique.
+        <em>Journal of Artificial Intelligence Research</em>, 16, 321–357.
+    </div>
+
+    <div class="reference">
+        8. Mitchell, M., et al. (2019). Model cards for model reporting.
+        <em>Proceedings of the Conference on Fairness, Accountability,
+        and Transparency.</em>
+    </div>
+
+    <div class="reference">
+        9. Gebru, T., et al. (2021). Datasheets for datasets.
+        <em>Communications of the ACM</em>, 64(12), 86–92.
+    </div>
+
+
+    <!-- FINAL SUMMARY -->
+
+    <h2>36. Project at a Glance</h2>
+
+    <table>
+        <tr>
+            <th>Parameter</th>
+            <th>Details</th>
+        </tr>
+        <tr>
+            <td>Project Title</td>
+            <td>
+                BiasGuard-ML: Design and Development of an Adaptive
+                Algorithmic Framework for Detection, Quantification and
+                Mitigation of Data Bias in Machine Learning Datasets
+            </td>
+        </tr>
+        <tr>
+            <td>Principal Investigator</td>
+            <td>Dr. Nitin Mishra</td>
+        </tr>
+        <tr>
+            <td>Co-Principal Investigator</td>
+            <td>Dr. Sneha Soni</td>
+        </tr>
+        <tr>
+            <td>Institution</td>
+            <td>Parul University, Vadodara, India</td>
+        </tr>
+        <tr>
+            <td>Department</td>
+            <td>Department of Computer Science and Engineering</td>
+        </tr>
+        <tr>
+            <td>Duration</td>
+            <td>12 Months</td>
+        </tr>
+        <tr>
+            <td>Funding Requested</td>
+            <td><strong>₹5,00,000</strong></td>
+        </tr>
+        <tr>
+            <td>Research Domain</td>
+            <td>Artificial Intelligence / Machine Learning / Data Science</td>
+        </tr>
+        <tr>
+            <td>Core Theme</td>
+            <td>Responsible and Trustworthy AI</td>
+        </tr>
+        <tr>
+            <td>Primary Deliverable</td>
+            <td>
+                BiasGuard-ML Algorithmic Framework
+            </td>
+        </tr>
+        <tr>
+            <td>Expected Major Outputs</td>
+            <td>
+                Bias Detection Algorithm, Dataset Bias Score,
+                Adaptive Bias Mitigation Algorithm, Prototype Software,
+                Research Publications, and Potential Patent/IP
+            </td>
+        </tr>
+    </table>
+
+
+    <!-- SIGNATURE -->
+
+    <div class="signature">
+
+        <div class="signature-box">
+            <strong>Dr. Nitin Mishra</strong><br>
+            Principal Investigator<br>
+            Professor<br>
+            Department of Computer Science and Engineering<br>
+            Parul University
+        </div>
+
+        <div class="signature-box">
+            <strong>Dr. Sneha Soni</strong><br>
+            Co-Principal Investigator<br>
+            Associate Professor<br>
+            Department of Computer Science and Engineering<br>
+            Parul University
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+        Research Funding Proposal | BiasGuard-ML | Parul University, Vadodara
+    </div>
+
+</div>
+
+</body>
+</html>
+
