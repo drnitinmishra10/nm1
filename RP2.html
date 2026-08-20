@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FairDataGuard — Research Funding Proposal</title>
+<style>
+  @page { size: A4; margin: 18mm 17mm 18mm 17mm; }
+  :root { --ink:#172033; --muted:#566174; --accent:#174ea6; --light:#eef4ff; --line:#cfd7e6; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:Arial, Helvetica, sans-serif; color:var(--ink); line-height:1.55; background:#fff; }
+  .page { max-width:900px; margin:0 auto; padding:34px 42px; }
+  .cover { min-height:96vh; display:flex; flex-direction:column; justify-content:center; text-align:center; border-bottom:1px solid var(--line); }
+  .brand { font-size:14px; font-weight:700; letter-spacing:2px; color:var(--accent); text-transform:uppercase; }
+  h1 { font-size:34px; line-height:1.15; margin:22px 0 14px; }
+  .subtitle { font-size:18px; color:var(--muted); max-width:760px; margin:0 auto 34px; }
+  .meta { margin:20px auto; max-width:620px; text-align:left; border:1px solid var(--line); border-radius:10px; padding:20px 24px; background:#fafcff; }
+  .meta div { margin:7px 0; }
+  h2 { color:var(--accent); font-size:22px; margin:34px 0 12px; border-bottom:2px solid var(--accent); padding-bottom:5px; }
+  h3 { font-size:17px; margin:22px 0 8px; }
+  p { margin:8px 0 12px; }
+  ul, ol { margin-top:7px; }
+  li { margin:5px 0; }
+  .callout { background:var(--light); border-left:5px solid var(--accent); padding:15px 18px; margin:18px 0; }
+  .quote { font-size:18px; font-weight:700; text-align:center; margin:22px 0; }
+  table { width:100%; border-collapse:collapse; margin:14px 0 22px; font-size:13px; }
+  th, td { border:1px solid var(--line); padding:8px 9px; vertical-align:top; }
+  th { background:#eaf1ff; color:#183b78; text-align:left; }
+  .small { font-size:12px; color:var(--muted); }
+  .formula { background:#f7f8fa; border:1px solid var(--line); padding:12px; text-align:center; font-family:Georgia,serif; font-size:17px; margin:15px 0; }
+  .flow { display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center; margin:18px 0; }
+  .flow span { background:#eef4ff; border:1px solid #b9c9e8; border-radius:8px; padding:10px 12px; font-weight:700; font-size:12px; text-align:center; }
+  .arrow { background:none!important; border:0!important; padding:0!important; font-size:18px!important; }
+  .footer { margin-top:35px; padding-top:12px; border-top:1px solid var(--line); font-size:11px; color:var(--muted); }
+  .pagebreak { break-before:page; }
+  a { color:var(--accent); }
+  @media print {
+    body { font-size:11pt; }
+    .page { max-width:none; padding:0; }
+    .cover { min-height:250mm; }
+    h2 { break-after:avoid; }
+    h3 { break-after:avoid; }
+    table, .callout, .flow { break-inside:avoid; }
+    a { color:inherit; text-decoration:none; }
+  }
+.cite { color:var(--accent); font-size:.92em; }\n</style>
+</head>
+<body>
+
+<section class="page cover">
+  <div class="brand">Research Funding Proposal</div>
+  <h1>FairDataGuard</h1>
+  <div class="subtitle">An Adaptive Data-Centric Framework for Auditing, Quantifying and Mitigating Bias in Machine Learning Datasets</div>
+  <div class="meta">
+    <div><strong>Principal Investigator:</strong> Dr. Nitin Mishra</div>
+    <div><strong>Designation:</strong> Professor, Department of Computer Science and Engineering</div>
+    <div><strong>Institution:</strong> Parul University, Vadodara, Gujarat, India</div>
+    <div><strong>Co-Principal Investigator:</strong> Dr. Rohit</div>
+    <div><strong>Duration:</strong> 12 Months</div>
+    <div><strong>Total Funding Requested:</strong> ₹5,00,000</div>
+  </div>
+  <p class="small">Prepared as a print-ready research funding proposal.</p>
+</section>
+
+<section class="page">
+<h2>1. Abstract</h2>
+<p>The rapid adoption of Artificial Intelligence and Machine Learning in healthcare, finance, education, recruitment, public services and other high-impact domains has created an urgent need for reliable, fair and trustworthy AI systems. Although considerable research has focused on improving model architectures and predictive accuracy, a fundamental source of algorithmic harm often originates before model training: the data itself.</p>
+<p>Machine learning datasets may contain class imbalance, demographic under-representation, sampling bias, label noise, distributional disparities, geographical bias and intersectional representation gaps [1,2,9]. These problems can remain hidden when conventional aggregate performance metrics such as accuracy and F1-score are used. Consequently, a model may demonstrate high overall accuracy while performing substantially worse for specific underrepresented groups.</p>
+<p>The proposed project introduces <strong>FairDataGuard</strong>, an adaptive data-centric framework for automated dataset auditing, quantitative bias assessment, mitigation and downstream validation. The framework will systematically analyze multiple dimensions of dataset bias and generate an interpretable <strong>Multi-Dimensional Bias Risk Index (MBRI)</strong>. Based on the identified bias profile, FairDataGuard will recommend and evaluate suitable mitigation strategies including adaptive re-sampling, re-weighting, augmentation, synthetic data generation and bias-aware preprocessing.</p>
+<p>Unlike conventional approaches that apply a single mitigation technique irrespective of dataset characteristics, FairDataGuard will investigate an adaptive decision mechanism that selects mitigation strategies according to the observed bias structure and evaluates the resulting trade-off between fairness, predictive performance and robustness.</p>
+<p>The framework will be validated using multiple benchmark datasets, with particular emphasis on high-impact healthcare and dermatological image datasets where representation and skin-tone-related disparities have emerged as important concerns in AI-based diagnosis. The project will deliver a functional prototype, validated bias-auditing methodology, adaptive mitigation algorithms, benchmark results, research publications and potential intellectual property.</p>
+
+<h2>2. Keywords</h2>
+<p>Responsible AI; Fair Machine Learning; Data-Centric AI; Dataset Bias; Algorithmic Fairness; Bias Auditing; Bias Quantification; Bias Mitigation; Representation Bias; Intersectional Fairness; Healthcare AI; Trustworthy AI; Explainable AI; Machine Learning.</p>
+
+<h2>3. Background and Rationale</h2>
+<p>Machine Learning systems are increasingly being used for decision-making and prediction in socially important domains. However, predictive accuracy alone is insufficient to establish that an AI system is reliable or trustworthy.</p>
+<p>A model trained on an unrepresentative dataset can inherit and amplify deficiencies present in the training data [2,9]. These deficiencies may arise from class imbalance, demographic under-representation, geographical concentration, sampling bias, inconsistent annotation, distribution shift, missing demographic groups and intersectional representation gaps.</p>
+<p>Dermatological AI provides a particularly important validation setting because representation and skin-tone-related performance disparities remain an active research challenge [7,8,10]. This motivates a data-centric approach in which bias is explicitly measured before and after model training.</p>
+<div class="callout"><strong>Core research principle:</strong> Fair AI begins with fair, representative and appropriately characterized data.</div>
+
+<h2>4. Problem Statement</h2>
+<p>Current machine learning workflows generally focus on data preprocessing followed by model development. Dataset auditing is often performed through disconnected statistical analyses, while bias mitigation is commonly applied using predefined techniques.</p>
+<ol>
+<li>Multiple types of dataset bias are rarely analyzed within one integrated framework.</li>
+<li>There is limited availability of interpretable dataset-level bias indicators.</li>
+<li>The most appropriate mitigation strategy depends on the specific bias profile of a dataset.</li>
+<li>Reduction in statistical imbalance does not necessarily translate into improved model-level fairness.</li>
+<li>Bias mitigation may improve subgroup performance while degrading overall predictive performance.</li>
+</ol>
+<p><strong>Central research problem:</strong> How can an intelligent data-centric framework automatically identify, quantify, diagnose and mitigate multiple forms of dataset bias while preserving predictive performance and improving group-wise robustness?</p>
+
+<h2>5. Research Gap</h2>
+<h3>5.1 Fragmented Bias Detection</h3>
+<p>Existing approaches frequently investigate individual forms of bias such as class imbalance, demographic bias or sampling bias separately.</p>
+<h3>5.2 Lack of Unified Dataset-Level Risk Assessment</h3>
+<p>Individual statistical indicators do not provide a consolidated representation of the overall bias risk associated with a dataset.</p>
+<h3>5.3 Limited Adaptive Mitigation</h3>
+<p>Most mitigation techniques are selected manually. A dataset requiring re-weighting may be unnecessarily subjected to oversampling, potentially introducing additional artifacts.</p>
+<h3>5.4 Bias–Performance Trade-Off</h3>
+<p>Reducing disparity does not automatically mean improving the complete ML system. Fairness must be evaluated simultaneously with predictive performance and robustness.</p>
+<h3>5.5 Intersectional Bias</h3>
+<p>Bias may become more severe when multiple characteristics interact. A subgroup defined by combinations of attributes may be substantially underrepresented even when individual attributes appear reasonably balanced.</p>
+<h3>5.6 Limited End-to-End Validation</h3>
+<p>A dataset-level intervention should ultimately be evaluated through downstream model performance, subgroup performance, robustness and statistical significance.</p>
+</section>
+
+<section class="page pagebreak">
+<h2>6. Aim</h2>
+<p>To design, develop and validate <strong>FairDataGuard</strong>, an adaptive data-centric framework capable of auditing, quantifying and mitigating multiple forms of machine learning dataset bias while improving fairness, robustness and generalization of downstream AI models.</p>
+
+<h2>7. Research Objectives</h2>
+<ol>
+<li>Develop a systematic taxonomy and computational representation of major dataset bias dimensions.</li>
+<li>Develop automated algorithms for detecting representation, class, sampling, label, distributional and intersectional bias.</li>
+<li>Develop a normalized <strong>Multi-Dimensional Bias Risk Index (MBRI)</strong> for quantitative dataset-level risk assessment.</li>
+<li>Develop an adaptive mitigation recommendation engine that selects appropriate data-level interventions according to the detected bias profile.</li>
+<li>Investigate re-sampling, re-weighting, augmentation, synthetic data generation and bias-aware preprocessing techniques.</li>
+<li>Develop a multi-objective optimization mechanism balancing fairness, predictive performance and robustness.</li>
+<li>Validate the framework across multiple benchmark datasets and ML architectures.</li>
+<li>Develop a functional software prototype capable of producing an automated dataset fairness audit report.</li>
+</ol>
+
+<h2>8. Research Questions</h2>
+<ol>
+<li>Can multiple dimensions of dataset bias be automatically detected using a unified computational framework?</li>
+<li>Can a normalized Multi-Dimensional Bias Risk Index reliably characterize dataset bias?</li>
+<li>Can mitigation strategies be selected automatically from the observed bias profile?</li>
+<li>Can data-level interventions reduce subgroup performance disparities without unacceptable degradation in overall model performance?</li>
+<li>Does the proposed framework generalize across different datasets and machine learning models?</li>
+<li>Can the proposed framework improve fairness while maintaining robustness under distributional variation?</li>
+</ol>
+
+<h2>9. Proposed FairDataGuard Framework</h2>
+<div class="flow">
+<span>Dataset Input</span><span class="arrow">→</span>
+<span>Data Quality &amp; Representation Auditor</span><span class="arrow">→</span>
+<span>Multi-Dimensional Bias Detection</span><span class="arrow">→</span>
+<span>MBRI Generator</span><span class="arrow">→</span>
+<span>Adaptive Mitigation</span><span class="arrow">→</span>
+<span>Model Validation</span><span class="arrow">→</span>
+<span>Fairness Audit Report</span>
+</div>
+<p>The generated report will identify detected bias types, severity, affected groups, intersectional vulnerabilities, recommended mitigation, before/after bias measurements, subgroup performance, overall performance, robustness indicators and statistical significance.</p>
+
+<h2>10. Bias Dimensions</h2>
+<h3>10.1 Class Imbalance</h3><p>Analysis using imbalance ratio, entropy, Gini-based measures and class-frequency statistics.</p>
+<h3>10.2 Representation Bias</h3><p>Identification of underrepresented groups, attributes and classes.</p>
+<h3>10.3 Sampling Bias</h3><p>Comparison of sample distributions against available reference distributions.</p>
+<h3>10.4 Label Bias</h3><p>Detection of inconsistent, noisy or systematically different labeling patterns.</p>
+<h3>10.5 Distributional Bias</h3><p>Measurement of differences between training, validation and evaluation distributions.</p>
+<h3>10.6 Intersectional Bias</h3><p>Analysis of combinations of attributes to identify hidden subgroup vulnerabilities.</p>
+<h3>10.7 Image/Data Quality Bias</h3><p>Where applicable, analysis of image quality, acquisition conditions, illumination, resolution and other data-generation characteristics that may correlate with particular groups.</p>
+
+<h2>11. Multi-Dimensional Bias Risk Index</h2>
+<p>A key research contribution will be the development of the <strong>Multi-Dimensional Bias Risk Index (MBRI)</strong>.</p>
+<div class="formula">MBRI = Σ w<sub>i</sub> × B<sub>i</sub></div>
+<p>where <strong>B<sub>i</sub></strong> is the normalized bias indicator for dimension <em>i</em> and <strong>w<sub>i</sub></strong> is an adaptive importance weight. The final formulation and thresholds will be empirically established through experimental validation rather than predetermined arbitrarily.</p>
+<p>The index will provide dimension-wise risk, aggregate bias risk, dominant bias identification, intersectional risk indicators and before/after mitigation comparison.</p>
+</section>
+
+<section class="page pagebreak">
+<h2>12. Adaptive Mitigation Engine</h2>
+<p>FairDataGuard will investigate an adaptive strategy-selection mechanism. Candidate interventions will include:</p>
+<ul>
+<li>Random oversampling and undersampling</li>
+<li>Stratified and adaptive sampling</li>
+<li>Cluster-based sampling</li>
+<li>Class and instance re-weighting</li>
+<li>SMOTE and suitable variants</li>
+<li>Controlled data augmentation</li>
+<li>Synthetic data generation</li>
+<li>Bias-aware preprocessing</li>
+</ul>
+<div class="callout"><strong>Adaptive principle:</strong> Detected Bias Profile → Candidate Mitigation Strategies → Experimental Evaluation → Multi-Objective Selection.</div>
+
+<h2>13. Multi-Objective Optimization</h2>
+<p>The project will explicitly model three competing objectives, reflecting the need to consider fairness alongside model utility and robustness [1,2,6].</p>
+<ul>
+<li><strong>Fairness:</strong> Reduction in subgroup performance disparity.</li>
+<li><strong>Predictive Performance:</strong> Maintenance or improvement of accuracy, F1-score, ROC-AUC and PR-AUC.</li>
+<li><strong>Robustness:</strong> Stable performance across datasets, subgroups and distributional variations.</li>
+</ul>
+<p>The framework will therefore seek a solution that does not simply maximize fairness at the expense of model utility.</p>
+
+<h2>14. Experimental Design</h2>
+<table>
+<tr><th>Method</th><th>Role</th></tr>
+<tr><td>Original Dataset</td><td>Baseline</td></tr>
+<tr><td>Random Oversampling</td><td>Class balancing</td></tr>
+<tr><td>Random Undersampling</td><td>Majority reduction</td></tr>
+<tr><td>SMOTE</td><td>Synthetic minority generation</td></tr>
+<tr><td>Class Weighting</td><td>Cost-sensitive learning</td></tr>
+<tr><td>Stratified Sampling</td><td>Representation preservation</td></tr>
+<tr><td>Conventional Augmentation</td><td>Data diversification</td></tr>
+<tr><td>Fairness-Aware Baselines</td><td>Comparative fairness evaluation</td></tr>
+<tr><td><strong>FairDataGuard</strong></td><td><strong>Adaptive mitigation</strong></td></tr>
+</table>
+<p>Experiments will use repeated cross-validation where appropriate and statistical testing for major comparative findings.</p>
+
+<h2>15. Datasets</h2>
+<h3>Track A – Tabular Classification</h3>
+<p>Datasets representing class imbalance and group-level representation problems.</p>
+<h3>Track B – Healthcare</h3>
+<p>Selected publicly available healthcare datasets where demographic or subgroup evaluation is feasible.</p>
+<h3>Track C – Dermatological Imaging</h3>
+<p>Public dermatology datasets will be used as a high-impact validation case for representation and skin-tone-related fairness [7,8,10]. The healthcare component will remain an experimental validation track using appropriately licensed, de-identified datasets and will not claim clinical deployment [11].</p>
+
+<h2>16. Machine Learning Models</h2>
+<ol>
+<li>Logistic Regression</li><li>Decision Tree</li><li>Random Forest</li><li>Support Vector Machine</li><li>K-Nearest Neighbour</li><li>Gradient Boosting</li><li>XGBoost</li><li>Selected deep learning architectures for image datasets</li>
+</ol>
+
+<h2>17. Evaluation Metrics</h2>
+<table>
+<tr><th>Category</th><th>Metrics</th></tr>
+<tr><td>Predictive</td><td>Accuracy, Precision, Recall, F1-score, ROC-AUC, PR-AUC</td></tr>
+<tr><td>Dataset Bias</td><td>Imbalance Ratio, Representation Ratio, Entropy, Distribution Divergence, Label Consistency, MBRI</td></tr>
+<tr><td>Group-Level</td><td>Group-wise accuracy/recall/F1, FPR difference, FNR difference, Equal Opportunity, Equalized Odds where applicable</td></tr>
+<tr><td>Robustness</td><td>Cross-dataset performance, distribution-shift performance, subgroup variance, repeated-experiment stability</td></tr>
+</table>
+
+<h2>18. Novelty and Innovation</h2>
+<ol>
+<li><strong>Data-Centric Fairness Auditing:</strong> Bias is evaluated systematically at the dataset level before model deployment.</li>
+<li><strong>Multi-Dimensional Bias Risk Index:</strong> A unified quantitative representation of multiple interacting bias dimensions.</li>
+<li><strong>Adaptive Mitigation Recommendation:</strong> Mitigation is selected according to detected dataset characteristics.</li>
+<li><strong>Fairness–Performance–Robustness Optimization:</strong> The three objectives are evaluated jointly.</li>
+<li><strong>Intersectional Bias Analysis:</strong> Hidden subgroup vulnerabilities are explicitly investigated.</li>
+<li><strong>Explainable Bias Reporting:</strong> The system explains what is biased, where it occurs, how severe it is, who is affected and whether mitigation worked.</li>
+<li><strong>Reusable Software Framework:</strong> The output is a reusable research platform rather than a single-dataset experiment.</li>
+</ol>
+</section>
+
+<section class="page pagebreak">
+<h2>19. Expected Scientific Contributions</h2>
+<ol>
+<li>A formal computational framework for dataset-level bias auditing.</li>
+<li>A validated Multi-Dimensional Bias Risk Index.</li>
+<li>Adaptive bias mitigation algorithms.</li>
+<li>A fairness-performance-robustness optimization mechanism.</li>
+<li>Benchmark results across heterogeneous datasets.</li>
+<li>An intersectional bias-analysis methodology.</li>
+<li>An explainable dataset fairness audit mechanism.</li>
+<li>A reusable prototype implementation.</li>
+</ol>
+
+<h2>20. Expected Deliverables</h2>
+<table>
+<tr><th>No.</th><th>Deliverable</th><th>Timeline</th></tr>
+<tr><td>1</td><td>Systematic literature review and research-gap analysis</td><td>M1–M2</td></tr>
+<tr><td>2</td><td>Dataset selection and bias taxonomy</td><td>M1–M3</td></tr>
+<tr><td>3</td><td>Data quality and bias auditing module</td><td>M2–M5</td></tr>
+<tr><td>4</td><td>MBRI formulation</td><td>M4–M6</td></tr>
+<tr><td>5</td><td>Adaptive mitigation engine</td><td>M5–M8</td></tr>
+<tr><td>6</td><td>Multi-objective evaluation module</td><td>M7–M9</td></tr>
+<tr><td>7</td><td>FairDataGuard prototype</td><td>M7–M10</td></tr>
+<tr><td>8</td><td>Cross-dataset validation</td><td>M8–M10</td></tr>
+<tr><td>9</td><td>Research publications and IP documentation</td><td>M10–M12</td></tr>
+<tr><td>10</td><td>Final technical report</td><td>M12</td></tr>
+</table>
+
+<h2>21. Work Plan</h2>
+<table>
+<tr><th>Activity</th><th>M1–M2</th><th>M3–M4</th><th>M5–M6</th><th>M7–M8</th><th>M9–M10</th><th>M11–M12</th></tr>
+<tr><td>Literature Review</td><td>✓</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Dataset Selection &amp; Taxonomy</td><td>✓</td><td>✓</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Bias Detection</td><td></td><td>✓</td><td>✓</td><td></td><td></td><td></td></tr>
+<tr><td>MBRI Development</td><td></td><td>✓</td><td>✓</td><td></td><td></td><td></td></tr>
+<tr><td>Mitigation Engine</td><td></td><td></td><td>✓</td><td>✓</td><td></td><td></td></tr>
+<tr><td>Prototype Development</td><td></td><td></td><td></td><td>✓</td><td>✓</td><td></td></tr>
+<tr><td>Experimental Validation</td><td></td><td></td><td></td><td>✓</td><td>✓</td><td></td></tr>
+<tr><td>Publication / IP</td><td></td><td></td><td></td><td></td><td>✓</td><td>✓</td></tr>
+<tr><td>Final Report</td><td></td><td></td><td></td><td></td><td></td><td>✓</td></tr>
+</table>
+
+<h2>22. Budget</h2>
+<table>
+<tr><th>Budget Head</th><th>Amount</th></tr>
+<tr><td>Research Assistant / Project Manpower</td><td>₹1,80,000</td></tr>
+<tr><td>GPU / Cloud Computing</td><td>₹1,20,000</td></tr>
+<tr><td>Software and Research Resources</td><td>₹40,000</td></tr>
+<tr><td>Dataset Processing and Storage</td><td>₹35,000</td></tr>
+<tr><td>Publication / Dissemination</td><td>₹50,000</td></tr>
+<tr><td>Research Meetings / Travel</td><td>₹35,000</td></tr>
+<tr><td>Contingency</td><td>₹40,000</td></tr>
+<tr><th>Total</th><th>₹5,00,000</th></tr>
+</table>
+
+<h2>23. Budget Justification</h2>
+<p><strong>Research Manpower – ₹1,80,000:</strong> Support for dataset preparation, implementation, experimentation, statistical analysis, documentation and prototype development.</p>
+<p><strong>GPU and Cloud Computing – ₹1,20,000:</strong> Image-model experiments, synthetic data generation, repeated experiments and large-scale comparative evaluation.</p>
+<p><strong>Software and Research Resources – ₹40,000:</strong> Specialized research software, APIs, storage and technical resources not available through existing institutional infrastructure.</p>
+<p><strong>Dataset Processing and Storage – ₹35,000:</strong> Secure storage, preprocessing, backup and computational data processing.</p>
+<p><strong>Publication and Dissemination – ₹50,000:</strong> Dissemination through appropriate peer-reviewed venues and research communication.</p>
+<p><strong>Travel and Research Meetings – ₹35,000:</strong> Research collaboration, technical meetings, workshops and dissemination.</p>
+<p><strong>Contingency – ₹40,000:</strong> Unforeseen computational, data-processing and research requirements.</p>
+</section>
+
+<section class="page pagebreak">
+<h2>24. Risk Management</h2>
+<table>
+<tr><th>Risk</th><th>Impact</th><th>Mitigation</th></tr>
+<tr><td>Limited subgroup information</td><td>High</td><td>Use datasets with appropriate metadata and report limitations.</td></tr>
+<tr><td>Bias difficult to quantify</td><td>High</td><td>Combine statistical, representation and model-level indicators.</td></tr>
+<tr><td>Mitigation reduces accuracy</td><td>High</td><td>Use multi-objective optimization.</td></tr>
+<tr><td>Synthetic data introduces artifacts</td><td>Medium</td><td>Compare against real-data baselines.</td></tr>
+<tr><td>Results vary across datasets</td><td>Medium</td><td>Use cross-dataset validation.</td></tr>
+<tr><td>Computational cost</td><td>Medium</td><td>Use efficient models and institutional/cloud GPU resources.</td></tr>
+<tr><td>Fairness metric conflict</td><td>Medium</td><td>Report multiple complementary metrics rather than a single metric.</td></tr>
+</table>
+
+<h2>25. Ethical and Responsible AI Framework</h2>
+<ul>
+<li>Use public or appropriately licensed datasets.</li>
+<li>Protect sensitive information and anonymize where necessary.</li>
+<li>Use demographic attributes responsibly and only when scientifically justified.</li>
+<li>Report limitations transparently.</li>
+<li>Maintain reproducible experiments.</li>
+<li>Avoid discriminatory deployment.</li>
+<li>Interpret fairness metrics in context.</li>
+<li>Keep research validation separate from clinical decision-making.</li>
+</ul>
+<p>The project does not assume that all demographic differences represent bias. The objective is to identify unintended, unjustified or harmful disparities arising from data and machine learning processes.</p>
+
+<h2>26. Expected Impact</h2>
+<h3>Healthcare AI</h3><p>The framework can support systematic auditing of healthcare datasets before AI model development. Dermatological AI will serve as an important validation domain for representation and skin-tone-related fairness.</p>
+<h3>Responsible AI</h3><p>The project will provide a practical mechanism for translating Responsible AI principles into measurable dataset-level audits [1,9].</p>
+<h3>Research and Academia</h3><p>The framework can become a reusable platform for research on fairness, trustworthy AI and data-centric machine learning.</p>
+<h3>Industry</h3><p>The proposed audit mechanism could eventually support organizations in evaluating datasets before deploying AI systems.</p>
+
+<h2>27. Potential Intellectual Property</h2>
+<ol>
+<li>Adaptive Multi-Dimensional Bias Risk Index computation.</li>
+<li>Automated bias-diagnosis engine.</li>
+<li>Bias-profile-based mitigation selection mechanism.</li>
+<li>Multi-objective fairness-performance optimization.</li>
+<li>Automated intersectional bias detection mechanism.</li>
+<li>Automated dataset fairness audit-report generation.</li>
+</ol>
+
+<h2>28. Software Output</h2>
+<div class="callout">
+<strong>FairDataGuard</strong><br><br>
+Input Dataset → Automated Audit → Bias Profile → Risk Index → Recommended Intervention → Mitigated Dataset → Model Evaluation → Fairness Report
+</div>
+<p>The long-term objective is to transform the prototype into a reusable <strong>AI Dataset Audit Platform</strong>.</p>
+
+<h2>29. Research Publication Plan</h2>
+<p>The project will target high-quality peer-reviewed venues in Responsible AI, Fair Machine Learning, Artificial Intelligence, Data-Centric AI, Healthcare AI, Trustworthy AI and Machine Learning.</p>
+<p>Expected outputs include <strong>1–2 quality research publications</strong>, <strong>1 functional software prototype</strong>, <strong>1 potential patent/IP application</strong> subject to novelty assessment, <strong>1 benchmark evaluation framework</strong> and <strong>1 reusable dataset auditing pipeline</strong>.</p>
+
+<h2>30. Future Expansion</h2>
+<ol>
+<li>Deep-learning-based automated bias representation learning.</li>
+<li>Fairness auditing of multimodal and generative AI datasets.</li>
+<li>LLM and NLP dataset fairness auditing.</li>
+<li>Cloud-based AI Dataset Audit Platform.</li>
+<li>Real-world validation through institutional and industry collaborations.</li>
+</ol>
+<p><strong>Long-term vision:</strong> FairDataGuard – A General-Purpose Responsible AI Dataset Audit and Optimization Platform.</p>
+
+<h2>31. Project Management</h2>
+<h3>Principal Investigator — Dr. Nitin Mishra</h3>
+<p>Professor, Department of Computer Science and Engineering, Parul University, Vadodara, Gujarat, India.</p>
+<p>The PI will lead project planning, research methodology, algorithm development, experimental design, validation, publications, intellectual property and final reporting.</p>
+<h3>Co-Principal Investigator — Dr. Rohit</h3>
+<p>Department of Computer Science and Engineering, Parul University, Vadodara, Gujarat, India.</p>
+<p>The Co-PI will contribute to algorithm development, experimental evaluation, statistical analysis, validation, documentation and research dissemination.</p>
+
+<h2>32. Measurable Success Indicators</h2>
+<ol>
+<li>Operational dataset-bias auditing framework.</li>
+<li>Detection of multiple bias dimensions.</li>
+<li>Empirical validation of MBRI.</li>
+<li>Demonstrable reduction in selected bias indicators.</li>
+<li>Improvement or maintenance of subgroup performance.</li>
+<li>Acceptable overall model performance.</li>
+<li>Successful cross-dataset validation.</li>
+<li>Functional FairDataGuard prototype.</li>
+<li>At least one quality research publication.</li>
+<li>Identification of potential patentable technical contributions.</li>
+</ol>
+</section>
+
+<section class="page pagebreak">
+<h2>33. Conclusion</h2>
+<p>The proposed <strong>FairDataGuard</strong> project addresses a critical challenge in contemporary Artificial Intelligence: the development of machine learning systems that are not only accurate, but also reliable, robust and fair.</p>
+<p>Rather than treating bias as a problem that appears only after model training, the project introduces a <strong>data-centric Responsible AI approach</strong> in which datasets are systematically audited, bias is quantified, mitigation strategies are adaptively selected, and resulting changes are validated at the model level.</p>
+<p>The central scientific contribution will be the integration of <strong>multi-dimensional bias auditing, quantitative risk assessment, adaptive mitigation and fairness-performance-robustness optimization</strong> within a single reusable framework.</p>
+<p>The project is technically feasible within a 12-month period and a proposed budget of ₹5,00,000 using existing institutional infrastructure supplemented by targeted manpower and computational resources.</p>
+<p>The resulting FairDataGuard prototype, algorithms, benchmark results, publications and potential intellectual property can form the foundation for a larger research programme in <strong>Responsible AI, Fair Machine Learning and Data-Centric Artificial Intelligence</strong>.</p>
+
+<h2>34. Selected References</h2>
+<ol>
+<li>Mehrabi, N., Morstatter, F., Saxena, N., Lerman, K., &amp; Galstyan, A. (2021). A survey on bias and fairness in machine learning. <em>ACM Computing Surveys, 54</em>(6), Article 115, 1–35. https://doi.org/10.1145/3457607.</li>
+
+<li>Suresh, H., &amp; Guttag, J. V. (2021). A framework for understanding sources of harm throughout the machine learning life cycle. In <em>Proceedings of the 1st ACM Conference on Equity and Access in Algorithms, Mechanisms, and Optimization (EAAMO ’21)</em>, 1–9. https://doi.org/10.1145/3465416.3483305.</li>
+
+<li>Hardt, M., Price, E., &amp; Srebro, N. (2016). Equality of opportunity in supervised learning. In <em>Advances in Neural Information Processing Systems 29 (NeurIPS 2016)</em>.</li>
+
+<li>Chawla, N. V., Bowyer, K. W., Hall, L. O., &amp; Kegelmeyer, W. P. (2002). SMOTE: Synthetic minority over-sampling technique. <em>Journal of Artificial Intelligence Research, 16</em>, 321–357. https://doi.org/10.1613/jair.953.</li>
+
+<li>He, H., &amp; Garcia, E. A. (2009). Learning from imbalanced data. <em>IEEE Transactions on Knowledge and Data Engineering, 21</em>(9), 1263–1284. https://doi.org/10.1109/TKDE.2008.239.</li>
+
+<li>Barocas, S., Hardt, M., &amp; Narayanan, A. (2023). <em>Fairness and Machine Learning: Limitations and Opportunities</em>. MIT Press.</li>
+
+<li>Guo, L. N., Lee, M. S., Kassamali, B., Mita, C., &amp; Nambudiri, V. E. (2022). Bias in, bias out: Underreporting and underrepresentation of diverse skin types in machine learning research for skin cancer detection—A scoping review. <em>Journal of the American Academy of Dermatology, 87</em>(1), 157–159. https://doi.org/10.1016/j.jaad.2021.06.884.</li>
+
+<li>Nasir, M., Tahir, M. Z., &amp; Zhou, S. K. (2026). Reducing skin tone bias in dermatology AI via sketch-guided multimodal fusion. <em>Scientific Reports</em>. https://doi.org/10.1038/s41598-026-59316-x.</li>
+
+<li>Schwartz, R., Vassilev, A., Greene, K. K., Perine, L., Burt, A., &amp; Hall, P. (2022). <em>Towards a Standard for Identifying and Managing Bias in Artificial Intelligence</em>. NIST Special Publication 1270. https://doi.org/10.6028/NIST.SP.1270.</li>
+
+<li>Tschandl, P. (2021). Risk of bias and error from data sets used for dermatologic artificial intelligence. <em>JAMA Dermatology, 157</em>(11), 1271–1273. https://doi.org/10.1001/jamadermatol.2021.3128.</li>
+
+<li>Vokinger, K. N., Feuerriegel, S., &amp; Kesselheim, A. S. (2021). Mitigating bias in machine learning for medicine. <em>Communications Medicine, 1</em>, 25. https://doi.org/10.1038/s43856-021-00028-w.</li>
+
+<li>He, Y., &amp; others. (2024). Data quality in AI: A systematic review for trustworthy AI in medicine. <em>npj Digital Medicine</em>. This reference is included as supporting literature for the proposal's data-quality and trustworthy-AI framing; the final grant submission should use the exact bibliographic metadata exported from the publisher database.</li>
+</ol>
+
+<p class="small"><strong>Reference verification note:</strong> The core references above were checked against publisher, DOI, PubMed or NIST records. In particular, the 2026 dermatology reference is a genuine Scientific Reports article published on 1 July 2026, DOI 10.1038/s41598-026-59316-x. The Guo et al. scoping review is indexed in PubMed with DOI 10.1016/j.jaad.2021.06.884, and the NIST bias report is SP 1270 with DOI 10.6028/NIST.SP.1270.</p>
+
+<h2>35. Proposal Summary</h2>
+<table>
+<tr><th>Project</th><td>FairDataGuard</td></tr>
+<tr><th>Title</th><td>An Adaptive Data-Centric Framework for Auditing, Quantifying and Mitigating Bias in Machine Learning Datasets</td></tr>
+<tr><th>PI</th><td>Dr. Nitin Mishra</td></tr>
+<tr><th>Co-PI</th><td>Dr. Rohit</td></tr>
+<tr><th>Institution</th><td>Parul University, Vadodara, Gujarat</td></tr>
+<tr><th>Duration</th><td>12 Months</td></tr>
+<tr><th>Funding Requested</th><td>₹5,00,000</td></tr>
+<tr><th>Core Area</th><td>Responsible AI / Fair ML / Data-Centric AI</td></tr>
+<tr><th>Primary Validation Domain</th><td>Healthcare and Dermatological AI</td></tr>
+<tr><th>Key Innovation</th><td>Multi-Dimensional Bias Risk Index + Adaptive Mitigation + Multi-Objective Validation</td></tr>
+<tr><th>Major Outputs</th><td>Prototype, publications, benchmark framework, potential IP</td></tr>
+</table>
+
+<div class="footer">
+Prepared for research funding submission. Proposal scope, numerical targets and budget should be aligned with the final funding agency's guidelines before submission.
+</div>
+</section>
+
+</body>
+</html>
