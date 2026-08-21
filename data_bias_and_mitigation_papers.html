@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>50 Foundational Papers on Data Bias and Algorithmic Fairness</title>
+  <style>
+    :root {
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --primary: #1e40af;
+      --primary-hover: #1d4ed8;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: #e2e8f0;
+      --table-header-bg: #f1f5f9;
+      --row-alt: #f8fafc;
+      --badge-bg: #e0e7ff;
+      --badge-text: #3730a3;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      padding: 32px 16px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 28px 24px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      border: 1px solid var(--border-color);
+    }
+
+    header {
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 16px;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 6px;
+    }
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+      text-align: left;
+    }
+
+    thead th {
+      background-color: var(--table-header-bg);
+      color: #334155;
+      font-weight: 600;
+      padding: 12px 14px;
+      border-bottom: 2px solid var(--border-color);
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border-color);
+      transition: background-color 0.15s ease-in-out;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: var(--row-alt);
+    }
+
+    tbody tr:hover {
+      background-color: #f1f5f9;
+    }
+
+    td {
+      padding: 12px 14px;
+      vertical-align: top;
+      color: var(--text-main);
+    }
+
+    .col-idx {
+      text-align: center;
+      font-weight: 600;
+      color: var(--text-muted);
+      width: 40px;
+    }
+
+    .col-title {
+      font-weight: 600;
+      color: #1e293b;
+      min-width: 220px;
+    }
+
+    .col-authors {
+      color: var(--text-muted);
+      min-width: 180px;
+    }
+
+    .col-venue {
+      white-space: nowrap;
+      font-weight: 500;
+      color: #334155;
+    }
+
+    .col-focus {
+      min-width: 260px;
+      color: #334155;
+    }
+
+    .btn-link {
+      display: inline-block;
+      padding: 5px 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #ffffff;
+      background-color: var(--primary);
+      text-decoration: none;
+      border-radius: 4px;
+      text-align: center;
+      white-space: nowrap;
+      transition: background-color 0.2s;
+    }
+
+    .btn-link:hover {
+      background-color: var(--primary-hover);
+    }
+
+    footer {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 0.825rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>Foundational Research on Data Bias & Algorithmic Fairness</h1>
+    <p class="subtitle">50 curated peer-reviewed academic papers covering representation disparities, annotator artifacts, and debiasing solutions.</p>
+  </header>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th class="col-idx">#</th>
+          <th>Paper Title</th>
+          <th>Key Authors</th>
+          <th>Venue & Year</th>
+          <th>Bias Category & Mitigation Strategy</th>
+          <th style="text-align: center;">Paper Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-idx">1</td>
+          <td class="col-title">A Survey on Bias and Fairness in Machine Learning</td>
+          <td class="col-authors">N. Mehrabi, F. Morstatter, N. Saxena, K. Lerman, A. Galstyan</td>
+          <td class="col-venue">ACM CSUR (2021)</td>
+          <td class="col-focus">Comprehensive taxonomy covering bias in data generation, algorithmic processing, and feedback loops alongside end-to-end mitigation interventions.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.1145/3457607" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">2</td>
+          <td class="col-title">Gender Shades: Intersectional Accuracy Disparities in Commercial Gender Classification</td>
+          <td class="col-authors">J. Buolamwini, T. Gebru</td>
+          <td class="col-venue">ACM FAccT (2018)</td>
+          <td class="col-focus">Identifies intersectional demographic skew in benchmark datasets; introduces the Pilot Parliaments Benchmark (PPB) to force balanced multi-class evaluation.</td>
+          <td style="text-align: center;"><a href="https://proceedings.mlr.press/v81/buolamwini18a.html" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">3</td>
+          <td class="col-title">Learning Fair Representations</td>
+          <td class="col-authors">R. Zemel, Y. Wu, K. Swersky, T. Pitassi, C. Dwork</td>
+          <td class="col-venue">ICML (2013)</td>
+          <td class="col-focus">Pre-processing method that maps input data into an intermediate latent representation, obfuscating sensitive attributes while preserving task-relevant predictive information.</td>
+          <td style="text-align: center;"><a href="https://proceedings.mlr.press/v28/zemel13.html" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">4</td>
+          <td class="col-title">Equality of Opportunity in Supervised Learning</td>
+          <td class="col-authors">M. Hardt, E. Price, N. Srebro</td>
+          <td class="col-venue">NeurIPS (2016)</td>
+          <td class="col-focus">Defines equalized odds and equal opportunity criteria; provides post-processing threshold adjustments to overcome historical label bias.</td>
+          <td style="text-align: center;"><a href="https://papers.nips.cc/paper/2016/hash/9d2682367c3b8f07b50ab5dcf9710003-Abstract.html" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">5</td>
+          <td class="col-title">Datasheets for Datasets</td>
+          <td class="col-authors">T. Gebru, J. Morgenstern, B. Vecchione, et al.</td>
+          <td class="col-venue">CACM (2021)</td>
+          <td class="col-focus">Standardized metadata documentation protocol to surface collection mechanics, annotation assumptions, and demographic gaps before deployment.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.1145/3458723" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">6</td>
+          <td class="col-title">Man is to Computer Programmer as Woman is to Homemaker? Debiasing Word Embeddings</td>
+          <td class="col-authors">T. Bolukbasi, K.-W. Chang, J. Zou, V. Saligrama, G. Patterson</td>
+          <td class="col-venue">NeurIPS (2016)</td>
+          <td class="col-focus">Identifies gender bias directions in latent vector spaces (word2vec) and uses geometric projection/neutralization to zero out stereotypical components.</td>
+          <td style="text-align: center;"><a href="https://papers.nips.cc/paper/2016/hash/a486cd07e4ac3d270571622f4f316ec5-Abstract.html" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">7</td>
+          <td class="col-title">Optimized Pre-Processing for Discrimination Prevention</td>
+          <td class="col-authors">F. Calmon, D. Wei, B. Vinzamuri, K. N. Ramamurthy, K. R. Varshney</td>
+          <td class="col-venue">NeurIPS (2017)</td>
+          <td class="col-focus">Probabilistic mapping framework that distorts the input distribution minimally while bounding mutual information between features and protected classes.</td>
+          <td style="text-align: center;"><a href="https://papers.nips.cc/paper/2017/hash/9a8fa213824042d3c18f3a0b28001c16-Abstract.html" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">8</td>
+          <td class="col-title">Certifying and Removing Disparate Impact</td>
+          <td class="col-authors">M. Feldman, S. A. Friedler, J. Moeller, C. Scheidegger, S. Venkatasubramanian</td>
+          <td class="col-venue">ACM KDD (2015)</td>
+          <td class="col-focus">Geometric feature repair algorithm that aligns marginal distributions across sensitive groups to satisfy legal disparate impact constraints.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.1145/2783258.2783311" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">9</td>
+          <td class="col-title">Inherent Trade-Offs in the Fair Determination of Risk Scores</td>
+          <td class="col-authors">J. Kleinberg, S. Mullainathan, M. Raghavan</td>
+          <td class="col-venue">ITCS (2017)</td>
+          <td class="col-focus">Theoretical proof establishing the mathematical incompatibility of predictive calibration and balance for positive/negative classes under unequal base rates.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.4230/LIPIcs.ITCS.2017.43" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">10</td>
+          <td class="col-title">Fair Prediction with Disparate Impact: A Study of Bias in Recidivism Prediction</td>
+          <td class="col-authors">A. Chouldechova</td>
+          <td class="col-venue">Big Data (2017)</td>
+          <td class="col-focus">Demonstrates that when base rates differ between subpopulations, instruments satisfying predictive parity inevitably yield unequal false positive/negative rates.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.1089/big.2016.0047" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">11</td>
+          <td class="col-title">Mitigating Unwanted Biases with Adversarial Learning</td>
+          <td class="col-authors">B. H. Zhang, B. Lemoine, M. Mitchell</td>
+          <td class="col-venue">AAAI/ACM AIES (2018)</td>
+          <td class="col-focus">In-processing minimax objective training an adversary to predict protected variables from intermediate representations, penalizing discriminatory encodings.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.1145/3278721.3278779" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">12</td>
+          <td class="col-title">A Reductions Approach to Fair Classification</td>
+          <td class="col-authors">A. Agarwal, A. Beygelzimer, M. Dudík, J. Langford, H. Wallach</td>
+          <td class="col-venue">ICML (2018)</td>
+          <td class="col-focus">Formulates fair classification under general fairness constraints as an efficient sequence of cost-sensitive classification sub-problems using game theory.</td>
+          <td style="text-align: center;"><a href="https://proceedings.mlr.press/v80/agarwal18a.html" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">13</td>
+          <td class="col-title">Fairness Beyond Disparate Impact: Metric and Optimization</td>
+          <td class="col-authors">M. B. Zafar, I. Valera, M. Gomez Rodriguez, K. P. Gummadi</td>
+          <td class="col-venue">ACM WSDM (2017)</td>
+          <td class="col-focus">Introduces convex covariance-based proxy constraints for mistreatment rates (FPR/FNR), allowing tractable convex optimization in margin-based classifiers.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.1145/3018661.3018704" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">14</td>
+          <td class="col-title">Learning Adversarially Fair and Transferable Representations</td>
+          <td class="col-authors">D. Madras, E. Creager, T. Pitassi, R. Zemel</td>
+          <td class="col-venue">ICML (2018)</td>
+          <td class="col-focus">Adversarial fair representation learning framework that guarantees demographic parity and equalized odds generalize cleanly across unseen downstream tasks.</td>
+          <td style="text-align: center;"><a href="https://proceedings.mlr.press/v80/madras18a.html" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">15</td>
+          <td class="col-title">Data Preprocessing Techniques for Classification Without Discrimination</td>
+          <td class="col-authors">F. Kamiran, T. Calders</td>
+          <td class="col-venue">KAIS (2012)</td>
+          <td class="col-focus">Seminal data cleaning protocols: reweighing, selective relabeling (massaging), and targeted sampling to sanitize demographic imbalances in historical training corpora.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.1007/s10115-011-0463-8" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">16</td>
+          <td class="col-title">Men Also Like Shopping: Reducing Gender Bias Amplification using Corpus-level Constraints</td>
+          <td class="col-authors">J. Zhao, T. Wang, M. Yatskar, V. Ordonez, K.-W. Chang</td>
+          <td class="col-venue">EMNLP (2017)</td>
+          <td class="col-focus">Demonstrates models amplify dataset skews in visual semantic role labeling; enforces corpus-level Lagrangian integer linear constraints (RBA) to prevent magnification.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.18653/v1/D17-1323" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">17</td>
+          <td class="col-title">Lipstick on a Pig: Debiasing Methods Cover up Systematic Gender Biases in Word Embeddings</td>
+          <td class="col-authors">H. Gonen, Y. Goldberg</td>
+          <td class="col-venue">NAACL-HLT (2019)</td>
+          <td class="col-focus">Critiques projection-based word debiasing, demonstrating that spatial clustering and implicit associative artifacts persist despite geometric vector alignment.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.18653/v1/N19-1061" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">18</td>
+          <td class="col-title">Annotation Artifacts in Natural Language Inference Data</td>
+          <td class="col-authors">S. Gururangan, S. Swayamdipta, O. Levy, et al.</td>
+          <td class="col-venue">NAACL-HLT (2018)</td>
+          <td class="col-focus">Reveals that crowd annotators inadvertently introduce lexical shortcuts into benchmarks (e.g., negation in contradiction), allowing hypothesis-only models to cheat.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.18653/v1/N18-2017" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">19</td>
+          <td class="col-title">Are We Modeling the Task or the Annotator? An Investigation of Annotator Bias</td>
+          <td class="col-authors">M. Geva, Y. Goldberg, J. Berant</td>
+          <td class="col-venue">EMNLP-IJCNLP (2019)</td>
+          <td class="col-focus">Proves NLP models overfit to annotator-specific stylistic idiosyncrasies; proposes annotator-aware data splits and multi-annotator modeling architectures.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.18653/v1/D19-1107" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">20</td>
+          <td class="col-title">Model Cards for Model Reporting</td>
+          <td class="col-authors">M. Mitchell, S. Wu, A. Zaldivar, et al.</td>
+          <td class="col-venue">ACM FAccT (2019)</td>
+          <td class="col-focus">Standardized reporting paradigm mandating disaggregated benchmark evaluations across intersectional subgroups and distinct environmental conditions.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.1145/3287560.3287596" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">21</td>
+          <td class="col-title">Unbiased Look at Dataset Bias</td>
+          <td class="col-authors">A. Torralba, A. A. Efros</td>
+          <td class="col-venue">CVPR (2011)</td>
+          <td class="col-focus">Seminal cross-dataset generalization experiments in vision benchmarks, proving algorithms memorize dataset collection bias rather than semantic visual concepts.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.1109/CVPR.2011.5995347" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">22</td>
+          <td class="col-title">Fairness Through Awareness</td>
+          <td class="col-authors">C. Dwork, M. Hardt, T. Pitassi, O. Reingold, R. Zemel</td>
+          <td class="col-venue">ITCS (2012)</td>
+          <td class="col-focus">Establishes individual fairness via Lipschitz condition on task-specific distance metrics, ensuring similar individuals receive similar classification distributions.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.1145/2090236.2090255" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">23</td>
+          <td class="col-title">On Fairness and Calibration</td>
+          <td class="col-authors">G. Pleiss, M. Raghavan, F. Wu, J. Kleinberg, K. Q. Weinberger</td>
+          <td class="col-venue">NeurIPS (2017)</td>
+          <td class="col-focus">Examines post-processing calibration constraints and shows randomized threshold relaxations can reconcile calibration with equalized odds.</td>
+          <td style="text-align: center;"><a href="https://papers.nips.cc/paper/2017/hash/b8b9c74ac5261ec7f012c3a4e9529534-Abstract.html" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">24</td>
+          <td class="col-title">Two-Player Games for Efficient Non-Convex Constrained Optimization</td>
+          <td class="col-authors">A. Cotter, H. Jiang, M. Gupta</td>
+          <td class="col-venue">ALT / JMLR (2019)</td>
+          <td class="col-focus">Formulates non-convex constrained optimization under rate constraints (e.g., demographic parity, recall parity) as a two-player zero-sum game.</td>
+          <td style="text-align: center;"><a href="https://proceedings.mlr.press/v99/cotter19b.html" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">25</td>
+          <td class="col-title">Fairness Without Demographics in Machine Learning</td>
+          <td class="col-authors">T. Hashimoto, M. Srivastava, H. Namkoong, P. Liang</td>
+          <td class="col-venue">ICML (2018)</td>
+          <td class="col-focus">Applies Distributionally Robust Optimization (DRO) to protect minority subpopulations over repeated feedback iterations when protected demographic labels are unobserved.</td>
+          <td style="text-align: center;"><a href="https://proceedings.mlr.press/v80/hashimoto18a.html" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">26</td>
+          <td class="col-title">Counterfactual Fairness</td>
+          <td class="col-authors">M. J. Kusner, J. R. Loftus, C. Russell, R. Silva</td>
+          <td class="col-venue">NeurIPS (2017)</td>
+          <td class="col-focus">Causal modeling framework ensuring model predictions remain invariant under counterfactual interventions on sensitive demographic variables in causal DAGs.</td>
+          <td style="text-align: center;"><a href="https://papers.nips.cc/paper/2017/hash/a486cd07e4ac3d270571622f4f316ec5-Abstract.html" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">27</td>
+          <td class="col-title">Data Statements for Natural Language Processing</td>
+          <td class="col-authors">E. M. Bender, B. Friedman</td>
+          <td class="col-venue">TACL (2018)</td>
+          <td class="col-focus">Qualitative schema for linguistic datasets capturing speaker demographics, annotator characteristics, and speech context to prevent exclusionary generalization.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.1162/tacl_a_00041" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">28</td>
+          <td class="col-title">Classification with Fairness Constraints: A Meta-Algorithm with Provable Guarantees</td>
+          <td class="col-authors">L. E. Celis, L. Huang, V. Keswani, N. K. Vishnoi</td>
+          <td class="col-venue">ACM FAccT (2019)</td>
+          <td class="col-focus">Flexible meta-algorithm handling multiple non-linear fairness constraints simultaneously with rigorous theoretical generalization and error bounds.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.1145/3287560.3287586" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">29</td>
+          <td class="col-title">Empirical Risk Minimization Under Fairness Constraints</td>
+          <td class="col-authors">M. Donini, L. Oneto, S. Ben-David, J. Shawe-Taylor, M. Pontil</td>
+          <td class="col-venue">NeurIPS (2018)</td>
+          <td class="col-focus">Linear programming-based ERM framework bounding the generalization risk of equal opportunity violations in kernel machines and deep architectures.</td>
+          <td style="text-align: center;"><a href="https://papers.nips.cc/paper/2018/hash/373e4c5d8ed8b82627a087194e153667-Abstract.html" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">30</td>
+          <td class="col-title">Towards Fairness in Visual Recognition: Effective Strategies for Bias Mitigation</td>
+          <td class="col-authors">Z. Wang, K. Qinami, I. C. Karakozis, et al.</td>
+          <td class="col-venue">CVPR (2020)</td>
+          <td class="col-focus">Evaluates domain-independent feature extraction, attribute adversarial training, and balanced sampling on visual benchmarks like CelebA.</td>
+          <td style="text-align: center;"><a href="https://openaccess.thecvf.com/content_CVPR_2020/html/Wang_Towards_Fairness_in_Visual_Recognition_Effective_Strategies_for_Bias_Mitigation_CVPR_2020_paper.html" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">31</td>
+          <td class="col-title">Women also Snowboard: Overcoming Bias in Captioning Models</td>
+          <td class="col-authors">L. A. Hendricks, K. Burns, K. Saenko, T. Darrell, A. Rohrbach</td>
+          <td class="col-venue">ECCV (2018)</td>
+          <td class="col-focus">Equal Opportunity Guiding Loss and visual-context blinding mechanism that penalizes caption models when predicting gender without direct image evidence.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.1007/978-3-030-01219-9_47" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">32</td>
+          <td class="col-title">StereoSet: Measuring Stereotypical Bias in Pretrained Language Models</td>
+          <td class="col-authors">M. Nadeem, A. Bethke, S. Reddy</td>
+          <td class="col-venue">ACL-IJCNLP (2021)</td>
+          <td class="col-focus">Standardized large-scale probe dataset evaluating language modeling capability alongside stereotypical associations across gender, race, religion, and profession.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.18653/v1/2021.acl-long.416" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">33</td>
+          <td class="col-title">Self-Diagnosis and Self-Debiasing: A Proposal for Grounding Language Models</td>
+          <td class="col-authors">T. Schick, S. Udupa, H. Schütze</td>
+          <td class="col-venue">ACL-IJCNLP (2021)</td>
+          <td class="col-focus">Decoding-time intervention using internal model knowledge to measure its own bias and guide generative token probabilities away from undesirable distributions.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.18653/v1/2021.acl-long.561" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">34</td>
+          <td class="col-title">Closing the AI Accountability Gap: Defining an End-to-End Framework for Internal Auditing</td>
+          <td class="col-authors">I. D. Raji, A. Smart, R. N. White, et al.</td>
+          <td class="col-venue">ACM FAccT (2020)</td>
+          <td class="col-focus">SMACTR operational audit framework providing concrete checklists and accountability milestones throughout the data collection, testing, and release pipeline.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.1145/3351095.3372873" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">35</td>
+          <td class="col-title">The Woman Worked as a Babysitter: On Biases in Language Generation</td>
+          <td class="col-authors">E. Sheng, K.-W. Chang, P. Natarajan, N. Peng</td>
+          <td class="col-venue">EMNLP-IJCNLP (2019)</td>
+          <td class="col-focus">Introduces prefix prompt templates and the 'regard' metric to measure social bias in open-ended natural language generation; tests prompt prefix mitigation.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.18653/v1/D19-1339" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">36</td>
+          <td class="col-title">Bias and Fairness in Large Language Models: A Survey</td>
+          <td class="col-authors">I. O. Gallegos, R. A. Rossi, J. Barrow, et al.</td>
+          <td class="col-venue">Comput. Linguistics (2024)</td>
+          <td class="col-focus">Systematic survey covering pre-training corpus filtering, instruction-tuning alignment (RLHF/DPO), and decoding-time interventions for foundation models.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.1162/coli_a_00524" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">37</td>
+          <td class="col-title">Discovering Fair Representations in the Data Domain</td>
+          <td class="col-authors">N. Quadrianto, V. Sharmanska, O. Thomas</td>
+          <td class="col-venue">CVPR (2019)</td>
+          <td class="col-focus">Translates data into an interpretable and fair sanitized dataset domain where semantic attributes remain human-inspectable without preserving sensitive proxies.</td>
+          <td style="text-align: center;"><a href="https://openaccess.thecvf.com/content_CVPR_2019/html/Quadrianto_Discovering_Fair_Representations_in_the_Data_Domain_CVPR_2019_paper.html" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">38</td>
+          <td class="col-title">Flexibly Fair Representation Learning by Disentanglement</td>
+          <td class="col-authors">E. Creager, D. Madras, J.-H. Jacobsen, et al.</td>
+          <td class="col-venue">ICML (2019)</td>
+          <td class="col-focus">Variational autoencoder framework learning modular disentangled latent factors, enabling practitioners to filter out arbitrary sensitive attributes at test time.</td>
+          <td style="text-align: center;"><a href="https://proceedings.mlr.press/v97/creager19a.html" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">39</td>
+          <td class="col-title">Decision Theory for Freedom of Discrimination in Machine Learning</td>
+          <td class="col-authors">F. Kamiran, A. Karim, B. Verwer</td>
+          <td class="col-venue">KAIS (2012)</td>
+          <td class="col-focus">Reject Option Classification (ROC) post-processing method shifting decision boundaries exclusively around critical regions of high predictive uncertainty.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.1007/s10115-011-0463-8" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">40</td>
+          <td class="col-title">An Efficient Post-Processing Method for Balancing Fairness and Accuracy</td>
+          <td class="col-authors">I. Alabdulmohsin, M. Gerdzhev</td>
+          <td class="col-venue">AISTATS (2021)</td>
+          <td class="col-focus">Closed-form post-processing optimization projecting binary classifier scores onto optimal fairness-constrained polytopes with minimal Pareto accuracy sacrifice.</td>
+          <td style="text-align: center;"><a href="https://proceedings.mlr.press/v130/alabdulmohsin21a.html" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">41</td>
+          <td class="col-title">Equalized Odds Post-Processing via Threshold Tuning</td>
+          <td class="col-authors">B. Woodworth, S. Gunasekar, M. I. Ohannessian, N. Srebro</td>
+          <td class="col-venue">COLT (2017)</td>
+          <td class="col-focus">Establishes fundamental sample complexity bounds comparing empirical post-processing threshold adjustments against unconstrained in-processing baselines.</td>
+          <td style="text-align: center;"><a href="https://proceedings.mlr.press/v65/woodworth17a.html" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">42</td>
+          <td class="col-title">Fairness-Aware Classifier with Decision Boundary Adjustment</td>
+          <td class="col-authors">T. Kamishima, S. Akaho, H. Asoh, J. Sakuma</td>
+          <td class="col-venue">ECML PKDD (2012)</td>
+          <td class="col-focus">Regularization technique incorporating prejudice index penalties directly into logistic objective functions to neutralize implicit dataset correlations.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.1007/978-3-642-33486-3_3" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">43</td>
+          <td class="col-title">BOLD: Dataset and Metrics for Measuring Biases in Open-Ended Language Generation</td>
+          <td class="col-authors">J. K. Dhamala, T. Sun, V. Kumar, et al.</td>
+          <td class="col-venue">ACM FAccT (2021)</td>
+          <td class="col-focus">Large-scale benchmark covering 23,000+ English prompts across 5 demographic domains for fine-grained sentiment, toxicity, and psycholinguistic bias evaluation.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.1145/3442188.3445924" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">44</td>
+          <td class="col-title">Towards Understanding and Mitigating Social Biases in Language Models</td>
+          <td class="col-authors">P. P. Liang, C. Wu, L.-P. Morency, R. Salakhutdinov</td>
+          <td class="col-venue">ICML (2021)</td>
+          <td class="col-focus">Formulates contextual debiasing via null-space projection and counterfactual data augmentation during LM adaptation.</td>
+          <td style="text-align: center;"><a href="https://proceedings.mlr.press/v139/liang21a.html" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">45</td>
+          <td class="col-title">DecodingTrust: A Comprehensive Assessment of Trustworthiness in GPT Models</td>
+          <td class="col-authors">B. Wang, W. Chen, H. Pei, et al.</td>
+          <td class="col-venue">NeurIPS (2023)</td>
+          <td class="col-focus">Systematic auditing of toxicity, stereotype bias, and adversarial vulnerability in frontier LLMs under diverse prompt distributions and conversational contexts.</td>
+          <td style="text-align: center;"><a href="https://proceedings.neurips.cc/paper_files/paper/2023/hash/b25686036f1c48e8ff11e51b143a50d2-Abstract-Datasets_and_Benchmarks.html" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">46</td>
+          <td class="col-title">DALL-Eval: Probing Social Bias in Text-to-Image Generation</td>
+          <td class="col-authors">J. Cho, A. Zala, M. Bansal</td>
+          <td class="col-venue">ICCV (2023)</td>
+          <td class="col-focus">Visual question-answering evaluation suite auditing demographic skews and occupational representation disparities in multimodal diffusion pipelines.</td>
+          <td style="text-align: center;"><a href="https://openaccess.thecvf.com/content/ICCV2023/html/Cho_DALL-Eval_Probing_Social_Bias_in_Text-to-Image_Generation_ICCV_2023_paper.html" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">47</td>
+          <td class="col-title">Stable Bias: Analyzing Societal Representations in Diffusion Models</td>
+          <td class="col-authors">A. S. Luccioni, C. Akiki, M. Mitchell, Y. Jernite</td>
+          <td class="col-venue">NeurIPS (2023)</td>
+          <td class="col-focus">Empirical audit revealing heightened gender and racial stereotyping in open diffusion weights relative to baseline prompt distributions; offers dataset curation guidelines.</td>
+          <td style="text-align: center;"><a href="https://proceedings.neurips.cc/paper_files/paper/2023/hash/3f40f09805b583f707f1854ea7fb4bf8-Abstract-Datasets_and_Benchmarks.html" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">48</td>
+          <td class="col-title">Fairness in Multi-Task Learning via Post-Processing Optimization</td>
+          <td class="col-authors">L. Oneto, M. Donini, G. Luise, et al.</td>
+          <td class="col-venue">NeurIPS (2019)</td>
+          <td class="col-focus">Post-processing optimization framework transferring demographic parity and equal opportunity guarantees across shared multi-task latent representations.</td>
+          <td style="text-align: center;"><a href="https://papers.nips.cc/paper/2019/hash/1113b28b6d4b4a1b025b3992147781b0-Abstract.html" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">49</td>
+          <td class="col-title">Individual Fairness in Post-Processing via Metric-Aligned Perturbations</td>
+          <td class="col-authors">S. Maity, D. Mukherjee, M. Yurochkin, Y. Sun</td>
+          <td class="col-venue">NeurIPS (2021)</td>
+          <td class="col-focus">Optimal transport and metric smoothing formulation enforcing individual Lipschitz fairness on pre-trained black-box models without full retraining.</td>
+          <td style="text-align: center;"><a href="https://proceedings.neurips.cc/paper/2021/hash/6c0199e82937be1e92d51fb264be48ab-Abstract.html" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+        <tr>
+          <td class="col-idx">50</td>
+          <td class="col-title">Auditing Radicalization: A Large-Scale Analysis of Algorithmic Biases in Recommenders</td>
+          <td class="col-authors">M. H. Ribeiro, R. Ottoni, R. West, V. A. F. Almeida, W. Meira Jr.</td>
+          <td class="col-venue">ACM FAccT (2020)</td>
+          <td class="col-focus">Audit methodology assessing feedback loops and interaction bias in longitudinal recommendation graphs; proposes feedback diversification techniques.</td>
+          <td style="text-align: center;"><a href="https://doi.org/10.1145/3351095.3372879" target="_blank" rel="noopener noreferrer" class="btn-link">View Paper</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    <p>Curated Reference List &bull; Machine Learning, NLP, and Computer Vision Fairness</p>
+  </footer>
+</div>
+
+</body>
+</html>
