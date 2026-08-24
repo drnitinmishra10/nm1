@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research Challenges in AI-Based Financial Recommendation Systems</title>
+<style>
+  @page { size: A4; margin: 17mm 16mm 18mm 16mm; }
+  body {
+    margin:0; color:#111; background:#fff;
+    font-family:"Times New Roman", Times, serif;
+    font-size:10.7pt; line-height:1.28;
+  }
+  .paper { max-width: 800px; margin:0 auto; padding:22px 0 36px; }
+  h1 { text-align:center; font-size:18pt; line-height:1.12; margin:0 0 8px; }
+  h2 { font-size:12.4pt; margin:12px 0 5px; }
+  h3 { font-size:11pt; margin:9px 0 4px; }
+  p { text-align:justify; margin:0 0 6px; }
+  .authors, .affil { text-align:center; }
+  .authors { font-size:11pt; margin-bottom:4px; }
+  .affil { font-size:9.8pt; line-height:1.35; }
+  .abstract { border:0.7px solid #666; padding:8px 9px; margin:11px 0 7px; }
+  .keywords { margin-top:5px; }
+  table { width:100%; border-collapse:collapse; margin:7px 0 8px; font-size:8.75pt; }
+  th,td { border:0.45px solid #777; padding:4px; vertical-align:top; text-align:left; }
+  th { font-weight:bold; }
+  .figure { border:0.6px solid #777; padding:8px; margin:8px 0; }
+  .figure-title { font-weight:bold; text-align:center; margin-bottom:7px; }
+  .flow { display:grid; grid-template-columns:1fr 24px 1fr 24px 1fr 24px 1fr; gap:4px; align-items:center; }
+  .box { border:0.7px solid #666; padding:7px 4px; text-align:center; font-size:8.8pt; }
+  .arrow { text-align:center; font-size:15px; }
+  .note { font-size:8.5pt; color:#333; margin-top:5px; }
+  .formula { text-align:center; font-family:"Courier New",monospace; font-size:9.1pt; margin:5px 0; }
+  .refs { font-size:8.6pt; line-height:1.16; }
+  .refs p { text-align:left; margin-bottom:4px; }
+  .pagebreak { break-before:page; page-break-before:always; }
+  .footer { border-top:0.5px solid #888; margin-top:10px; padding-top:5px; text-align:center; color:#555; font-size:8.2pt; }
+  ol { margin-top:4px; }
+  @media print { .paper{max-width:none;padding:0;} .screen-note{display:none;} }
+</style>
+</head>
+<body>
+<div class="paper">
+
+<h1>Research Challenges in AI-Based Financial Recommendation Systems: Toward Personalized, Explainable, Trustworthy, and Regulation-Aware Decision Support</h1>
+
+<div class="authors"><strong>Dr. Nitin Mishra</strong><sup>1</sup>, <strong>Ms. Tamanna Sharma</strong><sup>2</sup></div>
+<div class="affil">
+<sup>1</sup>Professor, Department of Computer Science &amp; Engineering, Parul University, Vadodara, India<br>
+Email: drnitinmishra10@gmail.com<br>
+<sup>2</sup>Assistant Professor, Faculty of Management Studies (FMS), Parul University, Vadodara, India; Research Scholar, Management, Sigma University, Vadodara, India
+</div>
+
+<div class="abstract">
+<strong>Abstract—</strong>
+Artificial intelligence (AI) is increasingly being used to support financial recommendation tasks such as investment selection, portfolio construction, robo-advisory, banking-product recommendation, credit decisions, insurance personalization, and financial education. However, financial recommendation is not a conventional recommender-system problem. Financial choices are sensitive to market dynamics, risk preferences, delayed outcomes, portfolio interactions, regulations, and the user's capacity to understand and act on a recommendation. Recent literature shows a rapid movement from rule-based and conventional recommendation techniques toward machine learning, deep learning, reinforcement learning, graph-based methods, and large language model (LLM)-assisted interfaces. At the same time, significant research challenges remain in personalization, cold-start handling, temporal robustness, portfolio-level reasoning, explainability, fairness, privacy, trustworthy evaluation, human oversight, and regulatory compliance. This paper reviews these challenges and proposes a consolidated research framework for future AI-based financial recommendation systems. The framework separates the problem into five interacting layers: user and preference modeling, financial knowledge and market-state modeling, recommendation and portfolio optimization, explanation and human interaction, and governance and continuous monitoring. The paper argues that future systems should move beyond accuracy-oriented ranking toward multi-objective evaluation that jointly considers suitability, risk, diversification, stability, explainability, fairness, and long-term user outcomes. The paper also highlights the emerging role of generative AI, while emphasizing hallucination control, grounding, privacy, auditability, and human oversight. The objective is to provide researchers with a clearer roadmap for developing financially useful and socially responsible recommendation systems.
+<div class="keywords"><strong>Keywords—</strong> financial recommendation systems, robo-advisory, personalized investment, explainable AI, reinforcement learning, portfolio optimization, fairness, trust, financial technology, large language models</div>
+</div>
+
+<h2>1. Introduction</h2>
+<p>
+Recommender systems have traditionally been developed to help users select items such as movies, products, news, or music. Financial recommendation systems operate under a very different set of conditions. An investment recommendation can change a person's wealth, risk exposure, liquidity, and long-term financial position. In addition, the quality of a recommendation cannot be judged only by whether the user clicks or purchases an item. Suitability, downside risk, diversification, time horizon, tax considerations, market conditions, and the consequences of a poor recommendation also matter [1–4].
+</p>
+<p>
+Robo-advisors and other AI-enabled advisory systems have therefore emerged as an important part of financial technology. The recent literature describes robo-advisory as a rapidly developing research area covering classification of service models, investor behavior, performance, personalization, and algorithm design [1]. More broadly, AI is now being used across investment management for portfolio optimization, forecasting, risk management, advisory, and compliance, but the literature remains fragmented across finance, computer science, information systems, and human-computer interaction [5].
+</p>
+<p>
+At the technical level, AI provides powerful tools for extracting investor preferences, learning from behavioral data, ranking financial products, forecasting market states, and adapting recommendations over time. Recent studies have examined online learning and reinforcement learning for personalized investment advice [6,7], while explainable robo-advisor research has focused on cold-start investors and the challenge of producing understandable recommendations from complex models [8]. At the same time, newer work is exploring generative AI and LLMs for financial advice interfaces, financial education, and recommendation explanation [9].
+</p>
+<p>
+The core research problem is consequently no longer just <em>“How can a model make a better prediction?”</em> It is <em>“How can an AI system make a financially appropriate recommendation for a particular person, at a particular time, under uncertainty, while remaining understandable, fair, secure, and controllable?”</em> This paper addresses that broader question.
+</p>
+
+<h2>2. Scope and Review Approach</h2>
+<p>
+This paper presents a focused narrative review and research agenda rather than a claim of a formal systematic review. The literature was considered across five streams: (i) financial recommender and robo-advisory systems, (ii) investor preference and portfolio modeling, (iii) explainable and human-centered AI, (iv) fairness, privacy, and trustworthy AI, and (v) emerging generative-AI applications in financial services. Recent peer-reviewed studies and authoritative academic sources published primarily during 2018–2026 were prioritized, together with foundational papers that define important methods or evaluation principles.
+</p>
+<p>
+A notable recent systematic review of AI-based financial recommender systems analyzed 86 peer-reviewed studies published between 2018 and 2025 and reported a shift from conventional collaborative/content-based approaches toward deep learning, graph neural networks, reinforcement learning, and LLM-assisted architectures. It also identified a persistent mismatch between conventional item-ranking evaluation and the portfolio-aware, risk-sensitive nature of financial decision support [10]. This observation strongly motivates the research challenges consolidated in this paper.
+</p>
+
+<h2>3. Evolution of AI-Based Financial Recommendation</h2>
+<table>
+<tr><th>Generation</th><th>Typical approach</th><th>Main strength</th><th>Major limitation</th></tr>
+<tr><td>Rule-based</td><td>Risk questionnaires, expert rules</td><td>Simple and auditable</td><td>Static and weakly personalized</td></tr>
+<tr><td>Conventional ML</td><td>Regression, trees, classification, collaborative filtering</td><td>Better personalization</td><td>Limited temporal/context modeling</td></tr>
+<tr><td>Deep learning</td><td>Neural networks, embeddings, sequence models</td><td>Nonlinear preference learning</td><td>Data demand and interpretability</td></tr>
+<tr><td>Reinforcement learning</td><td>Bandits, policy learning, online adaptation</td><td>Dynamic preference adaptation</td><td>Reward design and financial risk</td></tr>
+<tr><td>Graph-based</td><td>Investor-product/social/market graphs</td><td>Relational information</td><td>Graph drift and privacy</td></tr>
+<tr><td>Generative AI</td><td>LLM/RAG-based interaction and explanation</td><td>Natural-language interaction</td><td>Hallucination, grounding, compliance</td></tr>
+</table>
+<p>
+The evolution shows increasing model complexity, but greater complexity does not automatically mean better financial advice. A high-capacity model can still produce unsuitable recommendations when its objective function is poorly specified, training data are non-representative, or evaluation ignores the portfolio consequences of individual recommendations [10,11].
+</p>
+
+<h2>4. Major Research Challenges</h2>
+
+<h3>4.1 Personalized investor preference modeling</h3>
+<p>
+The first challenge is representing the investor correctly. Risk tolerance is often reduced to a small questionnaire, even though actual preferences can depend on income stability, wealth, investment horizon, liquidity needs, financial literacy, previous experience, behavioral biases, and changing life circumstances. Research on interactive preference analysis shows that online reinforcement learning can be used to learn evolving investor preferences instead of assuming that a user's profile is static [6]. Related work formulates personalized robo-advising as an adaptive portfolio problem in which the system interacts with the client to update the risk-return trade-off over time [31]. Recent constrained reinforcement learning work similarly treats the investor as a dynamic decision-maker whose preferences must be modeled alongside portfolio and product constraints [7].
+</p>
+<p>
+The research gap is the development of multi-dimensional preference models that combine explicit statements with observed behavior while avoiding overfitting to short-term trading activity. A user who recently bought a risky asset should not automatically be interpreted as having permanently high risk tolerance.
+</p>
+
+<h3>4.2 Cold-start and sparse-feedback problems</h3>
+<p>
+New investors have little or no transaction history. Traditional recommendation methods therefore struggle to infer preferences, creating a cold-start problem. A recent explainable robo-advisor study addressed this by combining CatBoost-like feature processing, neural learning, online updates, and social-influence information to generate initial recommendations for new clients [8].
+</p>
+<p>
+The deeper challenge is that financial feedback is delayed. In a movie recommender system, a user can rate an item immediately. In finance, the quality of a recommendation may only become clear after months or years. Consequently, the system must avoid learning aggressive policies simply because they generate short-term engagement or trading activity.
+</p>
+
+<h3>4.3 Portfolio-level rather than item-level recommendation</h3>
+<p>
+Most conventional recommender systems rank individual items. Financial decisions, however, are inherently portfolio-dependent. A recommendation that looks attractive in isolation may increase concentration risk when added to an existing portfolio. Correlation, drawdown, liquidity, transaction costs, tax consequences, and diversification must therefore be considered jointly [2,3,10].
+</p>
+<p>
+Future systems should shift from <em>“recommend this security”</em> to <em>“recommend this action within the user's portfolio.”</em> This requires portfolio-aware objectives and constraints, not only ranking accuracy.
+</p>
+
+<h3>4.4 Non-stationary markets and concept drift</h3>
+<p>
+Financial data are non-stationary. Relationships that hold in one market regime may break during another. A recommendation model trained on a calm market can behave poorly during a crisis, inflation shock, or structural change in investor behavior. This creates a need for temporal validation, drift detection, regime-aware learning, and continuous model monitoring [10,12].
+</p>
+<p>
+Random train-test splits should therefore be supplemented by rolling or walk-forward validation. Researchers should distinguish between temporal generalization and ordinary interpolation. Models that perform well on randomly mixed observations may fail when asked to predict genuinely future conditions.
+</p>
+
+<h3>4.5 Explainability and meaningful disclosure</h3>
+<p>
+Explainability is particularly important in financial recommendations because users may be unwilling to act on a black-box result, while regulators and financial institutions may require understandable justification. Recent research on AI-enabled financial advisory services identifies explainable AI as a major implementation requirement and emphasizes the difference between technical interpretability and explanations that ordinary customers can actually understand [13].
+</p>
+<p>
+Feature importance alone may be insufficient. An investor may need explanations at multiple levels: <em>why this product?</em>, <em>why now?</em>, <em>why this risk level?</em>, <em>what alternatives were considered?</em>, and <em>what could make this recommendation wrong?</em> Financial explanation systems should therefore be evaluated by comprehension, calibration of trust, and decision quality rather than by the presence of a visualization alone [13,14].
+</p>
+
+<h3>4.6 Trust, automation bias, and human oversight</h3>
+<p>
+Financial AI systems must manage two opposite risks: users may distrust useful recommendations, or they may over-trust automated advice. A transparent interface should support informed reliance rather than simply maximize acceptance. Research on robo-advisor adoption and design highlights the importance of perceived usefulness, cognitive load, transparency, user autonomy, and the ability to communicate limitations [15–17].
+</p>
+<p>
+Human oversight is therefore not necessarily a weakness of automation. Hybrid systems can reserve escalation for cases involving unusual risk, conflicting goals, ambiguous user intent, major market events, or insufficient evidence.
+</p>
+
+<h3>4.7 Fairness and discriminatory outcomes</h3>
+<p>
+Financial recommendation systems may produce systematically different recommendations across demographic or socioeconomic groups because of biased training data, unequal access to products, proxy variables, historical decisions, or differences in financial literacy. The broader fairness literature shows that bias can enter through data collection, labels, model design, or deployment and that there is no single fairness metric appropriate for all contexts [18–21].
+</p>
+<p>
+In finance, fairness must be interpreted carefully. Equal recommendation rates are not necessarily the correct objective when investors have legitimately different goals or risk capacities. More meaningful research questions concern equitable access to suitable products, comparable recommendation quality, comparable error rates, and whether protected characteristics or their proxies improperly influence outcomes.
+</p>
+
+<h3>4.8 Privacy and sensitive behavioral data</h3>
+<p>
+Financial recommendation systems can use extremely sensitive information, including income, spending, transaction history, assets, liabilities, location, and potentially social-network signals. More personalization can therefore create more privacy exposure. Privacy-preserving machine learning, data minimization, access control, secure aggregation, and federated learning are potential directions, but they introduce additional complexity and may affect model performance [22].
+</p>
+<p>
+A major research challenge is finding the right trade-off between personalization and data minimization: the system should collect information that meaningfully improves suitability without turning every available personal signal into a prediction feature.
+</p>
+
+<h3>4.9 Security, adversarial manipulation, and data poisoning</h3>
+<p>
+Financial recommenders depend on continuously changing external data sources. This creates attack surfaces such as manipulated market information, adversarial inputs, malicious content, compromised APIs, and training-data poisoning. Security must therefore be integrated into the recommendation pipeline rather than treated as a separate software concern.
+</p>
+<p>
+For LLM-based advisory systems, the attack surface expands to prompt injection, retrieval manipulation, unauthorized disclosure, and fabricated financial claims. Grounded generation, source attribution, tool restrictions, adversarial evaluation, and continuous monitoring are important research directions [9,23].
+</p>
+
+<h3>4.10 Regulation, suitability, and accountability</h3>
+<p>
+Financial advice is a regulated domain in many jurisdictions. The challenge is not only to build a technically accurate recommendation model but also to demonstrate that the system behaves consistently with suitability, disclosure, privacy, governance, and record-keeping requirements. Recent research on robo-advisory design emphasizes transparency, disclosure of limitations, ethical principles, and careful communication rather than requiring customers to understand the full internal algorithm [24].
+</p>
+<p>
+Future work should therefore treat compliance as a design requirement. Audit trails, model cards, recommendation logs, explanation records, versioned data, and human escalation paths can improve accountability [25,26].
+</p>
+
+<div class="figure">
+<div class="figure-title">Figure 1. Proposed research architecture for trustworthy AI-based financial recommendation</div>
+<div class="flow">
+<div class="box">Investor Profile<br>Goals • Risk • Horizon • Constraints</div>
+<div class="arrow">→</div>
+<div class="box">Financial Context<br>Market • Portfolio • Products • News</div>
+<div class="arrow">→</div>
+<div class="box">AI Engine<br>ML • GNN • RL • LLM/RAG</div>
+<div class="arrow">→</div>
+<div class="box">Decision Layer<br>Suitability • Risk • Diversity • Constraints</div>
+</div>
+<p class="note">Cross-cutting controls: explainability, fairness, privacy, security, governance, human oversight, drift monitoring, and auditability.</p>
+</div>
+
+<h2>5. Evaluation Challenges</h2>
+<p>
+The evaluation of financial recommendation systems is one of the weakest areas in the literature. Conventional recommender-system metrics such as precision, recall, hit rate, and NDCG may be useful for ranking, but they do not capture financial utility. A system can recommend the “right” item according to clicks while still increasing concentration or downside risk.
+</p>
+<p>
+A more appropriate evaluation protocol should report multiple dimensions:
+</p>
+<table>
+<tr><th>Dimension</th><th>Example measures</th><th>Why it matters</th></tr>
+<tr><td>Recommendation quality</td><td>Precision@k, Recall@k, NDCG, hit rate</td><td>Ranking relevance</td></tr>
+<tr><td>Financial performance</td><td>Return, Sharpe ratio, Sortino ratio, alpha</td><td>Economic utility</td></tr>
+<tr><td>Downside risk</td><td>Maximum drawdown, VaR, CVaR</td><td>Loss sensitivity</td></tr>
+<tr><td>Diversification</td><td>Concentration, diversification ratio, correlation</td><td>Portfolio robustness</td></tr>
+<tr><td>Stability</td><td>Turnover, recommendation volatility</td><td>Practical usability</td></tr>
+<tr><td>Explainability</td><td>Comprehension, fidelity, explanation stability</td><td>Trust and informed decisions</td></tr>
+<tr><td>Fairness</td><td>Group utility/error gaps</td><td>Equitable recommendation quality</td></tr>
+<tr><td>Robustness</td><td>Walk-forward / stress tests</td><td>Resilience under change</td></tr>
+</table>
+<p>
+This multidimensional view aligns with the emerging literature's warning that financial recommendation should not be evaluated as an ordinary item-ranking problem [10]. It also reduces the risk of optimizing a single metric at the expense of user welfare.
+</p>
+
+<h2>6. Research Gaps</h2>
+<table>
+<tr><th>Research gap</th><th>Current limitation</th><th>Promising direction</th></tr>
+<tr><td>Dynamic preference learning</td><td>Static investor profiles</td><td>Online and longitudinal preference models</td></tr>
+<tr><td>Portfolio-aware recommendation</td><td>Item-level ranking</td><td>Joint recommendation + allocation</td></tr>
+<tr><td>Cold start</td><td>Need for transaction history</td><td>Hybrid profiling, elicitation, and social/context signals</td></tr>
+<tr><td>Temporal robustness</td><td>Random splits dominate</td><td>Walk-forward and regime-aware evaluation</td></tr>
+<tr><td>Explainability</td><td>Feature importance only</td><td>Interactive, counterfactual and uncertainty-aware explanations</td></tr>
+<tr><td>Fairness</td><td>Limited subgroup analysis</td><td>Suitability-aware and intersectional fairness</td></tr>
+<tr><td>Privacy</td><td>More data used for personalization</td><td>Data minimization and privacy-preserving learning</td></tr>
+<tr><td>Generative AI</td><td>Hallucination and weak grounding</td><td>Retrieval grounding, verification, audit trails</td></tr>
+<tr><td>Governance</td><td>Post-hoc compliance</td><td>Compliance-by-design and continuous auditing</td></tr>
+</table>
+
+<h2>7. Proposed Research Roadmap</h2>
+<p>
+A useful research program can be organized as a sequence of increasingly realistic experiments.
+</p>
+<ol>
+<li><strong>Stage 1—Investor modeling:</strong> construct a benchmark for explicit risk preferences, implicit behavior, financial goals, and changing preferences.</li>
+<li><strong>Stage 2—Portfolio-aware recommendation:</strong> compare item-level recommendation against portfolio-aware multi-objective recommendation.</li>
+<li><strong>Stage 3—Dynamic adaptation:</strong> introduce online learning or reinforcement learning under controlled risk constraints.</li>
+<li><strong>Stage 4—Explainability:</strong> evaluate feature-based, counterfactual, dialogic, and uncertainty-aware explanations with users of different financial-literacy levels.</li>
+<li><strong>Stage 5—Trustworthy AI:</strong> audit fairness, privacy, security, robustness, and suitability across demographic and market subgroups.</li>
+<li><strong>Stage 6—Generative AI:</strong> integrate grounded LLMs for conversational financial education and explanation while separating language generation from investment decision authority.</li>
+<li><strong>Stage 7—External validation:</strong> perform walk-forward, cross-market, and stress-period evaluation with reproducible datasets and documented assumptions.</li>
+</ol>
+
+<h2>8. Opportunities for Generative AI and LLM-Based Financial Recommendation</h2>
+<p>
+Generative AI introduces an important extension of financial recommendation: the system can interact conversationally, summarize evidence, explain portfolio changes, compare alternatives, and translate financial concepts for users with different levels of expertise [9]. This creates an opportunity to combine quantitative models with natural-language interaction.
+</p>
+<p>
+However, an LLM should not be treated as a substitute for validated financial analytics. A safer architecture separates the functions: quantitative models estimate risk and portfolio properties; retrieval systems provide current and traceable financial information; policy and suitability engines apply constraints; and the LLM generates user-facing explanations grounded in those outputs. This architecture reduces the chance that fluent but unsupported language becomes the final decision criterion.
+</p>
+<p>
+The emerging research agenda should also investigate whether explanations improve <em>calibrated trust</em> rather than simply increasing trust. Recent work on transparency and AI-based financial advice suggests that understandable disclosure and user control are central to responsible implementation [13,24].
+</p>
+
+<h2>9. Discussion</h2>
+<p>
+The central lesson from the current literature is that financial recommendation is a socio-technical system rather than a standalone prediction problem. Better algorithms are useful, but they cannot solve an incorrectly specified financial objective, incomplete user profile, biased data, weak portfolio constraints, or poor explanation design. The system must be evaluated as a complete decision-support pipeline.
+</p>
+<p>
+The literature also suggests that the field is moving toward more adaptive methods—especially reinforcement learning, online learning, graph methods, and generative AI—but evidence remains uneven. A recent 2026 systematic review of financial recommender research identifies a formulation gap between conventional recommender assumptions and the risk-sensitive, delayed-feedback, portfolio-dependent characteristics of finance [10]. This gap is a particularly promising direction for future research.
+</p>
+<p>
+Another important observation is that explainability, fairness, privacy, and regulation are not independent add-ons. More personalization can require more data; more data can increase privacy risk; stronger optimization can make the model harder to explain; and aggressive automation can increase the consequences of model error. Future architectures therefore need explicit trade-off modeling and governance mechanisms.
+</p>
+
+<h2>10. Conclusion</h2>
+<p>
+AI-based financial recommendation systems have the potential to make financial decision support more personalized, scalable, adaptive, and accessible. Yet the research problem is significantly harder than conventional recommendation because financial outcomes are uncertain, delayed, portfolio-dependent, and potentially harmful. The most important challenges include reliable investor preference modeling, cold-start learning, portfolio-aware recommendation, temporal drift, explainability, fairness, privacy, security, regulation, and human oversight.
+</p>
+<p>
+Future work should move from accuracy-centric recommendation toward trustworthy financial decision support. A successful system should not merely recommend a product; it should explain why the recommendation is appropriate, quantify relevant risk, consider the user's broader portfolio, reveal uncertainty, remain robust under market change, and preserve meaningful user control. Generative AI can improve interaction and financial education, but its role should be constrained by grounded evidence, validated financial models, and strong governance. The research agenda proposed in this paper provides a foundation for developing such systems and for evaluating them using measures that reflect both technical performance and real-world financial responsibility.
+</p>
+
+<h2>References</h2>
+<div class="refs">
+<p>[1] G. Cardillo and H. Chiappini, “Robo-advisors: A systematic literature review,” <em>Finance Research Letters</em>, vol. 62, 105119, 2024. doi:10.1016/j.frl.2024.105119.</p>
+<p>[2] M. Beketov, K. Lehmann, and M. Wittke, “Robo Advisors: quantitative methods inside the robots,” <em>Journal of Asset Management</em>, vol. 19, pp. 363–370, 2018. doi:10.1057/s41260-018-0092-9.</p>
+<p>[3] A. Sironi, <em>FinTech Innovation: From Robo-Advisors to Goal Based Investing and Gamification</em>, Wiley, 2016.</p>
+<p>[4] H. Alsabah, A. Capponi, O. Ruiz Lacedelli, and M. Stern, “Robo-Advising: Learning Investors’ Risk Preferences via Portfolio Choices,” <em>Journal of Financial Econometrics</em>, vol. 19, no. 2, pp. 369–392, 2021.</p>
+<p>[5] C. Mertzanis, “Artificial intelligence and investment management: Structure, strategy, and governance,” <em>International Review of Financial Analysis</em>, 104599, 2025. doi:10.1016/j.irfa.2025.104599.</p>
+<p>[6] X. Hu, S. Kang, L. Ren, and S. Zhu, “Interactive preference analysis: A reinforcement learning framework,” <em>European Journal of Operational Research</em>, vol. 319, no. 3, pp. 983–998, 2024. doi:10.1016/j.ejor.2024.06.033.</p>
+<p>[7] X. Hu, S. Kang, S. Xue, and S. Zhu, “Constrained reinforcement learning framework for investor preference analysis with online convex optimization,” <em>Applied Soft Computing</em>, vol. 189, 114425, 2026. doi:10.1016/j.asoc.2025.114425.</p>
+<p>[8] X. Hu, S. Kang, S. Xue, and S. Zhu, “Explainable robo-advisor: An online learning framework for new investors without trading records,” <em>Neurocomputing</em>, vol. 624, 129463, 2025. doi:10.1016/j.neucom.2025.129463.</p>
+<p>[9] M. Tahvildari, “Integrating generative AI in Robo-Advisory: A systematic review of opportunities, challenges, and strategic solutions,” <em>Multidisciplinary Reviews</em>, vol. 8, no. 12, e2025379, 2025. doi:10.31893/multirev.2025379.</p>
+<p>[10] M. Faid, W. van Heeswijk, and L. Spierdijk, “AI-Based Financial Recommender Systems: A Systematic Review of Methods, Evaluation Practices, and Open Challenges,” SSRN, 2026. doi:10.2139/ssrn.7113178. <em>Note: this is a recent working-paper review and is used to identify emerging research directions; it is not presented as a Scopus-indexed journal article.</em></p>
+<p>[11] J. B. Heaton, N. G. Polson, and J. H. Witte, “Deep learning for finance: deep portfolios,” <em>Applied Stochastic Models in Business and Industry</em>, vol. 33, no. 1–2, pp. 3–12, 2017.</p>
+<p>[12] F. Neri, “Domain Specific Concept Drift Detectors for Predicting Financial Time Series,” 2021. The study examines concept-drift detection for non-stationary financial time series and reports that drift detection can improve adaptation efficiency.</p>
+<p>[13] H. Zhu, O. Vigren, and I.-L. Söderberg, “Implementing artificial intelligence empowered financial advisory services: A literature review and critical research agenda,” <em>Journal of Business Research</em>, vol. 174, 114494, 2024. doi:10.1016/j.jbusres.2023.114494.</p>
+<p>[14] A. Barredo Arrieta et al., “Explainable artificial intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI,” <em>Information Fusion</em>, vol. 58, pp. 82–115, 2020.</p>
+<p>[15] L. Brenner and T. Meyll, “Robo-advisors: A substitute for human financial advice?” <em>Journal of Behavioral and Experimental Finance</em>, vol. 25, 100275, 2020. doi:10.1016/j.jbef.2020.100275.</p>
+<p>[16] D. Belanche, L. V. Casaló, and C. Flavián, “Artificial Intelligence in FinTech: Understanding robo-advisors adoption among customers,” <em>Industrial Management &amp; Data Systems</em>, vol. 119, no. 7, pp. 1411–1430, 2019. doi:10.1108/IMDS-08-2018-0368.</p>
+<p>[17] N. M. Namyslo, D. Jung, and T. Sturm, “The state of robo-advisory design: A systematic consolidation of design requirements and recommendations,” <em>Electronic Markets</em>, vol. 35, article 20, 2025. doi:10.1007/s12525-025-00762-2.</p>
+<p>[18] N. Mehrabi, F. Morstatter, N. Saxena, K. Lerman, and A. Galstyan, “A Survey on Bias and Fairness in Machine Learning,” <em>ACM Computing Surveys</em>, vol. 54, pp. 1–35, 2019.</p>
+<p>[19] S. Caton and C. Haas, “Fairness in Machine Learning: A Survey,” <em>ACM Computing Surveys</em>, vol. 56, pp. 1–38, 2020.</p>
+<p>[20] N. Shahbazi, Y. Lin, A. Asudeh, and H. V. Jagadish, “Representation Bias in Data: A Survey on Identification and Resolution Techniques,” <em>ACM Computing Surveys</em>, vol. 55, pp. 1–39, 2022.</p>
+<p>[21] T. P. Pagano et al., “Bias and Unfairness in Machine Learning Models: A Systematic Review on Datasets, Tools, Fairness Metrics, and Identification and Mitigation Methods,” <em>Big Data and Cognitive Computing</em>, vol. 7, no. 15, 2023.</p>
+<p>[22] C. Dwork, M. Hardt, T. Pitassi, O. Reingold, and R. Zemel, “Fairness through awareness,” in <em>Proceedings of Innovations in Theoretical Computer Science</em>, pp. 214–226, 2012.</p>
+<p>[23] R. K. E. Bellamy et al., “AI Fairness 360: An extensible toolkit for detecting and mitigating algorithmic bias,” <em>IBM Journal of Research and Development</em>, 2019.</p>
+<p>[24] N. M. Namyslo, D. Jung, and T. Sturm, “The state of robo-advisory design: A systematic consolidation of design requirements and recommendations,” <em>Electronic Markets</em>, vol. 35, article 20, 2025. doi:10.1007/s12525-025-00762-2.</p>
+<p>[25] M. Mitchell et al., “Model Cards for Model Reporting,” in <em>Proceedings of the Conference on Fairness, Accountability, and Transparency</em>, pp. 220–229, 2019.</p>
+<p>[26] T. Gebru et al., “Datasheets for Datasets,” <em>Communications of the ACM</em>, vol. 64, no. 12, pp. 86–92, 2021.</p>
+<p>[27] S. Wachter, B. Mittelstadt, and C. Russell, “Counterfactual explanations without opening the black box: Automated decisions and the GDPR,” <em>Harvard Journal of Law &amp; Technology</em>, vol. 31, no. 2, 2018.</p>
+<p>[28] F. Kamiran and T. Calders, “Data preprocessing techniques for classification without discrimination,” <em>Knowledge and Information Systems</em>, vol. 33, pp. 1–33, 2012.</p>
+<p>[29] M. Hardt, E. Price, and N. Srebro, “Equality of Opportunity in Supervised Learning,” in <em>Advances in Neural Information Processing Systems</em>, vol. 29, 2016.</p>
+<p>[30] M. Hort, Z. Chen, J. Zhang, F. Sarro, and M. Harman, “Bias Mitigation for Machine Learning Classifiers: A Comprehensive Survey,” <em>ACM Journal on Responsible Computing</em>, vol. 1, pp. 1–52, 2022.</p>
+<p>[31] A. Capponi, S. Ólafsson, and T. Zariphopoulou, “Personalized Robo-Advising: Enhancing Investment Through Client Interaction,” <em>Management Science</em>, vol. 68, no. 4, pp. 2485–2512, 2022. doi:10.1287/mnsc.2021.4014.</p>
+<p>[32] F. D’Acunto, N. Prabhala, and A. G. Rossi, “The Promises and Pitfalls of Robo-Advising,” <em>The Review of Financial Studies</em>, vol. 32, no. 5, pp. 1983–2020, 2019. doi:10.1093/rfs/hhz014.</p>
+</div>
+
+<div class="footer">
+Printable A4 HTML • Scopus-oriented research manuscript • Expanded literature and humanized academic presentation
+</div>
+
+</div>
+</body>
+</html>
