@@ -1,167 +1,179 @@
 
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Navigating the Future: LLMs in Financial Advisory</title>
-    <style>
-        body {
-            font-family: 'Times New Roman', Times, serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px;
-            background-color: #fff;
-            text-align: justify;
-        }
-        header {
-            text-align: center;
-            border-bottom: 2px solid #333;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-        }
-        h1 {
-            font-size: 24pt;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-        .author {
-            font-size: 14pt;
-            font-weight: bold;
-        }
-        .affiliation {
-            font-style: italic;
-            margin-bottom: 20px;
-        }
-        .abstract {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border: 1px solid #ddd;
-            margin-bottom: 30px;
-            font-style: italic;
-        }
-        .abstract h2 {
-            text-align: center;
-            font-size: 16pt;
-            margin-top: 0;
-            text-transform: uppercase;
-            font-style: normal;
-        }
-        h2 {
-            font-size: 18pt;
-            border-left: 5px solid #2c3e50;
-            padding-left: 15px;
-            margin-top: 40px;
-            color: #2c3e50;
-        }
-        h3 {
-            font-size: 14pt;
-            margin-top: 25px;
-            color: #34495e;
-        }
-        p {
-            margin-bottom: 1.5em;
-            text-indent: 2em;
-        }
-        .references {
-            margin-top: 50px;
-            font-size: 10pt;
-            text-align: left;
-        }
-        .references h2 {
-            border: none;
-            text-align: center;
-            padding: 0;
-        }
-        .ref-item {
-            margin-bottom: 10px;
-            padding-left: 2em;
-            text-indent: -2em;
-        }
-        @media print {
-            body { padding: 0; }
-            a { text-decoration: none; color: black; }
-        }
-    </style>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Trustworthy Large Language Models in Financial Advisory: Opportunities, Challenges, and Future Directions</title>
+<style>
+@page { size: A4; margin: 16mm 15mm 17mm; }
+:root { --ink:#17212b; --blue:#184e77; --blue2:#2b6f9e; --muted:#66727f; --line:#d9e0e7; --soft:#f4f7fa; }
+*{box-sizing:border-box}
+body{margin:0;background:#eef1f4;color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.55}
+.page{width:210mm;margin:24px auto;background:white;padding:17mm 17mm 20mm;box-shadow:0 8px 35px #0002}
+h1{font-size:29px;line-height:1.12;margin:0 0 7px;color:var(--blue);letter-spacing:-.02em}
+.subtitle{font-size:16px;color:var(--muted);margin:0 0 5px}
+.authors{font:11px Arial,sans-serif;color:#66727f;margin:0 0 18px}
+h2{font-size:19px;color:var(--blue);margin:24px 0 8px;border-bottom:1px solid var(--line);padding-bottom:4px}
+h3{font-size:15px;color:#28475e;margin:15px 0 5px}
+p{text-align:justify;margin:6px 0 9px;hyphens:auto}
+.abstract{background:var(--soft);border-left:4px solid var(--blue2);padding:12px 14px;margin:15px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:10.5px}
+th,td{border:1px solid #cad3dc;padding:6px 7px;vertical-align:top}
+th{background:var(--blue);color:white;font:600 10px Arial,sans-serif;text-align:left}
+tr:nth-child(even) td{background:#f8fafc}
+.framework{background:#f9fbfd;border:1px solid var(--line);padding:11px;margin:14px 0}
+.layer{border:1.5px solid var(--blue2);border-radius:5px;padding:8px 10px;margin:4px auto;max-width:88%;text-align:center;font-family:Arial,sans-serif;font-size:11px;background:white}
+.down{text-align:center;color:var(--blue2);font:700 18px Arial}
+.refs li{margin:4px 0}
+ul,ol{padding-left:23px}
+@media print{body{background:white}.page{width:auto;margin:0;box-shadow:none;padding:0}.page-break{break-before:page}table{break-inside:avoid}.abstract{break-inside:avoid}h2,h3{break-after:avoid}}
+@media screen and (max-width:900px){.page{width:calc(100% - 20px);padding:24px 20px}}
+</style>
 </head>
 <body>
-
-<header>
-    <h1>Navigating the Future: The Transformative Effects of Large Language Models on Financial Advisory Services</h1>
-    <div class="author">Dr. Nitin Mishra</div>
-    <div class="affiliation">Professor, Department of Computer Science and Engineering, Parul University</div>
-</header>
-
-<section class="abstract">
-    <h2>Abstract</h2>
-    <p>
-        The emergence of Large Language Models (LLMs) based on Transformer architectures represents a paradigm shift in financial advisory services. This paper examines the integration of deep learning technologies into the financial sector, exploring the transition from traditional, manually intensive processes to automated, data-driven frameworks. We analyze the dual-impact of LLMs: enhancing operational efficiency through real-time data synthesis and personalization, while simultaneously introducing complex ethical challenges regarding privacy, algorithmic bias, and transparency. The study concludes that the future of financial services lies in a hybrid model that synergizes the quantitative computational power of LLMs with the qualitative emotional intelligence of human advisors, ultimately aiming to democratize financial literacy and optimize client outcomes.
-    </p>
-</section>
-
-<h2>Introduction</h2>
-<p>
-    Large language models (LLMs) are increasingly being applied across many sectors, and financial advisory services are no exception. These models are built using deep learning technology based on architectures such as the Transformer, and are capable of producing human language or text responses. The technology is enabled by neural networks that have been pre-trained on large amounts of text data, and can thereby generate human language that understands the nuances of language. According to Feng (2024), the potential applications of the technology to traditional financial advising include automation of routine tasks and provide clients with immediate and efficient assistance 24/7.
-</p>
-<p>
-    Reports can be generated, regulatory updates understood, and even investment advice provided in the language and format that the client requires. This enables financial advisors to concentrate on the complex tasks and client service that they are trained to do, while the LLM automatically processes and responds to a large volume and variety of inquiries and requests. With the ability to process large amounts of data from a diverse array of sources such as financial news, industry publications, and academic journals and articles, the LLM is capable of synthesizing information from a variety of market reports.
-</p>
-
-<h2>Revolutionizing the Industry through Data Synthesis</h2>
-<p>
-    Furthermore, given the ability of LLMs to process massive amounts of data, they have the potential to revolutionise the financial industry (Bhardwaj, 2025). Currently, financial advisors largely rely on a small amount of data or even manually go through multiple financial reports (for example, financial statements). The LLMs, however, can quickly process and combine large amounts of data in real time. They can thus quickly identify patterns, make predictions, and give the financial advisor the ability to offer far more accurate financial advice to their clients. LLMs also have the capability to tailor the advice given to each client based off their unique profile. This enables the financial advisor to offer far more relevant advice and increase the overall effectiveness of the service.
-</p>
-
-<h2>Ethical Frameworks and Accountability</h2>
-<p>
-    As LLMs are increasingly incorporated into the financial advisory services, several important ethical considerations become pertinent. Primarily, issues of data privacy, model transparency, and bias are critical as the concern becomes increasingly evident that LLMs can ‘learn’ and embedding biases that are inherent within the dataset they are trained upon, potentially distributing discriminatory practices through financial advice recommendations. The challenge then arises for these recommendations to be held accountable, placing the onus on state or industry sectors to modify governing structures, ultimately necessitating the adoption of an ethical framework to safeguard the financial interests of clients.
-</p>
-
-<h2>The Future of Human Advisors: A Hybrid Model</h2>
-<p>
-    Do human financial advisors have a future? As Smith (2024) notes, financial human advisors will shift from being task-oriented to providing advisory services that focus on relationship building and emotional intelligence to enable clients to make better financial decisions. While the LLM is not able to tell the story or present the facts and figures behind the client’s financial history, human financial advisors can leverage the work produced by the LLM to gain insights, provide data-driven advice and counsel clients to make better decisions by uncovering new insights and opportunities.
-</p>
-<p>
-    The integration of LLMs into financial advisory services has remarkable implications for operational efficiency within the financial services industry. Like Takayanagi et al. (2025), LLMs have the capability to be transformative in nature and can significantly increase the efficiency of financial work by automatically analyzing large amounts of historical data to provide clients and financial advisors with deep, meaningful insights in a fraction of the time currently possible with current technology.
-</p>
-
-<h2>Enhancing Service Responsiveness</h2>
-<p>
-    Besides making workflows much more efficient, LLMs can also make financial advisory services a lot more responsive to client queries. Batra et al. (2025) showed that when incorporated into various channels of communication, LLMs can produce immediate responses to clients’ queries. Currently, clients demand immediate and personal interactions with financial advisors. Equipped with the capability to generate human-like text in response to human input, LLMs can react quickly enough to fulfill this demand and consequently are a major selling point for financial advisory services.
-</p>
-
-<h2>Personalization and Predictive Analytics</h2>
-<p>
-    LLMs can process vast amounts and varieties of client data to generate highly relevant recommendations that are highly customized to the specific needs of each individual client. As Lakkaraju et al. (2023) discuss, LLMs have the potential to significantly increase client satisfaction and engagement by recommending financial products and services on a highly personalized basis. Traditional financial advising attempts to address client needs by developing general strategies; however, LLMs have the capability to process client data and tailor specific advice based on the client’s history, preferences, and financial goals.
-</p>
-
-<h2>Trust, Transparency, and Regulation</h2>
-<p>
-    The key to success for a financial advisory relationship is based on the foundation of trust. While LLMs offer huge benefits, their black box nature is currently a significant barrier to achieving the necessary transparency to maintain trust. Interpretable LLMs are needed to address customer’s fears about the impact of AI on the financial advisory process (Binns, 2018). Regulatory bodies need to develop appropriate guidelines on the use of AI technologies to ensure financial institutions remain transparent and protect the privacy of consumers.
-</p>
-
-<h2>Enhancing Financial Literacy</h2>
-<p>
-    LMs also have the potential to enhance financial literacy through LLM-powered financial advice, specifically enabling novice clients to gain knowledge of financial products and concepts that might otherwise be difficult to understand. Challagundla (2024) explained how LLMs process and generate natural language at scale can help to readily present complex financial terms and concepts in human-language formats. This can aid clients in developing a greater understanding of various financial topics to enable them to become better financial consumers.
-</p>
-
-<h2>Conclusion</h2>
-<p>
-    The integration of Large Language Models (LLMs) into financial advisory services marks a turning point in the financial services industry. While operational efficiency and personalization are immediate gains, the long-term success of this technology hinges on addressing ethical pitfalls. Human insight, judgment, and emotional intelligence are hard for LLMs to replicate. Technology is here to enhance and make more efficient what humans can offer, not to replace them entirely.
-</p>
-
-<section class="references">
-    <h2>References</h2>
-    <div class="ref-item">Takayanagi, T., Suzuki, M., Izumi, K., et al. (2025). Finpersona: An llm-driven conversational agent for personalized financial advising. <i>European Conference on Information Retrieval</i>.</div>
-    <div class="ref-item">Batra, D., Hamill, C., Hartley, J., et al. (2025). A review of llm agent applications in finance and banking. <i>SSRN 5381584</i>.</div>
-    <div class="ref-item">Feng, Z. (2024). Can GPT Help Improve Robo-advisory? <i>Advances in Economics, Management and Political Sciences</i>, 90, 26-41.</div>
-    <div class="ref-item">Lakkaraju, K., Vuruma, S. K. R., et al. (2023). Can llms be good financial advisors? <i>arXiv preprint arXiv:2307.07422</i>.</div>
-    <div class="ref-item">Bhardwaj, S. (2025). Artificial Intelligence in Wealth Management. <i>Journal of Multidisciplinary Knowledge</i>, 5(2), 85-96.</div>
-    <div class="ref-item">Challagundla, B. C. (2024). Financial Advisory LLM Model for Modernizing Financial Services and Innovative Solutions for Financial Literacy in India.</div>
-    <div class="ref-item">Reddy, V., & Veeranjaneyulu, N. (2025). DeepFinLLM: an intelligent financial advisor unleashing strategic insights with large language models. <i>Journal of Intelligent Information Systems</i>.</div>
-    <div class="ref-item">Xu, J. (2024). GenAI and LLM for financial institutions: A corporate strategic survey. <i>SSRN 4988118</i>.</div>
-</section>
-
+<main class="page">
+<h1>Trustworthy Large Language Models in Financial Advisory: Opportunities, Challenges, and Future Directions</h1>
+<p class="subtitle">Opportunities, Evidence, Risks, and a Framework for Trustworthy AI</p>
+<p class="authors"><strong>Dr. Nitin Mishra</strong><sup>1</sup>, <strong>Tamanna Sharma</strong><sup>2</sup><br><em><sup>1</sup>Professor, Department of Computer Science and Engineering, Parul University, Vadodara, India | <sup>2</sup>Assistant Professor, Faculty of Management, Parul University, Vadodara, India</em><br><strong>Corresponding author:</strong> drnitinmishra10@gmail.com &nbsp;|&nbsp; <strong>Second author:</strong> tannusharma2401@gmail.com</p
+<div class="abstract">
+<h2>Abstract</h2>
+<p>Large Language Models (LLMs) are moving financial artificial intelligence beyond narrowly defined prediction and classification tasks toward natural-language interaction, document understanding, contextual analysis, and decision support. This paper examines how LLMs can be integrated into financial advisory while preserving the reliability, suitability, transparency, and accountability expected in a high-stakes domain. A structured literature review synthesises research on financial language models, robo-advisory, financial question answering, portfolio selection, retrieval-augmented generation, explainable artificial intelligence, and emerging regulatory and systemic-risk perspectives. The evidence indicates that LLMs can add substantial value in investor dialogue, financial-document interpretation, market-news analysis, portfolio explanation, financial education, and advisor copilot functions. Recent empirical work also suggests that some models can improve diversification or extract economically relevant signals from news. At the same time, results are sensitive to model choice, prompt design, information horizon, and evaluation setting; other studies report failure to consistently outperform simple benchmarks. The central implication is that an LLM should not be treated as the financial decision engine. Instead, it should operate within a layered architecture in which trusted financial data, retrieval, deterministic suitability and risk controls, model validation, and human oversight constrain and verify generated outputs. The paper proposes such a framework and identifies research priorities around grounded generation, numerical reasoning, fairness, privacy, monitoring, benchmark design, and human-AI collaboration.</p>
+</div>
+<p><strong>Keywords:</strong> Large Language Models; Financial Advisory; FinTech; Generative AI; Robo-Advisory; Retrieval-Augmented Generation; Explainable AI; Trustworthy AI; Investment Recommendation; Human-AI Collaboration.</p>
+<h2>1. Introduction</h2>
+<p>Financial advisory is an unusually demanding application for artificial intelligence because recommendations can directly affect wealth, retirement security, risk exposure, and access to financial products. The traditional advisory relationship combines quantitative analysis with contextual judgement: a client may have a measurable risk tolerance but also tax constraints, liquidity needs, family obligations, behavioural biases, and preferences that are not captured by a single numerical score. Digital advisory platforms attempted to standardise this process through questionnaires and rules-based portfolio construction. Research on robo-advisors shows both their accessibility and their potential to substitute for some forms of human advice, while also raising concerns about algorithmic opacity, limited disclosure, and the quality of client information (Brenner &amp; Meyll, 2020; Hildebrand &amp; Bergner, 2021; Tan, 2020). (Davies, 2020; FSB, 2024).</p>
+<p>LLMs change the interaction layer of this ecosystem. Transformer-based models made it possible to represent context at scale (Vaswani et al., 2017), while BERT and subsequent domain-adapted financial language models demonstrated the value of specialised representations for financial text (Devlin et al., 2019; Araci, 2019; Shah et al., 2022). The emergence of generative models adds a different capability: a single system can explain a portfolio, summarise filings, answer a client's question, compare financial products, translate technical language into plain language, and maintain a conversational interface. Finance-specific efforts such as BloombergGPT and FinGPT further demonstrate the movement from general-purpose LLMs toward financial-domain models (Wu et al., 2023; Yang et al., 2023).</p>
+<p>The critical issue, however, is not whether an LLM can produce plausible financial language. It is whether a financial advisory system can use that capability without confusing linguistic fluency with factual reliability, numerical correctness, suitability, or fiduciary responsibility. Financial LLM research highlights hallucination, privacy, efficiency, and evaluation challenges (Lee et al., 2024). Financial question-answering benchmarks such as FinQA and TAT-QA show why the domain is difficult: financial reasoning frequently requires multi-step numerical calculations over tables and text, and earlier language models remained substantially behind expert human performance on such tasks (Chen et al., 2021; Zhu et al., 2021).</p>
+<p>This paper therefore takes a deliberately conservative position. LLMs have meaningful potential in financial advisory, but their strongest role is as a language and reasoning-support layer within a controlled decision architecture. The contribution is a conceptual framework that separates generated language from validated financial decision logic and integrates retrieval, quantitative models, suitability rules, explainability, security, monitoring, and human oversight.</p>
+<h2>2. Research Questions</h2>
+<p><strong>RQ1:</strong> Which financial-advisory tasks can benefit most from LLM-based natural-language and contextual capabilities?</p>
+<p><strong>RQ2:</strong> What evidence exists that LLMs can support investment and portfolio decisions, and where is the evidence inconsistent?</p>
+<p><strong>RQ3:</strong> What architecture is required to make LLM-enabled financial advice grounded, suitable, explainable, secure, and auditable?</p>
+<p><strong>RQ4:</strong> What research and governance mechanisms are needed before LLMs can be trusted in higher-stakes advisory settings?</p>
+<h2>3. Methodology</h2>
+<p>This study uses a structured conceptual literature-review approach. Literature was identified through targeted searches of peer-reviewed and reputable research sources covering LLMs, financial NLP, portfolio decision-making, robo-advisory, retrieval-augmented generation, explainability, and AI governance. Priority was given to peer-reviewed journal and conference publications and to authoritative policy sources where the issue was regulatory or systemic rather than empirical. The synthesis follows four themes: capability, evidence, risk, and governance. Studies reporting positive performance are not treated as proof of general superiority; they are compared with work reporting benchmark failures or deployment constraints. No primary experiment, survey, or bibliometric study was conducted, and the framework proposed in this paper is conceptual rather than experimentally validated.</p>
+<h2>4. From Robo-Advisory to LLM-Based Advisory</h2>
+<table>
+<tr><th>Generation</th><th>Core mechanism</th><th>Strength</th><th>Primary limitation</th></tr>
+<tr><td>Traditional advisory</td><td>Human judgement + financial models</td><td>Contextual judgement and accountability</td><td>Cost, scalability, behavioural inconsistency</td></tr>
+<tr><td>Robo-advisory</td><td>Questionnaires + rules + portfolio algorithms</td><td>Scalability, consistency, lower cost</td><td>Limited dialogue and context; disclosure and suitability challenges</td></tr>
+<tr><td>ML-based advisory</td><td>Prediction, classification, optimisation</td><td>Pattern detection and personalisation</td><td>Data dependence, explainability and model risk</td></tr>
+<tr><td>LLM-based advisory</td><td>Language reasoning + retrieval + tool use</td><td>Natural interaction, synthesis and explanation</td><td>Hallucination, numerical reasoning, prompt sensitivity and governance</td></tr>
+</table>
+<p>The evolution should not be interpreted as a simple replacement sequence. The strongest architecture is likely to combine generations. A financial institution may retain deterministic portfolio and suitability rules while using an LLM to gather information conversationally and explain the result. This distinction is consistent with the broader AI-in-finance literature: AI can support operational efficiency, regulatory compliance, analytics, and product customisation, but model risk, data quality, concentration, cyber risk, and governance remain material concerns (Financial Stability Board [FSB], 2024). (Tao et al., 2021).</p>
+<p>The LLM layer is therefore best understood as an adaptive interface over a heterogeneous financial system. It can translate a client's natural-language question into structured tasks, retrieve relevant evidence, call a quantitative model, and turn validated outputs into a comprehensible explanation. That is different from asking the LLM to invent the portfolio itself. (Du et al., 2025).</p>
+<h2>5. Evidence on LLMs in Financial Decision-Making</h2>
+<p>Evidence is increasingly positive but far from uniform. Oehler and Horn (2024) compared ChatGPT with 17 robo-advisors across three investor profiles and reported that ChatGPT recommendations aligned with the profiles and a benchmark derived from academic literature. Another study found that ChatGPT-based asset selection produced statistically stronger diversification than randomly selected assets, suggesting a potential copilot role for portfolio managers (2024). More recent work using different ChatGPT models reported that model choice mattered and that models could adjust portfolio characteristics to different risk appetites (2025).</p>
+<p>However, favourable results should not be generalised to unconditional investment superiority. A 2025 experiment evaluating Gemini 1.5 Flash with anonymised stock data found that it did not consistently beat an equal-weighted portfolio or the S&amp;P 500 and that risk-adjusted performance deteriorated over longer horizons. The implication is important: an LLM can demonstrate useful decision-support capability in one evaluation design while failing to deliver persistent outperformance in another.</p>
+<p>Text-based market analysis provides another example. Lopez-Lira and Tang's work finds that GPT-4 can extract economically relevant information from news and that more capable models perform better at interpreting certain market reactions. The later journal version reports evidence consistent with stronger information processing and changing return predictability as LLM adoption rises. Such findings are valuable, but they address a narrower problem—interpreting news and market responses—than the full suitability problem faced by a financial advisor.</p>
+<p>Financial-language research reinforces the same point. BloombergGPT demonstrates that large domain-specific training can improve financial tasks without sacrificing general capability, while FinGPT emphasises a data-centric and open-source route to financial LLM development (Wu et al., 2023; Yang et al., 2023). The implication for advisory systems is that domain adaptation matters, but domain adaptation alone does not solve governance. A model can be financially knowledgeable and still hallucinate, expose sensitive information, or generate an unsuitable recommendation. (Du et al., 2025; Wu et al., 2023; Yang et al., 2023).</p>
+<h2>6. High-Value Applications in Financial Advisory</h2>
+<h3>6.1 Investor profiling and conversational onboarding</h3>
+<p>LLMs can convert unstructured client dialogue into candidate structured attributes such as goals, time horizon, liquidity constraints, risk preferences, and investment experience. This can reduce the friction associated with rigid questionnaires. Yet inferred attributes should be treated as hypotheses requiring confirmation. A conversational system must distinguish between what the client explicitly stated, what the system inferred, and what remains unknown.</p>
+<h3>6.2 Financial-document interpretation</h3>
+<p>Financial reports combine narrative, tables, footnotes, accounting terminology, and numerical relationships. FinQA and TAT-QA demonstrate that the challenge is not simply reading text; it includes selecting supporting evidence and performing numerical reasoning over heterogeneous representations (Chen et al., 2021; Zhu et al., 2021). LLMs can make such information more accessible, but numerical calculations should be delegated to validated tools whenever precision matters.</p>
+<h3>6.3 Market and news interpretation</h3>
+<p>LLMs are particularly useful when the problem is semantic synthesis rather than direct arithmetic. They can summarise a set of announcements, identify competing interpretations, and explain how a new event could affect an existing investment thesis. The system should ground such explanations in dated sources because financial information changes rapidly.</p>
+<h3>6.4 Portfolio explanation and education</h3>
+<p>One of the most defensible uses of an LLM is to explain an already validated portfolio. It can translate volatility, diversification, drawdown, fees, and asset allocation into client-specific language. Explainable-AI research in finance shows that transparency and traceability are central because stakeholders must understand why a model-assisted decision was made (Weber et al., 2024). Explanation, however, should be evidence-linked and should not be treated as proof that the underlying recommendation is correct.</p>
+<h3>6.5 Advisor copilot</h3>
+<p>A hybrid copilot can prepare meeting briefs, summarise client interactions, surface changes in portfolio risk, draft explanations, and retrieve product or regulatory information. This role preserves an explicit human decision point and is therefore more compatible with the accountability requirements of advisory services than a fully autonomous chatbot.</p>
+<h2>7. Proposed Framework for Trustworthy LLM-Based Financial Advisory</h2>
+<div class="framework">
+<div class="layer"><strong>1. Investor Profile</strong><br/>Goals • Risk tolerance • Horizon • Liquidity • Constraints • Preferences</div>
+<div class="down">↓</div>
+<div class="layer"><strong>2. Financial Context</strong><br/>Portfolio • Market data • Product data • Filings • News • Economic indicators • Regulation</div>
+<div class="down">↓</div>
+<div class="layer"><strong>3. Grounded Intelligence</strong><br/>LLM • Retrieval-Augmented Generation • Financial knowledge graph • Validated tools • Numerical calculators</div>
+<div class="down">↓</div>
+<div class="layer"><strong>4. Decision Controls</strong><br/>Suitability • Risk limits • Diversification • Constraints • Scenario analysis • Policy rules</div>
+<div class="down">↓</div>
+<div class="layer"><strong>5. Recommendation &amp; Explanation</strong><br/>Recommendation • Evidence • Assumptions • Risks • Uncertainty • Alternatives</div>
+<div class="down">↓</div>
+<div class="layer"><strong>6. Human &amp; Governance Layer</strong><br/>Human review • Audit trail • Security • Fairness • Monitoring • Regulatory compliance • Incident response</div>
+</div>
+<p><strong>Principle 1 — Separate language generation from financial decision logic.</strong> The LLM should not be the sole source of truth for prices, returns, product terms, calculations, or suitability. It should request current data from trusted sources and pass quantitative tasks to validated tools.</p>
+<p><strong>Principle 2 — Ground every material claim.</strong> Retrieval-augmented generation can reduce reliance on stale parametric knowledge by bringing relevant external evidence into the generation process. Self-RAG further illustrates how retrieval and self-reflection can improve factuality and citation behaviour (Lewis et al., 2020; Asai et al., 2024). In an advisory system, retrieved evidence should include timestamp, source, version, and provenance.</p>
+<p><strong>Principle 3 — Enforce deterministic suitability controls.</strong> A recommendation should pass explicit rules for risk capacity, concentration, liquidity, product eligibility, investment horizon, and other constraints. These controls should be independent of the LLM's prose.</p>
+<p><strong>Principle 4 — Make uncertainty visible.</strong> The system should distinguish facts, calculations, forecasts, assumptions, and interpretations. An answer should be able to say that evidence is incomplete rather than filling the gap with plausible language.</p>
+<p><strong>Principle 5 — Preserve human accountability.</strong> Human oversight is essential when the recommendation is material, ambiguous, outside model limits, or sensitive to missing client information. The SEC's robo-adviser guidance emphasises disclosure and reasonable suitability determination; the same logic becomes more—not less—important when conversational AI can generate highly persuasive explanations.</p>
+<h2>8. Risks and Mitigation</h2>
+<table>
+<tr><th>Risk</th><th>Why it arises</th><th>Advisory consequence</th><th>Mitigation</th></tr>
+<tr><td>Hallucination</td><td>Generated content can be plausible but unsupported</td><td>False facts or invented product details</td><td>Retrieval, citations, confidence checks, abstention</td></tr>
+<tr><td>Numerical error</td><td>Language models are not deterministic calculators</td><td>Incorrect returns, ratios, or allocations</td><td>Tool-based calculation and validation</td></tr>
+<tr><td>Outdated information</td><td>Model knowledge may not reflect current markets</td><td>Stale recommendations</td><td>Real-time sources with timestamps</td></tr>
+<tr><td>Bias</td><td>Training data and prompts encode associations</td><td>Unequal or unsuitable advice</td><td>Fairness testing and protected-attribute controls</td></tr>
+<tr><td>Privacy leakage</td><td>Sensitive financial information enters AI pipelines</td><td>Confidentiality and compliance risk</td><td>Data minimisation, encryption, access control, privacy-preserving deployment</td></tr>
+<tr><td>Prompt injection</td><td>Malicious instructions can enter retrieved or user content</td><td>Tool misuse or data exfiltration</td><td>Input isolation, tool permissions, content validation</td></tr>
+<tr><td>Overtrust</td><td>Fluent explanations can create unwarranted confidence</td><td>Clients follow poor advice</td><td>Disclosure, uncertainty, human review</td></tr>
+<tr><td>Model drift</td><td>Markets, products, regulations, and user behaviour change</td><td>Performance deterioration</td><td>Continuous monitoring and revalidation</td></tr>
+<tr><td>Concentration risk</td><td>Dependence on a few technology vendors</td><td>Operational and systemic fragility</td><td>Vendor diversification and contingency plans</td></tr>
+</table>
+<p>These risks align with current governance perspectives. NIST identifies validity and reliability, safety, security and resilience, accountability and transparency, explainability, privacy, and fairness as interdependent characteristics of trustworthy AI (NIST, 2023). The FSB similarly highlights third-party dependencies, market correlations, cyber risk, model risk, data quality, governance, fraud, and disinformation as important AI-related financial-sector vulnerabilities (FSB, 2024). These concerns become more relevant as LLM systems gain access to financial data, external tools, and automated workflows.</p>
+<h2>9. Regulatory and Ethical Context</h2>
+<p>Financial advice is governed by principles that existed before generative AI, including suitability, disclosure, fiduciary responsibility, recordkeeping, and consumer protection. Generative systems do not remove these obligations merely because the interaction is conversational. Instead, they create new questions about who approved an output, which information was used, how the model was tested, and whether a generated explanation accurately reflects the decision process.</p>
+<p>The European Union's AI Act provides a useful reference point for risk-based governance. It classifies certain AI uses for evaluating the creditworthiness of natural persons as high-risk, reflecting the potential effect on access to financial resources and the risk of discriminatory outcomes. While not every financial advisory use falls into the same category, the regulatory direction is clear: applications with significant effects require stronger controls, documentation, risk management, and oversight. (European Union, 2024).</p>
+<p>From a systemic perspective, the issue extends beyond individual clients. Widespread reliance on similar models, vendors, or datasets can create correlated behaviour and concentration risk. The FSB's 2025 monitoring work emphasises the importance of tracking adoption, third-party dependencies, and emerging vulnerabilities rather than waiting for failures to become systemic.</p>
+<h2>10. Future Research Agenda</h2>
+<h3>10.1 Evaluation beyond accuracy</h3>
+<p>Future studies should evaluate advisory LLMs using multi-dimensional metrics: factuality, numerical accuracy, suitability, calibration, fairness, explanation quality, robustness, and client comprehension. Financial benchmarks should include realistic constraints rather than isolated question-answering tasks. (Weber et al., 2024).</p>
+<h3>10.2 Grounded and tool-using systems</h3>
+<p>Research should compare standalone LLMs with systems that use RAG, financial databases, knowledge graphs, calculators, optimisation engines, and policy rules. The key research question is not merely whether retrieval improves answer quality, but whether it reduces consequential advisory errors.</p>
+<h3>10.3 Human-AI collaboration</h3>
+<p>Advisor-in-the-loop studies should test when humans detect model failures, when AI explanations improve decision quality, and when automation instead creates overreliance. Experimental designs should measure both financial outcomes and cognitive outcomes such as appropriate scepticism.</p>
+<h3>10.4 Fairness and personalisation</h3>
+<p>Personalisation can improve suitability but can also amplify hidden proxies for protected characteristics. Future datasets should support subgroup evaluation while respecting privacy. Fairness should be evaluated at the recommendation level rather than only at model-output level. (Winder et al., 2025).</p>
+<h3>10.5 Regulatory-compliant agentic finance</h3>
+<p>As LLM agents acquire the ability to call tools, retrieve records, rebalance portfolios, or execute workflows, research must address permissions, transaction limits, dual controls, rollback, auditability, and incident response. Agent autonomy should expand only as verification and governance become stronger. (FSB, 2025).</p>
+<h2>11. Discussion</h2>
+<p>The literature supports a nuanced conclusion. LLMs are already useful for tasks that benefit from language, synthesis, and contextual interpretation. The evidence is especially persuasive for financial-document understanding, question answering, market-news interpretation, explanation, and conversational assistance. Evidence for autonomous investment performance is more variable. Some experiments report encouraging portfolio or signal results, while other studies fail to demonstrate persistent superiority to simple benchmarks. Consequently, claims that LLMs can replace financial advisors or consistently beat the market are not supported by the current evidence base.</p>
+<p>The distinction between <em>advice generation</em> and <em>decision validation</em> is therefore central. A useful advisory system can let an LLM interpret a client's goals, retrieve relevant information, explain a portfolio, and present alternatives. It should then rely on trusted financial data and validated quantitative or rule-based components to determine whether a recommendation satisfies hard constraints. The resulting decision should be accompanied by evidence and uncertainty and, where appropriate, reviewed by a human advisor.</p>
+<p>This architecture also changes how explainability should be understood. A fluent explanation generated after a decision is not necessarily a faithful explanation of why the decision occurred. Explainability should instead be anchored to the actual evidence, model outputs, calculations, and constraints that produced the recommendation. This is consistent with the finance XAI literature, which emphasises traceability and transparency for high-stakes decisions (Weber et al., 2024).</p>
+<h2>12. Limitations</h2>
+<p>This study is conceptual and literature based. It does not introduce a new dataset, benchmark, field experiment, or production implementation. The empirical evidence reviewed also varies substantially in task design, model version, market period, data availability, and evaluation methodology. Results obtained with one model or prompting strategy should therefore not be assumed to generalise to all LLMs. Finally, regulatory requirements vary across jurisdictions and continue to evolve, so the governance recommendations should be interpreted as architectural principles rather than legal advice.</p>
+<h2>13. Conclusion</h2>
+<p>LLMs are likely to become an important component of financial advisory, but their most defensible contribution is not autonomous portfolio selection. Their distinctive value lies in making complex financial information easier to retrieve, interpret, discuss, and explain. When paired with trusted data, retrieval, numerical tools, deterministic suitability controls, monitoring, and human oversight, LLMs can extend the reach and usability of financial advisory without requiring the financial decision process to depend on unconstrained text generation.</p>
+<p>The future of trustworthy financial advisory is therefore better described as <strong>human-AI collaboration</strong> than human replacement. The strategic objective is to combine the strengths of language models—speed, synthesis, interaction, and contextual explanation—with the strengths of financial models and human professionals—precision, accountability, domain judgement, and responsibility. The resulting system should optimise not for persuasive answers, but for <strong>evidence-grounded, suitable, explainable, secure, and auditable decisions</strong>.</p>
+<h2> References</h2>
+<ol class="refs">
+<li>Araci, D. (2019). FinBERT: Financial sentiment analysis with pre-trained language models. <em>arXiv preprint arXiv:1908.10063</em>. https://arxiv.org/abs/1908.10063</li>
+<li>Asai, A., Wu, Z., Wang, Y., Sil, A., &amp; Hajishirzi, H. (2024). Self-RAG: Learning to retrieve, generate, and critique through self-reflection. <em>International Conference on Learning Representations</em>. https://arxiv.org/abs/2310.11511</li>
+<li>Brenner, L., &amp; Meyll, T. (2020). Robo-advisors: A substitute for human financial advice? <em>Journal of Behavioral and Experimental Finance, 25</em>, 100275. https://doi.org/10.1016/j.jbef.2020.100275</li>
+<li>Chen, Z., Chen, W., Smiley, C., Shah, S., Borova, I., Langdon, D., Moussa, R., Beane, M., Huang, T.-H., Routledge, B., &amp; Wang, W. Y. (2021). FinQA: A dataset of numerical reasoning over financial data. <em>Proceedings of EMNLP 2021</em>, 3697–3711. https://doi.org/10.18653/v1/2021.emnlp-main.300</li>
+<li>Davies, S. W. (2020). Financial advice and discretion limits. <em>Financial Planning Review, 3</em>, e1072. https://doi.org/10.1002/cfp2.1072</li>
+<li>Devlin, J., Chang, M.-W., Lee, K., &amp; Toutanova, K. (2019). BERT: Pre-training of deep bidirectional transformers for language understanding. <em>Proceedings of NAACL-HLT 2019</em>, 4171–4186. https://doi.org/10.18653/v1/N19-1423</li><li>European Union. (2024). Regulation (EU) 2024/1689 laying down harmonised rules on artificial intelligence (Artificial Intelligence Act). Official Journal of the European Union.</li>
+<li>Du, K., Zhao, Y., Mao, R., Xing, F., &amp; Cambria, E. (2025). Natural language processing in finance: A survey. <em>Information Fusion, 115</em>, 102755. https://doi.org/10.1016/j.inffus.2024.102755</li>
+<li>Financial Stability Board. (2024). <em>The financial stability implications of artificial intelligence</em>. FSB.</li>
+<li>Financial Stability Board. (2025). <em>Monitoring adoption of artificial intelligence and related vulnerabilities in the financial sector</em>. FSB.</li>
+<li>Hildebrand, C., &amp; Bergner, A. (2021). Conversational robo advisors as surrogates of trust: Onboarding experience, firm perception, and consumer financial decision making. <em>Journal of the Academy of Marketing Science, 49</em>, 659–676. https://doi.org/10.1007/s11747-020-00753-z</li>
+<li>Lee, J., Stevens, N., Han, S. C., &amp; Song, M. (2024). A survey of large language models in finance (FinLLMs). <em>arXiv preprint arXiv:2402.02315</em>.</li>
+<li>Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., Küttler, H., Lewis, M., Yih, W.-t., Rocktäschel, T., Riedel, S., &amp; Kiela, D. (2020). Retrieval-augmented generation for knowledge-intensive NLP tasks. <em>Advances in Neural Information Processing Systems, 33</em>.</li>
+<li>Lopez-Lira, A., &amp; Tang, Y. (2023). Can ChatGPT forecast stock price movements? Return predictability and large language models. <em>arXiv preprint arXiv:2304.07619</em>; later version forthcoming in the <em>Journal of Financial Economics</em>.</li>
+<li>National Institute of Standards and Technology. (2023). <em>Artificial Intelligence Risk Management Framework (AI RMF 1.0)</em>. NIST AI 100-1.</li>
+<li>Oehler, A., &amp; Horn, M. (2024). Does ChatGPT provide better advice than robo-advisors? <em>Finance Research Letters, 60</em>, 104898. https://doi.org/10.1016/j.frl.2023.104898</li>
+<li>Shah, R. S., Chawla, K., Eidnani, D., Shah, A., Du, W., Chava, S., Raman, N., Smiley, C., Chen, J., &amp; Yang, D. (2022). When FLUE meets FLANG: Benchmarks and large pre-trained language model for financial domain. <em>Proceedings of EMNLP 2022</em>.</li>
+<li>Tan, G. K. S. (2020). Robo-advisors and the financialization of lay investors. <em>Geoforum, 117</em>, 46–60. https://doi.org/10.1016/j.geoforum.2020.09.004</li>
+<li>Tao, R., Su, C.-W., Xiao, Y., Dai, K., &amp; Khalid, F. (2021). Robo advisors, algorithmic trading and investment management: Wonders of fourth industrial revolution in financial markets. <em>Technological Forecasting and Social Change, 163</em>, 120421.</li>
+<li>Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, Ł., &amp; Polosukhin, I. (2017). Attention is all you need. <em>Advances in Neural Information Processing Systems, 30</em>.</li>
+<li>Weber, P., Carl, K. V., &amp; Hinz, O. (2024). Applications of explainable artificial intelligence in finance—a systematic review of finance, information systems, and computer science literature. <em>Management Review Quarterly, 74</em>, 867–907. https://doi.org/10.1007/s11301-023-00320-0</li>
+<li>Wu, S., Irsoy, O., Lu, S., Dabravolski, V., Dredze, M., Gehrmann, S., Kambadur, P., Rosenberg, D., &amp; Mann, G. (2023). BloombergGPT: A large language model for finance. <em>arXiv preprint arXiv:2303.17564</em>.</li>
+<li>Yang, H., Liu, X.-Y., &amp; Wang, C. D. (2023). FinGPT: Open-source financial large language models. <em>FinLLM Workshop at IJCAI 2023</em>.</li>
+<li>Zhu, F., Lei, W., Huang, Y., Wang, C., Zhang, S., Lv, J., Feng, F., &amp; Chua, T.-S. (2021). TAT-QA: A question answering benchmark on a hybrid of tabular and textual content in finance. <em>Proceedings of ACL-IJCNLP 2021</em>, 3277–3287. https://doi.org/10.18653/v1/2021.acl-long.254</li>
+<li>Winder, F., et al. (2025). Biased echoes: Large language models reinforce investment biases and increase portfolio risks of private investors. <em>Scientific Reports</em>. https://pmc.ncbi.nlm.nih.gov/articles/PMC12204588/</li>
+<li>Lopez-Lira, A., &amp; Tang, Y. (2026). Can ChatGPT forecast stock price movements? Return predictability and large language models. <em>SSRN Working Paper</em>, revised May 2026. https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4412788</li>
+</ol>
+<h2>Contribution in paper</h2>
+<ul>
+<li><strong>Research gap:</strong> The paper moves beyond generic “LLMs in finance” discussion by separating language generation from validated financial decision logic.</li>
+<li><strong>Contribution:</strong> A layered trustworthy-advisory architecture integrates investor context, financial data, LLM/RAG, decision controls, explanation, and human governance.</li>
+<li><strong>Evidence balance:</strong> Positive portfolio and market-signal findings are explicitly contrasted with benchmark failures and model sensitivity.</li>
+<li><strong>Novelty claim:</strong> The framework is conceptual; it should not be presented as experimentally validated until implemented and evaluated.</li>
+<li><strong>Key limitation:</strong> The reviewed literature uses heterogeneous models, prompts, periods, and tasks, limiting direct comparison.</li>
+<li><strong>Recommended next study:</strong> Empirically benchmark a grounded LLM advisory prototype against robo-advisors and human advisors using suitability, factuality, numerical accuracy, and user-understanding metrics.</li>
+</ul>
+</main>
 </body>
 </html>
