@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Machine Learning Dataset Bias Detection - Explanation & Flowchart</title>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        background: #f5f7fb;
+        color: #1f2937;
+    }
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 24px 60px;
+    }
+    .hero {
+        background: white;
+        border-radius: 16px;
+        padding: 36px;
+        box-shadow: 0 6px 24px rgba(0,0,0,.08);
+        margin-bottom: 28px;
+    }
+    h1 {
+        margin-top: 0;
+        font-size: 34px;
+        color: #111827;
+    }
+    h2 {
+        margin-top: 34px;
+        color: #1e3a8a;
+        border-bottom: 2px solid #dbeafe;
+        padding-bottom: 8px;
+    }
+    h3 { color: #374151; }
+    .subtitle {
+        font-size: 18px;
+        color: #6b7280;
+    }
+    .card {
+        background: white;
+        border-radius: 14px;
+        padding: 24px;
+        margin: 20px 0;
+        box-shadow: 0 4px 16px rgba(0,0,0,.06);
+    }
+    .flowchart {
+        overflow-x: auto;
+        padding: 20px;
+        background: #fafafa;
+        border-radius: 12px;
+        text-align: center;
+    }
+    .box {
+        display: inline-block;
+        min-width: 230px;
+        max-width: 330px;
+        padding: 14px 18px;
+        margin: 5px;
+        border: 2px solid #2563eb;
+        border-radius: 12px;
+        background: #eff6ff;
+        font-weight: 600;
+        vertical-align: middle;
+    }
+    .box.green {
+        border-color: #059669;
+        background: #ecfdf5;
+    }
+    .box.orange {
+        border-color: #d97706;
+        background: #fffbeb;
+    }
+    .box.red {
+        border-color: #dc2626;
+        background: #fef2f2;
+    }
+    .arrow {
+        display: block;
+        font-size: 28px;
+        color: #6b7280;
+        line-height: 1.1;
+    }
+    .row {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        align-items: stretch;
+        flex-wrap: wrap;
+    }
+    .mini {
+        flex: 1;
+        min-width: 210px;
+        max-width: 320px;
+        padding: 18px;
+        border-radius: 12px;
+        background: #f8fafc;
+        border: 1px solid #dbe3ee;
+    }
+    code {
+        background: #f3f4f6;
+        padding: 2px 6px;
+        border-radius: 5px;
+        font-family: Consolas, monospace;
+    }
+    pre {
+        background: #111827;
+        color: #e5e7eb;
+        padding: 18px;
+        border-radius: 10px;
+        overflow-x: auto;
+    }
+    .metric {
+        background: #f8fafc;
+        border-left: 4px solid #2563eb;
+        padding: 14px 18px;
+        margin: 12px 0;
+    }
+    .score-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+    .score-table th, .score-table td {
+        border: 1px solid #d1d5db;
+        padding: 12px;
+        text-align: left;
+    }
+    .score-table th {
+        background: #eff6ff;
+    }
+    .note {
+        background: #fff7ed;
+        border-left: 5px solid #f97316;
+        padding: 18px;
+        border-radius: 8px;
+    }
+    .footer {
+        text-align: center;
+        color: #6b7280;
+        margin-top: 35px;
+        font-size: 14px;
+    }
+    @media print {
+        body { background: white; }
+        .hero, .card { box-shadow: none; }
+        .container { max-width: none; }
+    }
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<div class="hero">
+    <h1>Machine Learning Dataset Bias Detection</h1>
+    <p class="subtitle">
+        Explanation and flowchart of the automated Python-based dataset bias analysis framework
+    </p>
+</div>
+
+<div class="card">
+    <h2>1. Overall Concept</h2>
+    <p>
+        The bias-detection program is designed as a pipeline. A dataset enters the system,
+        multiple dimensions of potential bias are examined, statistical evidence is collected,
+        and the system produces an overall Bias Risk Score and classification.
+    </p>
+
+    <div class="metric">
+        <strong>Core idea:</strong><br>
+        Dataset → Identify Groups → Compare Groups → Measure Disparity →
+        Statistical Validation → Combine Evidence → Bias Risk Assessment
+    </div>
+
+    <p>
+        The system should be treated as a <strong>bias screening and auditing tool</strong>.
+        Statistical disparity alone does not prove discrimination, and a low score does not
+        prove that a dataset is completely fair.
+    </p>
+</div>
+
+<div class="card">
+    <h2>2. Complete Flowchart</h2>
+
+    <div class="flowchart">
+
+        <div class="box">START PROGRAM</div>
+        <span class="arrow">↓</span>
+
+        <div class="box">
+            Enter Dataset Filename<br>
+            Enter Target Column<br>
+            Optional Sensitive Attributes
+        </div>
+        <span class="arrow">↓</span>
+
+        <div class="box">
+            Load Dataset<br>
+            CSV / XLSX / Parquet / JSON
+        </div>
+        <span class="arrow">↓</span>
+
+        <div class="box">
+            Dataset Validation<br>
+            • Rows & Columns<br>
+            • Data Types<br>
+            • Missing Values<br>
+            • Unique Values
+        </div>
+        <span class="arrow">↓</span>
+
+        <div class="box">
+            Target Analysis<br>
+            • Target Distribution<br>
+            • Class Frequencies<br>
+            • Class Imbalance
+        </div>
+        <span class="arrow">↓</span>
+
+        <div class="box">
+            Sensitive Attribute Detection / Selection<br>
+            Gender • Age • Region • Race • etc.
+        </div>
+        <span class="arrow">↓</span>
+
+        <div class="row">
+            <div class="mini">
+                <strong>Representation Bias</strong>
+                <p>Group sizes<br>Group ratios</p>
+            </div>
+            <div class="mini">
+                <strong>Target Outcome Disparity</strong>
+                <p>Group target rates<br>Outcome differences</p>
+            </div>
+            <div class="mini">
+                <strong>Missing-Value Disparity</strong>
+                <p>Missing percentage by demographic group</p>
+            </div>
+        </div>
+
+        <span class="arrow">↓</span>
+
+        <div class="box green">
+            Fairness Metrics<br>
+            • Disparate Impact<br>
+            • Statistical Parity Difference
+        </div>
+        <span class="arrow">↓</span>
+
+        <div class="box green">
+            Statistical Testing<br>
+            • Chi-Square Test<br>
+            • p-value<br>
+            • Sensitive Attribute ↔ Target
+        </div>
+        <span class="arrow">↓</span>
+
+        <div class="box">
+            Numerical Feature Group Analysis<br>
+            Compare feature distributions across groups
+        </div>
+        <span class="arrow">↓</span>
+
+        <div class="box">
+            Mutual Information<br>
+            Sensitive Attribute ↔ Target Association
+        </div>
+        <span class="arrow">↓</span>
+
+        <div class="box orange">
+            Data Quality Checks<br>
+            • Duplicate Records<br>
+            • Possible Target Leakage
+        </div>
+        <span class="arrow">↓</span>
+
+        <div class="box">
+            Visualization<br>
+            • Group Distribution<br>
+            • Target Rates<br>
+            • Bias Patterns
+        </div>
+        <span class="arrow">↓</span>
+
+        <div class="box green">
+            Calculate Bias Risk Score (0–100)<br>
+            Imbalance + Representation + Disparity +
+            Significance + Data Quality
+        </div>
+        <span class="arrow">↓</span>
+
+        <div class="box">FINAL BIAS CLASSIFICATION</div>
+        <span class="arrow">↓</span>
+
+        <div class="row">
+            <div class="box green">LOW<br>0–24</div>
+            <div class="box orange">MODERATE<br>25–49</div>
+            <div class="box orange">HIGH<br>50–69</div>
+            <div class="box red">CRITICAL<br>70–100</div>
+        </div>
+
+        <span class="arrow">↓</span>
+
+        <div class="box">
+            Recommendations &<br>
+            Bias Analysis Report
+        </div>
+        <span class="arrow">↓</span>
+
+        <div class="box green">END</div>
+    </div>
+</div>
+
+<div class="card">
+    <h2>3. Step-by-Step Explanation</h2>
+
+    <h3>Step 1 — Dataset Input</h3>
+    <p>
+        The user provides the dataset filename, the machine-learning target column,
+        and optionally the sensitive/protected attributes.
+    </p>
+
+    <pre>FILE_NAME = "/kaggle/input/dataset/data.csv"
+TARGET_COLUMN = "hired"
+SENSITIVE_COLUMNS = ["gender", "age", "region"]</pre>
+
+    <h3>Step 2 — Dataset Loading</h3>
+    <p>
+        The program loads the dataset and identifies its dimensions, data types,
+        unique values, and missing values.
+    </p>
+
+    <h3>Step 3 — Target Analysis</h3>
+    <p>
+        The target variable is examined to determine whether some classes are
+        heavily overrepresented.
+    </p>
+
+    <pre>Class 0 → 84%
+Class 1 → 16%</pre>
+
+    <p>
+        This indicates a strong class imbalance, which can cause a model to favor
+        the majority class.
+    </p>
+
+    <h3>Step 4 — Sensitive Attribute Detection</h3>
+    <p>
+        The program can either use attributes supplied by the user or heuristically
+        identify columns whose names suggest protected or sensitive characteristics,
+        such as gender, age, race, ethnicity, region, disability, or nationality.
+    </p>
+
+    <h3>Step 5 — Representation Bias</h3>
+    <p>
+        The program checks whether groups are represented proportionally in the dataset.
+    </p>
+
+    <pre>Male        → 71.8%
+Female      → 26.9%
+Non-binary  →  1.3%</pre>
+
+    <p>
+        A very small group may have insufficient representation for reliable model
+        learning or fairness evaluation.
+    </p>
+
+    <h3>Step 6 — Target Outcome Disparity</h3>
+    <p>
+        The target outcome is compared across demographic groups.
+    </p>
+
+    <pre>Male hiring rate        = 75%
+Female hiring rate      = 48%
+Non-binary hiring rate  = 15%</pre>
+
+    <p>
+        Large differences indicate potential outcome disparity and require further investigation.
+    </p>
+
+    <h3>Step 7 — Disparate Impact</h3>
+    <p>
+        For binary outcomes, the program can calculate the Disparate Impact Ratio:
+    </p>
+
+    <div class="metric">
+        <strong>DI = Selection Rate of Group A / Selection Rate of Reference Group</strong>
+    </div>
+
+    <p>For example:</p>
+
+    <div class="metric">
+        DI = 0.48 / 0.75 = <strong>0.64</strong>
+    </div>
+
+    <p>
+        A value substantially below 1 indicates that the selected group has a lower
+        selection rate than the reference group. The commonly used 0.80 threshold
+        is a screening convention, not universal proof of unfairness.
+    </p>
+
+    <h3>Step 8 — Statistical Parity Difference</h3>
+    <div class="metric">
+        <strong>SPD = Minimum Group Selection Rate − Maximum Group Selection Rate</strong>
+    </div>
+
+    <p>
+        A larger negative value indicates greater disparity in positive outcome rates.
+    </p>
+
+    <h3>Step 9 — Chi-Square Test</h3>
+    <p>
+        A Chi-square test is used to examine whether the sensitive attribute and target
+        variable have a statistically significant association.
+    </p>
+
+    <pre>Gender ───────────┐
+                   ├──→ Chi-Square Test → p-value
+Hired ─────────────┘</pre>
+
+    <p>
+        If p &lt; 0.05, the association is statistically significant under the assumptions
+        of the test. This does not establish causation.
+    </p>
+
+    <h3>Step 10 — Missing-Value Disparity</h3>
+    <p>
+        Missing data are compared between groups. For example, if income is missing for
+        5% of one group but 35% of another, the missingness itself may introduce bias.
+    </p>
+
+    <h3>Step 11 — Numerical Feature Analysis</h3>
+    <p>
+        Numerical features are compared across demographic groups. Large differences in
+        feature distributions can indicate sampling, measurement, or representation issues.
+    </p>
+
+    <h3>Step 12 — Mutual Information</h3>
+    <p>
+        Mutual information estimates the degree of statistical dependence between a
+        sensitive attribute and the target. A larger value suggests stronger association,
+        but it does not establish causality or unfairness.
+    </p>
+
+    <h3>Step 13 — Duplicate and Leakage Checks</h3>
+    <p>
+        Duplicate rows can distort model training, while target leakage can make model
+        performance appear artificially high and can invalidate a fairness analysis.
+    </p>
+
+    <h3>Step 14 — Visualization</h3>
+    <p>
+        Charts are generated to make representation imbalance and group-level outcome
+        differences easier to inspect.
+    </p>
+</div>
+
+<div class="card">
+    <h2>4. Bias Risk Score</h2>
+
+    <p>
+        The current prototype combines multiple warning signals into a screening score.
+    </p>
+
+    <pre>Class imbalance          → points
+Representation imbalance → points
+Disparate impact         → points
+Statistical significance → points
+Duplicates               → points
+                         ─────────
+                         Bias Score</pre>
+
+    <table class="score-table">
+        <thead>
+            <tr>
+                <th>Score</th>
+                <th>Classification</th>
+                <th>Interpretation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>0–24</td>
+                <td>LOW</td>
+                <td>No major indicators detected by the screening rules.</td>
+            </tr>
+            <tr>
+                <td>25–49</td>
+                <td>MODERATE</td>
+                <td>Some indicators require investigation.</td>
+            </tr>
+            <tr>
+                <td>50–69</td>
+                <td>HIGH</td>
+                <td>Multiple significant risk indicators are present.</td>
+            </tr>
+            <tr>
+                <td>70–100</td>
+                <td>CRITICAL</td>
+                <td>Strong potential bias indicators require detailed investigation.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="card">
+    <h2>5. Example Interpretation</h2>
+
+    <pre>Dataset
+   ↓
+Gender Representation
+   ↓
+Male        71.8%
+Female      26.9%
+Non-binary   1.3%
+   ↓
+Representation Imbalance Detected
+   ↓
+Hiring Rates
+   ↓
+Male        75%
+Female      48%
+Non-binary  15%
+   ↓
+Outcome Disparity Detected
+   ↓
+Disparate Impact = 0.64
+   ↓
+Potential Adverse Impact Indicator
+   ↓
+Chi-Square p-value < 0.05
+   ↓
+Statistically Significant Association
+   ↓
+Combined Evidence
+   ↓
+HIGH / CRITICAL BIAS RISK</pre>
+</div>
+
+<div class="card">
+    <h2>6. Recommended Research Architecture</h2>
+
+    <div class="flowchart">
+        <div class="box">DATASET</div>
+        <span class="arrow">↓</span>
+
+        <div class="row">
+            <div class="mini">
+                <strong>Representation Bias</strong>
+                <p>Group proportions<br>Sampling balance</p>
+            </div>
+            <div class="mini">
+                <strong>Outcome Bias</strong>
+                <p>Selection rates<br>Fairness metrics</p>
+            </div>
+            <div class="mini">
+                <strong>Data Quality Bias</strong>
+                <p>Missingness<br>Duplicates<br>Leakage</p>
+            </div>
+        </div>
+
+        <span class="arrow">↓</span>
+
+        <div class="box green">
+            Metrics + Statistical Tests
+        </div>
+        <span class="arrow">↓</span>
+
+        <div class="box green">
+            Evidence Fusion
+        </div>
+        <span class="arrow">↓</span>
+
+        <div class="box orange">
+            Explainable Bias Risk Assessment
+        </div>
+        <span class="arrow">↓</span>
+
+        <div class="box">
+            Recommendations / Mitigation
+        </div>
+    </div>
+
+    <p>
+        This architecture is preferable for research because each category of bias is
+        measured independently before the evidence is combined. This makes the final
+        assessment more transparent and explainable.
+    </p>
+</div>
+
+<div class="card">
+    <h2>7. Important Research Limitation</h2>
+
+    <div class="note">
+        <strong>Important:</strong> A high bias score does not automatically prove that
+        a dataset is discriminatory, and a low score does not prove that it is fair.
+        Statistical associations can arise from legitimate domain relationships,
+        sampling effects, historical processes, measurement choices, or confounding factors.
+        The results should therefore be reviewed in the context of the application domain.
+    </div>
+
+    <p>
+        For a research-paper-quality implementation, the scoring weights should be formally
+        justified or learned/validated using an appropriate evaluation methodology rather
+        than being treated as universally valid.
+    </p>
+</div>
+
+<div class="footer">
+    Machine Learning Dataset Bias Detection Framework — Explanation & Flowchart
+</div>
+
+</div>
+</body>
+</html>
