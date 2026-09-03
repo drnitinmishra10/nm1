@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Representation Bias and Its Detection</title>
+<style>
+@page{size:A4;margin:18mm 17mm}*{box-sizing:border-box}body{margin:0;font-family:"Times New Roman",serif;font-size:10.5pt;line-height:1.35;color:#202124}.paper{max-width:900px;margin:auto;padding:28px 34px}
+h1{font-size:21pt;line-height:1.15;text-align:center;margin:0 0 10px}h2{font-size:13.5pt;margin:18px 0 7px}h3{font-size:11.5pt;margin:12px 0 5px}
+.author{text-align:center;font-size:12pt;font-weight:bold}.email{text-align:center;font-size:10pt}.abstract{border-top:1px solid #555;border-bottom:1px solid #555;padding:9px 0;margin:14px 0;text-align:justify}
+p{text-align:justify;margin:6px 0}table{width:100%;border-collapse:collapse;margin:10px 0;font-size:9pt}th,td{border:.7px solid #777;padding:5px;vertical-align:top}th{background:#f0f0f0;text-align:center}.cap{text-align:center;font-size:9pt}
+.eq{text-align:center;font-style:italic;margin:8px}.callout{border-left:3px solid #555;background:#f5f5f5;padding:8px;margin:10px 0}.pagebreak{page-break-before:always}
+.refs{font-size:8.7pt;line-height:1.25}.refs li{margin-bottom:5px}.footer{border-top:.7px solid #aaa;margin-top:25px;padding-top:8px;text-align:center;font-size:8.5pt;color:#555}
+@media print{.paper{padding:0;max-width:none}a{color:#000;text-decoration:none}}
+</style></head><body><div class="paper">
+
+<h1>Representation Bias and Its Detection: A Data-Centric Framework for Measuring Underrepresentation in Machine Learning Datasets</h1>
+<div class="author">Dr. Nitin Mishra</div><div class="email">drnitinmishra10@gmail.com</div>
+
+<div class="abstract"><b>Abstract—</b>
+Representation bias occurs when a dataset does not adequately represent the populations, groups, contexts, or cases relevant to its intended application. Unlike random sampling variation, representation bias may systematically reduce the visibility of particular groups and consequently affect model learning, generalizability, subgroup reliability, and fairness evaluation. This paper presents a practical framework for detecting representation bias before downstream machine-learning modelling. The framework combines group proportions, external reference distributions, representation ratios, percentage-point gaps, chi-square goodness-of-fit testing, standardized residuals, and intersectional analysis. A synthetic 500-record student dataset is used to demonstrate the approach. The experiment intentionally introduces demographic imbalance across gender, age, region, and education. For example, the regional reference distribution is 25% for each of four regions, while the observed sample is approximately 49.8% North, 16.2% South, 10.6% East, and 23.4% West. The resulting regional chi-square statistic is approximately 180.48, showing substantial departure from the reference distribution. The paper argues that representation should be audited as an early-stage data-quality property rather than inferred solely from model-level fairness metrics. The proposed workflow is simple enough for reproducible implementation in Python and Kaggle while providing a foundation for more advanced weighting, re-sampling, causal, and fairness-aware approaches.
+<div><b>Keywords—</b> representation bias, underrepresentation, dataset bias, machine learning, fairness, data quality, representation ratio, intersectional analysis</div>
+</div>
+
+<h2>1. Introduction</h2>
+<p>Machine learning systems are often evaluated as though the training data naturally provide a faithful description of the population and conditions in which the system will be used. In reality, datasets are constructed through collection decisions, sampling mechanisms, platform constraints, historical practices, and availability of records. A dataset can therefore be large and internally consistent while still failing to adequately represent important groups. Representation bias refers to this failure of coverage and composition relative to the population, context, or task for which the data are intended [1–6].</p>
+<p>The distinction matters because the learning algorithm can only generalize from the evidence contained in the data. When a group is severely underrepresented, the model may have fewer opportunities to learn patterns associated with that group, resulting in unstable or systematically poorer performance. The well-known study by Buolamwini and Gebru demonstrated substantial intersectional accuracy disparities in commercial gender classification and helped focus attention on the connection between dataset composition and subgroup performance [7].</p>
+<p>Representation bias is related to, but broader than, sampling bias. Sampling bias emphasizes a systematic selection mechanism that causes the observed sample to differ from the target population. Representation bias focuses on the resulting coverage and composition of the dataset. The latter can be detected even when the exact sampling mechanism is unknown. A dataset may also be representative on one variable but poorly represented on an important intersection, such as age × gender × region [8,9].</p>
+<p>Contemporary responsible-AI research increasingly treats data collection and dataset construction as sources of potential harm. Suresh and Guttag place data collection and preparation within a lifecycle of machine-learning harms [5]. Mehrabi et al. survey multiple sources of bias and fairness problems [6], while Shahbazi et al. specifically organize the literature on representation bias and its identification and resolution [8]. Pagano et al. review identification and mitigation approaches and show that fairness analysis frequently relies on demographic parity, equal opportunity, and equalized odds, while broader multimetric and multiclass studies remain comparatively limited [11].</p>
+<p>This paper proposes an interpretable detection framework centered on an explicit reference population. Rather than treating equal group counts as universally desirable, the framework asks whether the dataset is appropriately aligned with a justified population benchmark. The contribution is a reproducible procedure for early-stage auditing, followed by a demonstration on a synthetic 500-row dataset.</p>
+
+<h2>2. Conceptual Background</h2>
+<h3>2.1 Defining representation</h3>
+<p>Representation is application-dependent. For a healthcare model, the reference may be the population of patients expected at deployment. For an educational model, it may be the student or applicant population. For a computer-vision system, representation can also concern conditions such as geography, lighting, image quality, age, or skin tone. Consequently, “balanced” should not automatically mean 50:50. The relevant goal is adequate and appropriate coverage of the target population and task [4,8,9].</p>
+<h3>2.2 Representation bias and class imbalance</h3>
+<p>Class imbalance concerns the distribution of a prediction target, whereas representation bias concerns the composition of groups or contexts relevant to the intended use. These concepts can coexist but should not be conflated. A rare disease label may be appropriately rare in a representative clinical dataset, while a demographic subgroup may still be severely underrepresented. A detection study should therefore compare group composition with a scientifically justified reference rather than impose arbitrary equal proportions.</p>
+<h3>2.3 Causes of representation bias</h3>
+<table><tr><th>Cause</th><th>Description</th><th>Potential consequence</th></tr>
+<tr><td>Historical exclusion</td><td>Earlier data collection systematically omitted particular groups.</td><td>Persistent undercoverage in later datasets.</td></tr>
+<tr><td>Sampling/selection</td><td>Selection mechanisms favor some people, places, or cases.</td><td>Distorted group proportions.</td></tr>
+<tr><td>Coverage limitation</td><td>The sampling frame cannot reach parts of the intended population.</td><td>Structural omissions.</td></tr>
+<tr><td>Platform effect</td><td>Data come disproportionately from users of a particular platform.</td><td>Demographic or geographic skew.</td></tr>
+<tr><td>Data availability</td><td>Records are easier to obtain for some groups than others.</td><td>Unequal quantity or quality of evidence.</td></tr>
+<tr><td>Temporal change</td><td>The target population changes after collection.</td><td>A formerly representative dataset becomes outdated.</td></tr>
+</table><div class="cap">Table 1. Common sources of representation bias [3,5,6,8,12].</div>
+
+<h2>3. Related Work</h2>
+<p>Representation problems have deep roots in survey research and statistical inference. Groves and Lyberg describe total survey error as a system containing multiple sources of distortion, including coverage and sampling processes [1]. Bethlehem shows how web-based participation can produce selection bias when participation probabilities differ across people or when participation is related to survey variables [2]. Baker et al. discuss the challenges of non-probability sampling and the need for external information when assessing representativeness [3]. These foundations remain relevant to modern machine-learning datasets because data collection is itself a selection process.</p>
+<p>Computer-vision research made dataset bias particularly visible. Torralba and Efros demonstrated that datasets collected under different conditions exhibit systematic differences and that these differences affect model transfer [4]. Buolamwini and Gebru showed that subgroup error rates can vary substantially across intersectional groups [7]. These findings support the idea that dataset composition should be audited before aggregate model performance is interpreted.</p>
+<p>Within machine learning, Suresh and Guttag propose a lifecycle framework for identifying sources of harm throughout data collection, labelling, model development, and deployment [5]. Mehrabi et al. survey bias and fairness mechanisms and show that bias can originate at several pipeline stages [6]. Shahbazi et al. provide a focused survey of representation bias across tabular, image, text, and graph data and classify identification and resolution techniques [8]. Le Quy et al. examine datasets used for fairness-aware machine learning and emphasize the importance of understanding protected attributes and dataset structure [9].</p>
+<p>Pessach and Shmueli synthesize fairness definitions and methods [10], while Pagano et al. systematically review datasets, tools, metrics, and identification/mitigation strategies [11]. Raji et al. argue for end-to-end internal algorithmic auditing [12]. The NIST AI Risk Management Framework further supports contextual evaluation of AI risks, including data and representativeness considerations [13]. The literature therefore supports a data-centric view in which representation checks are performed before relying on model-level outcomes.</p>
+
+<div class="pagebreak"></div>
+<h2>4. Proposed Representation Bias Detection Framework</h2>
+<p>The proposed framework starts by explicitly defining the target population and obtaining a reference distribution from census data, administrative records, validated studies, or another justified benchmark. If no credible reference exists, the researcher should report that limitation rather than inventing one. Internal coverage statistics may still be reported, but population-representativeness claims should remain qualified.</p>
+
+<h3>4.1 Group proportion</h3>
+<p>For group <i>g</i> in a dataset of size <i>N</i>, the observed group proportion is:</p>
+<div class="eq">p<sub>g</sub> = n<sub>g</sub> / N</div>
+<p>This is the first diagnostic and should be calculated for demographic, geographic, temporal, or other task-relevant attributes.</p>
+
+<h3>4.2 Representation ratio</h3>
+<p>Let q<sub>g</sub> denote the reference-population proportion. The representation ratio is:</p>
+<div class="eq">RR<sub>g</sub> = p<sub>g</sub> / q<sub>g</sub></div>
+<p>An RR of 1 indicates proportional representation; an RR below 1 indicates underrepresentation; and an RR above 1 indicates overrepresentation. A screening threshold such as 0.80 can flag potentially substantial underrepresentation, but it is a practical rule rather than a universal definition of bias.</p>
+
+<h3>4.3 Representation gap</h3>
+<div class="eq">G<sub>g</sub> = (p<sub>g</sub> − q<sub>g</sub>) × 100</div>
+<p>The gap expresses the deviation in percentage points. A dataset share of 10% against a reference share of 25%, for example, gives a −15 percentage-point gap.</p>
+
+<h3>4.4 Chi-square goodness-of-fit</h3>
+<p>For categorical groups with a specified reference distribution, the expected count is E<sub>g</sub> = Nq<sub>g</sub>. A goodness-of-fit test uses:</p>
+<div class="eq">χ² = Σ (O<sub>g</sub> − E<sub>g</sub>)² / E<sub>g</sub></div>
+<p>A small p-value indicates that the observed composition differs statistically from the reference under the assumed model. The test should be accompanied by effect-size-like measures because large datasets can make small deviations statistically significant.</p>
+
+<h3>4.5 Standardized residuals</h3>
+<div class="eq">R<sub>g</sub> = (O<sub>g</sub> − E<sub>g</sub>) / √E<sub>g</sub></div>
+<p>Positive residuals indicate groups appearing more frequently than expected; negative residuals indicate groups appearing less frequently than expected. This identifies which groups contribute most strongly to the overall mismatch.</p>
+
+<h3>4.6 Intersectional analysis</h3>
+<p>Marginal proportions can conceal important gaps. Therefore, the framework recommends examining meaningful intersections, such as gender × region or age × gender, provided sufficient data are available. Intersectional analysis is especially relevant to fairness because a subgroup may be small even when each individual attribute appears balanced [7,8].</p>
+
+<div class="pagebreak"></div>
+<h2>5. Experimental Demonstration</h2>
+<h3>5.1 Synthetic 500-row dataset</h3>
+<p>A synthetic dataset containing 500 student records was generated to provide a reproducible test environment. Variables include Student ID, Gender, Age Group, Region, Education, Performance Score, and Scholarship Decision. The data were intentionally created with representation imbalance. Small amounts of missing demographic information were also introduced to demonstrate realistic data-quality handling.</p>
+<p>For the main regional experiment, the target population is specified as 25% North, 25% South, 25% East, and 25% West. The observed sample contains approximately 49.8% North, 16.2% South, 10.6% East, and 23.4% West.</p>
+<table><tr><th>Region</th><th>Reference</th><th>Observed</th><th>Gap</th><th>RR</th></tr>
+<tr><td>North</td><td>25.0%</td><td>49.8%</td><td>+24.8 pp</td><td>1.992</td></tr>
+<tr><td>South</td><td>25.0%</td><td>16.2%</td><td>−8.8 pp</td><td>0.648</td></tr>
+<tr><td>East</td><td>25.0%</td><td>10.6%</td><td>−14.4 pp</td><td>0.424</td></tr>
+<tr><td>West</td><td>25.0%</td><td>23.4%</td><td>−1.6 pp</td><td>0.936</td></tr></table>
+<div class="cap">Table 2. Regional representation results in the synthetic experiment.</div>
+
+<h3>5.2 Statistical result</h3>
+<p>With N = 500 and an equal reference distribution, the expected count is 125 per region. The observed counts are approximately 249, 81, 53, and 117. The corresponding chi-square statistic is approximately <b>180.48</b> with 3 degrees of freedom, providing strong evidence that the observed regional distribution differs from the specified population benchmark.</p>
+<p>The regional sampling ratios further show the practical magnitude of the problem. North is represented at almost twice its reference share, while East is represented at less than half. The finding is important even before considering a machine-learning algorithm: the dataset contains substantially different amounts of evidence about different geographic groups.</p>
+
+<h3>5.3 Gender analysis</h3>
+<p>The synthetic dataset is also intentionally skewed by gender, with approximately 68% male and 32% female observations against a 50:50 reference. The resulting ratios are approximately 1.36 and 0.64. A model trained on such a dataset has substantially more training evidence from male respondents than female respondents.</p>
+
+<div class="callout"><b>Interpretation:</b> A representation mismatch is evidence of inadequate alignment between dataset composition and the chosen benchmark. It is not, by itself, proof of intentional discrimination or proof that the downstream model will be unfair. The next step is to investigate how representation affects the task and the model.</div>
+
+<h2>6. Implementation and Evaluation</h2>
+<p>The framework can be implemented using pandas, NumPy, SciPy, and Matplotlib. For each protected or task-relevant attribute, the pipeline calculates counts and proportions, maps reference proportions, computes representation ratios and gaps, performs statistical tests, calculates residuals, and produces visual comparisons. The approach is lightweight enough for a Kaggle notebook and can be incorporated into automated dataset-audit workflows.</p>
+<p>A simple screening score can summarize the average deviation from ideal proportional representation:</p>
+<div class="eq">RBS = min(100, 100 × mean(|RR<sub>g</sub> − 1|))</div>
+<p>This composite score is useful for dashboards but should never replace the group-level diagnostics. Two datasets can have the same aggregate score but very different underrepresented populations.</p>
+<h3>6.1 Visualization</h3>
+<p>Side-by-side plots of observed versus reference percentages provide an immediate visual check. Representation-ratio plots centered on 1.0 show which groups are under- or overrepresented. Visualizations are valuable because an aggregate table can obscure the practical direction and magnitude of representation differences.</p>
+<h3>6.2 Validation</h3>
+<p>A robust empirical study should test the framework on synthetic datasets with known ground truth as well as real-world datasets with credible population benchmarks. External benchmarks should be documented because a faulty reference can produce misleading representation conclusions. Intersectional checks should be performed where group sizes permit stable estimates.</p>
+
+<div class="pagebreak"></div>
+<h2>7. Discussion</h2>
+<p>The main implication is that representation is a data-quality property that deserves evaluation before model training. A very large dataset does not guarantee representativeness. If collection mechanisms favor particular populations, locations, platforms, or time periods, the resulting model may generalize unevenly. This concern is consistent with research linking dataset differences to transfer performance and subgroup disparities [4,7,8].</p>
+<p>Representation also affects fairness evaluation. Common fairness metrics compare outcomes across groups, but estimates can become unstable when some groups have few observations. A poorly represented subgroup may therefore create both a fairness problem and a measurement problem. Dataset adequacy should consequently be considered when interpreting demographic parity, equal opportunity, equalized odds, calibration, and related metrics [10,11].</p>
+<p>Intersectionality provides another reason to avoid relying on marginal summaries. A dataset could contain approximately equal numbers of men and women while containing very few older women from a particular region. Such groups can remain hidden in aggregate analyses. Representation auditing should therefore reflect the social and operational structure of the intended application rather than relying on a single protected attribute [7,8].</p>
+<p>Finally, appropriate representation should not be confused with equal representation. For many real populations, equal group shares would be inaccurate. The correct question is whether the dataset appropriately reflects the population relevant to the task. Where proportional representation is not the correct target, domain-specific reference distributions should be used.</p>
+
+<h3>7.1 Mitigation strategies</h3>
+<table><tr><th>Strategy</th><th>Purpose</th><th>Key consideration</th></tr>
+<tr><td>Targeted data collection</td><td>Add observations for underrepresented groups.</td><td>Often direct but may be costly.</td></tr>
+<tr><td>Stratified sampling</td><td>Ensure important groups are deliberately covered.</td><td>Requires planning during collection.</td></tr>
+<tr><td>Reweighting</td><td>Increase analytical contribution of underrepresented groups.</td><td>Needs reliable population information.</td></tr>
+<tr><td>Oversampling</td><td>Increase subgroup examples during training.</td><td>Can amplify noise or overfitting.</td></tr>
+<tr><td>Post-stratification</td><td>Adjust estimates to known population margins.</td><td>Requires careful weighting design.</td></tr>
+<tr><td>External validation</td><td>Check performance on a more representative dataset.</td><td>Useful when the training distribution cannot be changed.</td></tr>
+</table><div class="cap">Table 3. Practical responses to representation bias [3,8–13].</div>
+
+<h2>8. Limitations</h2>
+<p>The framework requires an appropriate reference population for direct representativeness claims. Reference distributions may be unavailable, outdated, or measured at a different level than the deployment population. Univariate comparisons may also miss multivariate selection effects. Statistical tests depend on assumptions and can be overly sensitive in very large samples. Finally, representation bias does not automatically establish unfair model behavior; downstream performance and error disparities must be evaluated separately.</p>
+<p>The synthetic experiment is intentionally controlled and therefore cannot reproduce the full complexity of real data collection. It demonstrates the mechanics of detection rather than estimating real-world prevalence. Future empirical work should evaluate the method across several domains and connect representation metrics with model accuracy, calibration, uncertainty, and fairness.</p>
+
+<h2>9. Future Research Directions</h2>
+<ul>
+<li><b>Multivariate detection:</b> combine representation ratios with propensity-score, classifier-based, and distributional distance methods.</li>
+<li><b>Dynamic monitoring:</b> detect when datasets become misaligned with populations over time.</li>
+<li><b>Intersectional scoring:</b> develop stable measures for multiple demographic attributes under sparse subgroup sizes.</li>
+<li><b>Representation–fairness linkage:</b> quantify how data composition changes subgroup performance and fairness metrics.</li>
+<li><b>Automated auditing:</b> produce reusable reports covering coverage, missingness, ratios, tests, and visual evidence.</li>
+</ul>
+
+<h2>10. Conclusion</h2>
+<p>Representation bias is an early-stage data problem that can weaken machine-learning reliability before model training begins. The objective should not be equal counts for every group, but appropriate and sufficiently rich coverage relative to the target population and application. This paper presented an interpretable framework based on group proportions, reference distributions, representation ratios, percentage-point gaps, chi-square testing, standardized residuals, visualization, and intersectional analysis.</p>
+<p>The synthetic 500-record experiment demonstrates how the framework makes representation differences visible and measurable. The regional analysis identifies strong overrepresentation of North and underrepresentation of East, while the gender analysis identifies a substantial male–female imbalance. These diagnostics can be produced before training a model, providing researchers with a practical opportunity to investigate, correct, or qualify the dataset.</p>
+<p>A data-centric approach therefore begins with a simple question: <i>Who is represented in the data, and how closely does that representation match the population for which the system is intended?</i> Making that question an explicit part of dataset auditing can improve the validity, reproducibility, and fairness of statistical and machine-learning research.</p>
+
+<h2>References</h2>
+<ol class="refs">
+<li>Groves, R. M., &amp; Lyberg, L. (2010). Total survey error: Past, present, and future. <i>Public Opinion Quarterly, 74</i>(5), 849–879. https://doi.org/10.1093/poq/nfq065</li>
+<li>Bethlehem, J. (2010). Selection bias in web surveys. <i>International Statistical Review, 78</i>(2), 161–188. https://doi.org/10.1111/j.1751-5823.2010.00112.x</li>
+<li>Baker, R., Brick, J. M., Bates, N. A., et al. (2013). Report of the AAPOR task force on non-probability sampling. <i>Journal of Survey Statistics and Methodology, 1</i>(2), 90–143. https://doi.org/10.1093/jssam/smt008</li>
+<li>Torralba, A., &amp; Efros, A. A. (2011). Unbiased look at dataset bias. In <i>Proceedings of CVPR 2011</i>, 1521–1528. https://doi.org/10.1109/CVPR.2011.5995347</li>
+<li>Suresh, H., &amp; Guttag, J. V. (2021). A framework for understanding sources of harm throughout the machine learning life cycle. In <i>Proceedings of FAccT 2021</i>, 1–9. https://doi.org/10.1145/3442188.3445922</li>
+<li>Mehrabi, N., Morstatter, F., Saxena, N., Lerman, K., &amp; Galstyan, A. (2021). A survey on bias and fairness in machine learning. <i>ACM Computing Surveys, 54</i>(6), Article 115. https://doi.org/10.1145/3457607</li>
+<li>Buolamwini, J., &amp; Gebru, T. (2018). Gender shades: Intersectional accuracy disparities in commercial gender classification. In <i>Proceedings of Machine Learning Research, 81</i>, 77–91.</li>
+<li>Shahbazi, N., Lin, Y., Asudeh, A., &amp; Jagadish, H. V. (2023). Representation bias in data: A survey on identification and resolution techniques. <i>ACM Computing Surveys, 55</i>, Article 315. https://doi.org/10.1145/3588433</li>
+<li>Le Quy, T., Roy, A., Iosifidis, V., Zhang, W., &amp; Ntoutsi, E. (2022). A survey on datasets for fairness-aware machine learning. <i>WIREs Data Mining and Knowledge Discovery, 12</i>(3), e1452. https://doi.org/10.1002/widm.1452</li>
+<li>Pessach, D., &amp; Shmueli, E. (2022). A review on fairness in machine learning. <i>ACM Computing Surveys, 55</i>(3), Article 51. https://doi.org/10.1145/3494672</li>
+<li>Pagano, T. P., Loureiro, R. B., Lisboa, F. V., et al. (2023). Bias and unfairness in machine learning models: A systematic review on datasets, tools, fairness metrics, and identification and mitigation methods. <i>Big Data and Cognitive Computing, 7</i>(1), 15. https://doi.org/10.3390/bdcc7010015</li>
+<li>Raji, I. D., Smart, A., White, R. N., et al. (2020). Closing the AI accountability gap: Defining an end-to-end framework for internal algorithmic auditing. In <i>Proceedings of FAT* 2020</i>, 33–44. https://doi.org/10.1145/3351095.3372873</li>
+<li>National Institute of Standards and Technology. (2023). <i>Artificial Intelligence Risk Management Framework (AI RMF 1.0)</i>. NIST AI 100-1. https://doi.org/10.6028/NIST.AI.100-1</li>
+<li>Mitchell, M., Wu, S., Zaldivar, A., et al. (2019). Model cards for model reporting. In <i>Proceedings of FAT* 2019</i>, 220–229. https://doi.org/10.1145/3287560.3287596</li>
+<li>Bender, E. M., Gebru, T., McMillan-Major, A., &amp; Shmitchell, S. (2021). On the dangers of stochastic parrots: Can language models be too big? In <i>Proceedings of FAccT 2021</i>, 610–623. https://doi.org/10.1145/3442188.3445922</li>
+<li>Barocas, S., Hardt, M., &amp; Narayanan, A. (2023). <i>Fairness and Machine Learning: Limitations and Opportunities</i>. MIT Press.</li>
+<li>Hardt, M., Price, E., &amp; Srebro, N. (2016). Equality of opportunity in supervised learning. In <i>Advances in Neural Information Processing Systems 29</i>, 3315–3323.</li>
+<li>Kleinberg, J., Mullainathan, S., &amp; Raghavan, M. (2017). Inherent trade-offs in the fair determination of risk scores. In <i>Proceedings of ITCS 2017</i>. https://doi.org/10.1145/2931130.2931180</li>
+<li>Dwork, C., Hardt, M., Pitassi, T., Reingold, O., &amp; Zemel, R. (2012). Fairness through awareness. In <i>Proceedings of ITCS 2012</i>, 214–226. https://doi.org/10.1145/2090236.2090255</li>
+<li>Chouldechova, A. (2017). Fair prediction with disparate impact: A study of bias in recidivism prediction instruments. <i>Big Data, 5</i>(2), 153–163. https://doi.org/10.1089/big.2016.0047</li>
+</ol>
+
+<div class="footer">Conference-paper draft • Dr. Nitin Mishra • drnitinmishra10@gmail.com</div>
+</div></body></html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class Imbalance Analysis and Detection</title>
+<style>
+@page{size:A4;margin:18mm 17mm}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:#202124;font-family:"Times New Roman",Times,serif;font-size:10.5pt;line-height:1.34}
+.paper{max-width:900px;margin:auto;padding:28px 34px}
+h1{font-size:21pt;line-height:1.15;text-align:center;margin:0 0 10px}
+h2{font-size:13.5pt;margin:18px 0 7px}
+h3{font-size:11.5pt;margin:12px 0 5px}
+.author{text-align:center;font-size:12pt;font-weight:700}
+.email{text-align:center;font-size:10pt}
+.abstract{border-top:1px solid #555;border-bottom:1px solid #555;padding:9px 0;margin:14px 0 16px;text-align:justify}
+p{text-align:justify;margin:6px 0}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:9pt}
+th,td{border:.7px solid #777;padding:5px;vertical-align:top}
+th{background:#f0f0f0;text-align:center}
+.cap{text-align:center;font-size:9pt;margin:-5px 0 9px}
+.eq{text-align:center;font-style:italic;margin:9px}
+.callout{border-left:3px solid #555;background:#f5f5f5;padding:8px 10px;margin:10px 0}
+.pagebreak{page-break-before:always}
+.refs{font-size:8.7pt;line-height:1.25}
+.refs li{margin-bottom:5px}
+.footer{border-top:.7px solid #aaa;margin-top:25px;padding-top:8px;text-align:center;font-size:8.5pt;color:#555}
+.figure{border:1px solid #999;padding:12px;margin:10px 0;text-align:center;font-family:Arial,sans-serif;font-size:9pt}
+.flow{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;align-items:center}
+.flow span{border:1px solid #555;padding:6px 8px;background:#fafafa}
+.arrow{font-weight:bold}
+@media print{.paper{padding:0;max-width:none}a{color:#000;text-decoration:none}}
+</style>
+</head>
+<body>
+<div class="paper">
+
+<h1>Class Imbalance Analysis and Detection: An Interpretable Framework for Diagnosing Skewed Target Distributions in Machine Learning</h1>
+<div class="author">Dr. Nitin Mishra</div>
+<div class="email">drnitinmishra10@gmail.com</div>
+
+<div class="abstract"><b>Abstract—</b>
+Class imbalance is a common data-quality problem in machine learning in which observations belonging to one or more target classes are substantially fewer than observations belonging to other classes. The imbalance may cause conventional learning algorithms to favor majority classes, conceal poor minority-class detection behind apparently strong accuracy, and produce unstable or misleading evaluation results. This paper presents a practical framework for detecting and analyzing class imbalance before model training. The framework combines class-frequency analysis, imbalance ratio, minority-share analysis, entropy, Gini-based concentration, effective number of classes, and stratified visualization. A synthetic 500-record binary-classification dataset is used to demonstrate the framework, with a deliberately imbalanced target variable containing approximately 90% majority-class and 10% minority-class observations. The analysis illustrates why accuracy alone is insufficient and motivates the use of recall, precision, F1-score, balanced accuracy, geometric mean, ROC-AUC, and especially precision-recall analysis when the positive class is rare. The paper distinguishes class imbalance from representation bias: class imbalance concerns the target-label distribution, whereas representation bias concerns whether important population groups are adequately represented. The proposed workflow is lightweight, reproducible in Python/Kaggle, and suitable as an early-stage audit before choosing resampling, cost-sensitive, ensemble, or hybrid learning methods. Recent reviews continue to identify pre-processing, algorithm-level, and hybrid approaches as major families for imbalanced learning, with continuing research gaps around robustness, generalizability, scalability, and evaluation [16,17].
+<div><b>Keywords—</b> class imbalance, imbalanced learning, minority class, imbalance ratio, data quality, SMOTE, cost-sensitive learning, precision-recall, machine learning evaluation</div>
+</div>
+
+<h2>1. Introduction</h2>
+<p>Many real-world predictive tasks produce unequal target-class frequencies. Fraudulent transactions are often much rarer than legitimate transactions, certain diseases are less prevalent than non-disease cases, equipment failures are uncommon compared with normal operation, and security incidents are generally rare relative to benign events. When a learning algorithm is trained on such data, the majority class can dominate the objective and the resulting decision boundary [1–5]. A classifier may then obtain high overall accuracy while failing to identify the minority cases that matter most.</p>
+<p>Class imbalance is not simply a nuisance in the dataset. It changes the statistical environment in which learning and evaluation occur. With a 95:5 distribution, for example, a trivial classifier that predicts the majority class for every observation already achieves 95% accuracy but has zero recall for the minority class. This illustrates why the choice of performance metrics must be connected to the target distribution and the practical cost of errors [5,6,10,15].</p>
+<p>Research on imbalanced learning has developed a broad family of approaches, including data-level resampling, algorithm-level modifications, cost-sensitive learning, ensembles, and hybrid methods [1,2,16,17]. Oversampling methods such as SMOTE create synthetic minority examples [7], while undersampling reduces majority observations. Cost-sensitive methods assign larger penalties to minority-class errors, and ensemble methods combine learners in ways that can be more robust to skewed distributions [4,8,9].</p>
+<p>However, mitigation should not be the first step. Before modifying the data, researchers should determine whether a class imbalance actually exists, how severe it is, whether it is expected in the target population, and whether the minority class is internally heterogeneous. A principled imbalance audit can prevent inappropriate use of synthetic sampling and can guide selection of evaluation measures.</p>
+<p>This paper proposes a practical detection framework with two goals. First, it provides interpretable metrics for describing the degree of class imbalance. Second, it connects diagnosis with appropriate downstream evaluation and mitigation. A reproducible synthetic experiment with 500 records demonstrates the method and provides a foundation for implementation in Python/Kaggle.</p>
+
+<h2>2. Conceptual Background</h2>
+<h3>2.1 Definition</h3>
+<p>Let a classification dataset contain K target classes with counts n<sub>1</sub>, n<sub>2</sub>, …, n<sub>K</sub>. The empirical class proportion is p<sub>k</sub> = n<sub>k</sub>/N. A dataset is class-imbalanced when these proportions are substantially unequal relative to the task requirements or the expected target distribution [1,2]. There is no universal numeric threshold that makes every dataset “imbalanced”; severity is contextual, and the same ratio can have different implications depending on sample size, costs, model family, and the complexity of the minority class.</p>
+
+<h3>2.2 Class imbalance versus representation bias</h3>
+<p>Class imbalance concerns the distribution of the target variable. Representation bias concerns the distribution of population groups or relevant contexts. A dataset can have a balanced target distribution but underrepresent a protected demographic group. Conversely, a disease dataset can appropriately contain a rare disease class because its true prevalence is low. This distinction is essential when conducting a sequence of data audits: class imbalance asks <i>which outcome classes are present and in what proportions?</i>, while representation analysis asks <i>which populations or contexts are represented and in what proportions?</i></p>
+
+<h3>2.3 Why imbalance affects machine learning</h3>
+<p>Many classifiers optimize global loss, so the majority class contributes more observations and therefore more influence to the optimization objective. In extreme cases the learner can obtain strong aggregate accuracy while effectively ignoring the minority class [3,5]. The effect is particularly problematic when minority errors carry high practical cost. Class imbalance can also alter threshold selection, probability calibration, confidence estimates, and the stability of cross-validation folds.</p>
+
+<h3>2.4 Types of imbalance</h3>
+<table>
+<tr><th>Type</th><th>Description</th><th>Example</th></tr>
+<tr><td>Binary imbalance</td><td>One of two classes is much less frequent.</td><td>90% normal, 10% fraud.</td></tr>
+<tr><td>Multiclass imbalance</td><td>Several classes occur at different frequencies.</td><td>60%, 25%, 10%, 5%.</td></tr>
+<tr><td>Extreme imbalance</td><td>Minority class is extremely rare.</td><td>99.5% majority, 0.5% minority.</td></tr>
+<tr><td>Long-tail distribution</td><td>Many classes decline gradually in frequency.</td><td>Product or image categories.</td></tr>
+<tr><td>Within-class heterogeneity</td><td>Minority class contains multiple difficult subregions.</td><td>Rare events with distinct subtypes.</td></tr>
+<tr><td>Overlap/noise</td><td>Minority and majority examples overlap or labels are noisy.</td><td>Borderline or mislabeled cases.</td></tr>
+</table>
+<div class="cap">Table 1. Major forms and practical manifestations of class imbalance [1,3,16,17].</div>
+
+<h2>3. Related Work</h2>
+<p>Early work framed imbalanced learning as a problem in which standard learners optimize overall performance while minority-class errors may be neglected. He and Garcia provide a widely cited review of the field and describe data-level, algorithm-level, and hybrid approaches [1]. Japkowicz and Stephen examine the impact of class imbalance on classifier performance and discuss why naive accuracy can become misleading [2]. Akbani et al. investigate class weighting and support vector methods for skewed learning problems [4].</p>
+<p>SMOTE is one of the most influential data-level approaches. Chawla et al. proposed generating synthetic minority examples by interpolating between minority samples, with experiments showing improvements over simple random oversampling in several settings [7]. Han et al. and related work subsequently developed variants such as borderline-focused oversampling [8]. Kubat and Matwin, and later research, explored informed undersampling approaches that remove majority examples likely to be redundant [9].</p>
+<p>Evaluation research emphasizes that accuracy can be inadequate for imbalanced classification. Davis and Goadrich analyze the relationship between ROC space and precision-recall space and argue that precision-recall analysis can be more informative when the positive class is rare [10]. Fawcett provides a broader introduction to ROC analysis [11]. Powers reviews precision, recall, F-measure, and related measures and clarifies their relationships [12]. Saito and Rehmsmeier show that precision-recall curves can provide a more informative picture than ROC curves for highly skewed data [13].</p>
+<p>Recent reviews confirm that class imbalance remains an active research area. Rezvani and Wang organize modern techniques into pre-processing, algorithmic, and hybrid categories and discuss persistent challenges [16]. Altalhan, Algarni, and Alouane provide a 2025 review covering oversampling, undersampling, ensemble learning, cost-sensitive learning, and hybrid strategies while emphasizing the continuing importance of F1, recall, G-mean, and AUC [17]. Chen et al. survey recent research, applications, and future directions across imbalanced classification, regression, and deep learning [18]. These reviews motivate a detection-first perspective in which the severity and structure of imbalance are measured before a mitigation method is selected.</p>
+
+<div class="pagebreak"></div>
+<h2>4. Proposed Class Imbalance Detection Framework</h2>
+<p>The framework begins by auditing the target variable before any resampling or class-weight adjustment. The audit should be performed on the complete dataset and, where appropriate, separately on training, validation, and test partitions. Resampling must never be applied to the test set because it changes the empirical evaluation distribution and can produce misleading performance estimates.</p>
+
+<h3>4.1 Class proportions</h3>
+<p>For each class k:</p>
+<div class="eq">p<sub>k</sub> = n<sub>k</sub> / N</div>
+<p>Class proportions immediately reveal whether the outcome is approximately balanced or skewed.</p>
+
+<h3>4.2 Imbalance ratio</h3>
+<p>For binary classification, a common descriptive measure is:</p>
+<div class="eq">IR = N<sub>majority</sub> / N<sub>minority</sub></div>
+<p>An IR of 1 means perfect count balance. An IR of 9 means the majority class contains nine times as many observations as the minority class. For multiclass data, the largest-to-smallest ratio provides a simple summary, although a full class-frequency table should always be reported.</p>
+
+<h3>4.3 Minority class share</h3>
+<div class="eq">MS = N<sub>minority</sub> / N</div>
+<p>Minority share is intuitive and useful for communicating severity. However, the choice of what qualifies as the minority class should be explicit when multiclass distributions are present.</p>
+
+<h3>4.4 Entropy-based balance</h3>
+<p>Class-distribution entropy is:</p>
+<div class="eq">H = −Σ p<sub>k</sub> log(p<sub>k</sub>)</div>
+<p>A normalized version is H/log(K), which ranges from 0 to 1 for K non-empty classes. A value near 1 indicates a more even distribution, while a value near 0 indicates concentration in a few classes. Entropy is helpful for multiclass problems because it considers all class proportions simultaneously.</p>
+
+<h3>4.5 Gini concentration</h3>
+<p>A complementary concentration measure is:</p>
+<div class="eq">G = 1 − Σ p<sub>k</sub><sup>2</sup></div>
+<p>Higher values correspond to a more even distribution for a fixed number of classes. Gini and entropy should be treated as descriptive indices rather than universal decision thresholds.</p>
+
+<h3>4.6 Effective number of classes</h3>
+<p>The inverse Simpson concentration provides an effective number of equally frequent classes:</p>
+<div class="eq">K<sub>eff</sub> = 1 / Σ p<sub>k</sub><sup>2</sup></div>
+<p>If the observed distribution is balanced across K classes, K<sub>eff</sub> approaches K. Under strong concentration, it becomes much smaller.</p>
+
+<h3>4.7 Class-level flags</h3>
+<p>The framework recommends flagging minority classes based on configurable thresholds such as minority share below 20%, 10%, or 5%, depending on the research context. The threshold should be presented as a screening criterion rather than a universal scientific boundary. Absolute sample size must also be considered: 5% of one million observations is a very different situation from 5% of 100 observations.</p>
+
+<h2>5. Experimental Demonstration</h2>
+<h3>5.1 Synthetic 500-record dataset</h3>
+<p>A synthetic binary-classification dataset containing 500 records is used for demonstration. The target variable is “Risk_Class,” with “Normal” as the majority class and “High_Risk” as the minority class. The dataset is intentionally generated with approximately 90% Normal and 10% High_Risk observations. Additional numerical and categorical predictors may be used later for model experiments, but the imbalance audit is performed on the target variable itself.</p>
+
+<table>
+<tr><th>Class</th><th>Count</th><th>Percentage</th><th>Role</th></tr>
+<tr><td>Normal</td><td>450</td><td>90.0%</td><td>Majority</td></tr>
+<tr><td>High_Risk</td><td>50</td><td>10.0%</td><td>Minority</td></tr>
+</table>
+<div class="cap">Table 2. Synthetic target distribution used for the class-imbalance experiment.</div>
+
+<h3>5.2 Imbalance ratio</h3>
+<p>For the synthetic dataset, the imbalance ratio is:</p>
+<div class="eq">IR = 450 / 50 = 9.0</div>
+<p>Thus, the majority class contains nine times as many observations as the minority class. A trivial majority classifier would already obtain 90% accuracy if evaluated on the same distribution, despite detecting none of the High_Risk cases.</p>
+
+<h3>5.3 Entropy and effective class count</h3>
+<p>With p<sub>1</sub>=0.90 and p<sub>2</sub>=0.10, the binary entropy is approximately 0.325 nats. Normalizing by log(2) gives approximately 0.469. The effective number of equally frequent classes is:</p>
+<div class="eq">K<sub>eff</sub> = 1 / (0.90² + 0.10²) ≈ 1.22</div>
+<p>Although two labels are present, the concentration index indicates that the distribution behaves substantially differently from a two-class 50:50 dataset.</p>
+
+<h3>5.4 Why accuracy is insufficient</h3>
+<table>
+<tr><th>Prediction behavior</th><th>Accuracy</th><th>Minority recall</th></tr>
+<tr><td>Always predict Normal</td><td>90%</td><td>0%</td></tr>
+<tr><td>Detect half of High_Risk cases without false positives</td><td>95%</td><td>50%</td></tr>
+</table>
+<div class="cap">Table 3. Illustration of why aggregate accuracy can conceal minority-class performance.</div>
+<p>The example demonstrates that higher accuracy does not necessarily correspond to a better minority-class detector. In risk-sensitive applications, missing a minority event may be considerably more costly than producing additional false positives. Evaluation should therefore include recall, precision, F1, balanced accuracy, G-mean, and precision-recall analysis [10,12,13,17].</p>
+
+<h2>6. Detection-to-Mitigation Workflow</h2>
+<p>The recommended workflow is to detect first, understand second, and mitigate third. The imbalance ratio identifies severity; class-level counts reveal which classes are affected; feature-level analysis can reveal whether minority cases are heterogeneous; and evaluation metrics determine whether the imbalance actually degrades the intended model behavior.</p>
+<div class="figure">
+<div class="flow">
+<span>Inspect Target</span><span class="arrow">→</span>
+<span>Measure Class Shares</span><span class="arrow">→</span>
+<span>Calculate IR/Entropy</span><span class="arrow">→</span>
+<span>Check Minority Size</span><span class="arrow">→</span>
+<span>Baseline Model</span><span class="arrow">→</span>
+<span>Select Mitigation</span><span class="arrow">→</span>
+<span>Re-evaluate</span>
+</div>
+<p><b>Figure 1.</b> Proposed class-imbalance detection and response workflow.</p>
+</div>
+
+<h3>6.1 Data-level methods</h3>
+<p>Data-level methods modify the training data. Random oversampling duplicates minority examples, while undersampling removes some majority examples. SMOTE creates synthetic minority instances [7]. More recent variants attempt to focus on difficult or borderline regions. These methods can improve minority performance but may also introduce redundancy, noise, or synthetic examples in inappropriate regions of feature space [16–18].</p>
+
+<h3>6.2 Algorithm-level methods</h3>
+<p>Algorithm-level strategies modify how a learner treats different classes. Cost-sensitive learning assigns greater penalty to minority errors. Weighted logistic regression, weighted support vector machines, balanced random forests, and cost-sensitive ensembles are common examples. Such methods avoid physically altering the data distribution, although they require careful tuning of class weights or misclassification costs [1,4,16,17].</p>
+
+<h3>6.3 Hybrid methods</h3>
+<p>Hybrid strategies combine data-level and algorithm-level approaches. They can be effective in difficult datasets, but the increased complexity makes controlled evaluation important. Researchers should avoid comparing only final accuracy; the full metric profile should be reported.</p>
+
+<div class="pagebreak"></div>
+<h2>7. Discussion</h2>
+<p>Class imbalance should be understood as a property of the target distribution rather than as a signal that every dataset must be artificially balanced. In many applications, imbalance reflects genuine real-world prevalence. The research goal is to determine whether the learning and evaluation process can still detect the classes that matter and whether the observed distribution is consistent with the deployment problem.</p>
+<p>The experimental example shows how easily accuracy can become misleading. In a 90:10 dataset, a model that predicts the majority class for every observation obtains 90% accuracy. This number may look strong in a conventional summary but provides no value for finding High_Risk cases. Balanced accuracy, F1, G-mean, and precision-recall measures provide additional information about minority detection [10,12,13].</p>
+<p>Another important issue is data leakage. If oversampling or SMOTE is applied before splitting data into training and testing sets, synthetic information derived from observations can leak into the evaluation set and inflate performance. Resampling should generally occur inside the training pipeline and within each training fold when cross-validation is used. This is especially important in reproducible conference research because improper evaluation can produce apparently strong but non-generalizable results.</p>
+<p>Class imbalance also interacts with representation bias. Suppose the minority class consists mainly of one demographic group because of how historical cases were recorded. Then a class-level correction can improve target balance while leaving demographic representation problems unresolved. Conversely, balancing a protected group without considering the target distribution can produce unrealistic training data. These audits should therefore be performed separately and then connected at the modelling stage.</p>
+
+<h3>7.1 Metric selection</h3>
+<table>
+<tr><th>Metric</th><th>Use under imbalance</th><th>Limitation</th></tr>
+<tr><td>Accuracy</td><td>Overall correctness.</td><td>Can be dominated by majority class.</td></tr>
+<tr><td>Precision</td><td>Reliability of positive predictions.</td><td>Can ignore missed positives.</td></tr>
+<tr><td>Recall</td><td>Coverage of minority/positive cases.</td><td>Can rise with more false positives.</td></tr>
+<tr><td>F1-score</td><td>Balances precision and recall.</td><td>Does not directly incorporate true negatives.</td></tr>
+<tr><td>Balanced Accuracy</td><td>Averages sensitivity across classes.</td><td>Does not reflect probability quality.</td></tr>
+<tr><td>G-mean</td><td>Balances class-specific sensitivity.</td><td>Less intuitive for some audiences.</td></tr>
+<tr><td>ROC-AUC</td><td>Measures ranking discrimination across thresholds.</td><td>Can appear optimistic with severe skew.</td></tr>
+<tr><td>PR-AUC</td><td>Focuses on precision-recall behavior.</td><td>Depends on the positive-class prevalence.</td></tr>
+</table>
+<div class="cap">Table 4. Evaluation measures commonly considered for imbalanced classification [10–13,17].</div>
+
+<h2>8. Limitations</h2>
+<p>The proposed detection framework is intentionally simple. It quantifies the target distribution but does not by itself determine whether a particular imbalance level will harm a particular model. The appropriate threshold depends on the application, costs of false positives and false negatives, sample size, class complexity, and operational requirements. Statistical class counts also do not reveal whether the minority class consists of coherent clusters or disconnected subpopulations.</p>
+<p>The synthetic experiment demonstrates known imbalance rather than real-world complexity. Future studies should evaluate the framework across benchmark datasets from healthcare, finance, cybersecurity, manufacturing, education, and other domains. Real datasets should also be evaluated across multiple random seeds, folds, and model families to separate genuine improvements from sampling variation.</p>
+
+<h2>9. Future Research Directions</h2>
+<ul>
+<li><b>Adaptive imbalance detection:</b> Develop thresholds that consider sample size, class overlap, decision cost, and model uncertainty rather than fixed ratios.</li>
+<li><b>Multiclass and long-tail auditing:</b> Extend the framework to long-tailed distributions and rare multiclass categories.</li>
+<li><b>Imbalance–fairness interaction:</b> Study whether balancing target labels improves or worsens subgroup fairness.</li>
+<li><b>Automated data-quality dashboards:</b> Combine class ratios, entropy, missingness, leakage checks, and subgroup analysis.</li>
+<li><b>Time-aware imbalance:</b> Detect changing event prevalence and distinguish real population change from data-collection drift.</li>
+<li><b>Robust evaluation:</b> Develop standardized reporting protocols across resampling, cost-sensitive, ensemble, and hybrid methods.</li>
+</ul>
+
+<h2>10. Conclusion</h2>
+<p>Class imbalance is a fundamental property of many real-world datasets and can materially affect both learning and evaluation. The most important first step is not to force the classes into equal numbers but to measure the target distribution, understand its severity, and determine whether minority-class detection is central to the task. This paper presented an interpretable framework based on class proportions, imbalance ratio, minority share, entropy, concentration, effective class count, and class-level diagnostics.</p>
+<p>The synthetic 500-record experiment demonstrates the central problem clearly: with a 90:10 target distribution, a trivial majority classifier can achieve 90% accuracy while completely missing the minority class. This is why model evaluation under imbalance should include class-sensitive metrics and, where appropriate, precision-recall analysis rather than relying on accuracy alone. Recent reviews continue to classify resampling, algorithm-level, and hybrid approaches as the main response families, while identifying generalizability and robust evaluation as ongoing research challenges [16–18].</p>
+<p>For reproducible machine-learning research, class-imbalance analysis should therefore become a standard data-audit stage before model selection. Detecting the imbalance, documenting its magnitude, choosing metrics deliberately, and only then selecting a mitigation technique creates a clearer and more scientifically defensible workflow.</p>
+
+<h2>References</h2>
+<ol class="refs">
+<li>He, H., &amp; Garcia, E. A. (2009). Learning from imbalanced data. <i>IEEE Transactions on Knowledge and Data Engineering, 21</i>(9), 1263–1284. https://doi.org/10.1109/TKDE.2008.239</li>
+<li>Japkowicz, N., &amp; Stephen, S. (2002). The class imbalance problem: A systematic study. <i>Intelligent Data Analysis, 6</i>(5), 429–449.</li>
+<li>Weiss, G. M. (2004). Mining with rarity: A unifying framework. <i>ACM SIGKDD Explorations Newsletter, 6</i>(1), 7–19. https://doi.org/10.1145/1007730.1007735</li>
+<li>Akbani, R., Kwek, S., &amp; Japkowicz, N. (2004). Applying support vector machines to imbalanced datasets. In <i>Proceedings of ECML PKDD</i>, 39–50. https://doi.org/10.1007/978-3-540-30115-8_7</li>
+<li>Branco, P., Torgo, L., &amp; Ribeiro, R. P. (2016). A survey of predictive modeling on imbalanced domains. <i>ACM Computing Surveys, 49</i>(2), 31. https://doi.org/10.1145/2907070</li>
+<li>Provost, F. (2000). Machine learning from imbalanced data sets 101. In <i>Proceedings of the AAAI'2000 Workshop on Imbalanced Data Sets</i>.</li>
+<li>Chawla, N. V., Bowyer, K. W., Hall, L. O., &amp; Kegelmeyer, W. P. (2002). SMOTE: Synthetic minority over-sampling technique. <i>Journal of Artificial Intelligence Research, 16</i>, 321–357. https://doi.org/10.1613/jair.953</li>
+<li>Han, H., Wang, W.-Y., &amp; Mao, B.-H. (2005). Borderline-SMOTE: A new over-sampling method in imbalanced data sets learning. In <i>Advances in Intelligent Computing</i>, 878–887. https://doi.org/10.1007/11538059_91</li>
+<li>Kubat, M., &amp; Matwin, S. (1997). Addressing the curse of imbalanced training sets: One-sided selection. In <i>Proceedings of ICML</i>, 179–186.</li>
+<li>Davis, J., &amp; Goadrich, M. (2006). The relationship between Precision-Recall and ROC curves. In <i>Proceedings of ICML</i>, 233–240. https://doi.org/10.1145/1143844.1143874</li>
+<li>Fawcett, T. (2006). An introduction to ROC analysis. <i>Pattern Recognition Letters, 27</i>(8), 861–874. https://doi.org/10.1016/j.patrec.2005.10.010</li>
+<li>Powers, D. M. W. (2011). Evaluation: From precision, recall and F-measure to ROC, informedness, markedness and correlation. <i>Journal of Machine Learning Technologies, 2</i>(1), 37–63.</li>
+<li>Saito, T., &amp; Rehmsmeier, M. (2015). The precision-recall plot is more informative than the ROC plot when evaluating binary classifiers on imbalanced datasets. <i>PLOS ONE, 10</i>(3), e0118432. https://doi.org/10.1371/journal.pone.0118432</li>
+<li>Provost, F., &amp; Fawcett, T. (2013). <i>Data Science for Business</i>. O'Reilly Media.</li>
+<li>Kelleher, J. D., Namee, B. M., &amp; D'Arcy, A. (2020). <i>Fundamentals of Machine Learning for Predictive Data Analytics</i> (2nd ed.). MIT Press.</li>
+<li>Rezvani, S., &amp; Wang, X. (2023). A broad review on class imbalance learning techniques. <i>Applied Soft Computing, 143</i>, 110415. <a href="https://consensus.app/papers/a-broad-review-on-class-imbalance-learning-techniques-rezvani-wang/6444982617d65bc9ab3c67773699b88f/?utm_source=chatgpt.com">Paper</a></li>
+<li>Altalhan, M., Algarni, A., &amp; Alouane, M. T.-H. (2025). Imbalanced data problem in machine learning: A review. <i>IEEE Access, 13</i>, 13686–13699. <a href="https://consensus.app/papers/imbalanced-data-problem-in-machine-learning-a-review-altalhan-algarni/7f3858690a0a54db97d070d5b5f1dc9b/?utm_source=chatgpt.com">Paper</a></li>
+<li>Chen, W., Yang, K., Yu, Z., Shi, Y., &amp; Chen, C. L. P. (2024). A survey on imbalanced learning: Latest research, applications and future directions. <i>Artificial Intelligence Review, 57</i>.</li>
+<li>Johnson, J. M., &amp; Khoshgoftaar, T. M. (2019). Survey on deep learning with class imbalance. <i>Journal of Big Data, 6</i>, 27. https://doi.org/10.1186/s40537-019-0192-5</li>
+<li>Guo, H., Li, Y., Shang, J., Gu, M., Huang, Y., &amp; Gong, B. (2017). Learning from class-imbalanced data: Review of methods and applications. <i>Expert Systems with Applications, 73</i>, 220–239. https://doi.org/10.1016/j.eswa.2016.12.035</li>
+</ol>
+
+<div class="footer">Conference-paper draft • Dr. Nitin Mishra • drnitinmishra10@gmail.com</div>
+</div>
+</body></html>

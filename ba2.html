@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sampling Bias and Its Detection</title>
+<style>
+@page { size: A4; margin: 18mm 17mm 18mm 17mm; }
+*{box-sizing:border-box}
+body{
+  margin:0;background:#fff;color:#202124;
+  font-family:"Times New Roman",Times,serif;
+  font-size:10.5pt;line-height:1.34;
+}
+.paper{max-width:900px;margin:0 auto;padding:28px 34px}
+.title{text-align:center;margin-bottom:18px}
+.title h1{font-size:21pt;line-height:1.15;margin:0 0 10px;font-weight:700}
+.author{font-size:12pt;font-weight:700}
+.email{font-size:10pt}
+.abstract{
+  border-top:1px solid #555;border-bottom:1px solid #555;
+  padding:9px 0;margin:14px 0 16px;text-align:justify
+}
+.abstract b{font-size:10.5pt}
+.keywords{font-size:9.5pt;margin-top:7px}
+h2{
+  font-size:13.5pt;margin:18px 0 7px;
+  border-bottom:0.7px solid #888;padding-bottom:2px
+}
+h3{font-size:11.5pt;margin:12px 0 5px}
+p{text-align:justify;margin:6px 0}
+ol,ul{margin-top:5px}
+li{margin:3px 0;text-align:justify}
+table{
+  width:100%;border-collapse:collapse;margin:10px 0 12px;
+  font-size:9pt
+}
+th,td{border:0.7px solid #777;padding:5px 6px;vertical-align:top}
+th{background:#f0f0f0;text-align:center}
+.caption{text-align:center;font-size:9pt;margin:-5px 0 9px}
+.equation{
+  text-align:center;font-family:"Times New Roman",serif;
+  margin:9px 0;font-style:italic
+}
+.callout{
+  border-left:3px solid #555;background:#f5f5f5;
+  padding:8px 10px;margin:10px 0
+}
+.pagebreak{page-break-before:always}
+.refs{font-size:8.8pt;line-height:1.25}
+.refs li{margin-bottom:5px}
+.footer{
+  margin-top:25px;padding-top:8px;border-top:0.7px solid #aaa;
+  text-align:center;font-size:8.5pt;color:#555
+}
+.small{font-size:9pt}
+.figure{
+  border:1px solid #999;padding:12px;margin:10px 0;
+  text-align:center;font-family:Arial,sans-serif;font-size:9pt
+}
+.flow{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;align-items:center}
+.flow span{
+  border:1px solid #555;padding:6px 8px;background:#fafafa
+}
+.arrow{font-weight:bold}
+@media print{
+  .paper{padding:0;max-width:none}
+  a{color:#000;text-decoration:none}
+}
+</style>
+</head>
+
+<body>
+<div class="paper">
+
+<section class="title">
+  <h1>Sampling Bias and Its Detection: A Data-Centric Framework for Reliable Statistical and Machine Learning Inference</h1>
+  <div class="author">Dr. Nitin Mishra</div>
+  <div class="email">drnitinmishra10@gmail.com</div>
+</section>
+
+<div class="abstract">
+  <b>Abstract—</b>
+  Sampling is used because studying an entire population is often impractical, expensive, or impossible. The value of a sample, however, depends not only on its size but also on how closely it reflects the population for which conclusions are intended. Sampling bias occurs when the selection process systematically makes some units more likely to enter the analytical dataset than others, producing a mismatch between the observed sample and the target population. This problem is particularly important in contemporary data science because a biased sample can affect descriptive statistics, hypothesis tests, machine learning performance, fairness assessments, and decisions made from model outputs. This paper presents a practical, data-centric framework for detecting sampling bias before downstream modelling. The framework combines population–sample distribution comparison, sampling ratios, representation gaps, chi-square goodness-of-fit testing, standardized residuals, and visual diagnostics. A synthetic 500-record dataset is used to demonstrate the approach. The experiment intentionally creates a regional sampling imbalance in which the North contributes approximately 49.8% of the sample while the target population assumes 25% per region. The resulting chi-square statistic is 180.48, indicating a very large departure from the reference distribution. The paper argues that sampling bias should be treated as an early-stage data-quality problem rather than only as a model-fairness problem. The proposed workflow is simple enough for practical use in Python/Kaggle environments while providing a foundation for more advanced weighting, propensity-score, causal, and fairness-aware methods.
+  <div class="keywords"><b>Keywords—</b> sampling bias, sample selection bias, representation, data quality, fairness, machine learning, chi-square test, sampling ratio, statistical inference</div>
+</div>
+
+<h2>1. Introduction</h2>
+<p>
+Modern research increasingly relies on samples rather than complete population data. Surveys, online platforms, administrative databases, electronic health records, customer databases, educational repositories, and machine learning datasets all contain observations selected through some process. The analytical challenge is not simply to collect a large number of records; it is to ensure that the records support valid conclusions about the intended population. Classical sampling theory distinguishes random sampling variation from systematic departures caused by the sampling process [1,2,5,6]. In practice, the latter can be difficult to see because a dataset may contain thousands or millions of observations and still systematically exclude or over-select particular groups.
+</p>
+<p>
+Sampling bias is especially consequential when the sample is used to train or evaluate predictive models. Machine learning methods commonly assume that training and evaluation data are drawn from compatible distributions. When this assumption is violated, estimated performance may not transfer to the target population [8,9]. Sample selection bias has consequently been studied in machine learning as a distributional mismatch between the data available for learning and the population on which predictions are ultimately required [8]. Recent work also shows that selection effects can distort fairness measurement itself, meaning that a biased sample may cause researchers to underestimate or overestimate disparities between groups [10,11].
+</p>
+<p>
+The issue has a second dimension in responsible AI. Representation and sampling problems can create downstream disparities even when the learning algorithm is technically correct. Reviews of fairness research emphasize that bias can originate in the data collection and preparation stages, before a model is trained [12–16]. For example, if an employment dataset contains substantially more applicants from one geographic region than another, a model may learn relationships that are specific to the observed sample rather than the broader applicant population. A similar concern arises in healthcare, where a study population that differs systematically from the clinical population can reduce the reliability of predictions after deployment [20].
+</p>
+<p>
+This paper therefore focuses on a practical question: <i>How can sampling bias be detected systematically before it contaminates statistical analysis or machine learning?</i> The contribution is a compact detection framework that starts with a known or estimated reference population, compares distributions across important attributes, quantifies the magnitude of deviation, and applies statistical and visual diagnostics. The framework is deliberately interpretable so that researchers can explain why a sample was flagged rather than relying on an opaque bias score.
+</p>
+
+<h2>2. Conceptual Background</h2>
+<h3>2.1 Target population, sampling frame, and observed sample</h3>
+<p>
+Three concepts should be separated at the beginning of any sampling-bias analysis. The <b>target population</b> is the population to which the researcher intends to generalize. The <b>sampling frame</b> is the operational list, database, or mechanism from which units can actually be selected. The <b>observed sample</b> is the set of units whose information becomes available for analysis. Bias can enter when the frame does not cover the target population, when selection probabilities differ in an unintended way, or when sampled units respond or remain observable at different rates [1,2,17].
+</p>
+
+<h3>2.2 Sampling bias versus sampling error</h3>
+<p>
+Sampling error is an expected consequence of studying a subset of a population. Even a well-designed random sample will vary from one sample to another. Sampling bias is different: it is a systematic tendency for the sample to depart from the population in a direction related to the sampling process. A larger sample reduces random error but does not automatically remove systematic bias. A very large convenience sample can therefore be less useful for population inference than a smaller, carefully designed probability sample [1,5,6].
+</p>
+
+<h3>2.3 Main sources of sampling-related bias</h3>
+<table>
+<tr><th>Source</th><th>Description</th><th>Typical detection clue</th></tr>
+<tr><td>Coverage bias</td><td>Parts of the target population have little or no chance of appearing in the sampling frame.</td><td>Frame and population distributions differ.</td></tr>
+<tr><td>Selection bias</td><td>The inclusion mechanism is systematically related to relevant characteristics.</td><td>Observed covariates differ between selected and target units.</td></tr>
+<tr><td>Volunteer/self-selection bias</td><td>Individuals choose whether to enter the sample.</td><td>Participants differ from non-participants.</td></tr>
+<tr><td>Nonresponse bias</td><td>Selected units fail to respond and nonresponders differ from responders.</td><td>Response rates vary across groups.</td></tr>
+<tr><td>Survivorship bias</td><td>Only units that remain observable are included.</td><td>Historical or failed cases disappear from the dataset.</td></tr>
+<tr><td>Convenience sampling</td><td>Units are chosen because they are easy to access.</td><td>Sample composition reflects access rather than population structure.</td></tr>
+</table>
+<div class="caption">Table 1. Common sampling-related bias mechanisms synthesized from survey-error and machine-learning literature [1–4,17–20].</div>
+
+<h2>3. Related Work</h2>
+<p>
+The classical survey literature provides the conceptual foundation for sampling-bias detection. Groves and Lyberg describe survey error as a broader system containing sampling and nonsampling components, including coverage and nonresponse [1]. Groves and colleagues further emphasize that response rates alone are not sufficient evidence about nonresponse bias; the relationship between nonresponse and bias depends on whether respondents and nonrespondents differ on variables relevant to the estimate [2]. Bethlehem demonstrated that self-selection in web surveys can create substantial selection effects when participation probabilities are related to survey variables [3]. Work on non-probability sampling similarly stresses the need to compare sample composition with the target population rather than treating sample size as a substitute for representativeness [4].
+</p>
+<p>
+The machine-learning literature translates these ideas into a distribution-shift setting. Zadrozny formalized sample selection bias for classifiers and showed that common learning assumptions can fail when training and test distributions differ [8]. Fan and Davidson investigated correction approaches using model averaging and unlabeled examples [9]. More recent work by Kaltenpoth and Vreeken addresses the identification of selection effects directly from observational data and proposes methods for detecting and characterizing selection bias [10]. Brewer and Carlson show that selection on unobserved dimensions can remain problematic even when researchers use observed variables for weighting or inclusion [11].
+</p>
+<p>
+The connection with fairness is equally important. Pessach and Shmueli review the causes and measurement of unfairness in machine learning, including biases already embedded in datasets and sample-selection problems [12]. Their broader fairness work illustrates that fairness cannot be understood only through the final model output. Shahbazi et al. specifically survey representation bias and identify sampling and selection as important causes of underrepresentation [13]. Le Quy et al. show the importance of understanding the structure of benchmark datasets used for fairness-aware machine learning [14], while Pagano et al. synthesize datasets, metrics, tools, and identification/mitigation approaches across the bias literature [15]. Suresh and Guttag place data collection and data-generation processes within a lifecycle framework for understanding how harms emerge [16].
+</p>
+<p>
+Recent research continues to reinforce the importance of this early-stage perspective. A 2025 study on the origins of sampling bias argues that sample size bias and underrepresentation bias should be distinguished because sampling effects can distort fairness measurement [19]. Healthcare research similarly reports that sample selection bias can arise when study populations are not representative of the populations in which models are intended to operate [20]. These findings motivate a detection framework that is both statistically grounded and usable before model training.
+</p>
+
+<div class="pagebreak"></div>
+
+<h2>4. Proposed Sampling Bias Detection Framework</h2>
+<p>
+The proposed framework treats sampling bias as a measurable discrepancy between an observed sample and a reference population. The reference may come from census statistics, administrative records, a probability sample, a validated benchmark distribution, or a scientifically justified target distribution. When no reference distribution is available, the framework should not manufacture one; instead, researchers should report the limitation and use complementary methods such as selection modelling, propensity scores, domain knowledge, or external validation.
+</p>
+
+<div class="figure">
+<div class="flow">
+<span>Target Population</span><span class="arrow">→</span>
+<span>Reference Distribution</span><span class="arrow">→</span>
+<span>Observed Sample</span><span class="arrow">→</span>
+<span>Distribution Comparison</span><span class="arrow">→</span>
+<span>Statistical Test</span><span class="arrow">→</span>
+<span>Bias Diagnosis</span>
+</div>
+<p><b>Figure 1.</b> Early-stage sampling-bias detection workflow.</p>
+</div>
+
+<h3>4.1 Distributional comparison</h3>
+<p>
+For a categorical attribute with groups <i>g = 1,...,k</i>, let <i>p<sub>g</sub></i> denote the observed sample proportion and <i>q<sub>g</sub></i> the corresponding reference-population proportion. The first diagnostic is simply to compare these distributions. This step is descriptive rather than causal, but it often exposes substantial imbalance immediately.
+</p>
+
+<h3>4.2 Sampling ratio</h3>
+<p>
+A simple and interpretable measure is the sampling ratio:
+</p>
+<div class="equation">SR<sub>g</sub> = p<sub>g</sub> / q<sub>g</sub></div>
+<p>
+A value of 1 indicates proportional representation. Values below 1 indicate underrepresentation, while values above 1 indicate overrepresentation. A screening threshold such as 0.80 can be used to flag substantial underrepresentation, but the threshold should not be treated as a universal definition of bias. The appropriate tolerance depends on the application, sampling design, population size, and consequences of error.
+</p>
+
+<h3>4.3 Representation gap</h3>
+<p>
+The representation gap expresses the same discrepancy in percentage points:
+</p>
+<div class="equation">G<sub>g</sub> = (p<sub>g</sub> − q<sub>g</sub>) × 100</div>
+<p>
+For example, if a region accounts for 49.8% of the observed sample but 25% of the target population, the gap is +24.8 percentage points. A region representing 10.6% of the sample has a gap of −14.4 percentage points. The sign identifies the direction, while the magnitude indicates how far the sample has moved from the reference distribution.
+</p>
+
+<h3>4.4 Chi-square goodness-of-fit test</h3>
+<p>
+When the reference proportions are known and observations can reasonably be treated as independent for the test, a chi-square goodness-of-fit test provides a formal assessment. For group <i>g</i>, the expected count is:
+</p>
+<div class="equation">E<sub>g</sub> = Nq<sub>g</sub></div>
+<p>
+and the test statistic is:
+</p>
+<div class="equation">χ² = Σ<sub>g=1</sub><sup>k</sup> (O<sub>g</sub> − E<sub>g</sub>)² / E<sub>g</sub></div>
+<p>
+A small p-value indicates that the observed distribution is unlikely under the specified reference distribution. The test does not, by itself, prove why the discrepancy occurred. A significant result should therefore be followed by examination of the sampling frame, recruitment process, nonresponse, and data-collection channel.
+</p>
+
+<h3>4.5 Standardized residuals</h3>
+<p>
+Group-level residuals help identify which categories contribute most to the overall discrepancy:
+</p>
+<div class="equation">R<sub>g</sub> = (O<sub>g</sub> − E<sub>g</sub>) / √E<sub>g</sub></div>
+<p>
+Large positive residuals indicate over-observation relative to expectation; large negative residuals indicate under-observation. This is useful because an overall chi-square test can identify a mismatch without immediately showing which groups are responsible.
+</p>
+
+<h3>4.6 Multivariable and intersectional checks</h3>
+<p>
+A sample can appear balanced on one attribute while being biased on a combination of attributes. For example, gender may be close to the population distribution overall, but young women from a particular region may be almost absent. Consequently, representation should be checked not only marginally but also across meaningful intersections such as gender × region, age × gender, or region × education. Where sufficient population data are available, multivariate distance measures and propensity-score models can extend the framework.
+</p>
+
+<h2>5. Experimental Demonstration</h2>
+<h3>5.1 Synthetic dataset</h3>
+<p>
+To demonstrate the framework, a synthetic dataset containing 500 respondents was constructed. The dataset includes respondent identifier, region, gender, age group, education, employment status, sampling source, and a satisfaction score. The data intentionally contain a regional sampling imbalance so that the detection procedures have a known signal. The reference population is defined as 25% North, 25% South, 25% East, and 25% West.
+</p>
+
+<table>
+<tr><th>Region</th><th>Reference Population</th><th>Observed Sample</th><th>Gap (percentage points)</th><th>Sampling Ratio</th></tr>
+<tr><td>North</td><td>25.0%</td><td>49.8%</td><td>+24.8</td><td>1.992</td></tr>
+<tr><td>South</td><td>25.0%</td><td>16.2%</td><td>−8.8</td><td>0.648</td></tr>
+<tr><td>East</td><td>25.0%</td><td>10.6%</td><td>−14.4</td><td>0.424</td></tr>
+<tr><td>West</td><td>25.0%</td><td>23.4%</td><td>−1.6</td><td>0.936</td></tr>
+</table>
+<div class="caption">Table 2. Regional reference distribution and observed sample distribution in the synthetic experiment.</div>
+
+<h3>5.2 Statistical result</h3>
+<p>
+For N = 500 and a reference distribution of 25% per region, the expected count for every region is 125. The observed counts are approximately 249 North, 81 South, 53 East, and 117 West. The chi-square statistic is approximately <b>180.48</b> with 3 degrees of freedom. The corresponding p-value is far below the conventional 0.05 threshold. The null hypothesis that the observed regional distribution matches the reference population is therefore rejected.
+</p>
+<p>
+The result is substantively important as well as statistically significant. The North is almost twice as prevalent in the sample as expected, while the East appears at less than half its reference share. A model trained on this sample may consequently learn relationships that are more representative of the North than of the overall target population. Whether this produces predictive harm depends on the relationship between region and the outcome, but the data-quality problem is visible before any model is trained.
+</p>
+
+<h3>5.3 Interpretation</h3>
+<div class="callout">
+<b>Key finding:</b> A statistically significant difference should be interpreted as evidence of a distributional mismatch, not as proof that the sampling process was intentionally biased. The next step is to investigate the mechanism that produced the mismatch.
+</div>
+
+<h2>6. Practical Detection Algorithm</h2>
+<p>
+The framework can be implemented in Python using pandas, NumPy, SciPy, and Matplotlib. The workflow is suitable for a Kaggle notebook and can be incorporated into a reproducible data-quality pipeline. The core algorithm is:
+</p>
+<ol>
+<li>Load the dataset and identify variables for which population benchmarks are available.</li>
+<li>Remove or explicitly account for missing values.</li>
+<li>Calculate observed counts and proportions.</li>
+<li>Map the corresponding reference population proportions.</li>
+<li>Calculate sampling ratios and percentage-point gaps.</li>
+<li>Run a chi-square goodness-of-fit test where its assumptions are appropriate.</li>
+<li>Calculate standardized residuals to locate the largest deviations.</li>
+<li>Repeat the analysis for important demographic and operational variables.</li>
+<li>Run intersectional checks for combinations that may conceal subgroup underrepresentation.</li>
+<li>Investigate the sampling mechanism and decide whether weighting, resampling, additional data collection, or a different study design is justified.</li>
+</ol>
+
+<h3>6.1 Why multiple diagnostics are preferable</h3>
+<p>
+No single statistic captures every form of sampling bias. A chi-square test is sensitive to sample size and may become significant for practically small discrepancies in a very large dataset. Conversely, descriptive ratios can reveal a large discrepancy without indicating whether it is statistically distinguishable from the reference under a specified sampling model. Combining effect-size-like diagnostics with statistical testing and visualization provides a more balanced assessment. This is consistent with the broader literature, which recommends examining sample and population characteristics rather than relying on one indicator such as response rate or accuracy [2–4,17].
+</p>
+
+<div class="pagebreak"></div>
+
+<h2>7. Discussion</h2>
+<p>
+The experiment illustrates a central principle: <b>sampling bias is fundamentally a data-generation problem</b>. It occurs before model selection, hyperparameter tuning, or fairness optimization. If a sample systematically overrepresents one part of the population, a technically sophisticated model cannot automatically infer the characteristics of the missing population. In some settings, reweighting can partially correct the mismatch, but weighting is only as credible as the auxiliary variables and reference information used to construct the weights [9,11].
+</p>
+<p>
+This point is especially relevant to machine learning. Traditional evaluation often assumes that the test set is representative of the deployment environment. When that assumption is false, reported accuracy, recall, calibration, and fairness metrics can all be misleading [8,10,12]. The problem can be subtle: an aggregate performance measure may remain high while performance for an under-sampled group deteriorates. The literature on representation bias similarly shows that underrepresentation can affect downstream fairness and reliability [13–16].
+</p>
+<p>
+A second implication concerns research reproducibility. Many datasets are assembled from multiple sources, platforms, institutions, or time periods. The selection mechanism is sometimes poorly documented. Researchers may know the number of observations but not the probability that a member of the target population could enter the dataset. Dataset documentation should therefore record the target population, sampling frame, inclusion and exclusion criteria, recruitment channels, response patterns, collection period, and known population benchmarks. This is consistent with the broader movement toward documenting datasets and model development processes [16].
+</p>
+<p>
+A third implication is that sampling bias should be distinguished from other types of data bias. Representation bias, measurement bias, label bias, and historical bias may coexist with sampling bias but are not identical. A sample can be perfectly representative in demographic proportions and still contain biased measurements or historically biased labels. Conversely, a sample can have demographic imbalance without causing unfair model predictions if the imbalanced variable is irrelevant to the task. The purpose of detection is therefore to identify a risk requiring contextual investigation rather than to declare a dataset “biased” from one statistic alone.
+</p>
+
+<h3>7.1 Recommended decision rules</h3>
+<table>
+<tr><th>Evidence</th><th>Recommended interpretation</th><th>Action</th></tr>
+<tr><td>Small gap, non-significant test</td><td>No strong evidence of distributional mismatch.</td><td>Continue monitoring.</td></tr>
+<tr><td>Large gap, significant test</td><td>Strong evidence of sample–population mismatch.</td><td>Investigate sampling mechanism and consider correction.</td></tr>
+<tr><td>Large gap, no reliable reference</td><td>Potential representativeness problem but reference uncertainty exists.</td><td>Seek external population information.</td></tr>
+<tr><td>Marginal balance but intersectional imbalance</td><td>Hidden subgroup underrepresentation.</td><td>Perform subgroup/intersectional analysis.</td></tr>
+<tr><td>Selection related to unobserved variables</td><td>Observed-variable adjustment may be insufficient.</td><td>Consider sensitivity analysis or causal/selection models.</td></tr>
+</table>
+<div class="caption">Table 3. Practical interpretation guide.</div>
+
+<h2>8. Limitations</h2>
+<p>
+The proposed framework has several limitations. First, it requires a credible reference distribution for direct population–sample comparison. In many real-world datasets such information is incomplete or unavailable. Second, chi-square testing assumes a suitable categorical formulation and an appropriate sampling model; complex survey designs may require design-based methods, weights, clustering, or stratification adjustments. Third, marginal comparisons cannot fully detect multivariate selection mechanisms. A sample can match the population on each variable separately while differing on combinations of variables. Fourth, a statistical mismatch does not reveal the causal mechanism of selection. Finally, the synthetic experiment demonstrates detection rather than proving the downstream effect on model accuracy or fairness.
+</p>
+<p>
+These limitations suggest several extensions. Future work should incorporate propensity-score estimation, inverse-probability weighting, distributional distance measures, causal selection models, covariate-shift detection, and automated monitoring after deployment. For survey data, sampling weights, primary sampling units, and stratification information should be carried into the machine-learning workflow rather than discarded during preprocessing [17]. For high-stakes applications, external validation and subgroup-specific performance evaluation should accompany any claim that a model is representative.
+</p>
+
+<h2>9. Conclusion</h2>
+<p>
+Sampling bias is one of the earliest and most consequential ways in which a data-driven study can depart from its intended population. The problem is not solved by increasing sample size alone. A large sample can still be systematically unrepresentative if the sampling mechanism favors particular groups, locations, time periods, platforms, or participation patterns. This paper presented a practical detection framework based on reference distributions, sampling ratios, representation gaps, chi-square testing, standardized residuals, visualization, and intersectional analysis.
+</p>
+<p>
+The synthetic 500-record experiment demonstrated how the framework identifies a pronounced regional mismatch. The observed sample contained approximately 49.8% North respondents against a 25% reference share, while East respondents accounted for only 10.6%. The resulting chi-square statistic of 180.48 provided strong evidence that the sample distribution differed from the target distribution. More importantly, the diagnostics showed <i>where</i> the mismatch occurred, making the result actionable.
+</p>
+<p>
+For research and practical AI development, sampling-bias detection should therefore be incorporated into the data-quality stage before model training. The most defensible workflow is not “collect data, train a model, and then check fairness,” but rather “define the population, document the sampling process, compare the sample with the population, detect selection problems, correct or qualify the data, and only then evaluate model performance and fairness.” Such a data-centric approach can improve the validity, reproducibility, and social reliability of statistical and machine-learning systems.
+</p>
+
+<h2>10. Future Research Directions</h2>
+<ul>
+<li><b>Automated Sampling Bias Score:</b> Develop a calibrated composite score combining distributional gaps, statistical evidence, and subgroup coverage.</li>
+<li><b>Multivariate selection detection:</b> Use propensity scores, classifier-based two-sample tests, and causal models to detect selection mechanisms involving multiple variables.</li>
+<li><b>Intersectional monitoring:</b> Detect hidden underrepresentation across combinations of demographic and contextual attributes.</li>
+<li><b>Temporal sampling bias:</b> Monitor changes in sampling composition over time and identify population drift.</li>
+<li><b>Fairness-aware evaluation:</b> Quantify how sampling bias changes group-level accuracy, calibration, equal opportunity, and other fairness measures.</li>
+<li><b>Survey-aware machine learning:</b> Integrate survey design metadata, weights, strata, and primary sampling units into training and evaluation workflows.</li>
+</ul>
+
+<h2>References</h2>
+<ol class="refs">
+<li>Groves, R. M., &amp; Lyberg, L. (2010). Total survey error: Past, present, and future. <i>Public Opinion Quarterly, 74</i>(5), 849–879. https://doi.org/10.1093/poq/nfq065</li>
+<li>Groves, R. M. (2006). Nonresponse rates and nonresponse bias in household surveys. <i>Public Opinion Quarterly, 70</i>(5), 646–675. https://doi.org/10.1093/poq/nfl033</li>
+<li>Bethlehem, J. (2010). Selection bias in web surveys. <i>International Statistical Review, 78</i>(2), 161–188. https://doi.org/10.1111/j.1751-5823.2010.00112.x</li>
+<li>Baker, R., Brick, J. M., Bates, N. A., Battaglia, M., Couper, M. P., Dever, J. A., Gile, K. J., &amp; Tourangeau, R. (2013). Report of the AAPOR task force on non-probability sampling. <i>Journal of Survey Statistics and Methodology, 1</i>(2), 90–143. https://doi.org/10.1093/jssam/smt008</li>
+<li>Lohr, S. L. (2021). <i>Sampling: Design and Analysis</i> (3rd ed.). Chapman &amp; Hall/CRC.</li>
+<li>Cochran, W. G. (1977). <i>Sampling Techniques</i> (3rd ed.). Wiley.</li>
+<li>Heckman, J. J. (1979). Sample selection bias as a specification error. <i>Econometrica, 47</i>(1), 153–161. https://doi.org/10.2307/1912352</li>
+<li>Zadrozny, B. (2004). Learning and evaluating classifiers under sample selection bias. In <i>Proceedings of ICML 2004</i>, 114. https://doi.org/10.1145/1015330.1015425</li>
+<li>Fan, W., &amp; Davidson, I. (2007). On sample selection bias and its efficient correction via model averaging and unlabeled examples. In <i>Proceedings of SIAM International Conference on Data Mining</i>, 320–331. https://doi.org/10.1137/1.9781611972771.29</li>
+<li>Kaltenpoth, D., &amp; Vreeken, J. (2023). Identifying selection bias from observational data. In <i>Proceedings of the AAAI Conference on Artificial Intelligence, 37</i>(7), 8177–8185. https://doi.org/10.1609/aaai.v37i7.25987</li>
+<li>Brewer, D., &amp; Carlson, A. (2024). Addressing sample selection bias for machine learning methods. <i>Journal of Applied Econometrics</i>. https://doi.org/10.1002/jae.3029</li>
+<li>Pessach, D., &amp; Shmueli, E. (2022). A review on fairness in machine learning. <i>ACM Computing Surveys, 55</i>(3), Article 51. https://doi.org/10.1145/3494672</li>
+<li>Shahbazi, N., Lin, Y., Asudeh, A., &amp; Jagadish, H. V. (2023). Representation bias in data: A survey on identification and resolution techniques. <i>ACM Computing Surveys, 55</i>, Article 315. https://doi.org/10.1145/3588433</li>
+<li>Le Quy, T., Roy, A., Iosifidis, V., Zhang, W., &amp; Ntoutsi, E. (2022). A survey on datasets for fairness-aware machine learning. <i>WIREs Data Mining and Knowledge Discovery, 12</i>(3), e1452. https://doi.org/10.1002/widm.1452</li>
+<li>Pagano, T. P., Loureiro, R. B., Lisboa, F. V., et al. (2023). Bias and unfairness in machine learning models: A systematic review on datasets, tools, fairness metrics, and identification and mitigation methods. <i>Big Data and Cognitive Computing, 7</i>(1), 15. https://doi.org/10.3390/bdcc7010015</li>
+<li>Suresh, H., &amp; Guttag, J. V. (2021). A framework for understanding sources of harm throughout the machine learning life cycle. In <i>Proceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency</i>, 1–9. https://doi.org/10.1145/3442188.3445922</li>
+<li>Pessach, D., &amp; Shmueli, E. (2021). Improving fairness of artificial intelligence algorithms in privileged-group selection bias data settings. <i>Expert Systems with Applications, 185</i>, 115667. https://doi.org/10.1016/j.eswa.2021.115667</li>
+<li>Buolamwini, J., &amp; Gebru, T. (2018). Gender shades: Intersectional accuracy disparities in commercial gender classification. In <i>Proceedings of Machine Learning Research, 81</i>, 77–91.</li>
+<li>Zhioua, S., Binkyte, R., Ouni, A., &amp; Ktata, F. B. (2025). On the origins of sampling bias: Implications on fairness measurement and mitigation. <i>arXiv preprint arXiv:2503.17956</i>.</li>
+<li>Chauhan, V. K., Clifton, L., Salaün, A., Lu, H. Y., Branson, K., Schwab, P., Nigam, G., &amp; Clifton, D. A. (2025). Sample selection bias in machine learning for healthcare. <i>ACM Transactions on Computing for Healthcare, 6</i>(4), 1–24. https://doi.org/10.1145/3761822</li>
+</ol>
+
+<div class="footer">
+Conference-paper draft • Dr. Nitin Mishra • drnitinmishra10@gmail.com
+</div>
+
+</div>
+</body>
+</html>
