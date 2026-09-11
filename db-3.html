@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TRACE-DB: A Causal Evidence and Self-Verifying Framework for Explainable Dataset Bias Detection and Minimal Repair</title>
+<style>
+:root{--ink:#111;--muted:#555;--line:#cfcfcf;--paper:#fff;--bg:#f2f2f2;--soft:#f7f7f7}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--ink);background:var(--paper);line-height:1.55;font-size:11.5pt}
+main{max-width:980px;margin:28px auto;padding:45px 62px 70px;background:#fff;box-shadow:0 0 0 1px #ddd}
+h1{font-size:25pt;line-height:1.15;margin:0 0 14px;text-align:left;font-weight:700}
+h2{font-size:16pt;line-height:1.25;margin:28px 0 9px;border-bottom:1px solid #ddd;padding-bottom:4px}
+h3{font-size:12.5pt;margin:18px 0 6px}
+h4{font-size:11.5pt;margin:14px 0 5px}
+p{margin:7px 0 9px;text-align:justify}
+.author{text-align:center;margin:0 0 12px;font-size:12pt}.affil{text-align:center;color:#333;margin-bottom:6px}.corr{text-align:center;font-size:10.5pt;color:#333;margin-bottom:20px}
+.meta{border-top:1px solid #aaa;border-bottom:1px solid #aaa;padding:8px 0;margin:15px 0 20px;text-align:center;font-size:10pt;color:#333}
+.abstract{background:#fafafa;border:1px solid #ddd;padding:14px 16px;margin:18px 0}
+.abstract h2{border:0;margin:0 0 5px;padding:0;font-size:13pt}
+.keywords{font-size:10.5pt;margin-top:10px}
+.table-wrap{overflow-x:auto;margin:12px 0}.caption{font-size:10pt;color:#333;margin:5px 0 3px;font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:9.4pt;margin:4px 0 13px}th,td{border:1px solid #bbb;padding:6px 7px;vertical-align:top}th{background:#f0f0f0;text-align:left}tr:nth-child(even) td{background:#fafafa}
+.eq{font-family:"Times New Roman",serif;text-align:center;margin:10px 0 12px;font-size:12pt}.eq .box{display:inline-block;border:1px solid #bbb;padding:8px 16px;background:#fcfcfc}
+.figure{border:1px solid #bbb;padding:12px;margin:14px 0;background:#fff}.figure figcaption{font-size:10pt;margin-top:6px;color:#333}
+svg{max-width:100%;height:auto}
+.callout{border-left:4px solid #222;background:#f7f7f7;padding:10px 13px;margin:12px 0}.callout strong{display:block;margin-bottom:3px}
+.alg{white-space:pre-wrap;font-family:"Courier New",monospace;background:#f5f5f5;border:1px solid #ddd;padding:12px;font-size:9pt;line-height:1.45}
+.small{font-size:9.7pt;color:#444}.center{text-align:center}.right{text-align:right}.nowrap{white-space:nowrap}
+ul,ol{margin:7px 0 10px 25px}li{margin:4px 0}
+.ref{padding-left:25px;text-indent:-25px;margin:7px 0;font-size:9.7pt;text-align:left}.ref a{color:#111;text-decoration:underline}
+hr{border:0;border-top:1px solid #aaa;margin:26px 0}
+.notice{font-size:9.7pt;color:#333;background:#f3f3f3;border:1px solid #bbb;padding:10px 12px;margin:14px 0}
+@media print{
+ html{background:#fff} body{background:#fff;font-size:10.5pt} main{max-width:none;margin:0;box-shadow:none;padding:18mm 18mm 20mm}
+ h1{font-size:20pt} h2{font-size:14pt} h3{font-size:11.5pt}
+ .pagebreak{page-break-before:always}.avoidbreak{break-inside:avoid}.figure{break-inside:avoid}
+ a{color:#000;text-decoration:none}.noprint{display:none!important}
+ @page{size:A4;margin:15mm 15mm 18mm}
+}
+</style>
+</head>
+<body>
+<main>
+<h1>TRACE-DB: A Causal Evidence and Self-Verifying Framework for Explainable Dataset Bias Detection and Minimal Repair</h1>
+<div class="author"><strong>Dr. Nitin Mishra<sup>1</sup></strong> and <strong>Dr. Rohit<sup>1</sup></strong></div>
+<div class="affil"><sup>1</sup>Department of Computer Science and Engineering, Parul University, India</div>
+<div class="corr">Correspondence: drnitinmishra10@gmail.com; rohitatiiit@gmail.com</div>
+<div class="meta">Research Article &nbsp;|&nbsp; Methodological Framework &nbsp;|&nbsp; Proposed system with reproducible evaluation protocol</div>
+
+<div class="abstract">
+<h2>Abstract</h2>
+<p>Dataset bias is a first-order reliability problem in machine learning, yet many existing approaches evaluate bias through isolated demographic statistics, model-level fairness metrics, or a single mitigation operator. Such approaches can identify disparity without identifying its mechanism, or repair a distribution without demonstrating that the repaired dataset will remain fair and useful under independent models and distribution shift. This paper proposes <strong>TRACE-DB</strong> (Traceable Root-cause Analysis, Causal Evidence and Self-Verification for Dataset Bias), a data-centric framework that treats bias remediation as an auditable inference-and-intervention problem. TRACE-DB integrates seven capabilities: dataset fingerprinting, hidden-subgroup discovery, multi-evidence bias scoring, causal mechanism classification, instance-level bias responsibility attribution, mechanism-aware minimum necessary repair, and independent verification. The framework introduces two principal artifacts: a <em>Bias Evidence Graph</em>, which links statistical observations to candidate causes and responsible records, and a machine-readable <em>Bias Certificate</em>, which records the evidence, intervention, distortion, residual bias, and verification outcome for each repair. The proposed optimization seeks the smallest defensible data intervention satisfying explicit fairness, utility, causal-consistency, and robustness constraints. Crucially, the verification stage separates the auditing model from the verification model and requires counterfactual tests and, where feasible, evaluation on an external distribution. The manuscript synthesizes recent advances in dataset auditing, causal bias analysis, data valuation, label-error detection, responsible dataset assessment, and data repair, and derives a benchmark protocol for controlled and real-world evaluation. TRACE-DB is presented as a testable research hypothesis rather than as an experimentally validated result; its contribution is the integrated, traceable, mechanism-aware and independently verifiable formulation of dataset-bias remediation.</p>
+<p class="keywords"><strong>Keywords:</strong> dataset bias; data-centric AI; algorithmic fairness; causal inference; explainable AI; dataset auditing; subgroup discovery; data repair; data provenance; robustness; bias verification</p>
+</div>
+
+<h2>1 Introduction</h2>
+<p>Machine-learning systems inherit properties of the data-generating and data-curation processes from which they learn. Bias can therefore arise before model selection, during collection and annotation, through sampling and missingness mechanisms, or through data leakage and acquisition artifacts. Surveys of fairness-aware machine learning have traditionally organized mitigation into pre-processing, in-processing and post-processing families, while more recent data-centric work argues that data quality, provenance, coverage and representativeness deserve to be treated as first-class components of machine-learning engineering [1–4].</p>
+<p>A central difficulty is that an observed disparity does not uniquely identify its cause. Two groups can exhibit different label prevalence because of genuine population differences, selection effects, measurement processes, annotation practices, or a combination of these mechanisms. Jones et al. formalized this problem in a causal perspective on medical imaging, distinguishing disparities arising from prevalence, presentation and annotation and showing why apparently similar observations may call for different interventions [5]. This observation challenges the common practice of selecting a generic reweighting or representation-learning method solely from an observed fairness metric.</p>
+<p>The problem is compounded by distribution shift. A model can appear accurate and fair when training and testing data are sampled from closely related distributions while failing differentially when the deployment population, acquisition site, measurement protocol, time period or subgroup prevalence changes. Recent work on dataset bias auditing and responsible datasets emphasizes that dataset-level properties can enable shortcut learning, conceal subpopulation failures and inflate apparent generalization [6,7]. The 2025–2026 literature further shows that dataset curation can materially alter generalization claims when leakage or redundancy is removed [8].</p>
+<p>These observations motivate a data-centric question:</p>
+<div class="callout"><strong>Research question.</strong> Can dataset bias be detected, explained, repaired and independently verified more reliably when statistical evidence, subgroup structure, causal mechanisms, instance-level responsibility and distribution-shift testing are treated as one auditable pipeline?</div>
+<p>We propose TRACE-DB to investigate this question. The framework does not assume that statistical parity is universally correct, nor does it equate representation imbalance with unfairness. Instead, it first establishes evidence of a discrepancy, then estimates the likely mechanism, selects a compatible repair, records what changed and finally subjects the repaired dataset to tests that are independent of the audit procedure.</p>
+
+<h3>1.1 Contributions</h3>
+<ol>
+<li>A unified <strong>Bias Evidence Graph</strong> that connects subgroup-level statistical evidence, feature detectability, label quality, acquisition context, causal hypotheses and instance-level responsibility.</li>
+<li>A <strong>mechanism-aware repair policy</strong> that chooses among acquisition, reweighting, relabeling, feature intervention, distributional repair or targeted sampling rather than applying one universal debiasing operator.</li>
+<li>A constrained formulation of <strong>minimum necessary repair</strong>, explicitly trading residual bias against utility loss, causal inconsistency and data distortion.</li>
+<li>A <strong>self-verifying evaluation protocol</strong> using independent model families, counterfactual tests, bias-stress testing and external-distribution validation.</li>
+<li>A machine-readable <strong>Bias Certificate</strong> intended to provide provenance, reproducibility and human-auditable justification for every intervention.</li>
+</ol>
+
+<h2>2 Related Work and Research Gap</h2>
+<h3>2.1 Dataset-level bias and fairness auditing</h3>
+<p>Mehrabi et al. and later surveys classify bias across data, algorithms and human interaction, while Le Quy et al. catalogue datasets used in fairness-aware learning and emphasize that empirical conclusions depend strongly on the properties of benchmark datasets [1,2]. Pagano et al.'s systematic review reports a field dominated by binary-focused fairness metrics and notes that different fairness criteria can produce non-uniform conclusions [3]. This motivates a multi-metric, multi-model evaluation strategy rather than a single scalar fairness score.</p>
+<p>Dominguez-Catena et al. specifically study demographic bias metrics at the dataset level. Their IEEE Transactions on Pattern Analysis and Machine Intelligence analysis finds redundancy among existing demographic metrics and argues for a reduced complementary set [9]. TRACE-DB builds on this insight but extends the objective from measurement to explanation and repair.</p>
+<h3>2.2 Data quality, provenance and instance-level evidence</h3>
+<p>Data Cartography uses training dynamics to characterize examples as easy, ambiguous or hard to learn; hard-to-learn observations can include label errors [10]. Confident Learning focuses directly on identifying probable label errors and provides a model-agnostic, data-centric procedure for estimating label noise [11]. Data Shapley offers a principled way to quantify the contribution of individual training points to model utility [12]. These ideas are complementary: label-quality evidence asks whether an example is trustworthy, while data valuation asks how consequential that example is for a downstream task.</p>
+<p>Data provenance research argues that recording origins and processing steps is important for fairness, accountability, transparency and explainability [13]. TRACE-DB operationalizes this idea by attaching provenance and intervention history to bias evidence rather than keeping provenance as a separate documentation artifact.</p>
+<h3>2.3 Causal approaches and data repair</h3>
+<p>D-BIAS demonstrated a causal, human-in-the-loop approach in which users refine causal relations and simulate minimally changed datasets [14]. González-Sendino et al. describe fair data generation using mitigated causal models with an emphasis on explainability [15]. Optimal transport has also become an active tool for fairness-oriented distribution repair; recent work addresses the difficulty of learning transport operators from underrepresented groups and the challenge of repairing archival data [16,17].</p>
+<p>These works make it clear that causal repair and distributional repair are viable research directions. They also imply a boundary for novelty: a new contribution should not merely propose “OT for fairness,” “causal generation,” or “a fairness metric.” TRACE-DB instead focuses on the <em>selection and verification logic that connects diagnosis to repair</em>.</p>
+<h3>2.4 Detectability and shortcut risk</h3>
+<p>The recent G-AUDIT framework is particularly close to the motivation of TRACE-DB. It audits relationships among labels, patient attributes and acquisition/environment variables to identify shortcut-learning risks across images, text and tabular medical data [6]. TRACE-DB therefore treats detectability as an existing and necessary component rather than claiming it as a standalone novelty. Its proposed extension is to connect detectability to mechanism classification, instance-level responsibility, repair selection and independent verification.</p>
+<h3>2.5 Responsible datasets and distribution shift</h3>
+<p>Mittal et al. audit more than 60 computer-vision datasets for fairness, privacy and regulatory responsibility and show the practical limitations of existing dataset curation practices [7]. Ding et al. demonstrate that the UCI Adult benchmark has idiosyncrasies that limit external validity and introduce Folktables to support temporal and geographic variation [18]. Graber et al. show in a high-impact scientific application that removing data leakage and redundancy can substantially change reported generalization, reinforcing the principle that dataset curation must be evaluated against independent test distributions [8].</p>
+
+<div class="table-wrap avoidbreak">
+<div class="caption">Table 1. Positioning TRACE-DB against representative dataset-bias approaches.</div>
+<table>
+<thead><tr><th>Approach</th><th>Dataset audit</th><th>Cause/mechanism</th><th>Instance evidence</th><th>Repair</th><th>Independent verification</th></tr></thead>
+<tbody>
+<tr><td>Demographic metric families [9]</td><td>✓</td><td>–</td><td>–</td><td>–</td><td>Limited</td></tr>
+<tr><td>Dataset Cartography [10]</td><td>✓</td><td>Partial</td><td>✓</td><td>Indirect</td><td>Limited</td></tr>
+<tr><td>Confident Learning [11]</td><td>✓ (labels)</td><td>Partial</td><td>✓</td><td>✓ (cleaning)</td><td>Task-dependent</td></tr>
+<tr><td>Data Shapley [12]</td><td>Indirect</td><td>–</td><td>✓</td><td>Indirect</td><td>Task-dependent</td></tr>
+<tr><td>D-BIAS [14]</td><td>✓</td><td>✓</td><td>Partial</td><td>✓</td><td>Partial</td></tr>
+<tr><td>OT-based repair [16,17]</td><td>✓</td><td>Partial</td><td>Partial</td><td>✓</td><td>Partial</td></tr>
+<tr><td>AUDIT/detectability line [6]</td><td>✓</td><td>Hypothesis generation</td><td>Partial</td><td>–</td><td>✓/diagnostic</td></tr>
+<tr><td><strong>TRACE-DB (proposed)</strong></td><td><strong>✓</strong></td><td><strong>✓</strong></td><td><strong>✓</strong></td><td><strong>✓</strong></td><td><strong>✓✓</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>3 Problem Formulation</h2>
+<p>Let a dataset be represented as</p>
+<div class="eq"><div class="box">D = {(x<sub>i</sub>, y<sub>i</sub>, s<sub>i</sub>, u<sub>i</sub>, a<sub>i</sub>)}<sup>N</sup><sub>i=1</sub></div></div>
+<p>where x denotes observed features, y the task label or outcome, s one or more sensitive/protected attributes when ethically and legally available, u contextual or unprotected covariates, and a acquisition or provenance metadata. The framework also supports settings in which s is unavailable for some records; in those cases, candidate groups must be treated as latent hypotheses rather than ground-truth protected classes.</p>
+<p>For subgroup g, let R(g) represent its prevalence, L(g) its conditional label distribution, X(g) its feature distribution, Q(g) its annotation-quality profile, and A(g) its acquisition/provenance profile. A bias finding should be considered credible only when evidence from multiple dimensions is coherent and the relevant fairness concept is justified for the domain.</p>
+
+<h3>3.1 Bias as an evidence-backed hypothesis</h3>
+<p>TRACE-DB does not define bias by a single equality constraint. Instead, it represents a candidate bias hypothesis H as a tuple:</p>
+<div class="eq"><div class="box">H = (g, m, E, c, r)</div></div>
+<p>where g is the affected subgroup, m is a candidate mechanism class, E is a set of empirical evidence, c is a confidence estimate, and r is a proposed intervention. The distinction between hypothesis and conclusion is intentional: causal claims should not be inferred from observational associations without the assumptions and evidence needed to justify them.</p>
+
+<h2>4 TRACE-DB Framework</h2>
+<figure class="figure avoidbreak">
+<svg viewBox="0 0 900 470" role="img" aria-label="TRACE-DB architecture diagram">
+<defs><marker id="arr" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#111"/></marker></defs>
+<rect x="315" y="15" width="270" height="45" rx="4" fill="#f7f7f7" stroke="#111"/><text x="450" y="43" text-anchor="middle" font-size="18">RAW DATASET + PROVENANCE</text>
+<line x1="450" y1="60" x2="450" y2="92" stroke="#111" marker-end="url(#arr)"/>
+<rect x="310" y="92" width="280" height="48" rx="4" fill="#f7f7f7" stroke="#111"/><text x="450" y="122" text-anchor="middle" font-size="17">Dataset Fingerprint</text>
+<line x1="310" y1="140" x2="150" y2="185" stroke="#111" marker-end="url(#arr)"/><line x1="450" y1="140" x2="450" y2="185" stroke="#111" marker-end="url(#arr)"/><line x1="590" y1="140" x2="750" y2="185" stroke="#111" marker-end="url(#arr)"/>
+<rect x="35" y="185" width="230" height="58" rx="4" fill="#fafafa" stroke="#111"/><text x="150" y="208" text-anchor="middle" font-size="15">Representation /</text><text x="150" y="228" text-anchor="middle" font-size="15">Distribution audit</text>
+<rect x="335" y="185" width="230" height="58" rx="4" fill="#fafafa" stroke="#111"/><text x="450" y="208" text-anchor="middle" font-size="15">Detectability +</text><text x="450" y="228" text-anchor="middle" font-size="15">Label quality</text>
+<rect x="635" y="185" width="230" height="58" rx="4" fill="#fafafa" stroke="#111"/><text x="750" y="208" text-anchor="middle" font-size="15">Acquisition /</text><text x="750" y="228" text-anchor="middle" font-size="15">Causal context</text>
+<line x1="150" y1="243" x2="450" y2="285" stroke="#111" marker-end="url(#arr)"/><line x1="450" y1="243" x2="450" y2="285" stroke="#111" marker-end="url(#arr)"/><line x1="750" y1="243" x2="450" y2="285" stroke="#111" marker-end="url(#arr)"/>
+<rect x="300" y="285" width="300" height="55" rx="4" fill="#f3f3f3" stroke="#111"/><text x="450" y="308" text-anchor="middle" font-size="16">Bias Evidence Graph +</text><text x="450" y="328" text-anchor="middle" font-size="16">Mechanism Classification</text>
+<line x1="450" y1="340" x2="450" y2="375" stroke="#111" marker-end="url(#arr)"/>
+<rect x="300" y="375" width="300" height="55" rx="4" fill="#ededed" stroke="#111"/><text x="450" y="398" text-anchor="middle" font-size="16">Minimum Necessary Repair</text><text x="450" y="418" text-anchor="middle" font-size="16">+ Provenance Log</text>
+<line x1="600" y1="402" x2="760" y2="402" stroke="#111" marker-end="url(#arr)"/>
+<rect x="665" y="347" width="210" height="90" rx="4" fill="#fafafa" stroke="#111"/><text x="770" y="369" text-anchor="middle" font-size="15">Independent</text><text x="770" y="389" text-anchor="middle" font-size="15">Models + Counterfactuals</text><text x="770" y="409" text-anchor="middle" font-size="15">+ External Shift</text><text x="770" y="429" text-anchor="middle" font-size="15">Verification</text>
+<line x1="665" y1="437" x2="600" y2="437" stroke="#111"/>
+<rect x="315" y="445" width="270" height="20" fill="#111"/>
+</svg>
+<figcaption><strong>Fig. 1.</strong> TRACE-DB architecture. The key design principle is that diagnosis, intervention and verification are distinct stages, with evidence and provenance carried across the pipeline.</figcaption>
+</figure>
+
+<h3>4.1 Module A: Dataset Fingerprint</h3>
+<p>The first stage computes a multidimensional dataset fingerprint. Recommended families include representation measures, distributional distances, conditional label differences, mutual information or dependence tests, missingness patterns, annotation agreement, duplicate/leakage checks, provenance variables, and subgroup detectability. The objective is not to maximize the number of metrics, but to construct a compact, non-redundant evidence vector appropriate to the data modality and domain.</p>
+<p>For two groups g and h, a generic distribution discrepancy can be expressed as</p>
+<div class="eq"><div class="box">δ<sub>X</sub>(g,h) = d(P(X|G=g), P(X|G=h))</div></div>
+<p>where d may be Wasserstein distance, MMD, energy distance, Jensen–Shannon divergence, or another justified discrepancy. The framework retains the metric choice as metadata so the audit remains interpretable.</p>
+
+<h3>4.2 Module B: Hidden-Subgroup Discovery</h3>
+<p>Predefined demographic groups are insufficient when bias occurs at the intersection of attributes or along continuous covariates. TRACE-DB therefore searches for data-defined subgroups using constrained subgroup discovery, clustering in representation space, density-based methods and shallow rule learners. Candidate subgroups are filtered for stability across resamples and for adequate support. A subgroup is promoted to an audit hypothesis only if its evidence is not a transient artifact of a single split.</p>
+<p>For a candidate subgroup s, subgroup support is</p>
+<div class="eq"><div class="box">Support(s) = |s| / N</div></div>
+<p>and stability can be estimated from bootstrap agreement, Jaccard overlap of discovered members, or rule consistency. Tiny or unstable subgroups may still be important but should be reported with lower confidence.</p>
+
+<h3>4.3 Module C: Detectability and Shortcut Analysis</h3>
+<p>TRACE-DB trains auxiliary predictors to determine whether group, acquisition site, environment, or other potentially spurious attributes are unusually predictable from the task features. This provides a concrete test for hidden structure that a downstream model might exploit. The framework records predictive performance, calibration and feature attribution rather than merely reporting a correlation coefficient.</p>
+<div class="eq"><div class="box">A<sub>det</sub>(q) = AUC(h<sub>q</sub>(X))</div></div>
+<p>where q can be a sensitive attribute, site, device type, protocol, annotator or other context variable. High detectability is evidence of separability, not proof of unfairness. Its interpretation depends on the domain and the causal graph.</p>
+
+<h3>4.4 Module D: Multi-Evidence Bias Score</h3>
+<p>For each subgroup, TRACE-DB forms an evidence vector E<sub>s</sub> rather than a universal fairness scalar. A practical normalized score is:</p>
+<div class="eq"><div class="box">BES(s) = Σ<sub>k</sub> w<sub>k</sub> e<sub>k</sub>(s), &nbsp;&nbsp; Σw<sub>k</sub>=1, w<sub>k</sub>≥0</div></div>
+<p>The weights are not intended to be learned blindly. They should be chosen by domain experts, a preregistered policy, or a sensitivity analysis. The publication should report results under alternative weight vectors and, where possible, the individual components. This prevents the weighted score from becoming an opaque “fairness index.”</p>
+
+<h3>4.5 Module E: Causal Mechanism Classification</h3>
+<p>TRACE-DB uses a structural causal model (SCM) or causal graph when sufficient domain information exists. Candidate mechanisms include representation/selection, acquisition, prevalence, presentation, annotation and shortcut mechanisms. The algorithm does not claim causal identification from observational data alone; instead, it maps evidence to a ranked mechanism hypothesis and explicitly states assumptions and unmeasured confounders.</p>
+<p>For a causal graph G, let M be a candidate mechanism and E the observed evidence. The framework computes a mechanism score such as</p>
+<div class="eq"><div class="box">P(M | E) ∝ P(E | M) P(M)</div></div>
+<p>or uses a rule-based expert system when probabilistic causal modelling is not justified. The important reproducibility requirement is that the mapping from evidence to mechanism must be inspectable.</p>
+
+<h3>4.6 Module F: Instance-Level Bias Responsibility</h3>
+<p>A subgroup-level finding should be decomposed into record-level evidence. Let q<sub>i</sub> be an instance quality score, v<sub>i</sub> a downstream contribution/value estimate, and r<sub>i</sub> the degree to which the instance contributes to a detected subgroup discrepancy. A composite responsibility score can be written:</p>
+<div class="eq"><div class="box">BR<sub>i</sub> = αr<sub>i</sub> + β(1−q<sub>i</sub>) + γv<sub>i</sub> + δc<sub>i</sub></div></div>
+<p>where c<sub>i</sub> measures consistency with the suspected mechanism. The terms can be instantiated using different tools: training dynamics for uncertainty, confident learning for label reliability, Shapley-like values for contribution, and influence functions for local sensitivity. The framework deliberately treats these as evidence channels rather than assuming that one method is ground truth.</p>
+
+<h3>4.7 Module G: Mechanism-Aware Minimum Necessary Repair</h3>
+<p>The proposed repair principle is to minimize intervention magnitude subject to explicit constraints. Let D be the original dataset and D' the repaired dataset. Let Δ(D,D') quantify distortion; U(D') be task utility; B(D') residual bias; C(D,D') causal inconsistency; and S(D') a robustness score under shift.</p>
+<div class="eq"><div class="box">D* = arg min<sub>D'</sub> [ λ<sub>d</sub>Δ(D,D') + λ<sub>u</sub> L<sub>utility</sub> + λ<sub>b</sub>B(D') + λ<sub>c</sub>C(D,D') − λ<sub>s</sub>S(D') ]</div></div>
+<p>subject to:</p>
+<div class="eq"><div class="box">B(D*) ≤ ε<sub>b</sub>; &nbsp; U(D*) ≥ ε<sub>u</sub>; &nbsp; S(D*) ≥ ε<sub>s</sub>; &nbsp; C(D,D*) ≤ ε<sub>c</sub>.</div></div>
+<p>The optimization can be instantiated with a discrete repair portfolio. For example, a representation deficit may trigger targeted collection; suspected annotation bias may trigger adjudication; a site shortcut may trigger feature harmonization or targeted cross-site sampling; and a distribution shift may motivate optimal transport or calibrated reweighting. The system should be allowed to choose “do not repair yet” when causal evidence is weak.</p>
+
+<div class="table-wrap avoidbreak">
+<div class="caption">Table 2. Proposed mechanism-to-intervention policy.</div>
+<table>
+<thead><tr><th>Evidence pattern</th><th>Primary hypothesis</th><th>Preferred intervention</th><th>Do-not-claim condition</th></tr></thead>
+<tbody>
+<tr><td>Low subgroup support without task-relevant distribution evidence</td><td>Representation deficit</td><td>Targeted acquisition or resampling</td><td>Do not label as unfair solely from imbalance</td></tr>
+<tr><td>Label disagreement concentrated by annotator/site</td><td>Annotation/process bias</td><td>Adjudication, relabeling, annotator calibration</td><td>Do not erase labels without quality evidence</td></tr>
+<tr><td>Acquisition variable highly predicts label/task features</td><td>Shortcut/acquisition bias</td><td>Harmonization, site balancing, feature intervention</td><td>Detectability alone is not proof of unfairness</td></tr>
+<tr><td>Large conditional distribution discrepancy</td><td>Distribution/selection bias</td><td>Reweighting or distributional repair</td><td>Do not force equal distributions when legitimate causal differences exist</td></tr>
+<tr><td>High label-noise probability + high downstream influence</td><td>Corrupt/high-impact instances</td><td>Review or selective removal</td><td>Do not remove points solely because a model finds them hard</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>4.8 Module H: Bias Certificate</h3>
+<p>For every accepted finding and every repair, TRACE-DB emits a machine-readable certificate. The certificate is intended to make the intervention auditable and reproducible across research teams.</p>
+<div class="alg">{
+  "subgroup": "S_j",
+  "mechanism": "M_k",
+  "evidence": {
+    "representation": ...,
+    "distribution": ...,
+    "detectability_auc": ...,
+    "label_quality": ...,
+    "provenance": ...
+  },
+  "responsible_records": [...],
+  "repair": {
+    "operator": "...",
+    "parameters": {...},
+    "changed_records": [...]
+  },
+  "distortion": ...,
+  "residual_bias": ...,
+  "utility_delta": ...,
+  "external_shift_result": ...,
+  "counterfactual_result": ...,
+  "verification_models": [...],
+  "status": "VERIFIED | INCONCLUSIVE | REJECTED"
+}</div>
+<p>The certificate is a research artifact, not a legal determination of fairness. It is designed to support peer review, auditability and replication.</p>
+
+<h2>5 Algorithms</h2>
+<h3>5.1 Main pipeline</h3>
+<div class="alg">Algorithm 1: TRACE-DB
+Input: dataset D, task T, optional sensitive attributes S, provenance A, domain constraints Ω
+Output: repaired dataset D*, Bias Evidence Graph G_B, Bias Certificates C
+
+1.  Validate schema, provenance, missingness and train/test separation.
+2.  Compute dataset fingerprint F(D).
+3.  Discover predefined and latent candidate subgroups {s_j}.
+4.  For each s_j, compute representation, distribution, label-quality and detectability evidence.
+5.  Run leakage / duplicate / acquisition-context checks.
+6.  Construct causal graph(s) G_C using domain knowledge + statistically supported candidate edges.
+7.  Rank candidate mechanisms M_k for each subgroup using evidence E_j and declared assumptions.
+8.  Attribute subgroup evidence to records using quality, influence/value and mechanism-consistency channels.
+9.  Select a repair operator R_k from the mechanism-aware intervention portfolio.
+10. Solve the minimum-repair problem subject to fairness, utility, causal-consistency and robustness constraints.
+11. Generate D' and record all transformations in provenance.
+12. Train independent verification models V_1,...,V_m.
+13. Perform counterfactual tests, bias-stress tests and external-distribution tests.
+14. Issue a Bias Certificate only when predefined verification gates pass.
+15. Otherwise mark the finding INCONCLUSIVE and preserve the evidence for human review.</div>
+
+<h3>5.2 Verification gates</h3>
+<p>The central anti-circularity rule is:</p>
+<div class="eq"><div class="box">Audit model ≠ Verification model</div></div>
+<p>When possible, the repair process should also avoid using the final external test set. A strong evaluation uses nested splits, locked external data, and independent random seeds. The system should report both absolute performance and change relative to an unrepaired control.</p>
+
+<h2>6 Theoretical Properties and Research Propositions</h2>
+<h3>Proposition 1: Zero repair is optimal when constraints already hold</h3>
+<p>If the original dataset D satisfies all declared constraints and the objective assigns nonnegative cost to distortion, then D is an optimal solution of the minimum-repair problem. This follows immediately because Δ(D,D)=0 and any alternative intervention has nonnegative distortion. The practical implication is important: the framework is conservative by design and should not “repair” a dataset merely because its groups are statistically different.</p>
+<h3>Proposition 2: Minimum repair does not imply fairness by itself</h3>
+<p>The optimization can guarantee minimum distortion only relative to the specified objective and constraints. It cannot guarantee that the selected fairness concept is substantively appropriate. This is why TRACE-DB records domain assumptions and requires independent validation rather than treating optimization as a proof of real-world fairness.</p>
+<h3>Proposition 3: Independent verification is necessary to avoid audit-repair circularity</h3>
+<p>If the same model class and evaluation distribution are used to discover bias, optimize the repair and certify the repaired dataset, the evaluation can be coupled to the assumptions of the audit. Independence of model family, randomization and, where possible, external distribution breaks part of this circularity and produces a stronger falsification test. This proposition is methodological rather than a formal statistical guarantee.</p>
+<h3>Proposition 4: Detectability is evidence of separability, not proof of normative bias</h3>
+<p>A group, site, device, protocol or acquisition variable may be highly predictable from X because it contains legitimate signal. Therefore A<sub>det</sub> must enter a causal and domain-specific decision rule rather than directly determine a repair. This distinction is central to avoiding overcorrection.</p>
+
+<h2>7 Experimental Methodology</h2>
+<div class="notice"><strong>Important reporting status.</strong> This manuscript specifies a complete experimental design for TRACE-DB but does not fabricate empirical results. Numerical results should be populated only after running the preregistered protocol below.</div>
+<h3>7.1 Datasets</h3>
+<p>The evaluation should use four complementary settings.</p>
+<ol>
+<li><strong>Controlled synthetic benchmark:</strong> construct datasets with known ground-truth bias mechanisms by separately manipulating representation, selection, label noise, acquisition shortcuts, intersectional imbalance and conditional shift.</li>
+<li><strong>Fairness benchmark suite:</strong> evaluate on established tabular fairness datasets, while avoiding dependence on a single benchmark. Folktables is recommended for temporal and geographic robustness because it was designed to address limitations of the traditional Adult benchmark [18].</li>
+<li><strong>Real-world multimodal setting:</strong> at least one image, text or clinical tabular task with meaningful acquisition/provenance variables, allowing assessment of modality-agnostic behaviour [6].</li>
+<li><strong>External distribution:</strong> an independent cohort, site, time interval, geography or acquisition condition not used for repair selection.</li>
+</ol>
+<h3>7.2 Baselines</h3>
+<p>Baselines should include metric-only auditing, conventional reweighting, random or stratified rebalancing, a label-cleaning method, one influence/valuation method, one causal or human-in-the-loop method and at least one distributional repair method. G-AUDIT, D-BIAS, Confident Learning, Data Shapley and OT-based repair provide well-motivated comparison families [6,11,12,14,16,17].</p>
+<h3>7.3 Evaluation metrics</h3>
+<div class="table-wrap avoidbreak">
+<div class="caption">Table 3. Evaluation dimensions.</div>
+<table>
+<thead><tr><th>Dimension</th><th>Examples</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td>Bias detection</td><td>Precision, recall, AUROC on synthetic ground truth</td><td>Can the method find injected bias?</td></tr>
+<tr><td>Fairness</td><td>Demographic parity gap, equal opportunity gap, equalized odds components, subgroup calibration</td><td>Does the intervention reduce the selected disparity?</td></tr>
+<tr><td>Utility</td><td>Accuracy, macro-F1, AUROC, RMSE</td><td>Does the repair preserve task utility?</td></tr>
+<tr><td>Robustness</td><td>External AUROC/F1, temporal/site shift delta</td><td>Does the benefit persist under shift?</td></tr>
+<tr><td>Distortion</td><td>Wasserstein distance, L1/L2 feature change, record edit rate</td><td>How much data were changed?</td></tr>
+<tr><td>Explainability</td><td>Certificate completeness, evidence agreement, human rating</td><td>Can an auditor reconstruct why a repair occurred?</td></tr>
+<tr><td>Calibration</td><td>ECE/Brier score by subgroup</td><td>Does risk remain interpretable?</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>7.4 Controlled bias-stress test</h3>
+<p>A distinctive evaluation component should progressively intensify the synthetic bias. For example, independently vary group prevalence, group-feature dependence, acquisition-label dependence and label-noise rates. Plot detection power, repair distortion and residual bias as a function of the injected bias strength. A robust framework should increase detection confidence monotonically or at least predictably without falsely “discovering” bias in a clean control.</p>
+<h3>7.5 Ablation study</h3>
+<p>The main experiment should compare the complete framework against variants that remove one evidence family at a time:</p>
+<div class="eq"><div class="box">TRACE-DB; TRACE-DB−causal; TRACE-DB−detectability; TRACE-DB−instance; TRACE-DB−counterfactual; TRACE-DB−external verification</div></div>
+<p>The goal is to establish whether each component contributes beyond added complexity.</p>
+<h3>7.6 Statistical analysis</h3>
+<p>Use repeated stratified splits or nested cross-validation where applicable, report confidence intervals, and compare paired model outcomes using resampled differences. For synthetic data, report power and false-positive rate for bias detection. For external datasets, avoid repeatedly tuning the method on the external test set. The final protocol should be frozen before external evaluation.</p>
+
+<h2>8 Explainability and Verifiability</h2>
+<p>The core explainability objective is not to explain a trained classifier after the fact, but to explain the <em>dataset intervention itself</em>. TRACE-DB therefore has three explanation levels.</p>
+<h3>8.1 Global explanation</h3>
+<p>“What patterns make this dataset suspect?” The system displays the highest-evidence dimensions: representation, conditional distribution, detectability, annotation quality, provenance and leakage.</p>
+<h3>8.2 Subgroup explanation</h3>
+<p>“Which subgroup is affected and why?” A subgroup card shows the evidence vector, mechanism hypotheses, stability and expected intervention effect.</p>
+<h3>8.3 Instance explanation</h3>
+<p>“Which records contributed to the evidence?” The system ranks observations by responsibility, shows the contributing evidence channels, and differentiates “low quality” from “high bias responsibility.”</p>
+<p>This distinction is important because an unusual observation may be legitimate, and a highly influential observation may not be biased. Explainability should expose evidence, not turn a ranking score into an automatic deletion rule.</p>
+
+<h2>9 Discussion</h2>
+<h3>9.1 Why a closed-loop data-centric formulation is useful</h3>
+<p>Existing literature demonstrates strong individual techniques for auditing, causal reasoning, data valuation, label-quality estimation and distribution repair [6,10–17]. The proposed contribution is to organize these into a traceable decision pipeline. This is valuable for three reasons. First, it separates detection from diagnosis; a disparity can be documented without prematurely choosing a repair. Second, it separates diagnosis from intervention; the same evidence can be routed to different repair operators depending on mechanism. Third, it separates intervention from certification; a repaired dataset must survive tests not used to construct the repair.</p>
+<h3>9.2 Why “balance the dataset” is an inadequate objective</h3>
+<p>Equal group counts can remove legitimate structure, create synthetic artifacts or fail to address annotation and acquisition mechanisms. Conversely, unequal group counts can be appropriate when they reflect the target population. Therefore TRACE-DB optimizes against explicit constraints and domain objectives rather than assuming equal representation is the universal target.</p>
+<h3>9.3 Relationship to optimal transport</h3>
+<p>OT is naturally incorporated as one possible intervention for distributional bias. Recent work demonstrates both its promise and its difficulties, including representation bias in learning transport operators and the need for repair schemes that generalize beyond a single batch of observations [16,17]. TRACE-DB does not claim OT itself as novel; the proposed novelty lies in deciding <em>when</em> OT is justified and verifying that the repair addresses the detected mechanism rather than merely making two marginals look similar.</p>
+<h3>9.4 Relationship to causal fairness</h3>
+<p>The causal perspective is central but must be handled conservatively. Causal graphs can encode assumptions and identify plausible mechanisms, but observational data cannot establish every causal edge. TRACE-DB therefore stores causal assumptions explicitly and uses the graph to constrain repair decisions, while requiring falsification-oriented checks wherever possible.</p>
+<h3>9.5 The role of humans</h3>
+<p>The framework is automated at the level of evidence aggregation and verification but does not eliminate domain experts. Human review is especially appropriate when the mechanism is uncertain, when a sensitive attribute has legal or ethical implications, when labels encode normative judgments, or when an intervention would alter clinically or operationally meaningful data.</p>
+
+<h2>10 Threats to Validity and Limitations</h2>
+<ol>
+<li><strong>Fairness is contextual.</strong> No numerical criterion is universally appropriate. The framework cannot replace domain-specific definitions of harm.</li>
+<li><strong>Causal ambiguity remains.</strong> Mechanism classification is only as defensible as the available domain knowledge and assumptions.</li>
+<li><strong>Latent subgroups may be unstable.</strong> Unsupervised subgroup discovery can create patterns that are statistically real but operationally irrelevant.</li>
+<li><strong>Repair can introduce new artifacts.</strong> Reweighting, synthetic augmentation and feature transformation can create a different form of bias or reduce data fidelity.</li>
+<li><strong>External verification may be expensive.</strong> Truly independent data are often unavailable or restricted.</li>
+<li><strong>Privacy may conflict with fairness.</strong> Sensitive attributes can improve auditing while increasing privacy risk; responsible dataset research explicitly identifies this tension [7].</li>
+<li><strong>No guarantee of universal downstream fairness.</strong> A repaired dataset can still lead to an unfair deployed system because model design, thresholding, human interaction and operational policy can introduce additional bias.</li>
+</ol>
+
+<h2>11 Reproducibility Protocol</h2>
+<p>A publishable implementation should release, subject to privacy and licensing constraints:</p>
+<ol>
+<li>Dataset fingerprint schema and metric implementations.</li>
+<li>Subgroup-discovery configuration and stability criteria.</li>
+<li>Exact mechanism-classification rules or probabilistic model parameters.</li>
+<li>Repair operators and optimization weights.</li>
+<li>Complete provenance and transformation logs.</li>
+<li>Bias Certificates for every finding.</li>
+<li>Fixed random seeds and environment specifications.</li>
+<li>External evaluation procedure kept independent from training/repair selection.</li>
+<li>Synthetic bias generator with ground-truth mechanism labels.</li>
+</ol>
+<p>The framework should be distributed with a dataset card or datasheet that describes intended use, known limitations, sensitive attributes, provenance, licensing and evaluation assumptions.</p>
+
+<h2>12 Proposed Hypotheses</h2>
+<div class="table-wrap avoidbreak">
+<div class="caption">Table 4. Falsifiable hypotheses for an empirical TRACE-DB study.</div>
+<table>
+<thead><tr><th>Hypothesis</th><th>Prediction</th><th>Falsification criterion</th></tr></thead>
+<tbody>
+<tr><td>H1: Multi-evidence auditing improves bias detection</td><td>Higher recall at controlled false-positive rates than metric-only baselines</td><td>No improvement or worse performance on synthetic ground truth</td></tr>
+<tr><td>H2: Mechanism-aware repair reduces distortion</td><td>Lower data distortion at matched residual bias</td><td>No advantage over generic repair</td></tr>
+<tr><td>H3: Independent verification improves robustness claims</td><td>Fewer false certifications under external shift</td><td>No difference versus single-model in-distribution certification</td></tr>
+<tr><td>H4: Instance-level attribution improves intervention efficiency</td><td>Comparable bias reduction with fewer edited/reviewed records</td><td>No reduction in intervention footprint</td></tr>
+<tr><td>H5: Bias Certificates improve audit reproducibility</td><td>Higher agreement between independent reviewers reproducing the decision</td><td>No improvement in reconstruction accuracy/agreement</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>13 Expected Scientific Significance</h2>
+<p>The proposed framework targets a transition from <em>fairness scoring</em> to <em>dataset accountability</em>. A dataset audit should ideally answer not only whether a disparity exists, but where the evidence resides, which mechanism is plausible, what was changed, how much was changed, and whether the improvement survives independent testing. TRACE-DB makes these questions explicit and machine-readable.</p>
+<p>The framework also provides a bridge between several research communities that often use different vocabularies: responsible AI emphasizes accountability and provenance [7,13]; data-centric AI emphasizes quality and curation [4]; fairness research emphasizes disparity and equality criteria [1,3,9]; causal machine learning emphasizes mechanisms and interventions [5]; and dataset auditing emphasizes detectability and shortcut risk [6]. TRACE-DB offers a common pipeline in which these outputs become evidence objects rather than isolated diagnostics.</p>
+
+<h2>14 Conclusion</h2>
+<p>This paper presented TRACE-DB, a proposed causal evidence and self-verification framework for explainable dataset bias detection and minimal repair. The framework is deliberately data-centric: it treats the dataset, its provenance, its subgroups, its acquisition context and its labels as first-class objects of analysis. Its central research idea is that bias remediation should be <em>mechanism-aware, minimally invasive, explainable and independently verifiable</em>.</p>
+<p>The strongest prospective contribution is not any single metric, causal graph, Shapley estimate or optimal-transport operator. It is the integration of these evidence channels into an auditable loop culminating in a Bias Certificate. The empirical program specified here is designed to test whether this integration improves detection accuracy, reduces repair distortion, preserves utility and increases robustness under distribution shift. Those outcomes remain empirical questions and should be reported only after implementation and preregistered evaluation.</p>
+
+<h2>Data and Code Availability</h2>
+<p>The proposed framework is intended to be reproducible with publicly available datasets where licensing permits. An implementation should release source code, configuration files, synthetic bias generators, evaluation scripts, and example Bias Certificates. For restricted datasets, only derived metadata and reproducible analysis templates should be shared.</p>
+
+<h2>Ethics Statement</h2>
+<p>Dataset-bias auditing can expose sensitive demographic, health, financial or institutional information. Implementations should use the minimum sensitive information necessary, apply appropriate privacy controls, document consent and legal basis where applicable, and avoid automated deletion or relabeling of records solely on the basis of protected status. In high-stakes domains, human oversight and domain-specific governance remain necessary.</p>
+
+<h2>Author Contributions</h2>
+<p><strong>Dr. Nitin Mishra:</strong> conceptualization, methodology, research framing, formalization, manuscript drafting and critical revision.</p>
+<p><strong>Dr. Rohit:</strong> conceptualization, methodology, evaluation design, algorithmic analysis, manuscript drafting and critical revision.</p>
+<p>Both authors contributed to the development of the TRACE-DB framework and approved the manuscript.</p>
+
+<h2>Competing Interests</h2>
+<p>The authors declare no competing interests.</p>
+
+<h2>References</h2>
+<div class="ref">[1] Mehrabi N, Morstatter F, Saxena N, Lerman K, Galstyan A. <a href="https://consensus.app/papers/details/78264cc1f06454aeb928f43548d76c13/?utm_source=chatgpt" target="_blank">A Survey on Bias and Fairness in Machine Learning</a>. ACM Computing Surveys. 2019/2021;54:1–35. Citation count reported by Consensus: 6281.</div>
+<div class="ref">[2] Le Quy T, Roy A, Iosifidis V, Zhang W, Ntoutsi E. <a href="https://doi.org/10.1002/widm.1452" target="_blank">A survey on datasets for fairness-aware machine learning</a>. Wiley Interdisciplinary Reviews: Data Mining and Knowledge Discovery. 2022;12(3):e1452. DOI: 10.1002/widm.1452. Citation count reported by Consensus: 364.</div>
+<div class="ref">[3] Pagano TP, Loureiro RB, Lisboa FV, et al. <a href="https://consensus.app/papers/details/eada7cf8899f55f686427229367e6803/?utm_source=chatgpt" target="_blank">Bias and Unfairness in Machine Learning Models: A Systematic Review on Datasets, Tools, Fairness Metrics, and Identification and Mitigation Methods</a>. Big Data and Cognitive Computing. 2023;7:15. Citation count reported by Consensus: 297.</div>
+<div class="ref">[4] Whang SE, Roh Y, Song H, Lee J-G. <a href="https://doi.org/10.1007/s00778-022-00775-9" target="_blank">Data collection and quality challenges in deep learning: a data-centric AI perspective</a>. The VLDB Journal. 2023;32(4):791–813. DOI: 10.1007/s00778-022-00775-9. Citation count reported by Consensus: 581.</div>
+<div class="ref">[5] Jones C, Castro DC, De Sousa Ribeiro F, Oktay O, McCradden M, Glocker B. <a href="https://doi.org/10.1038/s42256-024-00797-8" target="_blank">A causal perspective on dataset bias in machine learning for medical imaging</a>. Nature Machine Intelligence. 2024;6:138–146. DOI: 10.1038/s42256-024-00797-8.</div>
+<div class="ref">[6] Drenkow N, Pavlak M, Harrigian K, Zirikly A, Subbaswamy A, Farhangi MM, Petrick N, Unberath M. <a href="https://doi.org/10.1038/s41746-026-02807-y" target="_blank">Detecting dataset bias in medical AI using a generalized and modality agnostic auditing approach</a>. npj Digital Medicine. 2026;9:654. DOI: 10.1038/s41746-026-02807-y.</div>
+<div class="ref">[7] Mittal S, Thakral K, Singh R, Vatsa M, Glaser T, Canton Ferrer C, Hassner T. <a href="https://doi.org/10.1038/s42256-024-00874-y" target="_blank">On responsible machine learning datasets emphasizing fairness, privacy and regulatory norms with examples in biometrics and healthcare</a>. Nature Machine Intelligence. 2024;6:936–949. DOI: 10.1038/s42256-024-00874-y.</div>
+<div class="ref">[8] Graber D, Stockinger P, Meyer F, et al. <a href="https://doi.org/10.1038/s42256-025-01124-5" target="_blank">Resolving data bias improves generalization in binding affinity prediction</a>. Nature Machine Intelligence. 2025;7:1713–1725. DOI: 10.1038/s42256-025-01124-5. See also Addendum: Nature Machine Intelligence. 2026;8:292.</div>
+<div class="ref">[9] Dominguez-Catena I, Paternain D, Galar M. <a href="https://doi.org/10.1109/TPAMI.2024.3361979" target="_blank">Metrics for Dataset Demographic Bias: A Case Study on Facial Expression Recognition</a>. IEEE Transactions on Pattern Analysis and Machine Intelligence. 2024;46(8):5209–5226. DOI: 10.1109/TPAMI.2024.3361979.</div>
+<div class="ref">[10] Swayamdipta S, Schwartz R, Lourie N, Wang Y, Hajishirzi H, Smith NA, Choi Y. <a href="https://doi.org/10.18653/v1/2020.emnlp-main.746" target="_blank">Dataset Cartography: Mapping and Diagnosing Datasets with Training Dynamics</a>. Proceedings of EMNLP. 2020:9275–9293. DOI: 10.18653/v1/2020.emnlp-main.746.</div>
+<div class="ref">[11] Northcutt CG, Jiang L, Chuang I. <a href="https://research.google/pubs/confident-learning-estimating-uncertainty-in-dataset-labels/" target="_blank">Confident Learning: Estimating Uncertainty in Dataset Labels</a>. Journal of Artificial Intelligence Research. 2021;70:1373–1411.</div>
+<div class="ref">[12] Ghorbani A, Zou J. <a href="https://proceedings.mlr.press/v97/ghorbani19c.html" target="_blank">Data Shapley: Equitable Valuation of Data for Machine Learning</a>. Proceedings of the 36th International Conference on Machine Learning. PMLR. 2019;97:2242–2251.</div>
+<div class="ref">[13] Werder K, Ramesh B, Zhang R. <a href="https://doi.org/10.1145/3503488" target="_blank">Establishing Data Provenance for Responsible Artificial Intelligence Systems</a>. ACM Transactions on Management Information Systems. 2022;13(2):Article 22, 1–23. DOI: 10.1145/3503488.</div>
+<div class="ref">[14] Ghai B, Mueller K. <a href="https://doi.org/10.1109/TVCG.2022.3209484" target="_blank">D-BIAS: A Causality-Based Human-in-the-Loop System for Tackling Algorithmic Bias</a>. IEEE Transactions on Visualization and Computer Graphics. 2023;29(1):473–482. DOI: 10.1109/TVCG.2022.3209484.</div>
+<div class="ref">[15] González-Sendino R, Serrano E, Bajo J. <a href="https://consensus.app/papers/details/bf1079d625985cc4ac046d48915d8ad5/?utm_source=chatgpt" target="_blank">Mitigating bias in artificial intelligence: Fair data generation via causal models for transparent and explainable decision-making</a>. Future Generation Computer Systems. 2024;155:384–401. Citation count reported by Consensus: 76.</div>
+<div class="ref">[16] Langbridge A, Quinn A, Shorten R. <a href="https://arxiv.org/abs/2410.02840" target="_blank">Overcoming Representation Bias in Fairness-Aware data Repair using Optimal Transport</a>. arXiv. 2024. Preprint.</div>
+<div class="ref">[17] De-Diego EM, Gordaliza P, López-Fidalgo J. <a href="https://doi.org/10.1002/asmb.70085" target="_blank">A Proposal of Smooth Interpolation to Optimal Transport for Restoring Biased Data for Algorithmic Fairness</a>. Applied Stochastic Models in Business and Industry. 2026;42(2):e70085. DOI: 10.1002/asmb.70085.</div>
+<div class="ref">[18] Ding F, Hardt M, Miller J, Schmidt L. <a href="https://arxiv.org/abs/2108.04884" target="_blank">Retiring Adult: New Datasets for Fair Machine Learning</a>. 2021. Folktables dataset suite.</div>
+<div class="ref">[19] Chen RJ, Wang JJ, Williamson DFK, et al. <a href="https://doi.org/10.1038/s41551-023-01056-8" target="_blank">Algorithmic fairness in artificial intelligence for medicine and healthcare</a>. Nature Biomedical Engineering. 2023;7:719–742. DOI: 10.1038/s41551-023-01056-8.</div>
+
+<hr />
+<p class="small"><strong>Literature verification note.</strong> The manuscript was informed by peer-reviewed and publisher sources available through September 2026. Recent findings were cross-checked against publisher or bibliographic records. Citation counts are time-sensitive and are included only where the research-search source reported them; they are not claims of current citation totals. The TRACE-DB method itself is a proposed research contribution and should be experimentally validated before any numerical performance claim is made.</p>
+</main>
+</body>
+</html>
