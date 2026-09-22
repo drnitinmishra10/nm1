@@ -1,500 +1,520 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Beyond Effective Prompts: A Security-Centric Review of Threats in Prompt Engineering for Large Language Models</title>
+<title>Beyond Effective Prompts: A Security-Centric Taxonomy and Research Agenda for Prompt Engineering in Large Language Models</title>
 <style>
-  @page { size: A4; margin: 14mm 13mm 14mm 13mm; }
-  * { box-sizing: border-box; }
-  html, body { margin:0; padding:0; background:#e9e9e9; }
-  body {
-    font-family: "Times New Roman", Times, serif;
-    color:#111;
-    line-height:1.22;
-    font-size:9.2pt;
-  }
-  .paper-page {
-    width:210mm;
-    min-height:297mm;
-    margin:10mm auto;
-    padding:14mm 13mm 13mm 13mm;
-    background:#fff;
-    position:relative;
-    page-break-after:always;
-    overflow:hidden;
-  }
-  .paper-page:last-child { page-break-after:auto; }
-  .header {
-    font-size:8pt;
-    text-align:center;
-    color:#444;
-    border-bottom:0.5pt solid #aaa;
-    padding-bottom:3pt;
-    margin-bottom:6pt;
-    letter-spacing:.1pt;
-  }
-  .footer {
-    position:absolute;
-    left:13mm; right:13mm; bottom:7mm;
-    border-top:.4pt solid #bbb;
-    padding-top:3pt;
-    font-size:7.5pt;
-    text-align:center;
-    color:#555;
-  }
-  h1 {
-    font-size:19pt; line-height:1.05; text-align:center;
-    margin:0 0 9pt; font-weight:bold;
-  }
-  h2 {
-    font-size:11pt; margin:9pt 0 4pt;
-    text-transform:uppercase; letter-spacing:.25pt;
-    border-bottom:.5pt solid #333; padding-bottom:2pt;
-  }
-  h3 { font-size:9.8pt; margin:6pt 0 2pt; }
-  p { margin:0 0 5pt; text-align:justify; }
-  .authors { text-align:center; font-size:10pt; margin:3pt 0 8pt; }
-  .affil { text-align:center; font-size:8.8pt; margin-bottom:7pt; }
-  .abstract {
-    border: .7pt solid #777;
-    padding:6pt 7pt;
-    margin:6pt 0 7pt;
-  }
-  .abstract b { font-size:9pt; }
-  .keywords { margin:3pt 0 8pt; text-align:justify; }
-  .keywords b { font-style:italic; }
-  .twocol {
-    column-count:2;
-    column-gap:8mm;
-    column-fill:balance;
-  }
-  .twocol p, .twocol h3, .twocol h2, .twocol table, .twocol .callout, .twocol ul {
-    break-inside:avoid;
-  }
-  .tight p { margin-bottom:4pt; }
-  table {
-    width:100%; border-collapse:collapse; margin:4pt 0 6pt;
-    font-size:7.7pt;
-  }
-  th, td { border:.4pt solid #555; padding:3pt 3.5pt; vertical-align:top; }
-  th { background:#f2f2f2; text-align:left; font-weight:bold; }
-  .threat-table th:nth-child(1){width:25%}
-  .threat-table th:nth-child(2){width:55%}
-  .threat-table th:nth-child(3){width:20%}
-  .matrix th:nth-child(1){width:20%}
-  .matrix th:nth-child(2){width:27%}
-  .matrix th:nth-child(3){width:27%}
-  .matrix th:nth-child(4){width:26%}
-  .small { font-size:7.7pt; }
-  .callout {
-    border-left:2pt solid #333;
-    padding:4pt 6pt;
-    margin:5pt 0;
-    background:#fafafa;
-    font-size:8.2pt;
-  }
-  .ref {
-    text-indent:-12pt;
-    padding-left:12pt;
-    margin-bottom:4pt;
-    text-align:left;
-    font-size:7.8pt;
-    line-height:1.18;
-  }
-  ol.compact { margin:3pt 0 5pt 17pt; padding:0; }
-  ol.compact li { margin-bottom:3pt; text-align:justify; }
-  ul.compact { margin:3pt 0 5pt 16pt; padding:0; }
-  ul.compact li { margin-bottom:2.5pt; text-align:justify; }
-  .figure {
-    border:.6pt solid #666; padding:7pt; margin:6pt 0;
-    text-align:center; font-size:7.8pt;
-  }
-  .layer {
-    border:.5pt solid #444; padding:5pt; margin:3pt auto; width:88%;
-    text-align:center; background:#fafafa;
-  }
-  .arrow { text-align:center; font-weight:bold; font-size:10pt; }
-  .note { font-size:7.6pt; color:#555; }
-  .no-break { break-inside:avoid; }
-  .title-note { font-size:7.8pt; color:#555; text-align:center; margin-top:2pt; }
-  .doi { color:#111; text-decoration:none; }
+@page { size: A4; margin: 15mm 12mm 15mm 12mm; }
+* { box-sizing:border-box; }
+html, body { margin:0; padding:0; background:#ececec; }
+body {
+  font-family:"Times New Roman", Times, serif;
+  color:#111;
+  font-size:9.3pt;
+  line-height:1.18;
+}
+.paper {
+  width:210mm;
+  min-height:297mm;
+  margin:9mm auto;
+  background:#fff;
+  padding:12mm 11mm 12mm;
+  box-shadow:0 0 8px rgba(0,0,0,.12);
+  position:relative;
+  page-break-after:always;
+}
+.paper:last-child { page-break-after:auto; }
+.running {
+  font-size:7.3pt; color:#555; text-align:center;
+  border-bottom:.4pt solid #aaa; padding-bottom:3pt; margin-bottom:6pt;
+  letter-spacing:.1pt;
+}
+.page-number {
+  position:absolute; bottom:5mm; left:0; right:0;
+  text-align:center; font-size:7.3pt; color:#555;
+}
+.title {
+  font-size:17pt; line-height:1.08; text-align:center; font-weight:bold;
+  margin:2pt 0 7pt;
+}
+.authors { text-align:center; font-size:10pt; margin-bottom:3pt; }
+.affil { text-align:center; font-size:8.7pt; line-height:1.18; margin-bottom:6pt; }
+.correspondence { font-size:7.8pt; color:#555; }
+.abstract {
+  margin:7pt 0 6pt;
+  border:.5pt solid #888;
+  padding:6pt 7pt;
+  font-size:8.9pt;
+}
+.abstract strong { font-variant:small-caps; }
+.keywords { font-size:8.6pt; margin:5pt 0 7pt; }
+.two {
+  column-count:2;
+  column-gap:7mm;
+  column-fill:balance;
+}
+h1 {
+  font-size:11.3pt; margin:6pt 0 4pt;
+  line-height:1.05; font-weight:bold;
+}
+h2 {
+  font-size:10.1pt; margin:6pt 0 3pt;
+  line-height:1.05; font-weight:bold;
+}
+h3 { font-size:9.5pt; margin:5pt 0 2pt; font-weight:bold; }
+p { margin:0 0 4.2pt; text-align:justify; }
+ul, ol { margin:2pt 0 5pt 15pt; padding:0; }
+li { margin:0 0 2pt; text-align:justify; }
+table {
+  width:100%; border-collapse:collapse; margin:4pt 0 5pt;
+  font-size:7.25pt; break-inside:avoid;
+}
+th, td {
+  border:.35pt solid #555; padding:2.8pt 3pt; vertical-align:top;
+}
+th { background:#efefef; font-weight:bold; text-align:center; }
+.small { font-size:7.5pt; }
+.xsmall { font-size:6.9pt; }
+.math {
+  display:block; text-align:center; font-style:italic;
+  margin:3pt 0; font-size:9pt;
+}
+.callout {
+  border-left:1.8pt solid #444; padding:4pt 5pt; background:#fafafa;
+  margin:5pt 0; break-inside:avoid;
+}
+.figure {
+  margin:5pt 0; text-align:center; break-inside:avoid;
+  border:.45pt solid #777; padding:4pt;
+}
+.figure img { width:100%; max-height:66mm; }
+.legend {
+  font-size:7.3pt; margin-top:2pt; text-align:center; color:#444;
+}
+.ref {
+  font-size:7.25pt; line-height:1.12; margin:0 0 3pt;
+  text-align:left; padding-left:16pt; text-indent:-16pt;
+}
+.rnum { font-weight:bold; }
+.note {
+  font-size:7.2pt; color:#555; margin-top:4pt;
+}
+.no-break { break-inside:avoid; }
+.footer-note {
+  border-top:.4pt solid #aaa; margin-top:6pt; padding-top:4pt;
+  font-size:7.3pt; color:#555;
+}
+@media print {
+  html, body { background:#fff; }
+  .paper { margin:0; box-shadow:none; }
+  a { color:#111; text-decoration:none; }
+}
 </style>
 </head>
 <body>
 
-<!-- PAGE 1 -->
-<section class="paper-page">
-  <div class="header">CONFERENCE RESEARCH PAPER · SECURITY OF GENERATIVE AI AND LARGE LANGUAGE MODELS</div>
-  <h1>Beyond Effective Prompts: A Security-Centric Review of Threats in Prompt Engineering for Large Language Models</h1>
+<section class="paper">
+  <div class="running">SPRINGER NATURE CONFERENCE PROCEEDINGS STYLE · SECURITY AND TRUSTWORTHY AI</div>
+  <div class="title">Beyond Effective Prompts: A Security-Centric Taxonomy and Research Agenda for Prompt Engineering in Large Language Models</div>
   <div class="authors"><b>Dr. Nitin Mishra<sup>1</sup>, Dr. Rohit<sup>1</sup></b></div>
   <div class="affil">
     <sup>1</sup>Department of Computer Science and Engineering, Parul University, Vadodara, Gujarat, India<br>
-    <span class="title-note">Corresponding author: Dr. Nitin Mishra · Professor, Department of Computer Science and Engineering, Parul University</span>
+    <span class="correspondence">Corresponding author: Dr. Nitin Mishra, Professor, Department of Computer Science and Engineering, Parul University</span>
   </div>
 
-  <div class="abstract">
-    <b>Abstract—</b>
-    Prompt engineering has moved from being a practical technique for obtaining better responses from large language models (LLMs) to becoming an important part of the security boundary of AI-enabled applications. A well-designed prompt can improve accuracy, consistency, and task alignment; the same mechanism can also be manipulated to bypass controls, expose confidential information, or redirect an AI agent toward actions that were never intended by the system designer. This paper presents a structured, research-oriented review of security threats associated with prompt engineering and prompt-driven LLM applications. Drawing on recent academic literature, major conference studies, and the OWASP Top 10 for LLM and Generative AI Applications (2025), the paper consolidates sixteen closely related threats into a security taxonomy covering prompt manipulation, information exposure, model and data integrity, application and agent security, retrieval security, multimodal attacks, and resource exhaustion. Particular attention is given to prompt injection, indirect prompt injection, jailbreaking, system prompt leakage, sensitive information disclosure, instruction-hierarchy manipulation, excessive agency, vector and embedding weaknesses, and multimodal prompt injection. The discussion argues that prompt security cannot be achieved by adding stronger wording to a system prompt alone. Security controls must instead be distributed across the application architecture, with trust boundaries, authorization, input and output validation, least privilege, retrieval controls, monitoring, and adversarial evaluation. The paper concludes with a future-work agenda for measurable prompt robustness, adaptive defense, agent security, multilingual and code-switched attacks, multimodal protection, and reproducible benchmarks. The central message is straightforward: prompt engineering should be treated as a security-sensitive design activity rather than only a method for improving model performance.
+  <div class="abstract"><strong>Abstract—</strong>
+  Prompt engineering has become an important way of improving the quality and consistency of large language model (LLM) responses, but prompts can also create security risks when attackers manipulate instructions, context, or external content. This paper presents a structured review of security threats in prompt-driven AI systems and organizes sixteen threats into a practical taxonomy covering prompt manipulation, information exposure, model and data integrity, retrieval security, application and agent security, multimodal attacks, and resource exhaustion. Recent academic studies, major conference publications, and the OWASP Top 10 for LLM and Generative AI Applications are examined to clarify the boundaries between closely related threats such as indirect prompt injection, context hijacking, sensitive information disclosure, and prompt-based data exfiltration. The paper further reviews defensive approaches, compares evidence across representative model studies, proposes measurable agent-security metrics, and discusses provenance-aware prompt construction. The results indicate that secure prompting cannot rely on wording alone; effective protection requires layered controls spanning prompts, retrieval, authorization, tool execution, monitoring, and governance. Future work is proposed around multilingual attacks, long-context systems, multimodal security, adaptive defenses, and reproducible evaluation.
   </div>
+  <div class="keywords"><b>Keywords:</b> prompt engineering; prompt injection; indirect prompt injection; jailbreak; system prompt leakage; LLM security; RAG security; AI agents; multimodal security; trustworthy AI.</div>
 
-  <div class="keywords"><b>Keywords—</b> Prompt engineering, prompt injection, indirect prompt injection, jailbreak, LLM security, generative AI security, prompt leakage, AI agents, RAG, adversarial prompting.</div>
-
-  <div class="twocol tight">
-    <h2>1. Introduction</h2>
+  <div class="two">
+    <h1>1 Introduction</h1>
     <p>
-      Large language models are now used as conversational assistants, coding partners, retrieval interfaces, document analysts, workflow agents, and decision-support components. In each of these settings, the prompt is more than a text string. It is part of the mechanism by which the application defines a task, establishes priorities, supplies context, and asks the model to produce an output. The security implication is important: when a model cannot reliably distinguish trusted instructions from untrusted content, the prompt itself becomes an attack surface.
+      Large language models have moved quickly from experimental systems to components of everyday software. They are used to summarize documents, answer questions, write and review code, search internal knowledge, support customer interactions, and increasingly operate as agents that can call tools and perform multi-step tasks. Prompt engineering sits at the centre of these applications because prompts define the task, provide context, constrain the response, and often describe what the model is expected to do.
     </p>
     <p>
-      Recent research has made this issue difficult to dismiss as a purely hypothetical concern. Zhan et al. introduced InjecAgent to evaluate indirect prompt injections against tool-integrated LLM agents and reported that, in their benchmark, ReAct-prompted GPT-4 agents were vulnerable to attacks in 24% of test cases [3]. AgentDojo similarly constructed realistic tasks involving email, banking, travel, and other tools to evaluate whether external data could manipulate agent behaviour [4]. These studies are particularly relevant because modern AI systems increasingly operate beyond a simple question-and-answer setting.
+      That usefulness also creates a security problem. A prompt is not simply an instruction written by a trusted developer. In a modern application, the model may receive a mixture of system instructions, user text, retrieved documents, email content, tool output, and visual information. Much of that material is untrusted, yet it may appear to the model as ordinary natural language. When the model cannot reliably separate authority from content, an attacker can use language itself as an attack surface [1–5].
     </p>
     <p>
-      A second line of work studies attacks on the prompt and instruction structure itself. Wallace et al. argued that LLMs often fail because they do not reliably distinguish privileged instructions from untrusted user or third-party text, motivating the idea of an instruction hierarchy [5]. Xia et al. placed prompt leakage and prompt jailbreaks within a broader “prompt threat” perspective and emphasized the need to study both threats to prompts and threats created by malicious prompts [2].
+      Research has demonstrated that the problem is practical. InjecAgent evaluated 30 tool-integrated LLM agents across 1,054 test cases involving 17 user tools and 62 attacker tools; in that study, ReAct-prompted GPT-4 was vulnerable to indirect prompt injection in 24% of cases [3]. AgentDojo created dynamic tasks for evaluating prompt injection in agents and showed why tool use changes the consequences of model manipulation [4]. Jailbreak studies have similarly shown that aligned models may still be influenced by adversarially constructed inputs [6,7].
     </p>
     <p>
-      Industry guidance also reflects this shift. The OWASP 2025 taxonomy identifies prompt injection, sensitive information disclosure, supply-chain vulnerabilities, data and model poisoning, improper output handling, excessive agency, system prompt leakage, vector and embedding weaknesses, misinformation, and unbounded consumption as major LLM application risks [1]. This taxonomy is useful for practitioners, but prompt engineering research requires a more granular view because some of the threats above arise specifically from instruction manipulation and context control.
+      Industry guidance has evolved alongside this research. The OWASP 2025 taxonomy lists prompt injection, sensitive information disclosure, supply-chain vulnerabilities, data and model poisoning, improper output handling, excessive agency, system prompt leakage, vector and embedding weaknesses, misinformation, and unbounded consumption as major LLM application risks [1]. The present paper retains the earlier sixteen-threat scope while making the relationships between these categories more explicit.
     </p>
 
-    <h2>2. Research Motivation and Objectives</h2>
+    <h1>2 Motivation and Contributions</h1>
     <p>
-      Prompt engineering is often discussed in terms of effectiveness: clarity, specificity, decomposition, examples, role prompting, chain-of-thought alternatives, retrieval context, and output formatting. Security introduces a second question: “What happens when the prompt, the context, or the model output is intentionally manipulated?” The literature suggests that performance-oriented prompt design and security-oriented prompt design cannot be treated as completely separate activities [1], [2], [15].
+      The purpose of this work is not to claim that all prompt risks are new or independent vulnerabilities. Several are overlapping mechanisms, outcomes, or system-level consequences. The research problem is therefore one of organization and practical interpretation: how can prompt-engineering security be described in a way that is useful to researchers designing benchmarks and developers building real applications?
     </p>
-    <p>This paper therefore has four objectives:</p>
-    <ol class="compact">
-      <li>To consolidate major prompt-related and prompt-adjacent security threats into a single conference-ready taxonomy.</li>
-      <li>To distinguish direct prompt attacks from attacks that enter through retrieved data, tools, agents, embeddings, or multimodal content.</li>
-      <li>To identify common architectural weaknesses that allow a prompt-level manipulation to become a system-level security incident.</li>
-      <li>To define future research directions that can support measurable, reproducible, and deployment-oriented prompt security.</li>
+    <p>The main contributions are as follows:</p>
+    <ol>
+      <li>A 16-threat taxonomy that preserves the scope of the earlier paper while clarifying inclusion and exclusion boundaries.</li>
+      <li>A structured, transparent review protocol suitable for a conference paper without claiming PRISMA-level systematic-review completeness.</li>
+      <li>An expanded discussion of preventive, detective, corrective, and architectural defenses, including the security–utility trade-off.</li>
+      <li>A cross-study evidence table showing why attack success figures should not be compared across studies without considering their datasets and threat models.</li>
+      <li>A concrete research agenda with agent-security metrics, provenance-aware prompting, multilingual evaluation, long-context testing, and governance alignment.</li>
     </ol>
 
+    <h1>3 Review Methodology</h1>
+    <p>
+      This study follows a structured narrative-review approach. The intention is to synthesize security evidence and build a coherent taxonomy rather than conduct a statistical meta-analysis. This distinction is important because the cited studies use different models, datasets, attack definitions, and evaluation protocols.
+    </p>
+    <h2>3.1 Sources and Search Strategy</h2>
+    <p>
+      The review considered publications and authoritative guidance available from 2021 to September 2026. Source types included ACL Anthology, USENIX, Springer Nature journals, arXiv preprints, official OWASP guidance, and public standards or regulatory sources from NIST, ISO, and the European Union. Representative search expressions included “prompt injection”, “indirect prompt injection”, “jailbreak large language models”, “system prompt extraction”, “instruction hierarchy”, “LLM agent security”, “RAG poisoning”, “vector embedding security”, and “multimodal prompt injection”.
+    </p>
+    <h2>3.2 Inclusion and Exclusion</h2>
+    <p>
+      We included primary research, benchmark papers, peer-reviewed surveys, established conference publications, and authoritative security or risk-management guidance directly relevant to LLM prompts, agents, retrieval, or connected application security. Duplicate results and material that only discussed general generative-AI adoption without a security component were excluded. Because this is not presented as a fully systematic review, no numerical PRISMA screening count is claimed.
+    </p>
+    <h2>3.3 Synthesis Procedure</h2>
+    <p>
+      Threats were first grouped by the security function being affected—confidentiality, integrity, availability, privilege, or reliability—and then mapped to their location in the AI application stack. Closely related terms were retained where they help explain different attack stages. For example, indirect prompt injection is treated as a delivery mechanism; context hijacking is the subsequent manipulation of working context; sensitive information disclosure is a broad leakage outcome; and prompt-based data exfiltration refers specifically to attacker-directed retrieval or transfer of protected information.
+    </p>
+  </div>
+  <div class="page-number">1</div>
+</section>
+
+<section class="paper">
+  <div class="running">MISHRA AND ROHIT · PROMPT ENGINEERING SECURITY</div>
+  <div class="two">
+    <h1>4 Taxonomy of Security Threats</h1>
+    <p>
+      The taxonomy uses five principal layers. Prompt manipulation covers attacks that alter instruction following. Information security covers prompt and data exposure. Model and knowledge integrity covers poisoning, retrieval, and supply-chain concerns. Application and agent security covers execution and privilege boundaries. Availability, reliability, and multimodal security covers resource exhaustion, misinformation, and non-text instruction channels.
+    </p>
+
+    <table>
+      <tr><th style="width:22%">Threat</th><th style="width:47%">Working definition</th><th style="width:16%">Primary property</th><th style="width:15%">Layer</th></tr>
+      <tr><td><b>1. Prompt Injection</b></td><td>Attacker-supplied instructions compete with trusted instructions and attempt to redirect model behaviour.</td><td>Integrity</td><td>Prompt</td></tr>
+      <tr><td><b>2. Indirect Prompt Injection</b></td><td>Malicious instructions enter through external content such as webpages, emails, documents, or tool outputs.</td><td>Integrity</td><td>Prompt/RAG</td></tr>
+      <tr><td><b>3. Jailbreaking</b></td><td>Adversarial prompts attempt to bypass safety policies or behavioural restrictions.</td><td>Integrity/Safety</td><td>Prompt</td></tr>
+      <tr><td><b>4. System Prompt Leakage</b></td><td>Attempts to extract hidden system instructions, configurations, roles, or operational rules.</td><td>Confidentiality</td><td>Prompt</td></tr>
+      <tr><td><b>5. Sensitive Information Disclosure</b></td><td>Protected personal, enterprise, credential, proprietary, or memorized information is exposed through interactions or outputs.</td><td>Confidentiality</td><td>Information</td></tr>
+      <tr><td><b>6. Instruction Hierarchy Manipulation</b></td><td>Lower-trust instructions are made to compete with or override higher-priority instructions.</td><td>Integrity</td><td>Prompt</td></tr>
+      <tr><td><b>7. Data and Model Poisoning</b></td><td>Manipulated training, fine-tuning, embedding, or knowledge data causes unwanted behaviour or hidden triggers.</td><td>Integrity</td><td>Model/Data</td></tr>
+      <tr><td><b>8. Improper Output Handling</b></td><td>Generated output is passed to downstream systems without sufficient validation, encoding, or sandboxing.</td><td>Integrity/Safety</td><td>Application</td></tr>
+      <tr><td><b>9. Excessive Agency</b></td><td>Excessive tool permissions, functionality, or autonomy increase the impact of model manipulation.</td><td>Privilege</td><td>Agent</td></tr>
+      <tr><td><b>10. Supply-Chain Vulnerabilities</b></td><td>Third-party models, data, libraries, prompts, plugins, or connectors introduce weaknesses.</td><td>Integrity</td><td>System</td></tr>
+      <tr><td><b>11. Vector and Embedding Weaknesses</b></td><td>Weaknesses in retrieval or vector storage can expose, poison, or misdirect model context.</td><td>Conf./Integrity</td><td>RAG</td></tr>
+      <tr><td><b>12. Unbounded Consumption</b></td><td>Resource-intensive prompts, request floods, or agent loops consume excessive computation, tokens, or cost.</td><td>Availability</td><td>System</td></tr>
+      <tr><td><b>13. Prompt-Based Data Exfiltration</b></td><td>Prompt manipulation is used to retrieve, combine, or transfer protected information toward an unauthorized destination.</td><td>Confidentiality</td><td>Information/Agent</td></tr>
+      <tr><td><b>14. Context Hijacking</b></td><td>Attacker-controlled content persists in working context and redirects later model decisions or actions.</td><td>Integrity</td><td>Cross-cutting</td></tr>
+      <tr><td><b>15. Multimodal Prompt Injection</b></td><td>Instructions embedded in images or other modalities alter multimodal model behaviour.</td><td>Integrity</td><td>Multimodal</td></tr>
+      <tr><td><b>16. Instruction-Induced Misinformation</b></td><td>Prompt constraints or adversarial framing steer the system toward false, unsupported, or misleading outputs.</td><td>Reliability</td><td>Reliability</td></tr>
+    </table>
+
     <div class="callout">
-      <b>Research position.</b> The key security issue is not that an LLM “understands language incorrectly” in an ordinary sense; rather, natural language can carry both legitimate instructions and untrusted content, while the application may give the model enough authority to turn a textual manipulation into a real-world action.
+      <b>Boundary rule:</b> A threat in this table is retained as a separate category when it represents a distinct attack goal, delivery route, security property, or control requirement. “Context hijacking” is therefore described as a cross-cutting mechanism rather than being treated as a completely independent OWASP category.
     </div>
-  </div>
 
-  <div class="footer">Page 1 of 6 · Mishra & Rohit · Prompt Engineering Security Review</div>
+    <h1>5 Threat Analysis</h1>
+    <h2>5.1 Prompt Manipulation</h2>
+    <h3>Prompt Injection</h3>
+    <p>
+      Prompt injection is the most direct example of instruction confusion. The attacker places text in a user-controlled field that attempts to change the task, reveal protected information, or induce an unintended action. The central security issue is not merely malicious language; it is the absence of a reliable boundary between trusted policy and untrusted input [1,5].
+    </p>
+    <h3>Indirect Prompt Injection</h3>
+    <p>
+      In indirect injection, the attacker may never see the model’s system prompt and may not need to interact with the application directly. A malicious instruction can be stored in a webpage, email, PDF, issue tracker, or retrieved knowledge item that the AI later processes. InjecAgent formalized this threat in a benchmark with external content and tool use [3]. AgentDojo demonstrates the same concern in dynamic agent tasks [4].
+    </p>
+    <h3>Jailbreaking</h3>
+    <p>
+      Jailbreaking attempts to bypass safety behaviour by constructing prompts that exploit weaknesses in alignment or generalization. Wei et al. studied competing objectives and mismatched generalization as explanations for why safety training can fail [6]. Zou et al. showed that automatically optimized adversarial suffixes could transfer across model families and interfaces [7]. These findings make a strong case for evaluating safety behaviour under adaptive attacks rather than relying on a fixed collection of examples.
+    </p>
+    <h3>Instruction Hierarchy Manipulation</h3>
+    <p>
+      A secure application normally has an order of authority: system policy, developer constraints, user requests, retrieved data, and tool output do not have identical trust. Wallace et al. proposed explicit instruction hierarchy training to teach models to prioritize privileged instructions over untrusted ones [5]. The idea is useful for prompt design, but application-level authorization should remain external to the model.
+    </p>
+    <h3>Context Hijacking</h3>
+    <p>
+      Context hijacking is best understood as a cross-cutting attack mechanism. An injected instruction may become part of the working context and influence later reasoning, tool selection, or response generation. In a multi-turn agent, the attack can survive beyond the original message. This makes provenance and context isolation important, particularly when external content is repeatedly reused [3,4].
+    </p>
+
+    <h2>5.2 Information Security</h2>
+    <h3>System Prompt Leakage</h3>
+    <p>
+      System prompt leakage concerns attempts to recover hidden prompts or their contents. Recent work has shown that carefully constructed queries can extract system-prompt material from LLM applications [8]. Importantly, prompt secrecy is not a substitute for security: credentials, authorization decisions, and sensitive configuration should not be protected only by hiding them in a system prompt [1].
+    </p>
+    <h3>Sensitive Information Disclosure</h3>
+    <p>
+      Confidential information can enter an LLM system through prompts, history, retrieval, logs, training data, or tools. Carlini et al. demonstrated that language models can sometimes reproduce memorized training examples, including names, telephone numbers, email addresses, code, and unique identifiers [9]. Application-level access control and data minimization therefore remain essential even when a model appears well aligned.
+    </p>
+    <h3>Prompt-Based Data Exfiltration</h3>
+    <p>
+      Data exfiltration is narrower than general disclosure because the attack is directed toward obtaining or transmitting protected information. In a tool-using agent, an injected instruction might persuade the model to query a private source and then include sensitive fields in an outbound action. InjecAgent explicitly evaluates both direct-harm and private-data-exfiltration intentions [3].
+    </p>
+  </div>
+  <div class="page-number">2</div>
 </section>
 
-<!-- PAGE 2 -->
-<section class="paper-page">
-  <div class="header">2. LITERATURE REVIEW AND TAXONOMY</div>
-  <div class="twocol tight">
-    <h2>3. Literature Review</h2>
+<section class="paper">
+  <div class="running">MISHRA AND ROHIT · THREAT ANALYSIS</div>
+  <div class="two">
+    <h2>5.3 Model, Data and Retrieval Integrity</h2>
+    <h3>Data and Model Poisoning</h3>
     <p>
-      The literature on LLM security has developed along several connected tracks. Early work demonstrated that language models can memorize and reveal portions of their training data [9]. Later research showed that alignment and safety behaviour can be bypassed through adversarial prompts [6], [7]. With the emergence of tool-using agents and retrieval-augmented generation (RAG), the attack surface expanded: the model began processing email content, web pages, retrieved passages, tool outputs, and multimodal inputs that may not be under the control of the application developer [3], [4].
+      Poisoning attacks target the information or model components on which a prompt-driven system depends. Malicious data can influence training, fine-tuning, embeddings, or retrieved knowledge. Hubinger et al. demonstrated proof-of-concept deceptive behaviours that persisted through several standard safety-training procedures in controlled experiments [10]. The broader lesson is that prompt quality cannot repair a compromised model or knowledge source.
     </p>
+    <h3>Vector and Embedding Weaknesses</h3>
     <p>
-      OWASP provides the most practical industry-oriented consolidation for application developers [1]. The 2025 list deliberately separates prompt injection from system prompt leakage, vector weaknesses, excessive agency, and unbounded consumption. This separation is useful because a prompt can be the initial attack vector while the final harm occurs elsewhere. For example, a malicious instruction may cause an agent to call a privileged tool; the technical failure is therefore not limited to the prompt itself.
+      RAG applications depend on retrieval to decide what information enters the model context. OWASP identifies risks including unauthorized access, information leakage, embedding-related attacks, and poisoned retrieval content [1]. The security boundary therefore extends below the prompt: document permissions, vector-store tenancy, provenance, and retrieval filtering can affect whether the model receives safe or unsafe context.
     </p>
+    <h3>Supply-Chain Vulnerabilities</h3>
     <p>
-      Academic work also indicates that defenses should not rely only on one additional instruction appended to the system prompt. Chen et al. explored a defense approach that leverages attack techniques to reinforce the intended instruction and reported improvements across their experimental settings [11]. Xiong et al. proposed a defensive prompt patch for jailbreak attacks and emphasized the practical need to balance security and utility [12]. These results are useful, but they do not eliminate the architectural lesson that authorization and privilege boundaries should remain outside the LLM.
-    </p>
-    <p>
-      The emerging multimodal literature makes the problem wider still. Yeo and Choi evaluated direct, indirect, image-based, and leakage-oriented attacks across commercial models [13]. More recent work has demonstrated image-based prompt injection as a black-box attack against multimodal LLMs, showing that instructions may be hidden inside visual inputs rather than typed by a user [14]. For security engineering, this means that “prompt” should be interpreted broadly as the complete instruction-bearing context presented to the model.
-    </p>
-
-    <h2>4. Proposed Security Taxonomy</h2>
-    <p>
-      Based on the literature, this paper organizes threats into five layers. The first layer contains <i>prompt manipulation</i> attacks, where the primary objective is to alter instruction following. The second covers <i>information security</i>, where attackers seek secrets, prompts, or protected data. The third concerns <i>model and knowledge integrity</i>, including poisoned training or retrieval data. The fourth covers <i>application and agent execution</i>, where model output becomes an action in another system. The fifth covers <i>availability and multimodal surfaces</i>, including resource exhaustion and attacks hidden in non-text inputs.
-    </p>
-
-    <table class="matrix">
-      <tr><th>Layer</th><th>Threat family</th><th>Representative threats</th><th>Primary security property</th></tr>
-      <tr><td>Prompt manipulation</td><td>Instruction conflict</td><td>Prompt injection, indirect injection, jailbreak, hierarchy manipulation, context hijacking</td><td>Integrity</td></tr>
-      <tr><td>Information security</td><td>Disclosure and extraction</td><td>System prompt leakage, sensitive information disclosure, prompt-based exfiltration</td><td>Confidentiality</td></tr>
-      <tr><td>Model/knowledge integrity</td><td>Trustworthy knowledge</td><td>Data/model poisoning, vector/embedding weaknesses, supply-chain vulnerabilities</td><td>Integrity & confidentiality</td></tr>
-      <tr><td>Application/agent security</td><td>Execution boundary</td><td>Improper output handling, excessive agency</td><td>Integrity, privilege, safety</td></tr>
-      <tr><td>Availability/multimodal</td><td>Resource and modality expansion</td><td>Unbounded consumption, multimodal injection, instruction-induced misinformation</td><td>Availability, integrity</td></tr>
-    </table>
-
-    <h2>5. Security Threats in Prompt Engineering</h2>
-
-    <table class="threat-table">
-      <tr><th>Threat</th><th>Security meaning</th><th>Refs.</th></tr>
-      <tr><td><b>1. Prompt Injection</b></td><td>Untrusted input attempts to override or redirect the intended instructions of the application.</td><td>[1], [11]</td></tr>
-      <tr><td><b>2. Indirect Prompt Injection</b></td><td>Malicious instructions embedded in external content such as websites, emails, documents, or tool results are processed as if they were trusted instructions.</td><td>[3], [4], [11]</td></tr>
-      <tr><td><b>3. Jailbreaking</b></td><td>Adversarial prompts attempt to bypass safety policies or behavioural restrictions imposed through alignment and application controls.</td><td>[6], [7], [12]</td></tr>
-      <tr><td><b>4. System Prompt Leakage</b></td><td>Attackers attempt to recover hidden system instructions, internal rules, roles, or configuration information from the model.</td><td>[1], [2], [8]</td></tr>
-      <tr><td><b>5. Sensitive Information Disclosure</b></td><td>Prompt interactions may cause personal, confidential, proprietary, credential-related, or memorized information to be exposed in outputs.</td><td>[1], [9]</td></tr>
-    </table>
-  </div>
-  <div class="footer">Page 2 of 6 · Literature Review and Security Taxonomy</div>
-</section>
-
-<!-- PAGE 3 -->
-<section class="paper-page">
-  <div class="header">5. THREAT ANALYSIS — PROMPT, INFORMATION, AND MODEL INTEGRITY</div>
-  <div class="twocol tight">
-
-    <h2>5.1 Prompt Manipulation Threats</h2>
-
-    <h3>1) Prompt Injection</h3>
-    <p>
-      Prompt injection is the foundational threat in which an attacker places instructions into input that compete with the application’s intended instructions. The attack does not require a software exploit in the conventional sense; instead, it abuses the model’s ability to interpret natural language as a command. A simple user-facing chatbot may therefore be manipulated through a carefully worded message, while an agent can be manipulated through an instruction that causes a tool call. The security challenge is fundamentally one of trust separation.
-    </p>
-
-    <h3>2) Indirect Prompt Injection</h3>
-    <p>
-      Indirect injection becomes more serious when the attacker does not directly control the user’s query. Malicious text can be inserted into a public webpage, an email, a shared document, or another source that the AI later retrieves. InjecAgent specifically studied this setting and found practical weaknesses in tool-integrated agents [3]. AgentDojo further demonstrated that real-world tasks become security tests once an agent is required to act on information obtained from external tools [4].
-    </p>
-    <p>
-      This threat deserves special attention in RAG systems because the retrieval layer creates a trusted-looking context window. A document may be relevant to the question but still be untrusted as an instruction source. Mixing these two roles—knowledge and authority—is one of the recurring design errors in prompt-driven applications.
-    </p>
-
-    <h3>3) Jailbreaking</h3>
-    <p>
-      Jailbreaking refers to attempts to circumvent safety behaviour through adversarial prompt construction. Wei et al. studied how safety training can fail under different jailbreak patterns [6], while Zou et al. demonstrated automated adversarial suffixes that could transfer across multiple aligned models and interfaces [7]. In practice, jailbreaks can include role-play framing, instruction conflicts, obfuscation, multilingual phrasing, long-context manipulation, or adversarially generated prompt components.
-    </p>
-    <p>
-      From a prompt-engineering perspective, jailbreak research demonstrates a deeper point: stronger instruction wording is not equivalent to stronger security. An application that depends exclusively on a model refusing unsafe requests has a weaker security boundary than one that independently enforces permissions and actions.
-    </p>
-
-    <h3>4) Instruction Hierarchy Manipulation</h3>
-    <p>
-      Modern applications often contain multiple instruction levels: a system message, developer rules, user input, retrieved context, and tool-generated content. An attacker can exploit ambiguity about which instruction is authoritative. Wallace et al. proposed explicit instruction hierarchy training so that higher-priority instructions dominate lower-priority ones during conflicts [5]. This work provides a useful conceptual foundation for secure prompt construction, although model-side hierarchy training should be paired with external enforcement.
-    </p>
-
-    <h3>5) Context Hijacking</h3>
-    <p>
-      Context hijacking occurs when attacker-controlled information becomes part of the conversation or retrieved context and then influences later decisions. The attack can be persistent across multi-step tasks because the compromised context is repeatedly fed back to the model. In agent workflows, this can create an attack chain rather than a single malicious response [4]. Context should therefore be treated as data with provenance, not automatically as policy.
-    </p>
-
-    <h2>5.2 Information Security Threats</h2>
-
-    <h3>6) System Prompt Leakage</h3>
-    <p>
-      System prompt leakage is the deliberate extraction of hidden instructions. Recent work has shown that system prompts can be an explicit target of extraction attacks [8]. OWASP also makes an important distinction: the system prompt itself should not be treated as a secret or a security control; the real risk arises when secrets, permission logic, connection information, or critical guardrails are placed there [1]. In other words, a leaked prompt may be a symptom of weak architecture rather than the complete vulnerability.
-    </p>
-
-    <h3>7) Sensitive Information Disclosure</h3>
-    <p>
-      Sensitive information may enter an LLM through user prompts, retrieved documents, conversation history, logs, fine-tuning data, or external tools. Carlini et al. demonstrated that language models can sometimes reproduce memorized training examples, including personally identifiable information and other sequences [9]. In enterprise systems, the risk is broader because confidential information can also be exposed through poorly designed retrieval or tool access.
-    </p>
-
-    <h3>8) Prompt-Based Data Exfiltration</h3>
-    <p>
-      Data exfiltration is an outcome-oriented threat in which prompt manipulation is used to make an application retrieve, combine, transform, or transmit protected information. The attacker may not need direct database access; instead, the model becomes an intermediary between a privileged data source and an attacker-controlled instruction. InjecAgent explicitly includes private-data exfiltration among its attack intentions [3]. Preventing this class of attack requires permission-aware retrieval and tool authorization, not only prompt wording.
-    </p>
-
-  </div>
-  <div class="footer">Page 3 of 6 · Threat Analysis I</div>
-</section>
-
-<!-- PAGE 4 -->
-<section class="paper-page">
-  <div class="header">5. THREAT ANALYSIS — APPLICATION, RAG, SUPPLY CHAIN, AND AVAILABILITY</div>
-  <div class="twocol tight">
-
-    <h2>5.3 Model and Knowledge Integrity</h2>
-
-    <h3>9) Data and Model Poisoning</h3>
-    <p>
-      Data and model poisoning occurs when malicious or manipulated content is introduced into training, fine-tuning, embeddings, or other knowledge sources. A related line of research has shown that backdoor-like behaviours can persist despite standard safety training in controlled experiments [10]. For prompt engineering, the lesson is important because prompt quality cannot compensate for compromised data foundations.
-    </p>
-
-    <h3>10) Vector and Embedding Weaknesses</h3>
-    <p>
-      RAG systems rely on embeddings and vector databases to select context. OWASP identifies risks including unauthorized access, cross-context information leakage, embedding inversion, and poisoned retrieval data [1]. A prompt may be perfectly written yet still lead to an unsafe response because the wrong document was retrieved or because a malicious document was ranked highly. Security therefore needs to extend from prompt construction into retrieval and access-control design.
-    </p>
-
-    <h3>11) Supply-Chain Vulnerabilities</h3>
-    <p>
-      LLM applications rarely consist of a single model. They may use external models, model adapters, prompt templates, plugins, libraries, vector stores, APIs, safety filters, and datasets. A weakness or compromise in any component can propagate into the final application [1]. Supply-chain security is especially relevant to prompt engineering because teams often reuse public prompt templates, agent frameworks, and third-party tool connectors without applying the same security scrutiny used for conventional software dependencies.
+      An LLM application commonly combines models, adapters, libraries, prompt templates, evaluation tools, APIs, plugins, datasets, and retrieval services. A vulnerability or compromise in any of these components can affect the final application [1]. Provenance should consequently be maintained for models, datasets, prompts, and external components. The same general principle appears in secure software supply-chain practice, where verifiable provenance is used to track artifacts and their production history [17].
     </p>
 
     <h2>5.4 Application and Agent Security</h2>
-
-    <h3>12) Improper Output Handling</h3>
+    <h3>Improper Output Handling</h3>
     <p>
-      A model output is text, but downstream software may interpret that text as HTML, JavaScript, SQL, shell commands, file paths, or API parameters. OWASP warns that insufficient validation and sanitization can turn model output into XSS, SQL injection, SSRF, privilege escalation, or remote code execution pathways [1]. This threat shows why secure prompting and secure software engineering must be integrated: the prompt may shape the output, but the application decides whether that output receives executable authority.
+      Model output becomes a security concern when another component treats it as executable or authoritative content. HTML, SQL, shell commands, file paths, API parameters, and code all require context-aware validation. OWASP identifies improper output handling because model-generated text can become a pathway to conventional vulnerabilities when passed downstream without suitable controls [1].
+    </p>
+    <h3>Excessive Agency</h3>
+    <p>
+      Tool integration changes the impact of prompt attacks. A model that only drafts text has limited authority; an agent that can send an email, modify a record, access a repository, or trigger a transaction has substantially greater consequence exposure. OWASP therefore emphasizes excessive functionality, excessive permissions, and excessive autonomy as separate dimensions of excessive agency [1]. Least privilege, allow-listed actions, sandboxing, and human approval for irreversible operations should be implemented outside the model.
     </p>
 
-    <h3>13) Excessive Agency</h3>
+    <h2>5.5 Availability and Reliability</h2>
+    <h3>Unbounded Consumption</h3>
     <p>
-      Agentic systems can read files, send emails, modify records, access repositories, call APIs, or initiate workflows. OWASP describes excessive agency in terms of excessive functionality, excessive permissions, and excessive autonomy [1]. A prompt injection becomes materially more dangerous when the model has broad capabilities. The principle of least privilege therefore applies to AI agents just as it applies to users and service accounts.
+      Unbounded consumption covers attacks and design failures that drive excessive inference, token usage, tool loops, or computational cost. Long prompts, repeated requests, and uncontrolled recursive agents can reduce service availability and increase operational cost [1]. Token budgets, timeouts, rate limits, recursion limits, and anomaly detection are straightforward controls that should be evaluated as part of prompt-security testing.
     </p>
+    <h3>Instruction-Induced Misinformation</h3>
     <p>
-      For example, an assistant that only needs to read a document should not automatically receive permission to delete or modify it. A model should propose sensitive actions, while deterministic application logic should validate authorization, target, and scope before execution.
+      Misinformation is not always a deliberate attack, but adversarial prompt framing can increase the chance that an LLM produces a false or unsupported answer. For security-sensitive applications, the concern is not merely factual quality; the concern arises when incorrect output is accepted as an operational input or decision. OWASP places misinformation among the key LLM application risks [1].
     </p>
-
-    <h2>5.5 Availability and Reliability Threats</h2>
-
-    <h3>14) Unbounded Consumption</h3>
+    <h3>Multimodal Prompt Injection</h3>
     <p>
-      Unbounded consumption refers to uncontrolled or excessive use of model inference resources. OWASP identifies denial of service, economic loss, service degradation, and model-theft-related risks under this category [1]. Long prompts, repeated requests, expensive tool loops, or uncontrolled agent recursion can all increase resource consumption. Prompt engineering should therefore include token budgets, rate limits, loop limits, timeouts, and anomaly detection where appropriate.
-    </p>
-
-    <h3>15) Instruction-Induced Misinformation</h3>
-    <p>
-      LLMs can generate confident but false statements, and prompt design can amplify this behaviour by demanding unsupported certainty, forcing a predetermined conclusion, or discouraging appropriate uncertainty. OWASP treats misinformation as a distinct application risk because downstream reliance can produce operational, reputational, or safety consequences [1]. From a research perspective, evaluation should therefore measure not only attack success but also whether defensive prompts preserve factual reliability.
+      Multimodal systems accept images, screenshots, scanned pages, diagrams, and other inputs that may contain hidden or visually embedded instructions. Yeo and Choi evaluated direct, indirect, image-based injection, and prompt leakage across eight commercial models, reporting exploitable weaknesses and the need for additional defenses [13]. Nagaraja et al. later studied visually embedded adversarial instructions and reported successful black-box attacks against a GPT-4-turbo vision setting in their experimental setup [14]. These findings suggest that prompt-security controls should not assume the instruction channel is text-only.
     </p>
 
-    <h2>5.6 Multimodal and Emerging Threats</h2>
-
-    <h3>16) Multimodal Prompt Injection</h3>
+    <h1>6 Cross-Study Model Evidence</h1>
     <p>
-      Multimodal systems add images, screenshots, scanned documents, and other visual inputs to the instruction channel. Yeo and Choi evaluated image-based injection together with direct, indirect, and leakage attacks [13]. Nagaraja et al. later demonstrated image-based prompt injection against multimodal LLMs in a black-box setting and reported that adversarial instructions could be embedded visually [14]. This matters because a human viewer may regard an image as harmless while the model's vision-language pipeline interprets its hidden or low-salience text as an instruction.
+      Direct numerical comparison across security papers is difficult because evaluation settings differ. Nevertheless, the published studies provide useful evidence that attacks and defenses behave differently across models and application architectures.
     </p>
-
-    <div class="callout">
-      <b>Key architectural observation.</b> Across these threats, the prompt is often the entry point, but the impact is determined by the surrounding system. A prompt injection against a read-only summarizer may be inconvenient; the same injection against an agent with email, file, database, or payment permissions can become a confidentiality or integrity incident.
-    </div>
-
-    <h2>6. Threat-to-Control Mapping</h2>
     <table>
-      <tr><th>Threat family</th><th>Practical control principle</th><th>Security rationale</th></tr>
-      <tr><td>Prompt manipulation</td><td>Explicit trust labels, instruction hierarchy, input screening, adversarial evaluation</td><td>Reduces instruction confusion and improves resistance to crafted prompts.</td></tr>
-      <tr><td>Information exposure</td><td>Data minimization, secret isolation, authorization outside the LLM, redaction</td><td>Prevents prompt leakage from becoming a direct confidentiality breach.</td></tr>
-      <tr><td>RAG / knowledge</td><td>Document provenance, permission-aware retrieval, content validation</td><td>Limits poisoned or unauthorized context.</td></tr>
-      <tr><td>Agent execution</td><td>Least privilege, allow-lists, human approval for high-impact actions</td><td>Converts model decisions into bounded, auditable actions.</td></tr>
-      <tr><td>Output safety</td><td>Context-aware encoding, parameterized queries, sandboxing</td><td>Prevents generated text from becoming executable instructions.</td></tr>
-      <tr><td>Availability</td><td>Rate limits, token budgets, timeouts, loop detection</td><td>Controls resource abuse and runaway agent behaviour.</td></tr>
-      <tr><td>Multimodal</td><td>Modality-aware filtering, OCR/text provenance, adversarial visual testing</td><td>Recognizes that images and documents can also carry instructions.</td></tr>
+      <tr><th>Study</th><th>Models / setting</th><th>Reported evidence</th><th>Interpretation limit</th></tr>
+      <tr><td>Zhan et al. [3]</td><td>30 LLM agents; 1,054 IPI cases</td><td>ReAct-prompted GPT-4 was vulnerable in 24% of the benchmark cases.</td><td>Agent/tool benchmark; not a universal model-risk estimate.</td></tr>
+      <tr><td>Wei et al. [6]</td><td>GPT-4; Claude v1.3</td><td>Jailbreak vulnerabilities persisted despite safety training and red-teaming.</td><td>Attack sets and model versions are historical.</td></tr>
+      <tr><td>Xiong et al. [12]</td><td>Llama-2-7B-Chat; Mistral-7B-Instruct-v0.2</td><td>Defensive Prompt Patch reported reduced attack success while preserving utility in the tested settings.</td><td>Defense evaluated on selected models and attack families.</td></tr>
+      <tr><td>Yeo &amp; Choi [13]</td><td>Eight commercial models</td><td>Study reported differing robustness across models and found continued need for external defenses.</td><td>Different model versions, tasks, and attack configurations limit direct ranking.</td></tr>
     </table>
+    <p class="note">
+      The table intentionally avoids constructing a global model ranking. Security measurements are meaningful only with their population, benchmark, attack definition, and model/version stated together.
+    </p>
+
+    <h1>7 Defensive Strategies and Controls</h1>
+    <p>
+      The literature points to a layered defense model. Prompt-level defenses can improve robustness, but they should be combined with deterministic application controls. A useful separation is preventive, detective, corrective, and architectural control.
+    </p>
+    <h2>7.1 Preventive Controls</h2>
+    <p>
+      Preventive measures include explicit instruction hierarchy, trust labels, input normalization, data minimization, permission-aware retrieval, allow-listed tools, and least-privilege credentials. The aim is to reduce the probability that untrusted content can become an authorized instruction.
+    </p>
+    <h2>7.2 Detective Controls</h2>
+    <p>
+      Detection can include prompt anomaly classifiers, injection pattern analysis, provenance checks, canary tokens for monitoring secret exposure, output inspection, and policy-violation logging. Detection is particularly useful when inputs are open-ended and attackers are expected to adapt.
+    </p>
+    <h2>7.3 Corrective Controls</h2>
+    <p>
+      High-impact systems should have fail-safe mechanisms: human approval, transaction rollback, session reset, tool revocation, rate limiting, and isolation of compromised context. A model should be able to stop safely when the authority of an instruction is unclear.
+    </p>
+    <h2>7.4 Architectural Controls</h2>
+    <p>
+      Architectural controls are the strongest layer because they do not require the model to “remember” a rule. Authorization engines, policy enforcement points, database access controls, parameterized interfaces, sandboxing, and deterministic tool schemas can prevent unsafe outputs from directly becoming unsafe actions.
+    </p>
   </div>
-  <div class="footer">Page 4 of 6 · Threat Analysis II and Control Mapping</div>
+  <div class="page-number">3</div>
 </section>
 
-<!-- PAGE 5 -->
-<section class="paper-page">
-  <div class="header">7. DISCUSSION, RESEARCH GAPS, AND FUTURE WORK</div>
-  <div class="twocol tight">
-
-    <h2>7. Discussion</h2>
+<section class="paper">
+  <div class="running">MISHRA AND ROHIT · DEFENSE AND EVALUATION</div>
+  <div class="two">
+    <h2>7.5 Evidence on Defense Effectiveness and Utility</h2>
+    <table>
+      <tr><th>Defense approach</th><th>Mechanism</th><th>Relevant threat</th><th>Reported result</th><th>Important limitation</th></tr>
+      <tr><td>Instruction hierarchy [5]</td><td>Model training to prioritize privileged instructions</td><td>Injection, hierarchy manipulation</td><td>Improved robustness in the reported GPT-3.5 experiments, including attacks not seen during training.</td><td>Requires training/model support; does not replace external authorization.</td></tr>
+      <tr><td>Attack-based defense [11]</td><td>Reuse attack methods as a defensive transformation</td><td>Prompt injection</td><td>Authors report stronger results than existing defenses in their experiments.</td><td>Benchmark-specific evaluation; adaptive transfer remains open.</td></tr>
+      <tr><td>Defensive Prompt Patch [12]</td><td>Defensive suffix/prompt patch</td><td>Jailbreak</td><td>Authors report reduced attack success with small utility impact on tested Llama-2 and Mistral models.</td><td>Prompt-level defense; adaptive attackers may require new evaluation.</td></tr>
+      <tr><td>External policy enforcement</td><td>Authorization, tool allow-lists, sandboxing</td><td>Agent abuse, data exfiltration, excessive agency</td><td>Architectural mitigation principle supported by OWASP guidance.</td><td>Requires application redesign and operational governance.</td></tr>
+    </table>
     <p>
-      The reviewed evidence supports a simple but significant conclusion: prompt security is a systems problem. Prompt injection is often discussed as though the model only needs a better instruction such as “ignore malicious commands.” That approach can be helpful as one layer, but it is not a complete security mechanism. OWASP explicitly recommends that sensitive authorization decisions and privilege boundaries not be delegated to the LLM [1]. Academic studies of agents reinforce the same point because tool access converts language-level manipulation into external actions [3], [4].
-    </p>
-    <p>
-      A second observation concerns trust boundaries. In conventional software security, data and instructions are normally distinguished by type and interface. In LLM applications, both may be represented as natural language. A retrieved paragraph can look identical to a policy instruction inside the context window. This “instruction-data dual use” makes prompt security fundamentally different from conventional input validation.
-    </p>
-    <p>
-      Third, prompt attacks are becoming increasingly adaptive. Jailbreak research has moved from manually designed prompts toward automatically generated attacks [7]. Prompt injection research is also producing benchmark-driven attack and defense methods [3], [11]. Therefore, a static list of blocked phrases or a single defensive prompt is unlikely to remain sufficient as attackers adapt.
-    </p>
-    <p>
-      Finally, security and usability remain coupled. Stronger filtering can reduce attack success but may also reduce legitimate task completion. Recent defensive studies explicitly evaluate this trade-off [11], [12]. The objective should consequently be robust task alignment: the model should perform the authorized task, ignore untrusted instructions, and stop or escalate when authority is unclear.
+      The evidence suggests that utility and security should be evaluated together. A defense that simply blocks most requests may show a low attack rate while damaging legitimate task completion. A practical security metric must therefore report both attack resistance and authorized-task performance.
     </p>
 
-    <h2>8. Research Gaps</h2>
-    <h3>8.1 Lack of a Unified Prompt-Security Evaluation Protocol</h3>
+    <h1>8 Threat Modeling and Security Metrics</h1>
+    <h2>8.1 STRIDE-Oriented View</h2>
     <p>
-      Existing benchmarks measure different aspects: jailbreak resistance, indirect injection, prompt leakage, agent tool safety, or output reliability. A common evaluation protocol could report attack success, task completion, confidential-data exposure, unauthorized-action rate, utility degradation, and resource consumption together. Such a benchmark would make defenses more comparable across models and application designs.
+      STRIDE can be adapted as a lightweight reasoning aid for LLM applications. Spoofing maps to impersonated users or tool identities; Tampering maps to prompt or context manipulation; Repudiation maps to weak action logging; Information Disclosure maps to prompt leakage and data exposure; Denial of Service maps to unbounded consumption; and Elevation of Privilege maps to excessive agency and unauthorized tool use. This mapping is not a replacement for an LLM-specific threat model, but it helps teams connect prompt security with established software-security practice.
     </p>
 
-    <h3>8.2 Multilingual and Code-Switched Prompt Attacks</h3>
+    <table>
+      <tr><th>STRIDE dimension</th><th>Prompt/LLM threats</th><th>Example control</th></tr>
+      <tr><td>Spoofing</td><td>Forged user/tool context; identity confusion</td><td>Strong authentication and signed tool identity.</td></tr>
+      <tr><td>Tampering</td><td>Prompt injection, context hijacking, poisoning</td><td>Provenance, integrity checks, trust separation.</td></tr>
+      <tr><td>Repudiation</td><td>Untraceable agent actions</td><td>Immutable logs and action identifiers.</td></tr>
+      <tr><td>Information Disclosure</td><td>Prompt leakage, disclosure, exfiltration</td><td>Data minimization and authorization gates.</td></tr>
+      <tr><td>Denial of Service</td><td>Unbounded consumption</td><td>Rate/token budgets, timeouts, loop limits.</td></tr>
+      <tr><td>Elevation of Privilege</td><td>Excessive agency, tool misuse</td><td>Least privilege and approval for high-impact actions.</td></tr>
+    </table>
+
+    <h2>8.2 Proposed Agent-Security Metrics</h2>
+    <p><b>Unauthorized Action Rate (UAR)</b> measures the fraction of agent actions that occur without valid authorization:</p>
+    <div class="math">UAR = Unauthorized actions / Total actions under attack</div>
+    <p><b>Irreversible Action Rate (IAR)</b> captures how frequently an attack causes an action that cannot be safely undone:</p>
+    <div class="math">IAR = Irreversible actions caused by attack / Total attack-triggered actions</div>
+    <p><b>Secure Task Completion (STC)</b> combines legitimate task completion with security constraints:</p>
+    <div class="math">STC = Correct legitimate tasks completed without policy violation / Total legitimate tasks</div>
+    <p><b>Recovery Rate (RR)</b> measures the proportion of unsafe intermediate states that are detected and safely reversed or contained:</p>
+    <div class="math">RR = Unsafe states recovered or contained / Unsafe states detected</div>
     <p>
-      A large portion of benchmark material is English-centric. Real deployments, especially in linguistically diverse environments, may contain Hindi-English code-switching, regional-language prompts, transliterated text, mixed scripts, and multilingual retrieved documents. Security research should test whether instruction hierarchy and injection defenses remain stable when the attacker changes language or script while preserving the malicious intent.
+      These metrics can be reported alongside the commonly used Attack Success Rate (ASR). The combined view is more informative than ASR alone because it captures whether a defense remains usable and whether an agent can recover when an attack partly succeeds.
     </p>
 
-    <h3>8.3 Security of Long-Context Systems</h3>
+    <h1>9 Provenance-Aware Prompt Construction</h1>
     <p>
-      Long context windows allow more information to be processed, but they also provide more space for hidden, repeated, or strategically placed instructions. Research is needed on whether position, repetition, recency, and context compression change attack success. A practical defense should work not only on short prompts but also on long enterprise documents and multi-turn agent histories.
+      A central design proposal emerging from this review is to carry trust and provenance information through the retrieval and agent pipeline. Instead of placing all context in a single undifferentiated block, each item can be annotated according to its role—for example, <code>TRUSTED_INSTRUCTION</code>, <code>UNTRUSTED_DATA</code>, <code>VERIFIED_FACT</code>, or <code>UNVERIFIED_RETRIEVAL</code>. The model is then instructed to treat content according to that provenance while deterministic application logic enforces the final authorization decision.
     </p>
 
-    <h3>8.4 Agent-Specific Security Metrics</h3>
-    <p>
-      Traditional LLM evaluation often measures response accuracy. An agent requires additional measures: unauthorized tool calls, unauthorized data access, irreversible actions, action-chain length, and recovery after an unsafe intermediate step. AgentDojo provides an important direction, but further domain-specific benchmarks are required [4].
-    </p>
-
-    <h3>8.5 Multimodal Security and Cross-Modal Attacks</h3>
-    <p>
-      Image-based injection demonstrates that the attack surface is no longer confined to text [14]. Future work should test screenshots, PDFs, charts, handwritten content, diagrams, hidden text, metadata, and combinations of visual and textual instructions. Defenses should also preserve accessibility and legitimate document understanding rather than simply discarding unusual visual content.
-    </p>
-
-    <h3>8.6 Provenance-Aware Prompt Construction</h3>
-    <p>
-      RAG systems should carry source information through the entire reasoning and tool pipeline. A useful research direction is to attach provenance and trust labels to each context item and evaluate whether models can consistently treat “information to read” differently from “instructions to follow.” This aligns with the instruction-hierarchy perspective [5] and with RAG-specific security concerns identified by OWASP [1].
-    </p>
-
-    <h2>9. Future Work</h2>
-    <p>
-      The future research agenda proposed in this paper is organized around <i>robustness, transferability, reliability, and enforceability</i>. First, robustness studies should evaluate attacks under paraphrasing, multilingual transformation, context reordering, and model changes. Second, transferability research should determine whether attacks and defenses generalize across closed and open models rather than working only on a single benchmark configuration.
-    </p>
-    <p>
-      Third, reliability should be measured jointly with security. A defense that blocks every uncertain request is not necessarily useful. A more meaningful metric is secure task success: the proportion of legitimate tasks completed correctly while malicious or unauthorized actions are consistently rejected. Fourth, enforceability should move beyond model instructions toward deterministic controls: policy engines, permission checks, tool schemas, sandboxing, data-loss prevention, and human approval for high-impact actions.
-    </p>
-    <p>
-      An especially important future direction is the development of <b>adaptive prompt-security gateways</b>. Such a gateway could classify content by trust level, detect instruction conflicts, inspect retrieved documents, constrain tool permissions, and evaluate the model’s output before execution. The objective is not to replace the LLM with rigid rules, but to place the LLM inside a broader security architecture where every high-risk action has an independent validation path.
-    </p>
-
-    <div class="figure no-break">
-      <b>Figure 1. Security-by-architecture view for prompt-driven AI applications</b>
-      <div class="layer">USER PROMPT / EXTERNAL CONTENT / MULTIMODAL INPUT</div>
-      <div class="arrow">↓</div>
-      <div class="layer">TRUST &amp; PROVENANCE LAYER — separate instructions from untrusted data</div>
-      <div class="arrow">↓</div>
-      <div class="layer">LLM / RAG — bounded context, hierarchy-aware prompting, retrieval controls</div>
-      <div class="arrow">↓</div>
-      <div class="layer">POLICY &amp; AUTHORIZATION — least privilege, schema validation, approval gates</div>
-      <div class="arrow">↓</div>
-      <div class="layer">TOOLS / DATABASES / FILES / EXTERNAL SYSTEMS</div>
-      <div class="note">The model is treated as one component inside the security boundary, not as the boundary itself.</div>
+    <div class="figure">
+      <img src="data:image/svg+xml;base64,CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgOTAwIDU3MCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJTZWN1cmUgYXJjaGl0ZWN0dXJlIGZvciBwcm9tcHQtZHJpdmVuIEFJIGFwcGxpY2F0aW9ucyI+CiAgPGRlZnM+CiAgICA8bWFya2VyIGlkPSJhcnJvdyIgdmlld0JveD0iMCAwIDEwIDEwIiByZWZYPSI5IiByZWZZPSI1IiBtYXJrZXJXaWR0aD0iNyIgbWFya2VySGVpZ2h0PSI3IiBvcmllbnQ9ImF1dG8tc3RhcnQtcmV2ZXJzZSI+CiAgICAgIDxwYXRoIGQ9Ik0gMCAwIEwgMTAgNSBMIDAgMTAgeiIgZmlsbD0iIzMzMyIvPgogICAgPC9tYXJrZXI+CiAgICA8bWFya2VyIGlkPSJyZWRhcnJvdyIgdmlld0JveD0iMCAwIDEwIDEwIiByZWZYPSI5IiByZWZZPSI1IiBtYXJrZXJXaWR0aD0iNyIgbWFya2VySGVpZ2h0PSI3IiBvcmllbnQ9ImF1dG8tc3RhcnQtcmV2ZXJzZSI+CiAgICAgIDxwYXRoIGQ9Ik0gMCAwIEwgMTAgNSBMIDAgMTAgeiIgZmlsbD0iIzdjMmQxMiIvPgogICAgPC9tYXJrZXI+CiAgPC9kZWZzPgogIDxyZWN0IHg9IjIyIiB5PSIxOCIgd2lkdGg9Ijg1NiIgaGVpZ2h0PSI1MzQiIHJ4PSIxNCIgZmlsbD0iI2ZmZiIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjIiLz4KICA8cmVjdCB4PSI0MiIgeT0iMzgiIHdpZHRoPSI4MTYiIGhlaWdodD0iMTQ1IiByeD0iMTIiIGZpbGw9IiNmOGY4ZjgiIHN0cm9rZT0iIzc3NyIgc3Ryb2tlLWRhc2hhcnJheT0iOCA2Ii8+CiAgPHRleHQgeD0iNDUwIiB5PSI2MSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IlRpbWVzIE5ldyBSb21hbiIgZm9udC1zaXplPSIxOSIgZm9udC13ZWlnaHQ9ImJvbGQiPlVOVFJVU1RFRCAvIE1JWEVEIElOUFVUIFNVUkZBQ0U8L3RleHQ+CiAgPHJlY3QgeD0iNzAiIHk9Ijg2IiB3aWR0aD0iMjM1IiBoZWlnaHQ9IjcwIiByeD0iMTAiIGZpbGw9IiNmMGYwZjAiIHN0cm9rZT0iIzU1NSIvPgogIDx0ZXh0IHg9IjE4NyIgeT0iMTE1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iVGltZXMgTmV3IFJvbWFuIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iYm9sZCI+VXNlciBQcm9tcHQ8L3RleHQ+CiAgPHRleHQgeD0iMTg3IiB5PSIxMzkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJUaW1lcyBOZXcgUm9tYW4iIGZvbnQtc2l6ZT0iMTMiPmRpcmVjdCBpbmplY3Rpb24gLyBqYWlsYnJlYWs8L3RleHQ+CiAgPHJlY3QgeD0iMzMzIiB5PSI4NiIgd2lkdGg9IjIzNSIgaGVpZ2h0PSI3MCIgcng9IjEwIiBmaWxsPSIjZjBmMGYwIiBzdHJva2U9IiM1NTUiLz4KICA8dGV4dCB4PSI0NTAiIHk9IjExNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IlRpbWVzIE5ldyBSb21hbiIgZm9udC1zaXplPSIxNyIgZm9udC13ZWlnaHQ9ImJvbGQiPlJBRyAvIERvY3VtZW50czwvdGV4dD4KICA8dGV4dCB4PSI0NTAiIHk9IjEzOSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IlRpbWVzIE5ldyBSb21hbiIgZm9udC1zaXplPSIxMyI+aW5kaXJlY3QgaW5qZWN0aW9uIC8gcG9pc29uaW5nPC90ZXh0PgogIDxyZWN0IHg9IjU5NiIgeT0iODYiIHdpZHRoPSIyMzUiIGhlaWdodD0iNzAiIHJ4PSIxMCIgZmlsbD0iI2YwZjBmMCIgc3Ryb2tlPSIjNTU1Ii8+CiAgPHRleHQgeD0iNzE0IiB5PSIxMTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJUaW1lcyBOZXcgUm9tYW4iIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSJib2xkIj5JbWFnZXMgLyBPdGhlciBNZWRpYTwvdGV4dD4KICA8dGV4dCB4PSI3MTQiIHk9IjEzOSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IlRpbWVzIE5ldyBSb21hbiIgZm9udC1zaXplPSIxMyI+bXVsdGltb2RhbCBpbmplY3Rpb248L3RleHQ+CgogIDxyZWN0IHg9IjE0MCIgeT0iMjA3IiB3aWR0aD0iNjIwIiBoZWlnaHQ9IjgyIiByeD0iMTIiIGZpbGw9IiNmM2YzZjMiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8dGV4dCB4PSI0NTAiIHk9IjIzNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IlRpbWVzIE5ldyBSb21hbiIgZm9udC1zaXplPSIxOSIgZm9udC13ZWlnaHQ9ImJvbGQiPlRSVVNULCBQUk9WRU5BTkNFIEFORCBDT05URVhUIENPTlRST0w8L3RleHQ+CiAgPHRleHQgeD0iNDUwIiB5PSIyNjEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJUaW1lcyBOZXcgUm9tYW4iIGZvbnQtc2l6ZT0iMTQiPmluc3RydWN0aW9uIGhpZXJhcmNoeSDCtyBwcm92ZW5hbmNlIGxhYmVscyDCtyBjb250ZXh0IGlzb2xhdGlvbiDCtyBkYXRhIG1pbmltaXNhdGlvbjwvdGV4dD4KICA8cGF0aCBkPSJNNDUwIDE4MyBMNDUwIDIwNyIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIuNSIgbWFya2VyLWVuZD0idXJsKCNhcnJvdykiLz4KCiAgPHJlY3QgeD0iOTUiIHk9IjMyMiIgd2lkdGg9IjcxMCIgaGVpZ2h0PSI4MiIgcng9IjEyIiBmaWxsPSIjZWRlZGVkIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgPHRleHQgeD0iNDUwIiB5PSIzNTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJUaW1lcyBOZXcgUm9tYW4iIGZvbnQtc2l6ZT0iMTkiIGZvbnQtd2VpZ2h0PSJib2xkIj5MTE0gLyBSQUcgLyBBR0VOVCBSRUFTT05JTkcgTEFZRVI8L3RleHQ+CiAgPHRleHQgeD0iNDUwIiB5PSIzNzYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJUaW1lcyBOZXcgUm9tYW4iIGZvbnQtc2l6ZT0iMTQiPmJvdW5kZWQgY29udGV4dCDCtyBzZWN1cmUgcmV0cmlldmFsIMK3IHRvb2wgcGxhbm5pbmcgwrcgb3V0cHV0IGNvbnN0cmFpbnRzPC90ZXh0PgogIDxwYXRoIGQ9Ik00NTAgMjg5IEw0NTAgMzIyIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMi41IiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93KSIvPgoKICA8cmVjdCB4PSIxMzciIHk9IjQzNyIgd2lkdGg9IjYyNiIgaGVpZ2h0PSI4MiIgcng9IjEyIiBmaWxsPSIjZjhmOGY4IiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMiIvPgogIDx0ZXh0IHg9IjQ1MCIgeT0iNDY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iVGltZXMgTmV3IFJvbWFuIiBmb250LXNpemU9IjE5IiBmb250LXdlaWdodD0iYm9sZCI+UE9MSUNZIC8gQVVUSE9SSVpBVElPTiAvIFZBTElEQVRJT04gR0FURTwvdGV4dD4KICA8dGV4dCB4PSI0NTAiIHk9IjQ5MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IlRpbWVzIE5ldyBSb21hbiIgZm9udC1zaXplPSIxNCI+bGVhc3QgcHJpdmlsZWdlIMK3IHNjaGVtYSB2YWxpZGF0aW9uIMK3IHNhbmRib3hpbmcgwrcgYXBwcm92YWwgZm9yIGhpZ2gtaW1wYWN0IGFjdGlvbnM8L3RleHQ+CiAgPHBhdGggZD0iTTQ1MCA0MDQgTDQ1MCA0MzciIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIyLjUiIG1hcmtlci1lbmQ9InVybCgjYXJyb3cpIi8+CgogIDxwYXRoIGQ9Ik02MiAxNzQgQzE0IDI0MCwgMjQgMzEwLCA4OCAzNTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdjMmQxMiIgc3Ryb2tlLXdpZHRoPSIzIiBtYXJrZXItZW5kPSJ1cmwoI3JlZGFycm93KSIvPgogIDx0ZXh0IHg9IjQ4IiB5PSIyNDAiIGZvbnQtZmFtaWx5PSJUaW1lcyBOZXcgUm9tYW4iIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiM3YzJkMTIiIHRyYW5zZm9ybT0icm90YXRlKC03MiA0OCAyNDApIj5hdHRhY2sgcGF0aDwvdGV4dD4KICA8cGF0aCBkPSJNODM4IDE3NCBDODg2IDI0MCwgODc2IDMxMCwgODEyIDM1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjN2MyZDEyIiBzdHJva2Utd2lkdGg9IjMiIG1hcmtlci1lbmQ9InVybCgjcmVkYXJyb3cpIi8+CiAgPHRleHQgeD0iODUyIiB5PSIyNDIiIGZvbnQtZmFtaWx5PSJUaW1lcyBOZXcgUm9tYW4iIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiM3YzJkMTIiIHRyYW5zZm9ybT0icm90YXRlKDcyIDg1MiAyNDIpIj5hdHRhY2sgcGF0aDwvdGV4dD4KCiAgPHRleHQgeD0iNDUwIiB5PSI1NDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJUaW1lcyBOZXcgUm9tYW4iIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiMzMzMiPgogICAgVGhlIG1vZGVsIGlzIGEgY29tcG9uZW50IGluc2lkZSB0aGUgc2VjdXJpdHkgYm91bmRhcnk7IGF1dGhvcml6YXRpb24gcmVtYWlucyBleHRlcm5hbCB0byB0aGUgbW9kZWwuCiAgPC90ZXh0Pgo8L3N2Zz4K" alt="Secure architecture for prompt-driven AI applications">
     </div>
   </div>
-  <div class="footer">Page 5 of 6 · Discussion, Research Gaps, and Future Work</div>
+  <div class="page-number">4</div>
 </section>
 
-<!-- PAGE 6 -->
-<section class="paper-page">
-  <div class="header">10. CONCLUSION AND REFERENCES</div>
-  <div class="twocol tight">
-
-    <h2>10. Conclusion</h2>
+<section class="paper">
+  <div class="running">MISHRA AND ROHIT · RESEARCH GAPS AND GOVERNANCE</div>
+  <div class="two">
+    <h1>10 Research Gaps and Future Work</h1>
+    <h2>10.1 Unified Security Evaluation</h2>
     <p>
-      Prompt engineering has become an essential practical skill for obtaining reliable behaviour from large language models, but its security implications now deserve equal attention. The review in this paper shows that prompt-related threats extend well beyond the familiar idea of a malicious user typing an “ignore previous instructions” message. Attacks can enter through direct prompts, external documents, retrieved content, system-prompt extraction attempts, multimodal inputs, poisoned knowledge sources, and compromised third-party components. Once an AI system is connected to tools, databases, files, or business workflows, the consequences can move from incorrect text generation to confidentiality loss, privilege misuse, unauthorized transactions, and service degradation.
+      Current benchmarks measure different pieces of the problem: jailbreak success, indirect injection, agent misuse, prompt extraction, or multimodal manipulation. A common benchmark should report ASR, UAR, STC, RR, confidential-data exposure, and resource consumption under the same experimental protocol. This would make defenses easier to compare without treating one metric as a complete representation of security.
+    </p>
+    <h2>10.2 Multilingual and Code-Switched Attacks</h2>
+    <p>
+      Security evaluation should include multilingual and code-switched prompts, including mixed-language instructions and transliterated text. The research question is not simply whether a model can understand a language; it is whether its security behaviour remains stable when the attacker changes language, script, or phrasing while preserving intent. A suitable benchmark can vary language, attack type, placement, and context length and report the same security metrics across conditions.
+    </p>
+    <h2>10.3 Long-Context Security</h2>
+    <p>
+      Longer context windows create more opportunities for repeated, strategically placed, or low-salience malicious instructions. Future studies should test the effect of instruction position, repetition, recency, context compression, and retrieval ordering. A useful outcome would be a “context robustness curve” showing attack success as adversarial content moves farther from the immediate instruction.
+    </p>
+    <h2>10.4 Agent-Specific Security Benchmarks</h2>
+    <p>
+      Agent evaluation should include unauthorized tool calls, privilege escalation, irreversible actions, action-chain length, and recovery. AgentDojo provides an important foundation, but domain-specific settings such as education, enterprise knowledge systems, software engineering, and public-service workflows can expose different action risks [4].
+    </p>
+    <h2>10.5 Adaptive Defenses</h2>
+    <p>
+      Static defensive prompts are unlikely to cover every future attack style. Research should explore adaptive security layers that combine prompt analysis, provenance, retrieval validation, action policies, and post-generation checks. A useful design principle is that the defense should become stricter as the potential impact of an action increases.
+    </p>
+    <h2>10.6 Multimodal Security</h2>
+    <p>
+      Future work should examine screenshots, scanned PDFs, diagrams, handwriting, metadata, and mixed image–text instructions. The challenge is not merely detecting malicious text; a security layer should preserve legitimate document understanding while limiting the ability of embedded content to become an unauthorized command [13,14].
+    </p>
+    <h2>10.7 Secure Prompt Transferability</h2>
+    <p>
+      Prompt-security research should distinguish between defenses that work for one model and defenses that generalize across models, providers, model sizes, and deployment architectures. The jailbreak literature already demonstrates transferability for some attacks [7]. Similar cross-model testing is needed for defenses.
+    </p>
+    <h2>10.8 Provenance and Explainable Security Decisions</h2>
+    <p>
+      Future systems should record why a context item was considered trusted, why a tool call was allowed, and which policy blocked an action. This would make incidents easier to investigate and would support more rigorous security auditing.
+    </p>
+    <h2>10.9 Research Questions and Success Measures</h2>
+    <table>
+      <tr><th>Research question</th><th>Suggested method</th><th>Primary metric</th></tr>
+      <tr><td>Does instruction hierarchy transfer across languages?</td><td>Multilingual benchmark with controlled paraphrase and code-switching.</td><td>ASR + STC</td></tr>
+      <tr><td>Does provenance labeling reduce indirect injection?</td><td>RAG benchmark with trusted/untrusted source labels.</td><td>ASR + provenance adherence</td></tr>
+      <tr><td>Can an agent recover after a partial injection?</td><td>Multi-step tool benchmark with reversible and irreversible actions.</td><td>RR + UAR + IAR</td></tr>
+      <tr><td>How does context length affect attack success?</td><td>Position-controlled long-context experiments.</td><td>ASR versus position/context length</td></tr>
+      <tr><td>How much utility does a defense cost?</td><td>Evaluate defended and baseline systems on identical legitimate tasks.</td><td>ΔSTC / utility loss</td></tr>
+    </table>
+
+    <h1>11 Regulatory and Governance Alignment</h1>
+    <p>
+      Prompt security also fits within broader AI risk-management practice. NIST's Generative AI Profile is a cross-sector companion to the AI Risk Management Framework and provides guidance for identifying and managing risks across the AI lifecycle [18,19]. For prompt-driven applications, this supports the idea of documenting intended use, risks, mitigations, monitoring, and evaluation rather than treating prompts as isolated configuration text.
     </p>
     <p>
-      The sixteen threats consolidated here provide a practical research map: prompt injection, indirect prompt injection, jailbreaking, instruction hierarchy manipulation, context hijacking, system prompt leakage, sensitive information disclosure, prompt-based data exfiltration, data and model poisoning, vector and embedding weaknesses, supply-chain vulnerabilities, improper output handling, excessive agency, unbounded consumption, instruction-induced misinformation, and multimodal prompt injection. Several of these are formally recognized by OWASP; others are finer-grained research categories derived from the academic literature and are best understood as attack patterns or outcomes that can overlap with the OWASP categories [1], [2].
+      ISO/IEC 42001:2023 specifies requirements for establishing, implementing, maintaining, and continually improving an Artificial Intelligence Management System. The standard follows a management-system approach and addresses risk assessment, governance, traceability, transparency, and continual improvement [20]. For institutions deploying LLM applications, prompt-security controls can therefore be incorporated into an AI management process rather than maintained only as developer conventions.
     </p>
     <p>
-      For future prompt-engineering research, the practical principle is clear. Security should not be achieved by “better wording” alone. A secure application should distinguish trusted instructions from untrusted context, protect secrets outside the prompt, enforce authorization independently, limit agent permissions, validate outputs before execution, control retrieval sources, and continuously test the system using adaptive adversarial benchmarks. This layered approach is especially important in educational institutions, enterprise systems, healthcare, finance, and public-service applications where the cost of an unintended AI action may be considerably higher than the cost of an incorrect conversational answer.
-    </p>
-    <p>
-      In conclusion, the research community should treat prompt engineering as both a communication mechanism and a security interface. The next generation of prompt-security work should therefore aim for measurable robustness, multilingual and multimodal resilience, reproducibility across models, and architectural enforceability. The most useful prompt is not simply the one that produces a good answer; it is the one that remains aligned with the authorized task even when the surrounding information is adversarial.
+      The EU AI Act provides a further regulatory reference point. Article 15 requires high-risk AI systems to achieve appropriate levels of accuracy, robustness, and cybersecurity throughout the lifecycle and calls for resilience against attempts by unauthorized third parties to alter system use, outputs, or performance [21]. The article also references measures relevant to data poisoning, model poisoning, adversarial examples, confidentiality attacks, and model flaws. The relevance to prompt security is direct at the level of robustness and attack resilience, while the exact legal obligations depend on the system's classification and deployment context.
     </p>
 
-    <h2>References</h2>
-
-    <div class="ref">[1] OWASP GenAI Security Project, “OWASP Top 10 for LLM and Generative AI Applications, 2025,” 2025. Available: <span class="doi">https://genai.owasp.org/initiatives/top-10-for-llm-and-genai/</span></div>
-
-    <div class="ref">[2] Z. Xia, H. Sun, J. Wang, Q. Qi, H. Wang, X. Fu, and J. Liao, “The Threat of PROMPTS in Large Language Models: A System and User Prompt Perspective,” <i>Findings of the Association for Computational Linguistics: ACL 2025</i>, pp. 12994–13035, 2025, doi: 10.18653/v1/2025.findings-acl.675.</div>
-
-    <div class="ref">[3] Q. Zhan, Z. Liang, Z. Ying, and D. Kang, “InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents,” <i>Findings of ACL 2024</i>, pp. 10471–10506, 2024, doi: 10.18653/v1/2024.findings-acl.624.</div>
-
-    <div class="ref">[4] E. Debenedetti, J. Zhang, M. Balunović, L. Beurer-Kellner, M. Fischer, and F. Tramèr, “AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents,” arXiv:2406.13352, 2024.</div>
-
-    <div class="ref">[5] E. Wallace, K. Xiao, R. Leike, L. Weng, J. Heidecke, and A. Beutel, “The Instruction Hierarchy: Training LLMs to Prioritize Privileged Instructions,” arXiv:2404.13208, 2024.</div>
-
-    <div class="ref">[6] A. Wei, N. Haghtalab, and J. Steinhardt, “Jailbroken: How Does LLM Safety Training Fail?,” arXiv:2307.02483, 2023.</div>
-
-    <div class="ref">[7] A. Zou, Z. Wang, N. Carlini, M. Nasr, J. Z. Kolter, and M. Fredrikson, “Universal and Transferable Adversarial Attacks on Aligned Language Models,” arXiv:2307.15043, 2023.</div>
-
-    <div class="ref">[8] B. C. Das, M. H. Amini, and Y. Wu, “System Prompt Extraction Attacks and Defenses in Large Language Models,” arXiv:2505.23817, 2025.</div>
-
-    <div class="ref">[9] N. Carlini, F. Tramèr, E. Wallace, M. Jagielski, A. Herbert-Voss, K. Lee, A. Roberts, T. Brown, D. Song, U. Erlingsson, A. Oprea, and C. Raffel, “Extracting Training Data from Large Language Models,” <i>USENIX Security Symposium</i>, 2021.</div>
-
-    <div class="ref">[10] E. Hubinger et al., “Sleeper Agents: Training Deceptive LLMs that Persist Through Safety Training,” arXiv:2401.05566, 2024.</div>
-
-    <div class="ref">[11] Y. Chen, H. Li, Z. Zheng, D. Wu, Y. Song, and B. Hooi, “Defense Against Prompt Injection Attack by Leveraging Attack Techniques,” <i>Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics</i>, pp. 18331–18347, 2025, doi: 10.18653/v1/2025.acl-long.897.</div>
-
-    <div class="ref">[12] C. Xiong, X. Qi, P.-Y. Chen, and T.-Y. Ho, “Defensive Prompt Patch: A Robust and Generalizable Defense of Large Language Models against Jailbreak Attacks,” <i>Findings of ACL 2025</i>, pp. 409–437, 2025, doi: 10.18653/v1/2025.findings-acl.23.</div>
-
-    <div class="ref">[13] A. Yeo and D. Choi, “Multimodal Prompt Injection Attacks: Risks and Defenses for Modern LLMs,” arXiv:2509.05883, 2025.</div>
-
-    <div class="ref">[14] N. Nagaraja, L. Zhang, Z. Wang, B. Zhang, and P. Patil, “Image-based Prompt Injection: Hijacking Multimodal LLMs through Visually Embedded Adversarial Instructions,” arXiv:2603.03637, 2026.</div>
-
-    <div class="ref">[15] Y. Dong et al., “Safeguarding large language models: a survey,” <i>Artificial Intelligence Review</i>, vol. 58, art. 382, 2025, doi: 10.1007/s10462-025-11389-2.</div>
-
-    <div class="ref">[16] J. Zhang et al., “When LLMs meet cybersecurity: a systematic literature review,” <i>Cybersecurity</i>, vol. 8, art. 55, 2025, doi: 10.1186/s42400-025-00361-w.</div>
-
-    <h2>Author Note</h2>
-    <p class="small">
-      <b>Dr. Nitin Mishra</b> is a Professor in the Department of Computer Science and Engineering at Parul University, Vadodara, with research interests spanning artificial intelligence, machine learning, deep learning, and applied AI systems. <b>Dr. Rohit</b> is a Professor in the Department of Computer Science and Engineering at Parul University. The authors present this manuscript as a literature-based conference paper intended to support further empirical work on prompt-security evaluation and secure AI application architecture.
-    </p>
-    <p class="note">
-      <b>Research limitation.</b> This paper is a structured literature review rather than a new experimental benchmark; therefore, the threat taxonomy should be validated further through controlled red-team experiments, cross-model evaluation, and domain-specific deployment studies.
-    </p>
+    <h1>12 Practical Security Checklist</h1>
+    <ul>
+      <li><b>RAG:</b> enforce source permissions, maintain provenance, validate retrieved content, and separate knowledge from instructions.</li>
+      <li><b>Agents:</b> apply least privilege, tool allow-lists, explicit schemas, bounded loops, and human approval for high-impact or irreversible actions.</li>
+      <li><b>Outputs:</b> treat generated text as untrusted until validated; use parameterized interfaces, context-aware encoding, and sandboxing.</li>
+      <li><b>Prompts:</b> keep secrets out of prompts, define instruction priority, minimize context, and test adaptive injection and jailbreak cases.</li>
+      <li><b>Multimodal:</b> inspect visual and document inputs, preserve provenance, and test image-based injection conditions.</li>
+      <li><b>Monitoring:</b> log prompts, provenance, tool calls, policy decisions, and security events in a privacy-conscious manner.</li>
+    </ul>
   </div>
-  <div class="footer">Page 6 of 6 · Conclusion and References</div>
+  <div class="page-number">5</div>
+</section>
+
+<section class="paper">
+  <div class="running">MISHRA AND ROHIT · DISCUSSION AND CONCLUSION</div>
+  <div class="two">
+    <h1>13 Discussion</h1>
+    <p>
+      The literature reviewed here points to a consistent architectural lesson. Prompt injection is often described as a model-behaviour problem, but the most serious consequences usually depend on what surrounds the model. If a chatbot only returns text, an injected instruction may produce an incorrect answer. If the same model can read private records, call tools, send messages, or alter business data, the very same manipulation can become a confidentiality, integrity, or privilege incident [1,3,4].
+    </p>
+    <p>
+      A second observation concerns the nature of natural-language interfaces. Conventional software often separates data from executable instructions by using types, APIs, permissions, and parsers. LLM applications routinely represent both as natural language. A paragraph retrieved from an external website can look syntactically similar to a developer instruction. This makes trust labeling and provenance especially important.
+    </p>
+    <p>
+      A third observation is that attack and defense are developing together. Automatic jailbreak generation [7], indirect-injection benchmarks [3], instruction hierarchy training [5], attack-based defenses [11], and defensive prompt patches [12] all demonstrate active progress. No single technique, however, removes the need for application-level authorization. Security testing should therefore be adaptive and should measure both attack resistance and legitimate task performance.
+    </p>
+    <p>
+      The taxonomy also shows why some threat names must be interpreted carefully. System prompt leakage is not equivalent to compromise of an application; sensitive information disclosure is broader than prompt leakage; prompt-based data exfiltration is an attacker-directed confidentiality outcome; and context hijacking is a mechanism that can appear in several attack types. Keeping these boundaries explicit reduces double counting and makes future empirical studies easier to reproduce.
+    </p>
+
+    <h1>14 Limitations</h1>
+    <p>
+      This work is a structured narrative review and does not present a new experimental benchmark. The evidence base is heterogeneous, and model versions change rapidly. Reported attack success rates are therefore not treated as universal model-security scores. Some emerging threat categories are still evolving, particularly in multimodal and agentic settings. Future empirical work should validate the taxonomy using controlled datasets, repeatable attack protocols, and cross-model experiments.
+    </p>
+
+    <h1>15 Conclusion</h1>
+    <p>
+      Prompt engineering has developed from a technique for improving model responses into an important interface between users, data, models, and applications. That interface can be exploited. This paper consolidates sixteen security threats spanning prompt manipulation, information exposure, model and data integrity, retrieval security, application and agent security, multimodal attacks, and resource consumption. The review shows that the threats are connected: an indirect prompt injection may become a context-hijacking event; a compromised context may lead to data exfiltration; excessive agency can convert the resulting model decision into an external action; and weak output handling can turn generated text into a conventional software vulnerability.
+    </p>
+    <p>
+      The evidence therefore supports a layered security model. Instruction hierarchy and defensive prompts remain useful, but they should sit alongside provenance, retrieval controls, authorization, least privilege, tool validation, output sanitization, monitoring, and recovery mechanisms. This approach is consistent with the broader direction of OWASP, NIST, ISO/IEC 42001, and contemporary AI security research [1,18–21].
+    </p>
+    <p>
+      The next stage of prompt-security research should move from lists of attacks toward measurable system robustness. Multilingual and code-switched evaluation, long-context testing, multimodal attacks, adaptive defenses, provenance-aware prompting, agent-specific metrics, and cross-model transferability are promising areas. In practical terms, the central principle is simple: a prompt may guide an AI system, but it should never be the only thing standing between a model output and a sensitive action.
+    </p>
+
+    <h1>References</h1>
+    <div class="ref"><span class="rnum">[1]</span> OWASP GenAI Security Project, “OWASP Top 10 for LLM and Generative AI Applications,” 2025. <a href="https://genai.owasp.org/initiatives/top-10-for-llm-and-genai/">https://genai.owasp.org/initiatives/top-10-for-llm-and-genai/</a>.</div>
+    <div class="ref"><span class="rnum">[2]</span> Xia, Z., Sun, H., Wang, J., Qi, Q., Wang, H., Fu, X., and Liao, J., “The Threat of PROMPTS in Large Language Models: A System and User Prompt Perspective,” Findings of ACL 2025, pp. 12994–13035, 2025. doi:10.18653/v1/2025.findings-acl.675.</div>
+    <div class="ref"><span class="rnum">[3]</span> Zhan, Q., Liang, Z., Ying, Z., and Kang, D., “InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents,” Findings of ACL 2024, pp. 10471–10506, 2024. doi:10.18653/v1/2024.findings-acl.624.</div>
+    <div class="ref"><span class="rnum">[4]</span> Debenedetti, E., et al., “AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents,” arXiv:2406.13352, 2024.</div>
+    <div class="ref"><span class="rnum">[5]</span> Wallace, E., Xiao, K., Leike, R., Weng, L., Heidecke, J., and Beutel, A., “The Instruction Hierarchy: Training LLMs to Prioritize Privileged Instructions,” arXiv:2404.13208, 2024.</div>
+    <div class="ref"><span class="rnum">[6]</span> Wei, A., Haghtalab, N., and Steinhardt, J., “Jailbroken: How Does LLM Safety Training Fail?,” arXiv:2307.02483, 2023.</div>
+    <div class="ref"><span class="rnum">[7]</span> Zou, A., Wang, Z., Carlini, N., Nasr, M., Kolter, J.Z., and Fredrikson, M., “Universal and Transferable Adversarial Attacks on Aligned Language Models,” arXiv:2307.15043, 2023.</div>
+    <div class="ref"><span class="rnum">[8]</span> Das, B.C., Amini, M.H., and Wu, Y., “System Prompt Extraction Attacks and Defenses in Large Language Models,” arXiv:2505.23817, 2025.</div>
+    <div class="ref"><span class="rnum">[9]</span> Carlini, N., Tramèr, F., Wallace, E., et al., “Extracting Training Data from Large Language Models,” Proceedings of the 30th USENIX Security Symposium, 2021.</div>
+    <div class="ref"><span class="rnum">[10]</span> Hubinger, E., et al., “Sleeper Agents: Training Deceptive LLMs that Persist Through Safety Training,” arXiv:2401.05566, 2024.</div>
+    <div class="ref"><span class="rnum">[11]</span> Chen, Y., Li, H., Zheng, Z., Wu, D., Song, Y., and Hooi, B., “Defense Against Prompt Injection Attack by Leveraging Attack Techniques,” Proceedings of ACL 2025, pp. 18331–18347, 2025. doi:10.18653/v1/2025.acl-long.897.</div>
+    <div class="ref"><span class="rnum">[12]</span> Xiong, C., Qi, X., Chen, P.-Y., and Ho, T.-Y., “Defensive Prompt Patch: A Robust and Generalizable Defense of Large Language Models against Jailbreak Attacks,” Findings of ACL 2025, pp. 409–437, 2025. doi:10.18653/v1/2025.findings-acl.23.</div>
+    <div class="ref"><span class="rnum">[13]</span> Yeo, A. and Choi, D., “Multimodal Prompt Injection Attacks: Risks and Defenses for Modern LLMs,” arXiv:2509.05883, 2025.</div>
+    <div class="ref"><span class="rnum">[14]</span> Nagaraja, N., Zhang, L., Wang, Z., Zhang, B., and Patil, P., “Image-based Prompt Injection: Hijacking Multimodal LLMs through Visually Embedded Adversarial Instructions,” arXiv:2603.03637, 2026.</div>
+    <div class="ref"><span class="rnum">[15]</span> Zhang, J., Bu, H., Wen, H., et al., “When LLMs meet cybersecurity: a systematic literature review,” Cybersecurity, vol. 8, art. 55, 2025. doi:10.1186/s42400-025-00361-w.</div>
+    <div class="ref"><span class="rnum">[16]</span> Huang, X., et al., “Safeguarding large language models: a survey,” Artificial Intelligence Review, 2025. doi:10.1007/s10462-025-11389-2.</div>
+    <div class="ref"><span class="rnum">[17]</span> SLSA, “Provenance,” v1.2, approved specification. <a href="https://slsa.dev/spec/v1.2/provenance">https://slsa.dev/spec/v1.2/provenance</a>.</div>
+    <div class="ref"><span class="rnum">[18]</span> Autio, C., Schwartz, R., Dunietz, J., Jain, S., Stanley, M., Tabassi, E., Hall, P., and Roberts, K., “Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile,” NIST AI 600-1, 2024. doi:10.6028/NIST.AI.600-1.</div>
+    <div class="ref"><span class="rnum">[19]</span> NIST, “AI Risk Management Framework,” including Generative AI Profile resources. <a href="https://www.nist.gov/itl/ai-risk-management-framework">https://www.nist.gov/itl/ai-risk-management-framework</a>.</div>
+    <div class="ref"><span class="rnum">[20]</span> ISO, “ISO/IEC 42001:2023 — Information technology — Artificial intelligence — Management system,” 2023. <a href="https://www.iso.org/standard/42001">https://www.iso.org/standard/42001</a>.</div>
+    <div class="ref"><span class="rnum">[21]</span> European Parliament and Council, “Regulation (EU) 2024/1689 (Artificial Intelligence Act),” Article 15: Accuracy, robustness and cybersecurity, 2024. <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj">https://eur-lex.europa.eu/eli/reg/2024/1689/oj</a>.</div>
+
+    <div class="footer-note">
+      <b>Author information.</b> Dr. Nitin Mishra is Professor, Department of Computer Science and Engineering, Parul University, Vadodara, Gujarat, India. Dr. Rohit is Professor, Department of Computer Science and Engineering, Parul University. This manuscript is a literature-based review and taxonomy paper; the authors’ empirical validation agenda is described as future work.
+    </div>
+  </div>
+  <div class="page-number">6</div>
 </section>
 
 </body>
