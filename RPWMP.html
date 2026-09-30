@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Master Prompt — Springer Nature Research Paper</title>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f3f5f7;
+        margin: 0;
+        color: #222;
+        line-height: 1.6;
+    }
+    .toolbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: #ffffff;
+        border-bottom: 1px solid #ddd;
+        padding: 12px 20px;
+        text-align: right;
+    }
+    .print-button {
+        border: 0;
+        padding: 10px 18px;
+        border-radius: 6px;
+        background: #222;
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+    }
+    .paper-container {
+        max-width: 950px;
+        margin: 30px auto;
+        background: white;
+        padding: 55px 65px;
+        box-shadow: 0 2px 14px rgba(0,0,0,.10);
+    }
+    h1 {
+        font-size: 30px;
+        margin-top: 0;
+        border-bottom: 2px solid #222;
+        padding-bottom: 12px;
+    }
+    h2 {
+        margin-top: 34px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 5px;
+    }
+    h3 {
+        margin-top: 24px;
+    }
+    pre {
+        background: #f5f5f5;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 16px;
+        overflow-x: auto;
+        white-space: pre-wrap;
+    }
+    code {
+        font-family: Consolas, monospace;
+    }
+    .author-box {
+        background: #f7f9fb;
+        border-left: 4px solid #444;
+        padding: 15px 20px;
+        margin: 20px 0;
+    }
+    .note {
+        background: #fff8e8;
+        border: 1px solid #ead9a7;
+        padding: 14px 18px;
+        border-radius: 6px;
+    }
+    li { margin-bottom: 7px; }
+    @media print {
+        .toolbar { display: none; }
+        body { background: white; }
+        .paper-container {
+            box-shadow: none;
+            margin: 0;
+            max-width: none;
+            padding: 20mm;
+        }
+        h2, h3 { break-after: avoid; }
+        pre { white-space: pre-wrap; }
+    }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+    <button class="print-button" onclick="window.print()">🖨 Print Prompt</button>
+</div>
+
+<main class="paper-container">
+<h1>Master Prompt — Springer Nature Research Paper in HTML</h1>
+
+<p><strong>Purpose:</strong> This prompt first asks for the research paper title and then generates a rigorous Springer Nature–style research paper as a professional, standalone HTML document with an A4 print layout and working print button.</p>
+
+<h2>STEP 1 — ASK FOR THE TITLE</h2>
+<p>Do not start writing the paper immediately.</p>
+<p>First ask me only:</p>
+<p><strong>“Please provide the research paper title.”</strong></p>
+<p>After I provide the title, develop the complete research paper according to the instructions below.</p>
+
+<h2>AUTHOR INFORMATION — ALWAYS USE THESE AUTHORS</h2>
+
+<div class="author-box">
+<strong>Author 1</strong><br>
+Dr. Nitin Mishra<br>
+Professor, Department of Computer Science and Engineering<br>
+Parul University, Vadodara, Gujarat, India<br>
+Email: drnitinmishra10@gmail.com
+</div>
+
+<div class="author-box">
+<strong>Author 2</strong><br>
+Dr. Rohit<br>
+Professor, Department of Computer Science and Engineering<br>
+Parul University, Vadodara, Gujarat, India<br>
+Email: rohitiiit@gmail.com
+</div>
+
+<p>Display the authors professionally as:</p>
+<p><strong>Dr. Nitin Mishra¹ and Dr. Rohit²</strong></p>
+
+<p><strong>¹</strong> Department of Computer Science and Engineering, Parul University, Vadodara, Gujarat, India</p>
+<p><strong>²</strong> Department of Computer Science and Engineering, Parul University, Vadodara, Gujarat, India</p>
+
+<p><strong>Corresponding author:</strong><br>
+Dr. Nitin Mishra<br>
+Email: drnitinmishra10@gmail.com</p>
+
+<p>Do not invent additional authors, affiliations, departments, ORCID IDs, phone numbers, addresses, or author contributions.</p>
+
+<h2>STEP 2 — DEVELOP THE RESEARCH PAPER</h2>
+
+<p>Based on the title I provide, develop a rigorous, publication-oriented research paper following a <strong>Springer Nature–style academic structure</strong>.</p>
+
+<p>The paper should be suitable for further refinement and submission to an appropriate Springer Nature journal.</p>
+
+<div class="note">
+<strong>Never fabricate:</strong> research results, experimental values, references, authors, DOI numbers, dataset statistics, citations, institutional information, or claims of novelty.
+</div>
+
+<p>If experimental results are not supplied, clearly identify proposed/illustrative results or provide tables/templates that can be populated with actual experimental results.</p>
+
+<h2>SPRINGER NATURE PAPER STRUCTURE</h2>
+
+<h3>Title</h3>
+<p>Create a precise, concise, research-oriented title. If the supplied title is already appropriate, retain it.</p>
+
+<h3>Authors and Affiliations</h3>
+<p>Always use <strong>Dr. Nitin Mishra¹ and Dr. Rohit²</strong> with the Parul University affiliations specified above.</p>
+
+<h3>Abstract</h3>
+<p>Write approximately 200–300 words covering background, research problem, research gap, proposed methodology, dataset/data source, experimental approach, key findings, and main contribution. Do not claim experimental findings unless actual results are available.</p>
+
+<h3>Keywords</h3>
+<p>Provide 5–8 relevant keywords.</p>
+
+<h3>1 Introduction</h3>
+<ul>
+<li>Research background</li>
+<li>Importance of the problem</li>
+<li>Existing challenges</li>
+<li>Current state of research</li>
+<li>Motivation</li>
+<li>Research gap</li>
+<li>Research objectives</li>
+<li>Main contributions</li>
+<li>Organization of the paper</li>
+</ul>
+
+<h3>2 Related Work</h3>
+<p>Provide a critical literature review rather than a simple summary. Discuss existing approaches, AI/ML/DL models, datasets, methodologies, advantages, limitations, and research trends.</p>
+
+<p>Include a comparison table:</p>
+<pre><code>| Study | Year | Dataset | Method | Key Finding | Limitation |
+|---|---|---|---|---|---|</code></pre>
+
+<p>Use recent peer-reviewed literature where possible. Do not fabricate references.</p>
+
+<h3>3 Research Gap and Objectives</h3>
+<p>Clearly explain the research gap, research problem, 3–5 measurable research objectives, and research questions where appropriate.</p>
+
+<h3>4 Materials and Methods</h3>
+<p>Develop a detailed and reproducible methodology.</p>
+<ul>
+<li>Dataset and data source</li>
+<li>Number of samples and classes, where verified</li>
+<li>Data preprocessing</li>
+<li>Data cleaning</li>
+<li>Missing-value handling</li>
+<li>Normalization/standardization</li>
+<li>Image resizing/noise removal where relevant</li>
+<li>Data augmentation</li>
+<li>Class balancing</li>
+<li>Feature engineering and selection</li>
+<li>Proposed model</li>
+<li>Algorithms and architecture</li>
+<li>Hyperparameters</li>
+<li>Optimization and training strategy</li>
+<li>Training/validation/test split</li>
+<li>Cross-validation</li>
+<li>Baseline models</li>
+<li>Hardware/software/frameworks</li>
+<li>Evaluation metrics</li>
+</ul>
+
+<h3>5 Proposed Framework</h3>
+<p>Provide a detailed explanation of the proposed framework including system architecture, data flow, processing pipeline, model components, input/output, training workflow, prediction workflow, and mathematical formulation where appropriate.</p>
+
+<h3>6 Experimental Results</h3>
+<p>Cover overall performance, baseline comparison, ablation study, error analysis, computational performance, and explainability analysis where relevant.</p>
+
+<div class="note">
+<strong>Important:</strong> Never present invented numerical results as actual experimental findings. If actual results are unavailable, use “Illustrative Result Structure — Replace with Experimental Results” or provide blank/placeholder tables.
+</div>
+
+<h3>7 Discussion</h3>
+<p>Discuss interpretation of results, comparison with previous research, strengths, practical implications, theoretical implications, model behaviour, possible reasons for observed performance, and generalizability.</p>
+
+<h3>8 Explainability and Interpretability</h3>
+<p>Where relevant, incorporate SHAP, LIME, Grad-CAM, attention maps, feature importance, or counterfactual explanations.</p>
+
+<h3>9 Limitations</h3>
+<p>Discuss dataset limitations, sample size, class imbalance, bias, generalizability, computational requirements, model limitations, external validation, and deployment constraints.</p>
+
+<h3>10 Future Research</h3>
+<p>Suggest realistic future research directions based on the identified limitations and research gap.</p>
+
+<h3>11 Conclusion</h3>
+<p>Summarize the research problem, methodology, contribution, major findings, scientific/practical significance, and future direction. Do not introduce unsupported new claims.</p>
+
+<h2>DECLARATIONS</h2>
+
+<h3>Funding</h3>
+<p>Unless different information is provided, use: <strong>No specific funding was received for this research.</strong></p>
+
+<h3>Data Availability</h3>
+<p>Do not invent availability information. If unavailable, use: <strong>Data availability: [To be specified by the authors based on the dataset used.]</strong></p>
+
+<h3>Code Availability</h3>
+<p>Use a placeholder when code availability has not been specified.</p>
+
+<h3>Ethics Approval</h3>
+<p>Include only when relevant. Do not fabricate ethics approval numbers.</p>
+
+<h3>Consent to Participate / Consent for Publication</h3>
+<p>Include only when applicable.</p>
+
+<h3>Competing Interests</h3>
+<p>Unless different information is provided, use: <strong>The authors declare no competing interests.</strong></p>
+
+<h3>Author Contributions</h3>
+<p>Do not invent specific contributions. If required, use:</p>
+<p><strong>Author Contributions:</strong> [To be finalized by the authors according to the actual contributions of Dr. Nitin Mishra and Dr. Rohit.]</p>
+
+<h2>REFERENCES</h2>
+<ul>
+<li>Use a consistent Springer Nature-compatible reference style.</li>
+<li>Prefer peer-reviewed sources.</li>
+<li>Prioritize recent research.</li>
+<li>Include seminal papers when necessary.</li>
+<li>Verify bibliographic details when web access is available.</li>
+<li>Never fabricate citations or DOI numbers.</li>
+<li>Ensure every in-text citation appears in the reference list.</li>
+<li>Ensure every reference in the bibliography is actually used.</li>
+</ul>
+
+<h2>FIGURES</h2>
+<p>Recommend publication-quality figures such as:</p>
+<ul>
+<li>Fig. 1. Overall research methodology</li>
+<li>Fig. 2. Proposed system architecture</li>
+<li>Fig. 3. Data preprocessing pipeline</li>
+<li>Fig. 4. Proposed deep learning architecture</li>
+<li>Fig. 5. Experimental workflow</li>
+<li>Fig. 6. Confusion matrix</li>
+<li>Fig. 7. Performance comparison</li>
+<li>Fig. 8. Explainability analysis</li>
+</ul>
+<p>For each conceptual figure, provide a professional prompt for generating a scientific diagram. Do not generate fake experimental graphs or performance plots unless actual data is available.</p>
+
+<h2>TABLES</h2>
+<ul>
+<li>Table 1. Literature comparison</li>
+<li>Table 2. Dataset characteristics</li>
+<li>Table 3. Experimental parameters</li>
+<li>Table 4. Model architecture</li>
+<li>Table 5. Performance comparison</li>
+<li>Table 6. Ablation study</li>
+<li>Table 7. Computational complexity</li>
+<li>Table 8. Limitations and future research</li>
+</ul>
+
+<h2>NOVELTY ANALYSIS</h2>
+<p>At the end, provide:</p>
+<ul>
+<li>Research Problem</li>
+<li>Research Gap</li>
+<li>Proposed Solution</li>
+<li>Key Contribution</li>
+<li>Potential Novelty</li>
+<li>Practical Contribution</li>
+<li>Theoretical Contribution</li>
+</ul>
+<p>Do not claim novelty without supporting evidence from the literature.</p>
+
+<h2>HTML OUTPUT REQUIREMENTS</h2>
+<p>The final paper must be returned as a <strong>complete standalone HTML5 document</strong> using responsive CSS, professional academic styling, Springer-like clean typography, proper heading hierarchy, academic tables, figure placeholders, mathematical equations where required, numbered sections, proper citation formatting, and print-friendly styling.</p>
+
+<p>The HTML must begin with:</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+...
+&lt;/head&gt;
+&lt;body&gt;
+...
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<h2>PRINT BUTTON</h2>
+<p>At the top of the paper, include a prominent <strong>🖨 Print Paper</strong> button.</p>
+
+<pre><code>&lt;button onclick="window.print()" class="print-button"&gt;
+    🖨 Print Paper
+&lt;/button&gt;</code></pre>
+
+<p>Add print-specific CSS:</p>
+
+<pre><code>@media print {
+    .print-button {
+        display: none;
+    }
+
+    body {
+        background: white;
+    }
+
+    .paper-container {
+        box-shadow: none;
+        margin: 0;
+        max-width: none;
+    }
+}</code></pre>
+
+<p>The printed version should contain only the research paper and should be cleanly formatted for A4 printing.</p>
+
+<h2>HTML DESIGN</h2>
+<ul>
+<li>A4 paper layout</li>
+<li>White background</li>
+<li>Academic typography</li>
+<li>Clear section numbering</li>
+<li>Readable line spacing</li>
+<li>Proper margins</li>
+<li>Responsive tables</li>
+<li>Figure captions</li>
+<li>Table captions</li>
+<li>Page-break-friendly sections</li>
+<li>Print-friendly formatting</li>
+<li>No unnecessary animations</li>
+<li>No advertisements</li>
+<li>No unnecessary external UI elements</li>
+</ul>
+
+<h2>FINAL QUALITY CONTROL</h2>
+<ol>
+<li>The title accurately represents the research.</li>
+<li>Dr. Nitin Mishra and Dr. Rohit are correctly listed as authors.</li>
+<li>Both authors have the correct Parul University affiliation.</li>
+<li>Both email addresses are correctly included.</li>
+<li>The research gap is clearly identified.</li>
+<li>The literature review supports the research gap.</li>
+<li>Objectives align with methodology.</li>
+<li>Methodology addresses the research problem.</li>
+<li>Evaluation metrics are appropriate.</li>
+<li>Results are not fabricated.</li>
+<li>References are not fabricated.</li>
+<li>Citations and references are consistent.</li>
+<li>Limitations are acknowledged.</li>
+<li>Conclusions are supported by the paper.</li>
+<li>HTML is valid and self-contained.</li>
+<li>The print button works.</li>
+<li>Print CSS removes the button.</li>
+<li>The paper is readable in browser and A4 print format.</li>
+</ol>
+
+<h2>WORKFLOW</h2>
+<p><strong>First response:</strong> Ask only:</p>
+<p><strong>“Please provide the research paper title.”</strong></p>
+
+<p><strong>After receiving the title:</strong> Generate the complete Springer Nature–style research paper with Dr. Nitin Mishra and Dr. Rohit as authors, Parul University affiliations, correct email addresses, complete academic structure, literature review, research gap, methodology, results framework, discussion, limitations, future research, conclusion, references, figures and figure-generation prompts, tables, declarations, professional HTML5 formatting, A4 print layout, and a working <strong>🖨 Print Paper</strong> button.</p>
+
+</main>
+</body>
+</html>
