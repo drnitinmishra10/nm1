@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Representational Bias in Machine Learning: A Focused Review and a Targeted Dataset Repair Framework
+  </title>
+  <style>
+   :root { --ink:#111; --muted:#444; --line:#777; --paper:#fff; --screen:#e9e9e9; }
+* { box-sizing:border-box; }
+html { background:var(--screen); }
+body { margin:0; color:var(--ink); background:var(--paper); font-family:"Times New Roman", Times, serif; font-size:10.5pt; line-height:1.32; }
+.toolbar { position:sticky; top:0; z-index:20; display:flex; justify-content:flex-end; padding:10px 18px; background:#fff; border-bottom:1px solid #aaa; font-family:Arial, sans-serif; }
+button { border:1px solid #111; background:#111; color:#fff; border-radius:4px; padding:9px 15px; font-size:13px; cursor:pointer; }
+.paper { max-width:1160px; margin:24px auto; padding:30px 38px 42px; background:#fff; box-shadow:0 1px 12px #c9c9c9; }
+.paper-title { max-width:930px; margin:3px auto 14px; text-align:center; font-size:23pt; line-height:1.15; font-weight:700; }
+.authors { margin:0 0 8px; text-align:center; font-size:12pt; font-weight:700; }
+.affiliation { max-width:900px; margin:0 auto 18px; text-align:center; font-size:9.5pt; line-height:1.35; }
+.affiliation-entry { margin:2px 0; }
+.author-email { font-size:9pt; }
+.abstract { max-width:1000px; margin:0 auto 12px; text-align:justify; }
+.abstract h2 { margin:0 0 5px; text-align:center; font-size:11pt; letter-spacing:.35px; }
+.keywords { margin:9px 0 18px; font-size:9.5pt; }
+.body { column-count:2; column-gap:28px; column-rule:1px solid #ddd; text-align:justify; }
+.section { break-inside:auto; }
+h1 { margin:13px 0 6px; font-size:12.4pt; line-height:1.16; break-after:avoid; }
+h2 { margin:10px 0 4px; font-size:10.8pt; line-height:1.18; break-after:avoid; }
+h3 { margin:8px 0 3px; font-size:10.3pt; line-height:1.18; break-after:avoid; }
+p { margin:0 0 6px; text-indent:1em; orphans:3; widows:3; }
+.no-indent { text-indent:0; }
+ul, ol { margin:4px 0 8px; padding-left:19px; }
+li { margin:0 0 3px; }
+.equation { margin:8px 0 10px; text-align:center; font-style:italic; }
+.table-wrap { column-span:all; width:100%; margin:9px 0 13px; break-inside:avoid; }
+table { width:100%; border-collapse:collapse; font-size:8.8pt; line-height:1.22; }
+th, td { border:0.7px solid #555; padding:6px 7px; vertical-align:top; overflow-wrap:anywhere; }
+th { text-align:center; background:#eee; }
+.caption { margin:4px 0 5px; text-align:center; font-size:8.8pt; font-weight:700; }
+.framework { column-span:all; margin:10px 0 13px; padding:10px; border:1px solid #555; break-inside:avoid; }
+.framework-title { margin-bottom:7px; text-align:center; font-weight:700; }
+.flow { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px; }
+.step { padding:8px; border:1px solid #777; background:#fafafa; text-align:center; font-size:8.8pt; }
+.step b { display:block; margin-bottom:4px; }
+.note { margin:7px 0; padding:6px 9px; border-left:3px solid #444; background:#f6f6f6; font-size:9.2pt; }
+.references { margin-top:12px; column-count:2; column-gap:25px; column-rule:1px solid #ddd; }
+.references h1 { column-span:all; margin:0 0 8px; text-align:center; font-size:12pt; }
+.ref-list { margin:0; padding:0; list-style:none; counter-reset:ref; }
+.ref-list li { position:relative; margin:0 0 7px; padding-left:26px; font-size:8.7pt; line-height:1.25; overflow-wrap:anywhere; break-inside:avoid; counter-increment:ref; }
+.ref-list li::before { position:absolute; left:0; top:0; content:"[" counter(ref) "]"; }
+a { color:#111; overflow-wrap:anywhere; }
+@media screen and (max-width:760px) {
+  .paper { margin:0; padding:20px 16px 30px; box-shadow:none; }
+  .paper-title { font-size:20pt; }
+  .body, .references { column-count:1; column-rule:0; }
+  .flow { grid-template-columns:1fr; }
+  .table-wrap { overflow-x:auto; }
+  table { min-width:620px; }
+}
+@media print {
+  @page { size:A4; margin:13mm 12mm 14mm; }
+  html, body { background:#fff; }
+  body { font-size:9.4pt; line-height:1.22; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .toolbar { display:none !important; }
+  .paper { width:auto; max-width:none; margin:0; padding:0; box-shadow:none; }
+  .paper-title { max-width:none; margin:0 auto 9px; font-size:18.5pt; line-height:1.12; }
+  .authors { font-size:10.5pt; margin-bottom:5px; }
+  .affiliation { margin-bottom:11px; font-size:8.4pt; line-height:1.25; }
+  .author-email { font-size:8.2pt; }
+  .abstract { font-size:8.9pt; margin-bottom:8px; }
+  .abstract h2 { font-size:9.7pt; }
+  .keywords { margin:6px 0 10px; font-size:8.5pt; }
+  .body { column-count:2; column-gap:18px; column-rule:.5px solid #ccc; }
+  h1 { margin:8px 0 4px; font-size:10.6pt; }
+  h2 { margin:7px 0 3px; font-size:9.4pt; }
+  h3 { margin:6px 0 2px; font-size:9.1pt; }
+  p { margin-bottom:4px; }
+  .table-wrap { margin:6px 0 8px; }
+  table { font-size:7.4pt; line-height:1.15; }
+  th, td { padding:4px 5px; }
+  .caption { font-size:7.8pt; }
+  .framework { margin:6px 0 8px; padding:6px; }
+  .flow { gap:5px; }
+  .step { padding:5px; font-size:7.4pt; }
+  .references { margin-top:8px; column-count:2; column-gap:18px; column-rule:.5px solid #ccc; }
+  .references h1 { font-size:10.5pt; }
+  .ref-list li { font-size:7.6pt; line-height:1.15; margin-bottom:4px; }
+  a { text-decoration:none; }
+}
+  </style>
+ </head>
+ <body>
+  <div class="toolbar">
+   <button onclick="window.print()">
+    Print / Save as PDF
+   </button>
+  </div>
+  <main class="paper">
+   <header>
+    <div class="paper-title">
+     Representational Bias in Machine Learning: A Focused Review and a Targeted Dataset Repair Framework
+    </div>
+    <div class="authors">
+     Dr. Nitin Mishra
+     <sup>
+      1
+     </sup>
+     , Swati Atre
+     <sup>
+      2
+     </sup>
+    </div>
+    <div class="affiliation">
+     <div class="affiliation-entry">
+      <sup>
+       1
+      </sup>
+      Professor, Department of Computer Science and Engineering, Parul University, Vadodara, Gujarat, India
+     </div>
+     <div class="affiliation-entry">
+      <sup>
+       2
+      </sup>
+      Ph.D. Scholar, SAM Global University, Bhopal, Madhya Pradesh, India
+      <br/>
+      <span class="author-email">
+       Email:
+       <a href="mailto:swatiatre@cvrump.ac.in">
+        swatiatre@cvrump.ac.in
+       </a>
+      </span>
+     </div>
+    </div>
+   </header>
+   <section class="abstract">
+    <h2>
+     ABSTRACT
+    </h2>
+    <p class="no-indent">
+     Representational bias occurs when the composition of a machine-learning dataset inadequately reflects the population, environments, or conditions for which a model is intended. It can produce uneven model performance while remaining hidden behind strong aggregate accuracy. This paper presents a focused review of strategies proposed in the literature for identifying and mitigating representational bias, distinguishing demographic or contextual representation mismatch from class imbalance, because balancing outcome labels does not necessarily improve coverage of protected or otherwise underrepresented groups. The review synthesizes data collection and curation, resampling, reweighting, fairness-aware learning, post-processing, subgroup evaluation, and dataset documentation, drawing on surveys by Caton and Haas and Mehrabi et&nbsp;al., a systematic mapping of imbalanced-data preprocessing by de&nbsp;Vargas et&nbsp;al., and recent healthcare reviews by Ruback et&nbsp;al. and Gadhoumi et&nbsp;al. Building on this synthesis, the paper proposes a targeted dataset repair framework organized around a quantitative representation gap, a diagnosis-first ordering of steps, and a least-disruptive-suitable-repair principle. The framework is contrasted with the NIST AI Risk Management Framework and the STANDING Together recommendations, from which it differs in operationalizing repair selection and validation for dataset-level interventions. The framework is conceptual and has not yet been empirically validated; it is intended to guide reproducible comparative experiments. The paper concludes with research questions concerning minimal repair, intersectional coverage, fairness&ndash;utility trade-offs, and the generalization of corrections across datasets.
+    </p>
+   </section>
+   <div class="keywords">
+    <b>
+     Keywords&mdash;
+    </b>
+    Representational bias, dataset bias, machine-learning fairness, underrepresentation, overrepresentation, class imbalance, reweighting, resampling, subgroup evaluation, dataset repair.
+   </div>
+   <div class="body">
+    <section class="section">
+     <h1>
+      I. INTRODUCTION
+     </h1>
+     <p>
+      Machine-learning systems are increasingly used in decisions involving healthcare, recruitment, credit, education, and identity verification. Their performance depends not only on model architecture and optimization, but also on which people, circumstances, and outcomes are captured in the data. A dataset may be large and internally consistent yet remain unsuitable for its intended deployment population. Non-representative data can distort model evaluation and lead to different error rates across groups [1], [2].
+     </p>
+     <p>
+      Representational bias is often discussed alongside class imbalance, sampling bias, and algorithmic unfairness. These concepts overlap but are not interchangeable. Class imbalance concerns the distribution of outcome labels; representational bias concerns whether the dataset adequately reflects the target population or relevant conditions. A dataset can contain equal numbers of positive and negative labels while still having very few examples from a particular age group, geographic region, skin tone, disability status, or intersection of attributes [3].
+     </p>
+     <p>
+      This paper has three aims: (1) synthesize commonly used mitigation strategies in the literature; (2) clarify how underrepresentation and overrepresentation should be assessed against a defined target population; and (3) propose a practical, explainable sequence for choosing and evaluating targeted dataset repairs. The scope of the review is deliberately limited to dataset composition and dataset-level interventions; sources of unfairness arising purely from model optimization, and fairness issues arising at deployment or from human use of model outputs, are not covered in depth. This is a focused literature review and conceptual synthesis, not a report of new empirical model experiments.
+     </p>
+    </section>
+    <section class="section">
+     <h1>
+      II. DEFINITIONS AND CONCEPTUAL DISTINCTIONS
+     </h1>
+     <h2>
+      A. Underrepresentation and overrepresentation
+     </h2>
+     <p>
+      Underrepresentation occurs when a group appears less frequently in the dataset than would be expected for the intended use. Overrepresentation occurs when a group occupies a greater share than its share in that target population. Both judgments require a reference distribution. A lower count relative to another group is not, on its own, proof of underrepresentation.
+     </p>
+     <p>
+      Let
+      <i>
+       q
+      </i>
+      <sub>
+       g
+      </sub>
+      denote the share of group
+      <i>
+       g
+      </i>
+      in the dataset and
+      <i>
+       p
+      </i>
+      <sub>
+       g
+      </sub>
+      its share in a justified target-population reference. A simple diagnostic representation gap is:
+     </p>
+     <div class="equation">
+      &Delta;
+      <sub>
+       g
+      </sub>
+      = q
+      <sub>
+       g
+      </sub>
+      &minus; p
+      <sub>
+       g
+      </sub>
+      , &nbsp; where q
+      <sub>
+       g
+      </sub>
+      = N
+      <sub>
+       g
+      </sub>
+      /N.
+     </div>
+     <p>
+      A negative value indicates a lower dataset share than the reference; a positive value indicates a higher share. This difference is a descriptive diagnostic, not a complete fairness metric. In the framework proposed in Section&nbsp;VI, a gap triggers closer inspection when |&Delta;
+      <sub>
+       g
+      </sub>
+      | exceeds a pre-specified tolerance &tau; (for example, 10 percentage points, set with stakeholders rather than universally). The reference distribution must match the use case, be justified, and account for relevant context. For an intersectional group, the same calculation is applied to a defined combination of attributes, written &Delta;
+      <sub>
+       g
+       <sub>
+        1
+       </sub>
+       &cap;g
+       <sub>
+        2
+       </sub>
+      </sub>
+      , where sample sizes and privacy permit; intersectional gaps are flagged for scrutiny at smaller absolute counts because estimates are less stable.
+     </p>
+     <h2>
+      B. Illustration
+     </h2>
+     <p>
+      Suppose the target population is estimated to be 60% urban and 40% rural, but the training data are 90% urban and 10% rural. The mismatch produces overrepresentation of one group and underrepresentation of the other at the same time, and the diagnosis would change entirely if the reference distribution itself were 90/10.
+     </p>
+     <h2>
+      C. Representation bias versus class imbalance
+     </h2>
+     <p>
+      Class imbalance is a difference in the prevalence of outcome labels, such as positive versus negative disease labels. Representation bias concerns group or context coverage. The two may co-occur, but solving one does not guarantee solving the other. Dablain et&nbsp;al. explicitly distinguish protected-feature bias from class imbalance and propose separate mechanisms within their Fair OverSampling approach [3].
+     </p>
+    </section>
+    <div class="table-wrap">
+     <div class="caption">
+      TABLE I. REPRESENTATION GAPS IN THE ILLUSTRATIVE EXAMPLE
+     </div>
+     <table>
+      <thead>
+       <tr>
+        <th>
+         Group
+         <i>
+          g
+         </i>
+        </th>
+        <th>
+         Dataset share q
+         <sub>
+          g
+         </sub>
+        </th>
+        <th>
+         Target share p
+         <sub>
+          g
+         </sub>
+        </th>
+        <th>
+         Gap &Delta;
+         <sub>
+          g
+         </sub>
+         (pp)
+        </th>
+        <th>
+         Interpretation (with &tau; = 10 pp)
+        </th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr>
+        <td>
+         Urban
+        </td>
+        <td>
+         0.90
+        </td>
+        <td>
+         0.60
+        </td>
+        <td>
+         +30
+        </td>
+        <td>
+         Overrepresented; exceeds &tau;
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Rural
+        </td>
+        <td>
+         0.10
+        </td>
+        <td>
+         0.40
+        </td>
+        <td>
+         &minus;30
+        </td>
+        <td>
+         Underrepresented; exceeds &tau;
+        </td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <section class="section">
+     <h1>
+      III. REVIEW METHOD
+     </h1>
+     <p>
+      This paper uses a focused narrative review of peer-reviewed surveys, systematic reviews, foundational methods papers, and authoritative guidance. Searches were conducted in IEEE Xplore, the ACM Digital Library, Scopus, and PubMed, with backward and forward citation chasing in Google Scholar, covering the period 2002 (the year of the SMOTE publication) through October 2026. Example search strings combined terms such as &ldquo;representational bias,&rdquo; &ldquo;dataset bias,&rdquo; &ldquo;fairness mitigation,&rdquo; &ldquo;reweighting,&rdquo; &ldquo;oversampling,&rdquo; &ldquo;underrepresentation,&rdquo; and &ldquo;subgroup evaluation&rdquo; with &ldquo;machine learning.&rdquo;
+     </p>
+     <p>
+      Sources were included if they were peer-reviewed, issued as authoritative guidance by a recognized standards body, or were methodologically relevant preprints clearly identified as such; all selected sources addressed dataset composition, dataset-level mitigation, or subgroup evaluation directly. Sources were excluded if they addressed fairness only at the model-optimization level without a dataset component, or if publication details could not be checked against a publisher, PubMed, or an official institutional page. Screening produced the reference set of 20 sources listed at the end of the paper. The synthesis is organized around the strategy taxonomy described in Section&nbsp;IV and the recent-review themes described in Section&nbsp;V, including the surveys of Caton and Haas [1] and Mehrabi et&nbsp;al. [13], the systematic mapping study of imbalanced-data preprocessing by de&nbsp;Vargas et&nbsp;al. [14], research connecting class imbalance and protected-feature bias [3], and healthcare reviews by Ruback et&nbsp;al. [18] and Gadhoumi et&nbsp;al. [19]. NIST AI Risk Management Framework guidance [16] and the STANDING Together recommendations [15] inform the discussion of representativeness, documentation, and group-wise evaluation.
+     </p>
+     <p class="no-indent">
+      <b>
+       Scope limitation:
+      </b>
+      this is not a PRISMA systematic review. It does not claim exhaustive database coverage, a complete screening log with inter-rater agreement, a formal risk-of-bias assessment, or a pooled quantitative effect estimate. Only English-language sources were considered. The purpose is to organize recurring methods and derive a framework for future empirical testing.
+     </p>
+    </section>
+    <div class="table-wrap">
+     <div class="caption">
+      TABLE II. COMPOSITION OF THE REVIEWED SOURCE SET
+     </div>
+     <table>
+      <thead>
+       <tr>
+        <th style="width:34%">
+         Source type
+        </th>
+        <th style="width:14%">
+         Count
+        </th>
+        <th style="width:52%">
+         Role in the synthesis
+        </th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr>
+        <td>
+         Broad fairness surveys
+        </td>
+        <td>
+         2
+        </td>
+        <td>
+         Taxonomy of preprocessing / in-processing / post-processing; fairness definitions and trade-offs [1], [13]
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Foundational methods papers
+        </td>
+        <td>
+         7
+        </td>
+        <td>
+         SMOTE and derivatives, reweighting, constrained and post-hoc fairness methods [4]&ndash;[10]
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Systematic reviews / mappings
+        </td>
+        <td>
+         4
+        </td>
+        <td>
+         Evidence on prevalence and reported effectiveness of data-level mitigation [3], [14], [18], [19]
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Standards and consensus guidance
+        </td>
+        <td>
+         2
+        </td>
+        <td>
+         Representativeness thresholds, disaggregated evaluation, dataset documentation [15], [16]
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Legal / critical perspective
+        </td>
+        <td>
+         1
+        </td>
+        <td>
+         Disparate-impact framing linking data practices to outcomes [2]
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Dataset documentation
+        </td>
+        <td>
+         1
+        </td>
+        <td>
+         Datasheets as the documentation instrument for Step 6 of the framework [20]
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Measurement trade-offs
+        </td>
+        <td>
+         2
+        </td>
+        <td>
+         Incompatibility results among fairness criteria [11], [12]
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Data-preprocessing survey
+        </td>
+        <td>
+         1
+        </td>
+        <td>
+         Survey of bias-addressing preprocessing techniques [17]
+        </td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <section class="section">
+     <h1>
+      IV. MITIGATION STRATEGIES REPORTED IN RESEARCH
+     </h1>
+     <h2>
+      A. Representative and targeted data collection
+     </h2>
+     <p>
+      Collecting genuine examples from groups, locations, devices, and operating conditions that are missing from the dataset is the most direct response when feasible. Data collection should be guided by the intended use population, not by an assumption that every group must have the same number of examples. Data curators should record inclusion and exclusion criteria, collection setting, group composition, known missing populations, and changes in data acquisition [15], [16]. Data collection may be costly, slow, privacy-sensitive, or impractical for rare events; those constraints should be recorded rather than concealed.
+     </p>
+     <h2>
+      B. Oversampling, undersampling, and synthetic data
+     </h2>
+     <p>
+      Oversampling increases the frequency or training influence of selected examples; undersampling removes or reduces selected examples from dominant subsets. Hybrid procedures combine both. SMOTE generates synthetic minority-class examples by interpolating among nearby examples, and the foundational work shows that combining oversampling and undersampling can improve performance for some imbalanced classification tasks [4]. Adaptive and boundary-focused variants such as ADASYN [5] and Borderline-SMOTE [6] concentrate synthetic generation where the class boundary is hardest. Fairness-aware variants such as FairSMOTE generate synthetic examples while also decoupling the class label from protected attributes, targeting both imbalance and protected-feature bias at the data level [7].
+     </p>
+     <p>
+      However, these methods were designed for class imbalance and do not automatically correct demographic representativeness. Applying SMOTE-style interpolation within a heterogeneous protected group without checking data geometry, labels, and subgroup validity can create out-of-manifold samples or amplify existing label errors, and random oversampling duplicates whatever noise the original records contain. Both risks are compounded when synthetic records leak beyond the training partition (see Section&nbsp;VI.E).
+     </p>
+     <h2>
+      C. Reweighting and cost-sensitive learning
+     </h2>
+     <p>
+      Reweighting leaves records intact but changes their contribution to the training objective. Examples from selected underrepresented or disadvantaged groups may receive higher weights, so errors on those examples matter more during training. Kamiran and Calders provide foundational data-preprocessing methods aimed at reducing discriminatory outcomes [8]. Reweighting can be useful where each group has some adequate support but unequal representation or outcomes persist. It cannot create new information for groups with extremely few examples, and extreme weights can increase variance or overfit the available cases.
+     </p>
+     <h2>
+      D. Fairness-aware in-processing
+     </h2>
+     <p>
+      In-processing methods modify the learning algorithm through fairness constraints, regularization, adversarial learning, or alternative optimization objectives. Constraint-based approaches bound a chosen disparity measure during training [9]; adversarial approaches train a predictor against a group-attribute classifier; regularization approaches add a fairness penalty to the loss. Caton and Haas organize these interventions together with preprocessing and post-processing families and discuss their assumptions and challenges [1]. These methods may reduce a specified disparity, but outcomes depend on the fairness definition, application, and available features. There may be trade-offs between predictive utility, group fairness criteria, calibration, and operational requirements, and the choice of constraint embeds a normative judgment that should be made explicit rather than defaulted [11], [12].
+     </p>
+     <h2>
+      E. Post-processing and decision thresholds
+     </h2>
+     <p>
+      Post-processing adjusts a model&rsquo;s outputs or decision thresholds after training to pursue a defined fairness objective. Hardt et&nbsp;al. provide a canonical equalized-odds post-processing construction [10], and a 2026 systematic review of structured healthcare data reports threshold adjustment among commonly used post-processing strategies, alongside reweighting and fairness-regularized training [18]. Threshold changes should be applied only when justified by context and policy requirements; they can affect calibration, error rates, and score interpretation, and a threshold change does not repair missing data or make a training sample representative. Moreover, except in special cases, no classifier can simultaneously satisfy calibration, demographic parity, and error-rate balance when base rates differ across groups [11], [12], so post-processing choices inevitably privilege one criterion over another.
+     </p>
+    </section>
+    <div class="table-wrap">
+     <div class="caption">
+      TABLE III. COMMON MITIGATION STRATEGIES, LIMITATIONS, AND EXAMPLE REFERENCES
+     </div>
+     <table>
+      <thead>
+       <tr>
+        <th style="width:17%">
+         Strategy
+        </th>
+        <th style="width:25%">
+         Best suited to
+        </th>
+        <th style="width:24%">
+         Potential benefit
+        </th>
+        <th style="width:22%">
+         Main caution
+        </th>
+        <th style="width:12%">
+         Example refs.
+        </th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr>
+        <td>
+         Targeted data collection
+        </td>
+        <td>
+         Groups or contexts largely missing from available data
+        </td>
+        <td>
+         Improves coverage using real observations
+        </td>
+        <td>
+         Cost, access, consent, privacy, and feasibility
+        </td>
+        <td>
+         [15], [16]
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Oversampling / augmentation
+        </td>
+        <td>
+         Limited training representation or class imbalance
+        </td>
+        <td>
+         Increases signal from selected examples
+        </td>
+        <td>
+         Overfitting, out-of-manifold synthetic artifacts, duplicated noise
+        </td>
+        <td>
+         [4]&ndash;[7]
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Undersampling
+        </td>
+        <td>
+         Redundant examples from dominant subsets
+        </td>
+        <td>
+         Reduces dominance or training cost
+        </td>
+        <td>
+         May discard useful variation and information
+        </td>
+        <td>
+         [4], [14]
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Reweighting
+        </td>
+        <td>
+         Groups have some coverage but should influence training differently
+        </td>
+        <td>
+         Changes learning emphasis without altering record counts
+        </td>
+        <td>
+         Large weights can increase variance; no new information
+        </td>
+        <td>
+         [8], [18]
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Fairness-aware training
+        </td>
+        <td>
+         Disparities persist after data-level checks
+        </td>
+        <td>
+         Optimizes for a selected fairness objective
+        </td>
+        <td>
+         Metric choice and fairness&ndash;utility trade-offs
+        </td>
+        <td>
+         [1], [9]
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Post-processing
+        </td>
+        <td>
+         Decision thresholds or group-level errors require adjustment
+        </td>
+        <td>
+         Can alter decision disparities without retraining
+        </td>
+        <td>
+         Does not repair source data; may break calibration
+        </td>
+        <td>
+         [10]&ndash;[12]
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Group-wise evaluation and monitoring
+        </td>
+        <td>
+         All high-impact or population-facing models
+        </td>
+        <td>
+         Detects hidden subgroup failures and drift
+        </td>
+        <td>
+         Requires reliable subgroup data and adequate sample sizes
+        </td>
+        <td>
+         [15], [16]
+        </td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <section class="section">
+     <h1>
+      V. WHAT RECENT REVIEWS INDICATE
+     </h1>
+     <p>
+      Several themes recur across the reviewed literature. First, the fairness literature commonly distinguishes preprocessing, in-processing, and post-processing strategies [1], [13]. Second, the systematic mapping of imbalanced-data preprocessing by de&nbsp;Vargas et&nbsp;al. demonstrates the breadth of research on sampling approaches and the continued prominence of data-level interventions [14]. These methods should nevertheless be selected according to the diagnosed imbalance rather than treated as interchangeable fixes.
+     </p>
+     <p>
+      Third, Dablain et&nbsp;al. argue that class imbalance and protected-feature bias should be handled as distinct but potentially co-existing problems [3]. Their Fair OverSampling approach uses SMOTE to address class imbalance and a separate feature-blurring mechanism intended to reduce the classifier&rsquo;s dependence on protected attributes. This work is directly relevant to studies that risk conflating numerical class balance with demographic fairness.
+     </p>
+     <p>
+      Fourth, transparency about intended use, included groups, missing groups, collection conditions, and data shifts is emphasized in the 2025 STANDING Together consensus recommendations, which were developed through a modified Delphi process involving more than 350 stakeholders from 58 countries [15]. NIST guidance likewise recommends comparing the intended population with the population represented in data, conducting disaggregated evaluation, and establishing representativeness thresholds where appropriate [16].
+     </p>
+     <p>
+      Finally, recent healthcare reviews support combining methods and evaluating them with group-based fairness metrics. A 2026 systematic review in
+      <i>
+       IEEE Access
+      </i>
+      , which included 26 studies selected from 2,064 retrieved records, reports reweighting, fairness-regularized learning, and threshold adjustment among the most frequently used mitigation strategies [18]. A separate 2026 review in
+      <i>
+       JAMIA Open
+      </i>
+      included 35 studies and found that most reported bias reduction, while also noting that effectiveness criteria were not standardized enough for direct method-to-method comparisons [19]. A 2025 survey by Tawakuli and Engel reaches a similar conclusion for data preprocessing techniques specifically: many methods exist, but reporting and evaluation practice remains heterogeneous [17]. Such findings are encouraging but domain-specific; they do not establish that any technique will work equally well across domains.
+     </p>
+    </section>
+    <section class="section">
+     <h1>
+      VI. PROPOSED TARGETED DATASET REPAIR FRAMEWORK
+     </h1>
+     <p>
+      Based on the reviewed methods, this paper proposes a decision sequence designed to avoid premature or indiscriminate balancing. The framework is a conceptual contribution and requires empirical evaluation.
+     </p>
+    </section>
+    <div class="framework">
+     <div class="framework-title">
+      Fig. 1. Proposed workflow for targeted dataset repair
+     </div>
+     <div class="flow">
+      <div class="step">
+       <b>
+        1. Define target
+       </b>
+       Specify intended population, deployment context, and relevant groups; justify p
+       <sub>
+        g
+       </sub>
+       and tolerance &tau;.
+      </div>
+      <div class="step">
+       <b>
+        2. Audit data
+       </b>
+       Measure group shares, &Delta;
+       <sub>
+        g
+       </sub>
+       , intersections, label mix, missingness, and data provenance.
+      </div>
+      <div class="step">
+       <b>
+        3. Diagnose cause
+       </b>
+       Separate coverage gaps, class imbalance, measurement errors, and label problems.
+      </div>
+      <div class="step">
+       <b>
+        4. Select least disruptive suitable repair
+       </b>
+       Prefer new data when feasible; consider reweighting, sampling, or fairness-aware learning as justified.
+      </div>
+      <div class="step">
+       <b>
+        5. Validate
+       </b>
+       Compare group-wise utility and fairness on untouched, representative test data.
+      </div>
+      <div class="step">
+       <b>
+        6. Document and monitor
+       </b>
+       Record limitations, repair choices, side effects, and performance drift.
+      </div>
+     </div>
+    </div>
+    <section class="section">
+     <h2>
+      A. Step 1: Define a defensible target distribution
+     </h2>
+     <p>
+      Specify the users, geography, time period, clinical or operational setting, and decisions for which the model is intended. The target distribution may come from reliable population statistics, deployment data, a clearly scoped cohort, or an explicitly justified use-case requirement. It should not be selected solely to make group counts equal. Together with domain stakeholders, set the tolerance &tau; that defines a gap large enough to warrant intervention, record the justification for &tau;, and state whether it is uniform across groups or stricter for groups carrying higher harm risk.
+     </p>
+     <h2>
+      B. Step 2: Audit representation and data quality
+     </h2>
+     <p>
+      For each relevant group, report sample count, dataset share q
+      <sub>
+       g
+      </sub>
+      , and&mdash;where a trustworthy target reference exists&mdash;the representation gap &Delta;
+      <sub>
+       g
+      </sub>
+      . Compute &Delta;
+      <sub>
+       g
+      </sub>
+      for intersectional groups where statistically and ethically appropriate, and treat small-count intersections with wider uncertainty. Check the label distribution within each group, missing values, acquisition methods, measurement differences, duplicate records, and selection rules. Small group counts should be reported with confidence intervals rather than treated as stable estimates.
+     </p>
+     <h2>
+      C. Step 3: Diagnose before intervening
+     </h2>
+     <p>
+      A low group count can coexist with label imbalance, measurement bias, label error, or domain shift. Each has different remedies. For instance, adding synthetic records cannot fix systematically inaccurate measurements, and rebalancing positive and negative disease outcomes may leave geographic undercoverage unchanged. This diagnostic stage is central to choosing an appropriate and minimally disruptive correction, and it prevents the common failure mode in which a sampling technique is applied to a problem it was not designed to solve.
+     </p>
+     <h2>
+      D. Step 4: Choose the least disruptive suitable repair
+     </h2>
+     <p>
+      &ldquo;Least disruptive suitable repair&rdquo; means the intervention with the smallest, most auditable change to the data that addresses the diagnosed cause. When feasible, targeted genuine data collection is preferable for a group that is nearly absent. When there is adequate group support but uneven influence during training, reweighting may be a useful baseline. Resampling may be appropriate for class imbalance or redundant dominance, provided it is restricted to training data. If disparities persist, compare fairness-aware learning and post-processing methods against a pre-specified fairness objective. Keep the unmodified dataset and document every transformation for reproducibility.
+     </p>
+     <h2>
+      E. Step 5: Evaluate effectiveness, utility, and unintended effects
+     </h2>
+     <p>
+      Measure overall performance and group-specific metrics before and after repair. Depending on task and consequence, suitable measures may include precision, recall, F1-score, false-positive rate, false-negative rate, area under the ROC curve, and calibration. Fairness itself must be made operational through an explicitly chosen criterion. The four most common candidates are:
+      <i>
+       demographic parity
+      </i>
+      (equal positive prediction rates across groups);
+      <i>
+       equal opportunity
+      </i>
+      (equal true-positive rates [10]);
+      <i>
+       equalized odds
+      </i>
+      (equal true-positive and false-positive rates [10]); and
+      <i>
+       calibration
+      </i>
+      (predicted risks agree with observed outcome frequencies within score ranges and groups [12]). These criteria are mutually incompatible except in special cases [11], [12], so the selection should be made with stakeholders before experiments begin, based on the harm model of the application (e.g., missing a true positive is costlier than a false positive in screening contexts, favoring recall-oriented criteria), and recorded with its rationale. Report confidence intervals or other uncertainty estimates when possible. No single metric represents fairness in every context [1], [16].
+     </p>
+     <p>
+      All data transformations, including oversampling and synthetic-data generation, must be confined to the training partition. Validation and test sets should remain untouched during method selection and should represent deployment conditions. Otherwise, leakage or an artificial test distribution can exaggerate improvements.
+     </p>
+     <h2>
+      F. Step 6: Document and monitor
+     </h2>
+     <p>
+      Publish dataset composition, source and collection context, exclusions, known missing populations, repair methods, metrics, limitations, and intended-use boundaries, using a structured documentation instrument such as a datasheet for datasets [20]. Monitor data and model drift after deployment and repeat subgroup evaluations when the population or acquisition process changes [15], [16].
+     </p>
+     <h2>
+      G. Relation to existing frameworks
+     </h2>
+     <p>
+      The proposed workflow is not the first guidance on representativeness and fairness, and its relationship to prior frameworks should be explicit. The NIST AI RMF [16] provides organizational-level risk governance (govern&ndash;map&ndash;measure&ndash;manage) but does not specify how an individual dataset should be audited or which repair operation to select for a given diagnosed cause. The STANDING Together recommendations [15] define what dataset documentation and group-wise evaluation should contain, but stop short of an operational repair-selection procedure. Caton and Haas [1] supply a taxonomy of intervention families without prescribing their ordering. Fair OverSampling [3] addresses two co-existing biases jointly but presupposes that sampling is the right response. The present framework contributes three elements absent from these sources in combination: (1) a quantitative trigger (&Delta;
+      <sub>
+       g
+      </sub>
+      with a justified tolerance &tau;) for when representation repair is warranted at all; (2) a diagnosis-first ordering that separates coverage gaps from class imbalance and measurement error before any intervention; and (3) a least-disruptive-suitable-repair principle that ranks candidate operations by their data-level cost and auditability. These are design contributions, and their practical value is precisely what the future experiments in Section&nbsp;VII are intended to test.
+     </p>
+     <h2>
+      H. Worked example (illustrative)
+     </h2>
+     <p>
+      Consider a synthetic but realistic scenario: a hospital readmission classifier trained on N&nbsp;=&nbsp;10,000 records. The justified target population for deployment is 60% urban and 40% rural. The audit (Step&nbsp;2) yields the composition and gaps shown in Table&nbsp;IV. Diagnosis (Step&nbsp;3) finds that outcome labels are similarly distributed across groups (no class imbalance), rural records were acquired only from one tertiary hospital (selection effect), and measurement of a key comorbidity variable differs between the two acquisition sites (measurement difference). The least disruptive suitable repair (Step&nbsp;4) proceeds in order: (1) correct or re-collect the comorbidity variable where possible; (2) add 1,500 genuine rural records from primary-care sites, prioritizing real data over synthetic interpolation; and (3) only if group-wise recall disparity persists after collection, apply training-only reweighting as a baseline before considering fairness-aware training.
+     </p>
+    </section>
+    <div class="table-wrap">
+     <div class="caption">
+      TABLE IV. HYPOTHETICAL WALK-THROUGH OF THE FRAMEWORK (SYNTHETIC DATA, FOR ILLUSTRATION ONLY)
+     </div>
+     <table>
+      <thead>
+       <tr>
+        <th style="width:22%">
+         Framework step
+        </th>
+        <th style="width:44%">
+         Action
+        </th>
+        <th style="width:34%">
+         Illustrative result
+        </th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr>
+        <td>
+         1. Define target
+        </td>
+        <td>
+         Deployment population: 60% urban, 40% rural; &tau; = 10 pp
+        </td>
+        <td>
+         Reference p
+         <sub>
+          g
+         </sub>
+         fixed and justified from regional census and deployment logs
+        </td>
+       </tr>
+       <tr>
+        <td>
+         2. Audit
+        </td>
+        <td>
+         Compute q
+         <sub>
+          g
+         </sub>
+         , &Delta;
+         <sub>
+          g
+         </sub>
+         , label mix, missingness
+        </td>
+        <td>
+         Urban 9,000 (90%), Rural 1,000 (10%); &Delta;
+         <sub>
+          urban
+         </sub>
+         = +30 pp, &Delta;
+         <sub>
+          rural
+         </sub>
+         = &minus;30 pp; labels ~20% positive in both groups
+        </td>
+       </tr>
+       <tr>
+        <td>
+         3. Diagnose
+        </td>
+        <td>
+         Separate coverage, label, measurement causes
+        </td>
+        <td>
+         Coverage gap + site-level measurement difference; no class imbalance
+        </td>
+       </tr>
+       <tr>
+        <td>
+         4. Repair
+        </td>
+        <td>
+         Fix measurement; add 1,500 genuine rural records; reweight only if needed
+        </td>
+        <td>
+         Post-repair: Urban 9,000 (78%), Rural 2,500 (22%); &Delta;
+         <sub>
+          rural
+         </sub>
+         = &minus;18 pp (reduced, residual gap documented)
+        </td>
+       </tr>
+       <tr>
+        <td>
+         5. Validate
+        </td>
+        <td>
+         Group-wise recall, FPR, calibration on untouched rural-sampled test set
+        </td>
+        <td>
+         Rural recall 0.58 &rarr; 0.74; overall F1 unchanged (&plusmn;0.01); urban recall &minus;0.02 (reported, not hidden)
+        </td>
+       </tr>
+       <tr>
+        <td>
+         6. Document
+        </td>
+        <td>
+         Datasheet with provenance, repair log, residual gaps, monitoring plan
+        </td>
+        <td>
+         Residual rural gap flagged for the next collection cycle
+        </td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <section class="section">
+     <p class="no-indent">
+      This example is synthetic and is included to show the intended use of the framework, not to claim empirical effectiveness. In particular, Step&nbsp;5&rsquo;s protocol of confining all transformations to the training partition and evaluating on a representative, untouched test set is what makes the reported gains interpretable.
+     </p>
+    </section>
+    <section class="section">
+     <h1>
+      VII. EVALUATION PLAN FOR FUTURE EXPERIMENTS
+     </h1>
+     <p>
+      The framework can be evaluated through a controlled comparison across several datasets and model families. Experiments should establish a baseline model, quantify representation mismatch, and compare candidate repairs using identical data splits and evaluation criteria.
+     </p>
+     <p>
+      Where possible, experiments should use multiple domains rather than a single benchmark. A method that works on tabular class-imbalanced data may not transfer to medical images or natural-language datasets. The comparison should report both improvements and regressions; otherwise it risks presenting mitigation as universally beneficial.
+     </p>
+    </section>
+    <div class="table-wrap">
+     <div class="caption">
+      TABLE V. SUGGESTED EXPERIMENTAL DESIGN
+     </div>
+     <table>
+      <thead>
+       <tr>
+        <th>
+         Component
+        </th>
+        <th>
+         Recommended protocol
+        </th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr>
+        <td>
+         Baselines
+        </td>
+        <td>
+         Original training data; class-only balancing; no fairness intervention
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Candidate interventions
+        </td>
+        <td>
+         Targeted data addition where available; oversampling; undersampling; reweighting; fairness-aware training; threshold adjustment
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Representation measures
+        </td>
+        <td>
+         Group counts, sample share, representation gap &Delta;
+         <sub>
+          g
+         </sub>
+         with pre-specified &tau;, missing-group and intersectional coverage audit
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Model measures
+        </td>
+        <td>
+         Overall and group-wise precision, recall, F1, FPR/FNR, AUC, and calibration where relevant
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Fairness criterion
+        </td>
+        <td>
+         One stakeholder-selected criterion (e.g., equal opportunity), fixed before experiments and reported with rationale
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Cost / effort
+        </td>
+        <td>
+         Records added or removed, number and size of weight changes, retraining cost, and human collection effort per intervention
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Statistical power
+        </td>
+        <td>
+         Subgroup sample sizes sufficient to detect pre-specified effect sizes on group-wise metrics; report intervals, not point estimates only
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Robustness
+        </td>
+        <td>
+         Repeated splits or cross-validation, uncertainty intervals, external or out-of-distribution validation
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Controls
+        </td>
+        <td>
+         Split before resampling; tune only on validation data; maintain an untouched test set
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Reporting
+        </td>
+        <td>
+         Data provenance, subgroup sizes, fairness definition, hyperparameters, limitations, and negative results
+        </td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <section class="section">
+     <h1>
+      VIII. OPEN CHALLENGES AND RESEARCH QUESTIONS
+     </h1>
+     <ol>
+      <li>
+       <b>
+        Target definition:
+       </b>
+       How can an appropriate reference population be defined when reliable population statistics are unavailable or the deployment population is changing?
+      </li>
+      <li>
+       <b>
+        Intersectional sparsity:
+       </b>
+       How can researchers detect and evaluate groups defined by multiple attributes without producing unreliable estimates or privacy risks?
+      </li>
+      <li>
+       <b>
+        Minimal repair and method selection:
+       </b>
+       Can diagnostics reliably predict the smallest effective intervention&mdash;data collection, reweighting, resampling, or fairness-aware training&mdash;for a given diagnosed cause?
+      </li>
+      <li>
+       <b>
+        Fairness&ndash;utility trade-offs:
+       </b>
+       How should stakeholders choose among accuracy, calibration, error-rate disparities, and operational constraints, given that these criteria cannot all be satisfied simultaneously [11], [12]?
+      </li>
+      <li>
+       <b>
+        External validity:
+       </b>
+       Do corrections generalize to other sites, populations, time periods, and data acquisition conditions?
+      </li>
+      <li>
+       <b>
+        Reproducibility:
+       </b>
+       Can dataset repair operations be documented transparently and audibly, including failed interventions?
+      </li>
+      <li>
+       <b>
+        Synthetic data governance:
+       </b>
+       Who validates that synthetic oversampled samples are plausible for each subgroup, and what evidence is sufficient before synthetic records are trusted for protected groups?
+      </li>
+     </ol>
+    </section>
+    <section class="section">
+     <h1>
+      IX. LIMITATIONS
+     </h1>
+     <p>
+      This paper provides a focused narrative synthesis rather than a protocol-driven systematic review or meta-analysis, and only English-language sources were considered. Its strategy comparison is qualitative and does not rank techniques using a common experimental benchmark. The empirical findings reported by referenced reviews come from different domains, protected attributes, datasets, fairness metrics, and definitions of success; they should not be compared as though they came from a single experiment. The framework itself was derived by the authors from the reviewed literature without external validation by independent practitioners, and its steps (in particular the &Delta;
+      <sub>
+       g
+      </sub>
+      trigger and the least-disruptive-repair ranking) encode design judgments that empirical work may revise. The proposed repair framework has not been tested on new datasets in this paper. These limitations motivate a reproducible follow-up study with explicit search and screening procedures and empirical validation.
+     </p>
+    </section>
+    <section class="section">
+     <h1>
+      X. CONCLUSION
+     </h1>
+     <p>
+      Representational bias should be assessed relative to a clearly defined intended population. Underrepresentation and overrepresentation describe opposite directions of mismatch, but neither can be identified reliably from group counts alone without a reference distribution. They are also distinct from class imbalance: equalizing outcome classes does not necessarily improve demographic or contextual coverage.
+     </p>
+     <p>
+      The literature commonly recommends a combination of targeted data collection, data-level preprocessing, reweighting, fairness-aware training, post-processing, subgroup-specific evaluation, and transparent documentation. The appropriate method depends on the cause of the observed disparity, available data, and the fairness objective. This paper&rsquo;s proposed workflow contributes a quantitative representation-gap trigger, a diagnosis-first ordering, and a least-disruptive-suitable-repair principle, together with validation and documentation requirements that make every repair a record-level auditable operation. Future experiments should test whether the framework can identify minimal corrections that improve subgroup performance without unnecessarily sacrificing overall model utility.
+     </p>
+    </section>
+   </div>
+   <section class="references">
+    <h1>
+     REFERENCES
+    </h1>
+    <ol class="ref-list">
+     <li>
+      S. Caton and C. Haas, &ldquo;Fairness in Machine Learning: A Survey,&rdquo;
+      <i>
+       ACM Computing Surveys
+      </i>
+      , vol. 56, no. 7, Art. 166, pp. 1&ndash;38, 2024. doi:
+      <a href="https://doi.org/10.1145/3616865">
+       10.1145/3616865
+      </a>
+      .
+     </li>
+     <li>
+      S. Barocas and M. Selbst, &ldquo;Big Data&rsquo;s Disparate Impact,&rdquo;
+      <i>
+       California Law Review
+      </i>
+      , vol. 104, no. 3, pp. 671&ndash;732, 2016.
+     </li>
+     <li>
+      D. Dablain, B. Krawczyk, and N. Chawla, &ldquo;Towards a holistic view of bias in machine learning: bridging algorithmic fairness and imbalanced learning,&rdquo;
+      <i>
+       Discover Data
+      </i>
+      , vol. 2, Art. 4, 2024. doi:
+      <a href="https://doi.org/10.1007/s44248-024-00007-1">
+       10.1007/s44248-024-00007-1
+      </a>
+      .
+     </li>
+     <li>
+      N. V. Chawla, K. W. Bowyer, L. O. Hall, and W. P. Kegelmeyer, &ldquo;SMOTE: Synthetic Minority Over-sampling Technique,&rdquo;
+      <i>
+       Journal of Artificial Intelligence Research
+      </i>
+      , vol. 16, pp. 321&ndash;357, 2002. doi:
+      <a href="https://doi.org/10.1613/jair.953">
+       10.1613/jair.953
+      </a>
+      .
+     </li>
+     <li>
+      H. He, Y. Bai, E. A. Garcia, and S. Li, &ldquo;ADASYN: Adaptive synthetic sampling approach for imbalanced learning,&rdquo; in
+      <i>
+       Proc. IEEE Int. Joint Conf. Neural Networks (IJCNN)
+      </i>
+      , 2008, pp. 1322&ndash;1328. doi:
+      <a href="https://doi.org/10.1109/IJCNN.2008.4633969">
+       10.1109/IJCNN.2008.4633969
+      </a>
+      .
+     </li>
+     <li>
+      H. Han, W.-Y. Wang, and B.-H. Mao, &ldquo;Borderline-SMOTE: A new over-sampling method in imbalanced data sets learning,&rdquo; in
+      <i>
+       Proc. Int. Conf. Intelligent Computing (ICIC)
+      </i>
+      , LNCS 3644, 2005, pp. 878&ndash;887. doi:
+      <a href="https://doi.org/10.1007/11538059_91">
+       10.1007/11538059_91
+      </a>
+      .
+     </li>
+     <li>
+      J. Chakraborty, S. Majumdar, and T. Menzies, &ldquo;FairSMOTE: A fairness-aware synthetic oversampling approach,&rdquo; arXiv:2109.08254, 2021.
+     </li>
+     <li>
+      F. Kamiran and T. Calders, &ldquo;Data preprocessing techniques for classification without discrimination,&rdquo;
+      <i>
+       Knowledge and Information Systems
+      </i>
+      , vol. 33, pp. 1&ndash;33, 2012. doi:
+      <a href="https://doi.org/10.1007/s10115-011-0463-8">
+       10.1007/s10115-011-0463-8
+      </a>
+      .
+     </li>
+     <li>
+      M. B. Zafar, I. Valera, M. G. Rodriguez, and K. P. Gummadi, &ldquo;Fairness beyond disparate treatment &amp; disparate impact: Learning classification without disparate mistreatment,&rdquo; in
+      <i>
+       Proc. Int. Conf. World Wide Web (WWW)
+      </i>
+      , 2017, pp. 1171&ndash;1180. doi:
+      <a href="https://doi.org/10.1145/3038912.3052660">
+       10.1145/3038912.3052660
+      </a>
+      .
+     </li>
+     <li>
+      M. Hardt, E. Price, and N. Srebro, &ldquo;Equality of opportunity in supervised learning,&rdquo; in
+      <i>
+       Proc. Advances in Neural Information Processing Systems (NeurIPS)
+      </i>
+      , 2016, pp. 3315&ndash;3323.
+     </li>
+     <li>
+      J. Kleinberg, S. Mullainathan, and M. Raghavan, &ldquo;Inherent trade-offs in the fair determination of risk scores,&rdquo; in
+      <i>
+       Proc. Innovations in Theoretical Computer Science (ITCS)
+      </i>
+      , 2017, pp. 43:1&ndash;43:23. doi:
+      <a href="https://doi.org/10.4230/LIPIcs.ITCS.2017.43">
+       10.4230/LIPIcs.ITCS.2017.43
+      </a>
+      .
+     </li>
+     <li>
+      A. Chouldechova, &ldquo;Fair prediction with disparate impact: A study of bias in recidivism prediction instruments,&rdquo;
+      <i>
+       Big Data
+      </i>
+      , vol. 5, no. 2, pp. 153&ndash;163, 2017. doi:
+      <a href="https://doi.org/10.1089/big.2016.0047">
+       10.1089/big.2016.0047
+      </a>
+      .
+     </li>
+     <li>
+      N. Mehrabi, F. Morstatter, N. Saxena, K. Lerman, and A. Galstyan, &ldquo;A survey on bias and fairness in machine learning,&rdquo;
+      <i>
+       ACM Computing Surveys
+      </i>
+      , vol. 54, no. 6, Art. 115, pp. 1&ndash;35, 2021. doi:
+      <a href="https://doi.org/10.1145/3457607">
+       10.1145/3457607
+      </a>
+      .
+     </li>
+     <li>
+      V. W. de Vargas, J. A. S. Aranda, R. dos Santos Costa, P. R. da Silva Pereira, and J. L. V. Barbosa, &ldquo;Imbalanced data preprocessing techniques for machine learning: a systematic mapping study,&rdquo;
+      <i>
+       Knowledge and Information Systems
+      </i>
+      , vol. 65, pp. 31&ndash;57, 2023. doi:
+      <a href="https://doi.org/10.1007/s10115-022-01772-8">
+       10.1007/s10115-022-01772-8
+      </a>
+      .
+     </li>
+     <li>
+      J. E. Alderman et al., &ldquo;Tackling algorithmic bias and promoting transparency in health datasets: the STANDING Together consensus recommendations,&rdquo;
+      <i>
+       The Lancet Digital Health
+      </i>
+      , vol. 7, no. 1, pp. e64&ndash;e88, 2025. doi:
+      <a href="https://doi.org/10.1016/S2589-7500(24)00224-3">
+       10.1016/S2589-7500(24)00224-3
+      </a>
+      .
+     </li>
+     <li>
+      National Institute of Standards and Technology,
+      <i>
+       Artificial Intelligence Risk Management Framework (AI RMF 1.0)
+      </i>
+      , NIST AI 100-1, 2023. doi:
+      <a href="https://doi.org/10.6028/NIST.AI.100-1">
+       10.6028/NIST.AI.100-1
+      </a>
+      .
+     </li>
+     <li>
+      A. Tawakuli and T. Engel, &ldquo;Make your data fair: A survey of data preprocessing techniques that address biases in data towards fair AI,&rdquo;
+      <i>
+       Journal of Engineering Research
+      </i>
+      , vol. 13, no. 3, pp. 2362&ndash;2369, 2025. doi:
+      <a href="https://doi.org/10.1016/j.jer.2024.06.016">
+       10.1016/j.jer.2024.06.016
+      </a>
+      .
+     </li>
+     <li>
+      L. Ruback, R. Fortunato, C. Renso, L. T. Duarte, and A. S. Teles, &ldquo;Bias Mitigation in Machine Learning Models Trained on Structured Health Data: A Systematic Review,&rdquo;
+      <i>
+       IEEE Access
+      </i>
+      , vol. 14, pp. 46331&ndash;46348, 2026. doi:
+      <a href="https://doi.org/10.1109/ACCESS.2026.3676756">
+       10.1109/ACCESS.2026.3676756
+      </a>
+      .
+     </li>
+     <li>
+      K. Gadhoumi et al., &ldquo;Strategies for mitigating artificial intelligence bias in healthcare: a systematic review,&rdquo;
+      <i>
+       JAMIA Open
+      </i>
+      , vol. 9, no. 3, Art. ooag081, 2026. doi:
+      <a href="https://doi.org/10.1093/jamiaopen/ooag081">
+       10.1093/jamiaopen/ooag081
+      </a>
+      .
+     </li>
+     <li>
+      T. Gebru, J. Morgenstern, B. Vecchione, J. W. Vaughan, H. Wallach, H. Daum&eacute; III, and K. Crawford, &ldquo;Datasheets for datasets,&rdquo;
+      <i>
+       Communications of the ACM
+      </i>
+      , vol. 64, no. 12, pp. 86&ndash;92, 2021. doi:
+      <a href="https://doi.org/10.1145/3458723">
+       10.1145/3458723
+      </a>
+      .
+     </li>
+    </ol>
+   </section>
+  </main>
+ </body>
+</html>
